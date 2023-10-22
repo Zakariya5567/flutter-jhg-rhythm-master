@@ -1,4 +1,4 @@
-# tempo_bpm
+# jhg-rhythm
 
 A new Flutter project.
 
