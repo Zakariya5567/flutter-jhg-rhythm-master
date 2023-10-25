@@ -4,14 +4,14 @@ import 'package:tempo_bpm/providers/speed_provider.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
+
 class SpeedView extends StatefulWidget {
    SpeedView({super.key});
 
   @override
   State<SpeedView> createState() => _SpeedViewState();
 }
-
-class _SpeedViewState extends State<SpeedView> {
+class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
 
   SpeedProvider? speedProvider;
 
@@ -48,15 +48,11 @@ class _SpeedViewState extends State<SpeedView> {
 
             // SPACER
             SizedBox(height: height * 0.05),
-
             // STARTING TEMPO
-             Heading(title: AppConstant.startingTempo, numbers: controller.startTempo.toStringAsFixed(0)),
-
+            Heading(title: AppConstant.startingTempo, numbers: controller.startTempo.toStringAsFixed(0)),
             // SPACER
             SizedBox(height: height * 0.015),
-
             // STARTING SLIDER
-
             SliderTheme(
               data: SliderThemeData(
                 thumbShape: RoundSliderThumbShape(
@@ -75,21 +71,13 @@ class _SpeedViewState extends State<SpeedView> {
                 controller. setStartTempo(values);
               }),
             ),
-
             // SPACER
-
             SizedBox(height: height * 0.02),
-
             // TARGET TEMPO
-             Heading(title: AppConstant.targetTempo, numbers: controller.targetTempo.toStringAsFixed(0)),
-
-
+            Heading(title: AppConstant.targetTempo, numbers: controller.targetTempo.toStringAsFixed(0)),
             // SPACER
             SizedBox(height: height * 0.015),
-
-
             // TARGET SLIDER
-
             SliderTheme(
               data: SliderThemeData(
                   thumbShape: RoundSliderThumbShape(
@@ -110,14 +98,9 @@ class _SpeedViewState extends State<SpeedView> {
                   }
               ),
             ),
-
-
             // SPACER
-
             SizedBox(height: height * 0.04),
-
             // BARS
-
             AddAndSubtractButton(
                 title: AppConstant.bars,
                 numbers:controller. bar.toString(),
@@ -129,13 +112,9 @@ class _SpeedViewState extends State<SpeedView> {
                   controller. decreaseBar();
                 }
             ),
-
             // SPACER
-
             SizedBox(height: height*0.03,),
-
             // INTERVAL BUTTONS
-
             AddAndSubtractButton(
                 title: AppConstant.interval,
                 numbers: controller.interval.toString(),
@@ -147,11 +126,8 @@ class _SpeedViewState extends State<SpeedView> {
                   controller. decreaseInterval();
                 }
             ),
-
-
-          // SPACER
+            // SPACER
             SizedBox(height: height * 0.03),
-
             // BPM VALUE SECTION
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -178,10 +154,9 @@ class _SpeedViewState extends State<SpeedView> {
                 ),
               ],
             ),
-
+            // SPACER
             SizedBox(height: height * 0.03),
             // BUTTON
-
             Center(
               child: GestureDetector(
                 onTap: ()async{
@@ -203,15 +178,12 @@ class _SpeedViewState extends State<SpeedView> {
                 ),
               ),
             ),
-
           ],
         ),
       );
     });
   }
 }
-
-
 class Heading extends StatelessWidget {
   const Heading({super.key,required this.title,required this.numbers});
   final String  title;
@@ -251,7 +223,6 @@ class Heading extends StatelessWidget {
     );
   }
 }
-
 class AddAndSubtractButton extends StatelessWidget {
   const AddAndSubtractButton({super.key,
     required this.title,
