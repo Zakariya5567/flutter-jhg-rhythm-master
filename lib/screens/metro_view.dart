@@ -23,8 +23,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final metroProvider = Provider.of<MetroProvider>(context,listen: false);
-     metroProvider.initializeAnimationController(this);
+      final metroProvider = Provider.of<MetroProvider>(context, listen: false);
+      metroProvider.initializeAnimationController(this);
   }
 
   MetroProvider? metroProvider;
@@ -45,7 +45,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Consumer<MetroProvider>(builder: (context, controller, child) {
+    return Consumer<MetroProvider>(
+        builder: (context, controller, child) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.03),
         child: Column(
@@ -201,26 +202,30 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           child: RotatedBox(
                             quarterTurns: 1,
                             child:
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                trackHeight: 0.0, // Set trackHeight to 0 to remove the track
-                                overlayShape: SliderComponentShape.noOverlay, // Remove overlay
-                                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 0.0), // Remove thumb
-                                overlayColor: Colors.transparent, // Make overlay transparent
+                            // SliderTheme(
+                            //   data: SliderTheme.of(context).copyWith(
+                            //     trackHeight: 0.0, // Set trackHeight to 0 to remove the track
+                            //     overlayShape: SliderComponentShape.noOverlay, // Remove overlay
+                            //     thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 0.0), // Remove thumb
+                            //     overlayColor: Colors.transparent, // Make overlay transparent
+                            //   ),
+                            //   child:
+                              Opacity(
+                                opacity: 0,
+                                child: Slider(
+                                  divisions: 300,
+                                  activeColor: Colors.transparent,
+                                  inactiveColor: Colors.transparent,
+                                  thumbColor: Colors.transparent,
+                                  value:  controller.bpm,
+                                  min: 1,
+                                  max:300,
+                                  onChanged: (value) {
+                                      controller.setPosition(value,this);
+                                  },
+                                ),
                               ),
-                              child: Slider(
-                                divisions: 300,
-                                activeColor: Colors.red,
-                                inactiveColor: Colors.green,
-                                thumbColor: Colors.transparent,
-                                value:  controller.bpm,
-                                min: 1,
-                                max:300,
-                                onChanged: (value) {
-                                    controller.setPosition(value,this);
-                                },
-                              ),
-                            ),
+                          //  ),
                           ),
                         ),
                       ),

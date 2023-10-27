@@ -34,13 +34,12 @@ static const String monthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.
 
 //BEAT MUSIC
 
-  static const String clickSound = "beat1.mp3";
-  static const String tapSound = "beat2.mp3";
-// static const String clickSound = "assets/audio/beat1.mp3";
-// static const String tapSound = "assets/audio/beat2.mp3";
-// static const String clickSound = "beat1.ogg";
-// static const String tapSound = "beat2.ogg";
-static const String tune = "audio/tune.mp3";
+//   static const String clickSound = "beat1.mp3";
+//   static const String tapSound = "beat2.mp3";
+
+  static const String clickSound = "assets/audio/click_sound1.mp3";
+  static const String tapSound = "assets/audio/click_sound2.mp3";
+  static const String tune = "audio/tune.mp3";
 
 
 }

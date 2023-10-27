@@ -13,6 +13,13 @@ class SpeedView extends StatefulWidget {
 }
 class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
 
+  @override
+  void initState() {
+      final speedProvider = Provider.of<SpeedProvider>(context,listen: false);
+      speedProvider.initializedPlayer();
+      super.initState();
+  }
+
   SpeedProvider? speedProvider;
 
   @override
@@ -21,12 +28,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
     super.didChangeDependencies();
   }
 
-  @override
-  void initState() {
-    final speedProvider = Provider.of<SpeedProvider>(context,listen: false);
-        speedProvider.initializedPlayer();
-    super.initState();
-  }
 
  @override
   void dispose() {

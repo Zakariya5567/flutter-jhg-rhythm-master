@@ -24,7 +24,10 @@ class TapTempoProvider extends ChangeNotifier{
     }
 
     tapTimestamp = currentTime;
-     setAudioName();
+    if(bpm != null){
+      setAudioName();
+    }
+
   }
 
   setAudioName(){

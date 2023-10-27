@@ -1,7 +1,11 @@
 import 'dart:async';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
+
+
+
+
 
 class MetroProvider extends ChangeNotifier{
 
@@ -23,8 +27,10 @@ class MetroProvider extends ChangeNotifier{
   AnimationController? controller;
   Animation<double>? animation;
 
-  initializeAnimationController(TickerProviderStateMixin ticker){
-    FlameAudio.play(AppConstant.clickSound,volume: 0);
+  final player = AudioPlayer();
+
+
+  initializeAnimationController(TickerProviderStateMixin ticker)async{
     controller = AnimationController(
       duration: Duration(milliseconds: (30000 / bpm).round()),
       vsync: ticker,
@@ -32,8 +38,12 @@ class MetroProvider extends ChangeNotifier{
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
   }
 
-  void disposeController() {
+  Future<void> disposeController() async {
     isPlaying = false;
+    if(controller != null){
+      controller!.dispose();
+    }
+
   }
 
   setPosition(double value,TickerProviderStateMixin ticker){
@@ -46,12 +56,15 @@ class MetroProvider extends ChangeNotifier{
     }
   }
 
-  void startStop(TickerProviderStateMixin ticker) {
+  Future<void> startStop(TickerProviderStateMixin ticker) async {
     firstTime = true;
     totalTick = 0;
     if (isPlaying) {
       controller!.reset();
       animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+       if(player.playing){
+        await player.stop();
+       }
     } else {
       setTimer(ticker);
     }
@@ -143,13 +156,16 @@ class MetroProvider extends ChangeNotifier{
 
   }
 
+
   Future playSound()async{
     totalTick = totalTick+1;
     if(totalTick == 1){
-      FlameAudio.play(AppConstant.clickSound);
+      await player.setAsset(AppConstant.clickSound);
+      await player.play();
     }else{
       if(totalTick<totalBeat+1){
-        FlameAudio.play(AppConstant.tapSound);
+        await player.setAsset(AppConstant.tapSound);
+        await player.play();
         if(totalTick == totalBeat) {
           totalTick = 0;
         }
@@ -157,10 +173,5 @@ class MetroProvider extends ChangeNotifier{
     }
   }
 
-  Future stopSound()async{
-    totalTick = 0;
-  }
-
-
-
 }
+
