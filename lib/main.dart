@@ -6,7 +6,6 @@ import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/providers/metro_provider.dart';
 import 'package:tempo_bpm/providers/speed_provider.dart';
 import 'package:tempo_bpm/providers/tap_temp_provider.dart';
-import 'package:tempo_bpm/screens/bpm_screen.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
 

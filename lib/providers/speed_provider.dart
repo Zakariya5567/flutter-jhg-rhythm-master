@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import '../utils/app_constant.dart';
-import 'package:async/async.dart';
 
 
 class SpeedProvider extends ChangeNotifier{

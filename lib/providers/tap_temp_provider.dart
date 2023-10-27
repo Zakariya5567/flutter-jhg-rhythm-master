@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:tempo_bpm/utils/app_constant.dart';
 
 class TapTempoProvider extends ChangeNotifier{
 

@@ -39,7 +39,7 @@ dependencies:
   just_audio: ^0.9.35
 #  flame_audio: ^2.1.2
   reg_page:
-    path: /Users/user/Desktop/Development/GitlabRepo/reg_page
+    path: /Users/jamieharrison/Documents/Github/flutter-jhg-reg-page
 
 dev_dependencies:
   flutter_test:

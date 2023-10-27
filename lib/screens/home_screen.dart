@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/screens/bpm_view.dart';
 import 'package:tempo_bpm/screens/speed_view.dart';
-import 'package:tempo_bpm/utils/images.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
@@ -131,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const BpmView() :
                 selectedButton == 1 ?
                 const MetroView():
-                SpeedView()
+                const SpeedView()
 
               ],
             ),

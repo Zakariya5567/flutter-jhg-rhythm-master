@@ -6,7 +6,7 @@ import '../utils/app_constant.dart';
 
 
 class SpeedView extends StatefulWidget {
-   SpeedView({super.key});
+   const SpeedView({super.key});
 
   @override
   State<SpeedView> createState() => _SpeedViewState();
