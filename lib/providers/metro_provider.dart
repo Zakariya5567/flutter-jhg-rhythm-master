@@ -1,43 +1,92 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:tempo_bpm/model/sound_model.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
 
 
 
 
+//The MetroProvider class is responsible for managing the metronome functionality,
+// controlling BPM, animation, and sound playback.
 
 class MetroProvider extends ChangeNotifier{
 
 
+  // initial values of BPM
+  double bpm = 120;
   double bpmMin = 1.0;
   double bpmMax = 300.0;
+
+  // Initial value of slider
   double sliderMin = 1.0;
   double sliderMax = 300.0;
 
+  // List of Beat buttons
   List<String> tapButtonList = ['4/4', '3/4','6/8'];
 
 
+  // Position of the slider
   double position = 0;
-  double bpm = 120;
   int totalBeat = 4;
   int totalTick = 0;
   bool isPlaying = false;
 
+  // Animation controller values
   AnimationController? controller;
   Animation<double>? animation;
 
+
+  // Instance of the Player
   final player = AudioPlayer();
 
 
+  // List of sound list
+  List <SoundModel> soundList = [];
+
+
+  // set sounds to sound list
+  setSoundList(){
+    soundList.clear();
+    soundList.add(SoundModel(name: AppConstant.logic, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
+    soundList.add(SoundModel(name: AppConstant.click, beat1: AppConstant.clave1Sound, beat2: AppConstant.clave2Sound));
+    soundList.add(SoundModel(name: AppConstant.drumsticks, beat1: AppConstant.drumsticks1Sound, beat2: AppConstant.drumsticks2Sound));
+    soundList.add(SoundModel(name: AppConstant.fineMetronome, beat1: AppConstant.fineMetronome1Sound, beat2: AppConstant.fineMetronome2Sound));
+    soundList.add(SoundModel(name: AppConstant.heartbeat, beat1: AppConstant.heartbeat1Sound, beat2: AppConstant.heartbeat2Sound));
+    soundList.add(SoundModel(name: AppConstant.lowClave, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
+    soundList.add(SoundModel(name: AppConstant.ping, beat1: AppConstant.ping1Sound, beat2: AppConstant.ping2Sound));
+    soundList.add(SoundModel(name: AppConstant.rim, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
+    soundList.add(SoundModel(name: AppConstant.seiko, beat1: AppConstant.seiko1Sound, beat2: AppConstant.seiko2Sound));
+    soundList.add(SoundModel(name: AppConstant.softClick, beat1: AppConstant.softClick1Sound, beat2: AppConstant.softClick2Sound));
+    soundList.add(SoundModel(name: AppConstant.ableton, beat1: AppConstant.ableton1Sound, beat2: AppConstant.ableton2Sound));
+    soundList.add(SoundModel(name: AppConstant.cubase, beat1: AppConstant.clave1Sound, beat2: AppConstant.cubase2Sound));
+    soundList.add(SoundModel(name: AppConstant.flStudio, beat1: AppConstant.flStudio1Sound, beat2: AppConstant.flStudio2Sound));
+    soundList.add(SoundModel(name: AppConstant.maschine, beat1: AppConstant.maschinelSound, beat2: AppConstant.maschine2Sound));
+    soundList.add(SoundModel(name: AppConstant.mpc, beat1: AppConstant.mpc1Sound, beat2: AppConstant.mpc2Sound));
+    soundList.add(SoundModel(name: AppConstant.protoolDefault, beat1: AppConstant.protoolsDefault1Sound, beat2: AppConstant.protoolsDefault2Sound));
+    soundList.add(SoundModel(name: AppConstant.protoolMarimba, beat1: AppConstant.protoolsMarimba1Sound, beat2: AppConstant.protoolsMarimba2Sound));
+    soundList.add(SoundModel(name: AppConstant.reason, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
+    soundList.add(SoundModel(name: AppConstant.sonar, beat1: AppConstant.sonar1Sound, beat2: AppConstant.sonar2Sound));
+  }
+
+
+
+  // Initialize  animation controller
   initializeAnimationController(TickerProviderStateMixin ticker)async{
+
+    // calling sound list to add sound to sound list
+   setSoundList();
+
+   // assign values to controller
     controller = AnimationController(
-      duration: Duration(milliseconds: (30000 / bpm).round()),
+      duration: Duration(milliseconds: (40000 / bpm).round()),
       vsync: ticker,
     );
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+
   }
 
+  // dispose controller if off the page
   Future<void> disposeController() async {
     isPlaying = false;
     if(controller != null){
@@ -46,6 +95,27 @@ class MetroProvider extends ChangeNotifier{
 
   }
 
+
+  // clear metronome
+  clearMetronome(){
+
+     position = 0;
+     bpm = 120;
+     totalBeat = 4;
+     totalTick = 0;
+     isPlaying = false;
+     if(controller != null){
+       animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+       controller!.reset();
+     }
+     soundName = AppConstant.logic;
+     firstBeat = AppConstant.logic1Sound;
+     secondBeat = AppConstant.logic2Sound;
+     notifyListeners();
+  }
+
+  // Set position of the slider
+  // Setting position, BPM, and notifying listeners
   setPosition(double value,TickerProviderStateMixin ticker){
     position = value;
     bpm  = value;
@@ -55,6 +125,9 @@ class MetroProvider extends ChangeNotifier{
       setTimer(ticker);
     }
   }
+
+  // Start/stop the metronome
+  // Toggling between start and stop states and notifying listeners
 
   Future<void> startStop(TickerProviderStateMixin ticker) async {
     firstTime = true;
@@ -72,6 +145,8 @@ class MetroProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  // Increase BPM
+  // Increasing BPM, resetting total ticks, and notifying listeners
   void increaseBpm(TickerProviderStateMixin ticker){
     if( bpm < bpmMax) {
       totalTick = 0;
@@ -83,6 +158,8 @@ class MetroProvider extends ChangeNotifier{
     }
   }
 
+  // Decrease BPM
+  // Decreasing BPM, resetting total ticks, and notifying listeners
   void decreaseBpm(TickerProviderStateMixin ticker) {
     if(bpm > bpmMin){
       totalTick = 0;
@@ -98,18 +175,24 @@ class MetroProvider extends ChangeNotifier{
   }
 
 
+
   bool firstTime = true;
 
+  // Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {
+
+    // dispose the previous timer adn add new one base on BPM
     firstTime = true;
     controller!.reset();
     controller!.dispose();
     controller =  AnimationController(
-      duration:  Duration( milliseconds: (30000 / bpm).round()),
+      duration:  Duration( milliseconds: (40000 / bpm).round()),
       vsync: ticker,
     );
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     controller!.repeat(reverse: true);
+
+    // Listen to timer to animate stalk and play sound
     controller!.addStatusListener((status) {
       if(status == AnimationStatus.forward){
         if(firstTime == true){
@@ -137,6 +220,9 @@ class MetroProvider extends ChangeNotifier{
   }
 
 
+  // Set beats based on the selected button
+  // Setting total beats based on the selected button and notifying listeners
+
   int selectedButton = 0;
   setBeats(index){
     if(index == 0 ){
@@ -157,14 +243,37 @@ class MetroProvider extends ChangeNotifier{
   }
 
 
+
+
+  // Set selected sound
+
+  String soundName = AppConstant.logic;
+  String firstBeat = AppConstant.logic1Sound;
+  String secondBeat = AppConstant.logic2Sound;
+
+  // Setting selected sound and notifying listeners
+  setSound({required TickerProviderStateMixin ticker,required String name, required String beat1 , required beat2}){
+    soundName = name;
+    firstBeat = beat1;
+    secondBeat = beat2;
+    notifyListeners();
+    totalTick = 0;
+    notifyListeners();
+    if(isPlaying == true){
+      setTimer(ticker);
+    }
+  }
+
+
+  // Play sound based on the metronome ticks
   Future playSound()async{
     totalTick = totalTick+1;
     if(totalTick == 1){
-      await player.setAsset(AppConstant.clickSound);
+      await player.setAsset(firstBeat);
       await player.play();
     }else{
       if(totalTick<totalBeat+1){
-        await player.setAsset(AppConstant.tapSound);
+        await player.setAsset(secondBeat);
         await player.play();
         if(totalTick == totalBeat) {
           totalTick = 0;

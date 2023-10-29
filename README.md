@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+The TapTempoProvider class handles tap tempo functionality, calculating BPM,
+and determining music tempo names based on the calculated BPM.
+
+The SpeedProvider class manages the functionality of a speed trainer,
+including BPM, intervals, and audio playback.
+
+The MetroProvider class is responsible for managing the metronome functionality,
+controlling BPM, animation, and sound playback.

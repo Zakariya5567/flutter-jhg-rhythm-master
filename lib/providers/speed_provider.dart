@@ -4,6 +4,10 @@ import 'package:just_audio/just_audio.dart';
 import '../utils/app_constant.dart';
 
 
+
+//The SpeedProvider class manages the functionality of a speed trainer,
+// including BPM, intervals, and audio playback.
+
 class SpeedProvider extends ChangeNotifier{
 
 
@@ -20,25 +24,25 @@ class SpeedProvider extends ChangeNotifier{
 
 
   // START TEMPO VALUES
-  double startTempo = 40;
+  double startTempo = 100;
   double startTempoMin = 1;
   double startTempoMax = 300;
 
 
   // TARGET TEMPO VALUES
-  double targetTempo = 120;
+  double targetTempo = 180;
   double targetTempoMin = 1;
   double targetTempoMax = 300;
 
   // INTERVAL VALUES
   // BPM SPEED WILL CHANGE ACCORDING TO INTERVAL
-  int interval = 1;
+  int interval = 5;
   int minInterval = 1;
   int maxInterval = 120;
 
 
   // BAR IS BEAT PER BPM
-  int bar = 1;
+  int bar = 4;
   int minBar = 1;
   int maxBar = 60;
 
@@ -52,8 +56,22 @@ class SpeedProvider extends ChangeNotifier{
   // TWO TYPE OF AUDIO TICK / TAP
   int totalTick = 0;
 
-  // INITIALIZE SOUND TO PRELOAD
-  initializedPlayer()async{
+
+
+  // Clear speed trainer settings
+  clearSpeedTrainer(){
+    if(_timer != null){
+      _timer!.cancel();
+    }
+    isPlaying = false;
+    bpm = 100;
+    startTempo = 100;
+    targetTempo = 180;
+    interval = 5;
+    bar = 4;
+    totalTick = 0;
+    barCounter = 0;
+    notifyListeners();
   }
 
   // SET START TEMPO RANGE OF SLIDER
@@ -146,7 +164,8 @@ class SpeedProvider extends ChangeNotifier{
   }
 
 
-
+  // Set timer for BPM
+  // Setting or canceling timer based on BPM and target tempo
   setTimer(){
     if(_timer != null){
       _timer!.cancel();
@@ -168,13 +187,14 @@ class SpeedProvider extends ChangeNotifier{
       },
     );
   }
-  //
-  int barCounter = 0;
 
+
+  // Bar counter and first-time flags
+  int barCounter = 0;
   bool firstTime = true;
 
+  // Play sound based on the metronome ticks
   Future playSound()async{
-
     barCounter = barCounter + 1;
     totalTick = totalTick+1;
     if(totalTick == 1){
@@ -187,62 +207,32 @@ class SpeedProvider extends ChangeNotifier{
         setTimer();
       }
 
-      await player.setAsset(AppConstant.clickSound);
+      await player.setAsset(AppConstant.logic1Sound);
       await player.play();
     }else{
       if(totalTick<totalBeats){
-        await player.setAsset(AppConstant.tapSound);
+        await player.setAsset(AppConstant.logic2Sound);
         await player.play();
       }else{
-        await player.setAsset(AppConstant.tapSound);
+        await player.setAsset(AppConstant.logic2Sound);
         await player.play();
         totalTick = 0;
       }
     }
   }
 
-  // Future playSound()async{
-  //
-  //    barCounter = barCounter + 1;
-  //
-  //   if(barCounter < totalBeats * bar ){
-  //
-  //     totalTick = totalTick+1;
-  //
-  //     if(totalTick == 1){
-  //       FlameAudio.play(AppConstant.clickSound);
-  //     }else{
-  //       if(totalTick<totalBeats){
-  //         FlameAudio.play(AppConstant.tapSound);
-  //       }else{
-  //         FlameAudio.play(AppConstant.tapSound);
-  //         totalTick = 0;
-  //       }
-  //     }
-  //   }else{
-  //     barCounter = 0;
-  //     totalTick = 0;
-  //     if(targetTempo > bpm + interval){
-  //       bpm = bpm + interval;
-  //     }else{
-  //       bpm = targetTempo;
-  //     }
-  //     FlameAudio.play(AppConstant.tapSound);
-  //     setTimer();
-  //     notifyListeners();
-  //   }
-  // }
 
+  // Dispose controller and reset settings
   disposeController() {
     if(_timer != null){
       _timer!.cancel();
     }
     isPlaying = false;
-    bpm = 40;
-    startTempo = 40;
-    targetTempo = 120;
-    interval = 1;
-    bar = 1;
+    bpm = 100;
+    startTempo = 100;
+    targetTempo = 180;
+    interval = 5;
+    bar = 4;
     totalTick = 0;
     barCounter = 0;
   }

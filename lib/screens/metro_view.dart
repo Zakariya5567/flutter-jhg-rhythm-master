@@ -59,9 +59,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                 // Button selection 3/3 ....
                 SizedBox(
-                  height: height * 0.40,
+                  height: height * 0.35,
                   width: width * 0.165,
                   child: ListView.builder(
+                     padding: EdgeInsets.zero,
+                      primary: false,
                       itemCount: controller.tapButtonList.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
@@ -107,6 +109,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   width: width * 0.60,
                   child: Stack(
                     children: [
+
+                      // Metronome
                       SizedBox(
                         height: height * 0.40,
                         width: width * 0.60,
@@ -118,6 +122,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         ),
                       ),
 
+                      // Stalk
                       Positioned(
                         top: height * 0.052,
                         child: Container(
@@ -136,7 +141,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                               return Transform(
                                 alignment: Alignment.bottomCenter,
-                                transform: Matrix4.identity()
+                                transform:
+                                Matrix4.identity()
                                   ..translate(translationValue, 0.0)
                                   ..rotateZ(rotationValue * 0.0034533), // Convert degrees to radians
                                 child: Stack(
@@ -172,6 +178,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         ),
                       ),
 
+                      //Slider wood
                       Positioned(
                         top: height*0.08,
                         left:width*0.003 ,
@@ -188,6 +195,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                       ),
 
 
+                      // Slider up down
                       Positioned(
                         left: width * 0.270,
                         top: height * 0.050,
@@ -200,14 +208,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           child: RotatedBox(
                             quarterTurns: 1,
                             child:
-                            // SliderTheme(
-                            //   data: SliderTheme.of(context).copyWith(
-                            //     trackHeight: 0.0, // Set trackHeight to 0 to remove the track
-                            //     overlayShape: SliderComponentShape.noOverlay, // Remove overlay
-                            //     thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 0.0), // Remove thumb
-                            //     overlayColor: Colors.transparent, // Make overlay transparent
-                            //   ),
-                            //   child:
                               Opacity(
                                 opacity: 0,
                                 child: Slider(
@@ -223,7 +223,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                   },
                                 ),
                               ),
-                          //  ),
                           ),
                         ),
                       ),
@@ -241,11 +240,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             ),
 
             //Sound button with arrow down
-            GestureDetector(
-              onTap: () async {
-                // controller.setSelectedButton(index);
-              },
-              child: Container(
+              Container(
                 height: height * 0.065,
                 width: width * 1,
                 decoration: BoxDecoration(
@@ -258,7 +253,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppConstant.sound,
+                        controller.soundName,
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.whitePrimary,
@@ -266,15 +261,38 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Image.asset(Images.arrowDown,
-                          width: width * 0.09,
-                          height: width * 0.09,
-                          color: AppColors.whiteSecondary)
+
+                      PopupMenuButton<String>(
+                        icon:  Image.asset(Images.arrowDown,
+                            width: width * 0.09,
+                            height: width * 0.09,
+                            color: AppColors.whiteSecondary),
+                        itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<String>>[
+
+                          for(int i = 0 ; i< controller.soundList.length ; i ++)
+
+
+                           PopupMenuItem<String>(
+                            value: controller.soundList[i].name,
+                            child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                  controller.setSound(ticker: this, name:  controller.soundList[i].name.toString(),
+                                      beat1: controller.soundList[i].beat1.toString(), beat2:  controller.soundList[i].beat2.toString());
+                                },
+                                child: Padding(
+                                  padding:  EdgeInsets.only(right: width*0.050),
+                                  child: Text(controller.soundList[i].name.toString()),
+                                )),
+                          ),
+
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
 
             // SPACER
             SizedBox(
@@ -359,25 +377,61 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
               height: height * 0.02,
             ),
 
-            Center(
-              child: GestureDetector(
-                onTap: ()async{
-                  controller.startStop(this);
-                },
-                child: Container(
-                  height: height * 0.095,
-                  width: height * 0.095,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:  AppColors.redPrimary,
+            // Reset button and play pause button
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: width * 0.025,),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  // Reset button
+                  GestureDetector(
+                    onTap: (){
+                      controller.clearMetronome();
+                    },
+                    child: Container(
+                      height: height * 0.045,
+                      width: height * 0.045,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child:Image.asset(Images.iconReset,
+                        color: AppColors.whitePrimary,
+                      ),
+                    ),
                   ),
-                  child: Center(
-                      child:
-                      Icon(
-                        controller.isPlaying == true ? Icons.pause :
-                        Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+
+                  // play pause button
+                  Center(
+                    child: GestureDetector(
+                      onTap: ()async{
+                        controller.startStop(this);
+                      },
+                      child: Container(
+                        height: height * 0.11,
+                        width: height * 0.11,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:  AppColors.redPrimary,
+                        ),
+                        child: Center(
+                            child:
+                            Icon(
+                              controller.isPlaying == true ? Icons.pause :
+                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+
+
+                  // Spacer
+                  SizedBox(
+                    height: height * 0.02,
+                    width: height * 0.02,
+                  ),
+                ],
               ),
             ),
 

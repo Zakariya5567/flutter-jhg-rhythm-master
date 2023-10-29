@@ -16,11 +16,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
+  // List on buttons , Tap tempo | Metronome | Speed Trainer
   List<String> buttonList = [AppConstant.tapTempo,AppConstant.metronome,AppConstant.speedTrainer];
 
 
+  // Identify selected button
+  // Base on this value we will show the screen
+  // 0 for tap tempo | 1 for Metronome | 2 for Speed trainer
   int selectedButton = 0;
 
+  // Set button value base on selection
   setSelectedButton(int value){
     setState(() {
       selectedButton = value;
@@ -29,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
+  // Set expiry date when user login to the app
+  // we will expire user login after 14 days
   setExpiryDate()async{
     DateTime currentDate = DateTime.now();
     DateTime endDate = currentDate.add(const Duration(days: 14));
@@ -62,30 +69,29 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
 
                 // SETTING ICON
-                Align(alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    onTap: ()async{
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return  Setting(
-                          yearlySubscriptionId: AppConstant.yearlySubscriptionId,
-                          monthlySubscriptionId: AppConstant.monthlySubscriptionId,
-                          nextPage: ()=> const HomeScreen(),);
-                      }));
-                    },
-                    child:Padding(
-                      padding:  EdgeInsets.only(top: height*0.01,right: width*0.01),
-                      child: Icon(Icons.settings,
-                        color: AppColors.whitePrimary, size: width*0.1,
-                      ),
-                    ),
-                  ),),
+                // Align(alignment: Alignment.topRight,
+                //   child: GestureDetector(
+                //     onTap: ()async{
+                //       Navigator.push(context, MaterialPageRoute(builder: (context){
+                //         return  Setting(
+                //           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
+                //           monthlySubscriptionId: AppConstant.monthlySubscriptionId,
+                //           nextPage: ()=> const HomeScreen(),);
+                //       }));
+                //     },
+                //     child:Padding(
+                //       padding:  EdgeInsets.only(top: height*0.01,right: width*0.01),
+                //       child: Icon(Icons.settings,
+                //         color: AppColors.whitePrimary, size: width*0.1,
+                //       ),
+                //     ),
+                //   ),),
 
 
                 // SPACER
-                SizedBox(height: height*0.03,),
+                SizedBox(height: height*0.07,),
 
                 //BUTTON SELECTION SECTION
-
                 SizedBox(
                   height: height*0.05,
                   child: ListView.builder(
@@ -126,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
 
+                // ScreenView base on button selection
                 selectedButton == 0 ?
                 const BpmView() :
                 selectedButton == 1 ?
@@ -139,167 +146,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-//
-//
-// void _increaseSpeed() {
-//
-//    duration = duration+1;
-//
-//   // duration = Duration(milliseconds: (_controller.duration!.inMilliseconds * 0.8).round());
-//   // _controller.repeat(reverse: true);
-// }
-//
-// void _decreaseSpeed() {
-//   // _controller.duration = Duration(milliseconds: (_controller.duration!.inMilliseconds * 1.2).round());
-//   // _controller.repeat(reverse: true);
-// }
-//
-//
-// double bpm = 120;
-// double minimumInterval = 40;
-// double maximumInterval = 300;
-//
-//
-//
-// //Duration duration = const Duration(milliseconds: 500);
-// int duration = 500;
-// bool isPlay = false;
-// double begin = 0;
-// final player = AudioPlayer();
-// int totalBeat = 4;
-// int totalTick = 0;
-//
-//
-//
-// int selectedButton = 0;
-// setBeats(index){
-//
-//   if(index == 0 ){
-//     totalBeat = 4;
-//     selectedButton = index;
-//
-//   }else if(index == 1 ){
-//     totalBeat = 3;
-//     selectedButton = index;
-//   }else if(index == 2 ){
-//     totalBeat = 6;
-//     selectedButton = index;
-//   }
-//
-// }
-//
-// Future playSound()async{
-//
-//   totalTick = totalTick+1;
-//  // final newBpm = 60000 / duration.inMilliseconds.toDouble();
-// //  bpm = newBpm;
-//   setState(() {});
-//
-//   if(totalTick == 1){
-//     await player.setAudioSource(AudioSource.asset(AppConstant.clickSound));
-//     if(player.playing == false){
-//       await player.play();
-//     }
-//   }else{
-//     if(totalTick<totalBeat){
-//       await player.setAudioSource(AudioSource.asset(AppConstant.tapSound));
-//       if(player.playing == false){
-//         await player.play();
-//       }
-//     }else{
-//       await player.setAudioSource(AudioSource.asset(AppConstant.tapSound));
-//       if(player.playing == false){
-//         await player.play();
-//       }
-//       totalTick = 0;
-//     }
-//   }
-//
-// }
-//
-// Future stopSound()async{
-//   if(player.playing){
-//     await player.stop();
-//   }
-//   totalTick = 0;
-// }
-//
-// bool firstTime = true;
-//
-// onPlay () async {
-//   if(isPlay == true){
-//     setState(()  {
-//       isPlay = false;
-//       firstTime = true;
-//       begin = 0;
-//      // duration =  500;
-//       _controller.reset();
-//       _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
-//     });
-//     await stopSound();
-//   }else{
-//     setState(() {
-//       isPlay = true;
-//       begin = 0;
-//      // duration = 500;
-//     });
-//
-//     _controller = AnimationController(
-//       duration:  Duration(milliseconds: duration),
-//       vsync: this,
-//     );
-//     _animation = Tween<double>(begin: begin, end: 1).animate(_controller);
-//     _controller.repeat(reverse: true);
-//     _controller.addStatusListener((status) async {
-//       if(status == AnimationStatus.forward){
-//         if(begin == -1 && firstTime == false){
-//           await playSound();
-//         }
-//
-//       } else if(status == AnimationStatus.reverse){
-//         if(begin == 0) {
-//           setState(() {
-//              duration =  duration * 2;
-//             _controller.duration = Duration(milliseconds: duration);
-//             begin = -1;
-//             _controller.repeat(reverse: true);
-//           });
-//           _animation = Tween<double>(begin: begin, end: 1).animate(_controller);
-//           // await playSound();
-//         }else{
-//           firstTime = false;
-//           await playSound();
-//         }
-//
-//       }
-//       else  if(status == AnimationStatus.completed){
-//         begin = 0;
-//         firstTime = true;
-//         await stopSound();
-//       }
-//       else  if(status == AnimationStatus.dismissed){
-//         begin = 0;
-//         firstTime = true;
-//         await stopSound();
-//
-//       }
-//     });
-//   }
-//
-// }
-//
-// double topPosition  = 0;
-//
-//
-//
-//
-// @override
-// void dispose() {
-//   _controller.dispose();
-//   super.dispose();
-// }
-
-////-----------------------------------------------------------------
-

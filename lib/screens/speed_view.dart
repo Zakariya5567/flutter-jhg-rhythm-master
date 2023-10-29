@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tempo_bpm/providers/speed_provider.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import '../utils/images.dart';
 
 
 class SpeedView extends StatefulWidget {
@@ -16,7 +17,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
   @override
   void initState() {
       final speedProvider = Provider.of<SpeedProvider>(context,listen: false);
-      speedProvider.initializedPlayer();
       super.initState();
   }
 
@@ -57,7 +57,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             SliderTheme(
               data: SliderThemeData(
                 thumbShape: RoundSliderThumbShape(
-                  enabledThumbRadius: height*0.012,
+                  enabledThumbRadius: height*0.015,
                 ),
                   overlayShape: SliderComponentShape.noOverlay,
                 trackHeight: height*0.005
@@ -82,13 +82,12 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             SliderTheme(
               data: SliderThemeData(
                   thumbShape: RoundSliderThumbShape(
-                    enabledThumbRadius: height*0.012,
+                    enabledThumbRadius: height*0.015,
                   ),
                   overlayShape: SliderComponentShape.noOverlay,
                   trackHeight: height*0.005
               ),
               child: Slider(
-
                   activeColor: AppColors.whitePrimary,
                   thumbColor: AppColors.whitePrimary,
                   min: controller.targetTempoMin,
@@ -157,34 +156,71 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             ),
             // SPACER
             SizedBox(height: height * 0.03),
-            // BUTTON
-            Center(
-              child: GestureDetector(
-                onTap: ()async{
-                  controller. startStop();
-                },
-                child: Container(
-                  height: height * 0.095,
-                  width: height * 0.095,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:  AppColors.redPrimary,
+            // Reset and play pause BUTTON
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: width * 0.025,),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+
+                  // Reset
+                  GestureDetector(
+                    onTap: (){
+                      controller.clearSpeedTrainer();
+                    },
+                    child: Container(
+                      height: height * 0.045,
+                      width: height * 0.045,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child:Image.asset(Images.iconReset,
+                        color: AppColors.whitePrimary,
+                      ),
+                    ),
                   ),
-                  child: Center(
-                      child:
-                      Icon(
-                        controller. isPlaying == true ? Icons.pause :
-                        Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+
+                  // Play pause
+                  Center(
+                    child: GestureDetector(
+                      onTap: ()async{
+                        controller. startStop();
+                      },
+                      child: Container(
+                        height: height * 0.11,
+                        width: height * 0.11,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:  AppColors.redPrimary,
+                        ),
+                        child: Center(
+                            child:
+                            Icon(
+                              controller. isPlaying == true ? Icons.pause :
+                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+
+                  // Spacer
+                  SizedBox(
+                    height: height * 0.02,
+                    width: height * 0.02,
+                  ),
+                ],
               ),
             ),
+
           ],
         ),
       );
     });
   }
 }
+
 class Heading extends StatelessWidget {
   const Heading({super.key,required this.title,required this.numbers});
   final String  title;
