@@ -127,7 +127,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                 }
             ),
             // SPACER
-            SizedBox(height: height * 0.03),
+            SizedBox(height: height * 0.035),
             // BPM VALUE SECTION
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -155,10 +155,10 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ],
             ),
             // SPACER
-            SizedBox(height: height * 0.03),
+            SizedBox(height: height * 0.020),
             // Reset and play pause BUTTON
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: width * 0.025,),
+              padding:  EdgeInsets.symmetric(horizontal: width * 0.050,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -189,8 +189,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         controller. startStop();
                       },
                       child: Container(
-                        height: height * 0.11,
-                        width: height * 0.11,
+                        height: height * 0.095,
+                        width: height * 0.095,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color:  AppColors.redPrimary,
@@ -198,8 +198,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         child: Center(
                             child:
                             Icon(
-                              controller. isPlaying == true ? Icons.pause :
-                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+                              controller.isPlaying == true ? Icons.pause :
+                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.10,)
                         ),
                       ),
                     ),

@@ -55,21 +55,26 @@ class BpmView extends StatelessWidget {
               onTap: (){
                 controller.handleTap();
               },
-              child: Container(
-                height: height * 0.18,
-                width: height * 0.18,
-                alignment: Alignment.center,
-                decoration:  BoxDecoration(
-                  color: AppColors.redPrimary,
-                  shape: BoxShape.circle,
-                ),
-                child:  Text(
-                  AppConstant.tap,
-                  style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
-                    color: AppColors.whitePrimary,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
+              child: AnimatedScale(
+                curve: Curves.bounceInOut,
+                duration: const Duration(milliseconds: 500),
+                scale: controller.buttonScale,
+                child: Container(
+                  height: height * 0.18,
+                  width: height * 0.18,
+                  alignment: Alignment.center,
+                  decoration:  BoxDecoration(
+                    color: AppColors.redPrimary,
+                    shape: BoxShape.circle,
+                  ),
+                  child:  Text(
+                    AppConstant.tap,
+                    style: TextStyle(
+                      fontFamily: AppConstant.sansFont,
+                      color: AppColors.whitePrimary,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

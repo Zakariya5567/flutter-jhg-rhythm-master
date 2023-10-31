@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/screens/bpm_view.dart';
 import 'package:tempo_bpm/screens/speed_view.dart';
 
+import '../providers/metro_provider.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'metro_view.dart';
@@ -12,7 +14,7 @@ class HomeScreen  extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
 
 
@@ -45,6 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     setExpiryDate();
+    Future.delayed(Duration.zero,(){
+      final metroProvider = Provider.of<MetroProvider>(context, listen: true);
+      metroProvider.initializeAnimationController(this,false);
+    });
+
     super.initState();
   }
 

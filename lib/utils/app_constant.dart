@@ -94,7 +94,7 @@ static const String monthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.
   static const String flStudio1Sound= "assets/audio/fLStudio1.mp3";
   static const String flStudio2Sound="assets/audio/fLStudio2.mp3";
  //Maschine
-  static const String maschinelSound=    "assets/audio/maschinel.mp3";
+  static const String maschinelSound=    "assets/audio/maschine1.mp3";
   static const String maschine2Sound=    "assets/audio/maschine2.mp3";
  //MPC
   static const String mpc1Sound=    "assets/audio/mpc1.mp3";

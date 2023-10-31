@@ -44,45 +44,70 @@ class MetroProvider extends ChangeNotifier{
   // List of sound list
   List <SoundModel> soundList = [];
 
+  int selectedIndex = 0;
 
   // set sounds to sound list
   setSoundList(){
     soundList.clear();
-    soundList.add(SoundModel(name: AppConstant.logic, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
-    soundList.add(SoundModel(name: AppConstant.click, beat1: AppConstant.clave1Sound, beat2: AppConstant.clave2Sound));
-    soundList.add(SoundModel(name: AppConstant.drumsticks, beat1: AppConstant.drumsticks1Sound, beat2: AppConstant.drumsticks2Sound));
-    soundList.add(SoundModel(name: AppConstant.fineMetronome, beat1: AppConstant.fineMetronome1Sound, beat2: AppConstant.fineMetronome2Sound));
-    soundList.add(SoundModel(name: AppConstant.heartbeat, beat1: AppConstant.heartbeat1Sound, beat2: AppConstant.heartbeat2Sound));
-    soundList.add(SoundModel(name: AppConstant.lowClave, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
-    soundList.add(SoundModel(name: AppConstant.ping, beat1: AppConstant.ping1Sound, beat2: AppConstant.ping2Sound));
-    soundList.add(SoundModel(name: AppConstant.rim, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
-    soundList.add(SoundModel(name: AppConstant.seiko, beat1: AppConstant.seiko1Sound, beat2: AppConstant.seiko2Sound));
-    soundList.add(SoundModel(name: AppConstant.softClick, beat1: AppConstant.softClick1Sound, beat2: AppConstant.softClick2Sound));
-    soundList.add(SoundModel(name: AppConstant.ableton, beat1: AppConstant.ableton1Sound, beat2: AppConstant.ableton2Sound));
-    soundList.add(SoundModel(name: AppConstant.cubase, beat1: AppConstant.clave1Sound, beat2: AppConstant.cubase2Sound));
-    soundList.add(SoundModel(name: AppConstant.flStudio, beat1: AppConstant.flStudio1Sound, beat2: AppConstant.flStudio2Sound));
-    soundList.add(SoundModel(name: AppConstant.maschine, beat1: AppConstant.maschinelSound, beat2: AppConstant.maschine2Sound));
-    soundList.add(SoundModel(name: AppConstant.mpc, beat1: AppConstant.mpc1Sound, beat2: AppConstant.mpc2Sound));
-    soundList.add(SoundModel(name: AppConstant.protoolDefault, beat1: AppConstant.protoolsDefault1Sound, beat2: AppConstant.protoolsDefault2Sound));
-    soundList.add(SoundModel(name: AppConstant.protoolMarimba, beat1: AppConstant.protoolsMarimba1Sound, beat2: AppConstant.protoolsMarimba2Sound));
-    soundList.add(SoundModel(name: AppConstant.reason, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
-    soundList.add(SoundModel(name: AppConstant.sonar, beat1: AppConstant.sonar1Sound, beat2: AppConstant.sonar2Sound));
+    soundList.add(SoundModel(id: 0, name: AppConstant.logic, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
+    soundList.add(SoundModel(id: 1,name: AppConstant.click, beat1: AppConstant.clave1Sound, beat2: AppConstant.clave2Sound));
+    soundList.add(SoundModel(id: 2,name: AppConstant.drumsticks, beat1: AppConstant.drumsticks1Sound, beat2: AppConstant.drumsticks2Sound));
+    soundList.add(SoundModel(id: 3,name: AppConstant.fineMetronome, beat1: AppConstant.fineMetronome1Sound, beat2: AppConstant.fineMetronome2Sound));
+    soundList.add(SoundModel(id: 4,name: AppConstant.heartbeat, beat1: AppConstant.heartbeat1Sound, beat2: AppConstant.heartbeat2Sound));
+    soundList.add(SoundModel(id: 5,name: AppConstant.lowClave, beat1: AppConstant.logic1Sound, beat2: AppConstant.logic2Sound));
+    soundList.add(SoundModel(id: 6,name: AppConstant.ping, beat1: AppConstant.ping1Sound, beat2: AppConstant.ping2Sound));
+    soundList.add(SoundModel(id: 7,name: AppConstant.rim, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
+    soundList.add(SoundModel(id: 8,name: AppConstant.seiko, beat1: AppConstant.seiko1Sound, beat2: AppConstant.seiko2Sound));
+    soundList.add(SoundModel(id: 9,name: AppConstant.softClick, beat1: AppConstant.softClick1Sound, beat2: AppConstant.softClick2Sound));
+    soundList.add(SoundModel(id: 10,name: AppConstant.ableton, beat1: AppConstant.ableton1Sound, beat2: AppConstant.ableton2Sound));
+    soundList.add(SoundModel(id: 11,name: AppConstant.cubase, beat1: AppConstant.clave1Sound, beat2: AppConstant.cubase2Sound));
+    soundList.add(SoundModel(id: 12,name: AppConstant.flStudio, beat1: AppConstant.flStudio1Sound, beat2: AppConstant.flStudio2Sound));
+    soundList.add(SoundModel(id: 13,name: AppConstant.maschine, beat1: AppConstant.maschinelSound, beat2: AppConstant.maschine2Sound));
+    soundList.add(SoundModel(id: 14,name: AppConstant.mpc, beat1: AppConstant.mpc1Sound, beat2: AppConstant.mpc2Sound));
+    soundList.add(SoundModel(id: 15,name: AppConstant.protoolDefault, beat1: AppConstant.protoolsDefault1Sound, beat2: AppConstant.protoolsDefault2Sound));
+    soundList.add(SoundModel(id: 16,name: AppConstant.protoolMarimba, beat1: AppConstant.protoolsMarimba1Sound, beat2: AppConstant.protoolsMarimba2Sound));
+    soundList.add(SoundModel(id: 17,name: AppConstant.reason, beat1: AppConstant.reason1Sound, beat2: AppConstant.reason2Sound));
+    soundList.add(SoundModel(id: 18,name: AppConstant.sonar, beat1: AppConstant.sonar1Sound, beat2: AppConstant.sonar2Sound));
   }
 
 
 
   // Initialize  animation controller
-  initializeAnimationController(TickerProviderStateMixin ticker)async{
+  initializeAnimationController(TickerProviderStateMixin ticker,bool isMute)async{
 
     // calling sound list to add sound to sound list
-   setSoundList();
+    setSoundList();
+
+   soundName = AppConstant.logic;
+   firstBeat = AppConstant.logic1Sound;
+   secondBeat = AppConstant.logic2Sound;
 
    // assign values to controller
-    controller = AnimationController(
-      duration: Duration(milliseconds: (40000 / bpm).round()),
-      vsync: ticker,
-    );
-    animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+
+    if(isMute == true){
+      controller = AnimationController(
+        duration: Duration(milliseconds: (60000 / bpm).round()),
+        vsync: ticker,
+      );
+      animation = Tween<double>(begin: -1, end: 1).animate(controller!);
+
+      player.setVolume(0.0);
+      controller!.repeat(reverse: true);
+      Future.delayed(const Duration(seconds: 3),() async {
+        controller!.reset();
+        animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+        await player.stop();
+        player.setVolume(1.0);
+        notifyListeners();
+      });
+    }else{
+      controller = AnimationController(
+        duration: Duration(milliseconds: (30000 / bpm).round()),
+        vsync: ticker,
+      );
+      animation = Tween<double>(begin: 0, end: 1).animate(controller!);
+
+    }
 
   }
 
@@ -186,7 +211,7 @@ class MetroProvider extends ChangeNotifier{
     controller!.reset();
     controller!.dispose();
     controller =  AnimationController(
-      duration:  Duration( milliseconds: (40000 / bpm).round()),
+      duration:  Duration( milliseconds: (30000 / bpm).round()),
       vsync: ticker,
     );
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
@@ -196,7 +221,8 @@ class MetroProvider extends ChangeNotifier{
     controller!.addStatusListener((status) {
       if(status == AnimationStatus.forward){
         if(firstTime == true){
-          firstTime = false;}
+          firstTime = false;
+        }
         else{
           playSound();
         }
@@ -207,6 +233,7 @@ class MetroProvider extends ChangeNotifier{
           controller!.duration = Duration( milliseconds: (60000 / bpm).round());
           animation = Tween<double>(begin: -1, end: 1).animate(controller!);
           controller!.repeat(reverse: true);
+
         }else{
           playSound();
         }
@@ -252,7 +279,12 @@ class MetroProvider extends ChangeNotifier{
   String secondBeat = AppConstant.logic2Sound;
 
   // Setting selected sound and notifying listeners
-  setSound({required TickerProviderStateMixin ticker,required String name, required String beat1 , required beat2}){
+  setSound({required TickerProviderStateMixin ticker,
+    required String name,
+    required String beat1 ,
+    required beat2 ,
+    required int index}){
+    selectedIndex = index;
     soundName = name;
     firstBeat = beat1;
     secondBeat = beat2;

@@ -11,6 +11,7 @@ import 'package:tempo_bpm/utils/app_constant.dart';
 
 
 Future<void> main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -18,6 +19,7 @@ Future<void> main() async{
   ]);
 
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -39,15 +41,17 @@ class MyApp extends StatelessWidget {
           return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: child!,
-              );
-          },
+              );},
 
         debugShowCheckedModeBanner: false,
+
         title: 'JHG Rhythm ',
+
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
+
         home:  SplashScreen(
           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
           monthlySubscriptionId: AppConstant.monthlySubscriptionId,

@@ -20,9 +20,16 @@ class TapTempoProvider extends ChangeNotifier{
   String musicName = '';
 
 
+  double buttonScale = 1;
   // Handle tap event to calculate BPM
   void handleTap() {
 
+    buttonScale = 1.2;
+    notifyListeners();
+    Future.delayed(const Duration(milliseconds: 200),(){
+      buttonScale = 1;
+      notifyListeners();
+    });
     // Get current time in milliseconds
     final currentTime = DateTime.now().millisecondsSinceEpoch.toDouble();
 

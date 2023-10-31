@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tempo_bpm/model/sound_model.dart';
 import 'package:tempo_bpm/providers/metro_provider.dart';
 import 'package:tempo_bpm/utils/images.dart';
 import '../utils/app_ colors.dart';
@@ -22,7 +23,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   void initState() {
     super.initState();
       final metroProvider = Provider.of<MetroProvider>(context, listen: false);
-      metroProvider.initializeAnimationController(this);
+      metroProvider.initializeAnimationController(this,false);
   }
 
   MetroProvider? metroProvider;
@@ -63,6 +64,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   width: width * 0.165,
                   child: ListView.builder(
                      padding: EdgeInsets.zero,
+                      //physics: const NeverScrollableScrollPhysics(),
                       primary: false,
                       itemCount: controller.tapButtonList.length,
                       shrinkWrap: true,
@@ -247,51 +249,63 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(15),
                   color: AppColors.greyPrimary,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.06),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        controller.soundName,
-                        style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
-                          color: AppColors.whitePrimary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                child:
 
-                      PopupMenuButton<String>(
-                        icon:  Image.asset(Images.arrowDown,
-                            width: width * 0.09,
-                            height: width * 0.09,
-                            color: AppColors.whiteSecondary),
-                        itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
+                DropdownButtonHideUnderline(
+                    child: ButtonTheme(
+                      alignedDropdown: true,
+                      child: DropdownButton<SoundModel>(
+                        isExpanded: true,
+                        isDense: true,
+                        value: controller.soundList[controller.selectedIndex],
+                        // SoundModel(name: controller.soundName, beat1: controller.firstBeat, beat2: controller.secondBeat),
+                       padding: EdgeInsets.zero,
+                        underline: Container(),
+                      borderRadius: BorderRadius.circular(20),
+                      dropdownColor: AppColors.greyPrimary,
+                      icon:  Image.asset(Images.arrowDown,
+                          width: width * 0.09,
+                          height: width * 0.09,
+                          color: AppColors.whiteSecondary),
+                         onChanged: (values){
+                          controller.setSound(ticker: this,
+                              name:  values!.name.toString(),
+                              beat1: values.beat1.toString(), beat2:
+                              values.beat2.toString().toString(),
+                               index:  values!.id!,
+                          );
+                        },
+                        items: [
+                        for(int i = 0 ; i< controller.soundList.length ; i ++)
 
-                          for(int i = 0 ; i< controller.soundList.length ; i ++)
-
-
-                           PopupMenuItem<String>(
-                            value: controller.soundList[i].name,
-                            child: GestureDetector(
-                                onTap: (){
-                                  Navigator.pop(context);
-                                  controller.setSound(ticker: this, name:  controller.soundList[i].name.toString(),
-                                      beat1: controller.soundList[i].beat1.toString(), beat2:  controller.soundList[i].beat2.toString());
-                                },
-                                child: Padding(
-                                  padding:  EdgeInsets.only(right: width*0.050),
-                                  child: Text(controller.soundList[i].name.toString()),
-                                )),
+                          DropdownMenuItem<SoundModel>(
+                            value: controller.soundList[i],
+                            child:
+                            Container(
+                               height: height*0.065,
+                               width:  double.maxFinite,
+                               alignment:Alignment.centerLeft,
+                               decoration: BoxDecoration(
+                                  color: AppColors.greyPrimary,
+                                  border: Border(
+                                  bottom: BorderSide(color: AppColors.greySecondary,width:0.2
+                                  )
+                                )
+                              ),
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal:width*0.04),
+                                child: Text(controller.soundList[i].name.toString(),
+                                  style: TextStyle(color: AppColors.whitePrimary,fontSize: 18,
+                                      fontWeight: FontWeight.w500,fontFamily: AppConstant.sansFont
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
 
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                      ], ),
+                    ),
+                  )
               ),
 
             // SPACER
@@ -379,7 +393,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
             // Reset button and play pause button
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: width * 0.025,),
+              padding:  EdgeInsets.symmetric(horizontal: width * 0.020,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -409,8 +423,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.startStop(this);
                       },
                       child: Container(
-                        height: height * 0.11,
-                        width: height * 0.11,
+                        height: height * 0.095,
+                        width: height * 0.095,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color:  AppColors.redPrimary,
@@ -419,7 +433,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                             child:
                             Icon(
                               controller.isPlaying == true ? Icons.pause :
-                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.13,)
+                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.10,)
                         ),
                       ),
                     ),
