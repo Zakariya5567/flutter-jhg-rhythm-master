@@ -73,11 +73,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               }),
             ),
             // SPACER
-            SizedBox(height: height * 0.02),
+            SizedBox(height: height * 0.025),
             // TARGET TEMPO
             Heading(title: AppConstant.targetTempo, numbers: controller.targetTempo.toStringAsFixed(0)),
             // SPACER
-            SizedBox(height: height * 0.015),
+            SizedBox(height: height * 0.020),
             // TARGET SLIDER
             SliderTheme(
               data: SliderThemeData(
@@ -99,7 +99,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ),
             ),
             // SPACER
-            SizedBox(height: height * 0.04),
+            SizedBox(height: height * 0.045),
             // BARS
             AddAndSubtractButton(
                 title: AppConstant.bars,
@@ -113,7 +113,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                 }
             ),
             // SPACER
-            SizedBox(height: height*0.03,),
+            SizedBox(height: height*0.035,),
             // INTERVAL BUTTONS
             AddAndSubtractButton(
                 title: AppConstant.interval,
@@ -189,17 +189,32 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         controller. startStop();
                       },
                       child: Container(
-                        height: height * 0.095,
-                        width: height * 0.095,
+                        height: height * 0.10,
+                        width: height * 0.10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color:  AppColors.redPrimary,
                         ),
                         child: Center(
-                            child:
-                            Icon(
-                              controller.isPlaying == true ? Icons.pause :
-                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.10,)
+
+                            child: Container(
+                          height: height * 0.10,
+                          width: height * 0.10,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:  AppColors.redPrimary,
+                          ),
+                          child: Center(
+                              child:
+                              controller.isPlaying == true ?
+
+                              Icon(
+                                Icons.pause ,color: AppColors.whitePrimary,size: height*0.066,) :
+                              Icon(
+                                Icons.play_arrow,color: AppColors.whitePrimary,size: height*0.083,)
+
+                          ),
+                        ),
                         ),
                       ),
                     ),
@@ -254,12 +269,12 @@ class Heading extends StatelessWidget {
             ),
           ),
 
-
         ],
       ),
     );
   }
 }
+
 class AddAndSubtractButton extends StatelessWidget {
   const AddAndSubtractButton({super.key,
     required this.title,

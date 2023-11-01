@@ -45,13 +45,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   @override
-  void initState() {
+    void initState() {
     setExpiryDate();
-    Future.delayed(Duration.zero,(){
-      final metroProvider = Provider.of<MetroProvider>(context, listen: true);
-      metroProvider.initializeAnimationController(this,false);
-    });
-
     super.initState();
   }
 
@@ -74,26 +69,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-                // SETTING ICON
-                // Align(alignment: Alignment.topRight,
-                //   child: GestureDetector(
-                //     onTap: ()async{
-                //       Navigator.push(context, MaterialPageRoute(builder: (context){
-                //         return  Setting(
-                //           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
-                //           monthlySubscriptionId: AppConstant.monthlySubscriptionId,
-                //           nextPage: ()=> const HomeScreen(),);
-                //       }));
-                //     },
-                //     child:Padding(
-                //       padding:  EdgeInsets.only(top: height*0.01,right: width*0.01),
-                //       child: Icon(Icons.settings,
-                //         color: AppColors.whitePrimary, size: width*0.1,
-                //       ),
-                //     ),
-                //   ),),
-
 
                 // SPACER
                 SizedBox(height: height*0.07,),

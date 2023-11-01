@@ -36,7 +36,7 @@ class SpeedProvider extends ChangeNotifier{
 
   // INTERVAL VALUES
   // BPM SPEED WILL CHANGE ACCORDING TO INTERVAL
-  int interval = 5;
+  int interval = 10;
   int minInterval = 1;
   int maxInterval = 120;
 
@@ -67,7 +67,7 @@ class SpeedProvider extends ChangeNotifier{
     bpm = 100;
     startTempo = 100;
     targetTempo = 180;
-    interval = 5;
+    interval = 10;
     bar = 4;
     totalTick = 0;
     barCounter = 0;
@@ -231,7 +231,7 @@ class SpeedProvider extends ChangeNotifier{
     bpm = 100;
     startTempo = 100;
     targetTempo = 180;
-    interval = 5;
+    interval = 10;
     bar = 4;
     totalTick = 0;
     barCounter = 0;

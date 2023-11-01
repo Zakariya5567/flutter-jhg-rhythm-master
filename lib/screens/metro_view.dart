@@ -23,7 +23,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   void initState() {
     super.initState();
       final metroProvider = Provider.of<MetroProvider>(context, listen: false);
-      metroProvider.initializeAnimationController(this,false);
+      metroProvider.initializeAnimationController(this);
   }
 
   MetroProvider? metroProvider;
@@ -52,8 +52,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             // SPACER
             SizedBox(height: height * 0.04),
+
 
             Row(
               children: [
@@ -70,10 +72,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return
-                          GestureDetector(
+                        return GestureDetector(
                             onTap: () async {
-                              controller.setBeats(index);
+                              controller.setBeats(this,index);
                             },
                             child: Padding(
                               padding:
@@ -196,7 +197,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         ),
                       ),
 
-
                       // Slider up down
                       Positioned(
                         left: width * 0.270,
@@ -235,14 +235,13 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
               ],
             ),
 
-
             // SPACER
             SizedBox(
               height: height * 0.035,
             ),
 
             //Sound button with arrow down
-              Container(
+            Container(
                 height: height * 0.065,
                 width: width * 1,
                 decoration: BoxDecoration(
@@ -255,24 +254,24 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     child: ButtonTheme(
                       alignedDropdown: true,
                       child: DropdownButton<SoundModel>(
+                        menuMaxHeight:height*0.40,
                         isExpanded: true,
                         isDense: true,
                         value: controller.soundList[controller.selectedIndex],
-                        // SoundModel(name: controller.soundName, beat1: controller.firstBeat, beat2: controller.secondBeat),
-                       padding: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
                         underline: Container(),
-                      borderRadius: BorderRadius.circular(20),
-                      dropdownColor: AppColors.greyPrimary,
-                      icon:  Image.asset(Images.arrowDown,
+                        borderRadius: BorderRadius.circular(20),
+                        dropdownColor: AppColors.greyPrimary,
+                        icon:  Image.asset(Images.arrowDown,
                           width: width * 0.09,
                           height: width * 0.09,
                           color: AppColors.whiteSecondary),
-                         onChanged: (values){
+                          onChanged: (values){
                           controller.setSound(ticker: this,
                               name:  values!.name.toString(),
                               beat1: values.beat1.toString(), beat2:
                               values.beat2.toString().toString(),
-                               index:  values!.id!,
+                              index:  values!.id!,
                           );
                         },
                         items: [
@@ -296,7 +295,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 padding:  EdgeInsets.symmetric(horizontal:width*0.04),
                                 child: Text(controller.soundList[i].name.toString(),
                                   style: TextStyle(color: AppColors.whitePrimary,fontSize: 18,
-                                      fontWeight: FontWeight.w500,fontFamily: AppConstant.sansFont
+                                      fontWeight: FontWeight.w600,fontFamily: AppConstant.sansFont
                                   ),
                                 ),
                               ),
@@ -423,17 +422,22 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.startStop(this);
                       },
                       child: Container(
-                        height: height * 0.095,
-                        width: height * 0.095,
+                        height: height * 0.10,
+                        width: height * 0.10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color:  AppColors.redPrimary,
                         ),
-                        child: Center(
+                        child:
+                        Center(
                             child:
+                            controller.isPlaying == true ?
+
                             Icon(
-                              controller.isPlaying == true ? Icons.pause :
-                              Icons.play_arrow,color: AppColors.whitePrimary,size: width*0.10,)
+                              Icons.pause ,color: AppColors.whitePrimary,size: height*0.066,) :
+                            Icon(
+                              Icons.play_arrow,color: AppColors.whitePrimary,size: height*0.083,)
+
                         ),
                       ),
                     ),

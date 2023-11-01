@@ -70,7 +70,6 @@ flutter:
     - assets/images/
     - assets/audio/
 
-
   fonts:
     - family: PlusJakartaSans-Regular
       fonts:
