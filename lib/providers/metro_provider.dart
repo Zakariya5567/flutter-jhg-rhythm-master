@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:tempo_bpm/db/local_db.dart';
 import 'package:tempo_bpm/model/sound_model.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
 
@@ -78,6 +79,10 @@ class MetroProvider extends ChangeNotifier{
   }
 
 
+  double? defaultBPM ;
+  int? defaultSound ;
+  int? defaultTiming ;
+
   // Initialize  animation controller
   initializeAnimationController(TickerProviderStateMixin ticker,)async{
     setSoundList();
@@ -100,17 +105,27 @@ class MetroProvider extends ChangeNotifier{
     controller!.stop();
 
 
-    Future.delayed(Duration.zero,(){
-      selectedButton = 0;
-      totalBeat = 4;
+    Future.delayed(Duration.zero,() async {
+
+      double? defBPM = await SharedPref.getDefaultBPM;
+      int? defSound  =  await SharedPref.getDefaultSound;
+      int? defTiming = await SharedPref.getDefaultTiming;
+
+
+      defaultBPM  = defBPM  ?? 120;
+      defaultSound = defSound ?? 0;
+      defaultTiming = defTiming ?? 0;
+
+      selectedIndex = defaultSound ?? 0 ;
+      selectedButton = defaultTiming ?? 0;
+      totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 : 6;
+      bpm = defaultBPM ?? 120;
       position = 0;
-      bpm = 120;
-      totalBeat = 4;
       totalTick = 0;
       isPlaying = false;
-      soundName = AppConstant.logic;
-      firstBeat = AppConstant.logic1Sound;
-      secondBeat = AppConstant.logic2Sound;
+      soundName = ( defaultSound == null  ? AppConstant.logic  : soundList[defaultSound!].name)!;
+      firstBeat =( defaultSound == null   ? AppConstant.logic1Sound  : soundList[defaultSound!].beat1)!;
+      secondBeat = (defaultSound == null ? AppConstant.logic2Sound  : soundList[defaultSound!].beat2)!;
       notifyListeners();
     });
 
@@ -132,12 +147,6 @@ class MetroProvider extends ChangeNotifier{
 
   // clear metronome
   clearMetronome(){
-
-     position = 0;
-     bpm = 120;
-     totalBeat = 4;
-     totalTick = 0;
-     isPlaying = false;
      if(timer != null){
        timer!.cancel();
      }
@@ -145,11 +154,17 @@ class MetroProvider extends ChangeNotifier{
        animation = Tween<double>(begin: 0, end: 1).animate(controller!);
        controller!.reset();
      }
-     selectedButton = 0;
-     totalBeat = 4;
-     soundName = AppConstant.logic;
-     firstBeat = AppConstant.logic1Sound;
-     secondBeat = AppConstant.logic2Sound;
+     position = 0;
+     totalTick = 0;
+     isPlaying = false;
+     selectedButton = defaultTiming ?? 0;
+     totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 : 6;
+     bpm = defaultBPM ?? 120;
+     selectedIndex = defaultSound ?? 0 ;
+     soundName = ( defaultSound == null  ? AppConstant.logic  : soundList[defaultSound!].name)!;
+     firstBeat =( defaultSound == null   ? AppConstant.logic1Sound  : soundList[defaultSound!].beat1)!;
+     secondBeat = (defaultSound == null ? AppConstant.logic2Sound  : soundList[defaultSound!].beat2)!;
+
      notifyListeners();
   }
 
@@ -223,50 +238,6 @@ class MetroProvider extends ChangeNotifier{
   Timer? timer ;
 
 
-
-  // setTimer(TickerProviderStateMixin ticker) async {
-  //
-  //   // dispose the previous timer adn add new one base on BPM
-  //   totalTick = 0;
-  //   firstTime = true;
-  //   controller!.reset();
-  //   controller!.dispose();
-  //   controller =  AnimationController(
-  //     duration:  Duration( milliseconds: (60000 / bpm).round()),
-  //     vsync: ticker,
-  //   );
-  //   animation = Tween<double>(begin: 0, end: 1).animate(controller!);
-  //   controller!.repeat(reverse: true,);
-  //   // Listen to timer to animate stalk and play sound
-  //   controller!.addStatusListener((status) {
-  //     if(status == AnimationStatus.forward){
-  //       if(firstTime == true){
-  //         firstTime = false;
-  //         playSound();
-  //       }
-  //       else{
-  //         playSound();
-  //       }
-  //     }
-  //     if(status == AnimationStatus.reverse){
-  //       if(firstTime == true){
-  //         controller!.duration = Duration( milliseconds: (60000 / bpm).round());
-  //         animation = Tween<double>(begin: -1, end: 1).animate(controller!);
-  //         controller!.repeat(reverse: true,);
-  //         playSound();
-  //       }else{
-  //          playSound();
-  //       }
-  //     }
-  //     if(status == AnimationStatus.completed){
-  //     }
-  //     if(status == AnimationStatus.dismissed){}
-  //
-  //
-  //   });
-  //
-  // }
-
   ///=================================
   //Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {
@@ -330,18 +301,25 @@ class MetroProvider extends ChangeNotifier{
       totalBeat = 4;
       selectedButton = index;
       notifyListeners();
-      setTimer(ticker);
+      if(isPlaying){
+        setTimer(ticker);
+      }
+
 
     }else if(index == 1 ){
       totalBeat = 3;
       selectedButton = index;
       notifyListeners();
-      setTimer(ticker);
+      if(isPlaying){
+        setTimer(ticker);
+      }
     }else if(index == 2 ){
       totalBeat = 6;
       selectedButton = index;
       notifyListeners();
-      setTimer(ticker);
+      if(isPlaying){
+        setTimer(ticker);
+      }
     }
 
   }

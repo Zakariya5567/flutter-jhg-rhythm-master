@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/screens/bpm_view.dart';
+import 'package:tempo_bpm/screens/setting_screen.dart';
 import 'package:tempo_bpm/screens/speed_view.dart';
-
-import '../providers/metro_provider.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'metro_view.dart';
@@ -61,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           color: AppColors.blackPrimary,
           child: Padding(
             padding:  EdgeInsets.only(
-                top:height*0.05 ,
+                top:height*0.03 ,
                 bottom: 0,
                 left:width*0.06 ,
                 right:width*0.06 ,
@@ -70,8 +68,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
+                // SETTING ICON
+                Align(alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: ()async{
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return const SettingScreen();
+                      }));
+                    },
+                    child:Padding(
+                      padding:  EdgeInsets.only(top: height*0.01,right: width*0.01),
+                      child: Icon(Icons.settings,
+                        color: AppColors.whitePrimary, size: width*0.1,
+                      ),
+                    ),
+                  ),),
                 // SPACER
-                SizedBox(height: height*0.07,),
+                SizedBox(height: height*0.03,),
 
                 //BUTTON SELECTION SECTION
                 SizedBox(

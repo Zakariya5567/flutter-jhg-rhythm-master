@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/providers/metro_provider.dart';
+import 'package:tempo_bpm/providers/setting_provider.dart';
 import 'package:tempo_bpm/providers/speed_provider.dart';
 import 'package:tempo_bpm/providers/tap_temp_provider.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
@@ -34,8 +34,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TapTempoProvider>(create: (context)=> TapTempoProvider()),
         ChangeNotifierProvider<SpeedProvider>(create: (context)=> SpeedProvider()),
         ChangeNotifierProvider<MetroProvider>(create: (context)=> MetroProvider()),
+        ChangeNotifierProvider<SettingProvider>(create: (context)=> SettingProvider()),
       ],
-      child: MaterialApp(
+      child:
+      MaterialApp(
 
         builder: (context, child) {
           return MediaQuery(

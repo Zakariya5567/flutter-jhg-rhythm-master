@@ -12,6 +12,12 @@ static const String bpmNull = '- -';
 static const String thisSongIs = 'This song is';
 static const String tempoDescription = 'Tap the blue button in the time with the beat to identify its tempo';
 
+static const String logout = 'Logout';
+static const String save = 'Save';
+static const String defaultTiming = 'Default Timing';
+static const String defaultSound = 'Default Sound';
+static const String defaultBpm = 'Default BPM';
+
 
 static const String tapTempo = 'Tap Tempo';
 static const String metronome = 'Metronome';
