@@ -271,7 +271,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                               name:  values!.name.toString(),
                               beat1: values.beat1.toString(), beat2:
                               values.beat2.toString().toString(),
-                              index:  values!.id!,
+                              index:  values.id!,
                           );
                         },
                         items: [
