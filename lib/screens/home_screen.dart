@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       color: AppColors.blackPrimary,
       child: Padding(
         padding: EdgeInsets.only(
-          top: height * 0.05,
+          top: height * 0.06,
           bottom: 0,
           left: width * 0.06,
           right: width * 0.06,
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   child: Icon(
                     Icons.settings,
                     color: AppColors.whitePrimary,
-                    size: width * 0.1,
+                    size: width * 0.07,
                   ),
                 ),
               ),
