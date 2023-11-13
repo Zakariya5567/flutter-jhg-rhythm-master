@@ -38,7 +38,7 @@ dependencies:
   provider: ^6.0.5
   just_audio: ^0.9.35
   reg_page:
-    path: /Users/jamieharrison/Documents/GitHub/flutter-jhg-reg-page
+    path: /Users/Development/fre_projects/flutter-jhg-reg-page
 
 dev_dependencies:
   flutter_test:

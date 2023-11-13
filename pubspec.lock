@@ -164,10 +164,10 @@ packages:
     dependency: transitive
     description:
       name: in_app_purchase
-      sha256: "17074a826f32e36f6cc36effcbcf92abc3b0d8a1e02f42583eaa4c6c79d4f026"
+      sha256: bdda02b5b11b56d5e29c7f0c57c433db3452b0c8ce1c37cbfcf1de52946efd9f
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.10"
+    version: "3.1.11"
   in_app_purchase_android:
     dependency: transitive
     description:
@@ -355,7 +355,7 @@ packages:
   reg_page:
     dependency: "direct main"
     description:
-      path: "/Users/jamieharrison/Documents/GitHub/flutter-jhg-reg-page"
+      path: "/Users/Development/fre_projects/flutter-jhg-reg-page"
       relative: false
     source: path
     version: "0.0.1"
