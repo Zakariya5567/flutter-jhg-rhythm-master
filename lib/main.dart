@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
         home:  SplashScreen(
           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
           monthlySubscriptionId: AppConstant.monthlySubscriptionId,
+          appName: AppConstant.appName,
           nextPage: ()=> const HomeScreen(),),
       ),
     );

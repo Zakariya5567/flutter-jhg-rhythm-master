@@ -275,6 +275,7 @@ class _SettingScreenState extends State<SettingScreen>{
                               AppConstant.yearlySubscriptionId,
                           monthlySubscriptionId:
                               AppConstant.monthlySubscriptionId,
+                          appName: AppConstant.appName,
                           nextPage: () => const HomeScreen(),
                         );
                       }), (route) => false);
