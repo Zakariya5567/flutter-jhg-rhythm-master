@@ -10,7 +10,6 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import '../widgets/add_add_subtract_button.dart';
 
-
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -18,14 +17,12 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
-class _SettingScreenState extends State<SettingScreen>{
-
-
-
+class _SettingScreenState extends State<SettingScreen> {
   @override
   void initState() {
     super.initState();
-    final settingProvider = Provider.of<SettingProvider>(context, listen: false);
+    final settingProvider =
+        Provider.of<SettingProvider>(context, listen: false);
     settingProvider.initializeAnimationController();
   }
 
@@ -51,8 +48,9 @@ class _SettingScreenState extends State<SettingScreen>{
               children: [
                 // BACK ICON
                 GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return const HomeScreen();
                     }));
                   },
@@ -70,7 +68,7 @@ class _SettingScreenState extends State<SettingScreen>{
                 AddAndSubtractButton(
                     padding: 0,
                     title: AppConstant.defaultBpm,
-                    numbers:  controller.bpm.toStringAsFixed(0),
+                    numbers: controller.bpm.toStringAsFixed(0),
                     redButtonSize: height * 0.044,
                     greyButtonSize: width * 0.20,
                     description: "",
@@ -78,7 +76,7 @@ class _SettingScreenState extends State<SettingScreen>{
                       controller.increaseBpm();
                     },
                     onSubtract: () {
-                      controller. decreaseBpm();
+                      controller.decreaseBpm();
                     }),
 
                 // SPACER
@@ -235,7 +233,10 @@ class _SettingScreenState extends State<SettingScreen>{
                 InkWell(
                   onTap: () {
                     controller.onSave();
-                    showToast(context: context, message: "Setting Saved Successfully", isError: false);
+                    showToast(
+                        context: context,
+                        message: "Setting Saved Successfully",
+                        isError: false);
                   },
                   child: Center(
                     child: Container(
@@ -286,7 +287,7 @@ class _SettingScreenState extends State<SettingScreen>{
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.redPrimary,
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),

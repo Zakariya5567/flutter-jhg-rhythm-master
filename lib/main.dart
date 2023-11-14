@@ -9,9 +9,7 @@ import 'package:tempo_bpm/providers/tap_temp_provider.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
 
-
-Future<void> main() async{
-
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -19,7 +17,6 @@ Future<void> main() async{
   ]);
 
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -28,40 +25,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TapTempoProvider>(create: (context)=> TapTempoProvider()),
-        ChangeNotifierProvider<SpeedProvider>(create: (context)=> SpeedProvider()),
-        ChangeNotifierProvider<MetroProvider>(create: (context)=> MetroProvider()),
-        ChangeNotifierProvider<SettingProvider>(create: (context)=> SettingProvider()),
+        ChangeNotifierProvider<TapTempoProvider>(
+            create: (context) => TapTempoProvider()),
+        ChangeNotifierProvider<SpeedProvider>(
+            create: (context) => SpeedProvider()),
+        ChangeNotifierProvider<MetroProvider>(
+            create: (context) => MetroProvider()),
+        ChangeNotifierProvider<SettingProvider>(
+            create: (context) => SettingProvider()),
       ],
-      child:
-      MaterialApp(
-
+      child: MaterialApp(
         builder: (context, child) {
           return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!,
-              );},
-
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: child!,
+          );
+        },
         debugShowCheckedModeBanner: false,
-
         title: 'JHG Rhythm ',
-
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-
-        home:  SplashScreen(
+        home: SplashScreen(
           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
           monthlySubscriptionId: AppConstant.monthlySubscriptionId,
           appName: AppConstant.appName,
-          nextPage: ()=> const HomeScreen(),),
+          nextPage: () => const HomeScreen(),
+        ),
       ),
     );
   }
 }
-
-

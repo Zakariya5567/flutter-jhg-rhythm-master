@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   }),
             ),
 
-           // ScreenView base on button selection
+            // ScreenView base on button selection
             selectedButton == 0
                 ? const MetroView()
                 : // Now Metronome is first
