@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
           monthlySubscriptionId: AppConstant.monthlySubscriptionId,
           appName: AppConstant.appName,
+          appVersion: AppConstant.appVersion,
           nextPage: () => const HomeScreen(),
         ),
       ),
