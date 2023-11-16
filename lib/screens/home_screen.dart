@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/screens/bpm_view.dart';
-import 'package:tempo_bpm/screens/setting_screen.dart';
-import 'package:tempo_bpm/screens/speed_view.dart';
+import 'package:rhythm_master/screens/bpm_view.dart';
+import 'package:rhythm_master/screens/setting_screen.dart';
+import 'package:rhythm_master/screens/speed_view.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'metro_view.dart';

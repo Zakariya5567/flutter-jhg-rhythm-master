@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/model/sound_model.dart';
-import 'package:tempo_bpm/providers/setting_provider.dart';
-import 'package:tempo_bpm/screens/home_screen.dart';
-import 'package:tempo_bpm/utils/images.dart';
-import 'package:tempo_bpm/widgets/heading.dart';
+import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/screens/home_screen.dart';
+import 'package:rhythm_master/utils/images.dart';
+import 'package:rhythm_master/widgets/heading.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import '../widgets/add_add_subtract_button.dart';

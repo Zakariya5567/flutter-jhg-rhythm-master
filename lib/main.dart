@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/providers/metro_provider.dart';
-import 'package:tempo_bpm/providers/setting_provider.dart';
-import 'package:tempo_bpm/providers/speed_provider.dart';
-import 'package:tempo_bpm/providers/tap_temp_provider.dart';
-import 'package:tempo_bpm/screens/home_screen.dart';
-import 'package:tempo_bpm/utils/app_constant.dart';
+import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
+import 'package:rhythm_master/providers/tap_temp_provider.dart';
+import 'package:rhythm_master/screens/home_screen.dart';
+import 'package:rhythm_master/utils/app_constant.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

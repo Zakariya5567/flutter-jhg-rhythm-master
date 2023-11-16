@@ -1,6 +1,6 @@
 {
-    "name": "tempo_bpm",
-    "short_name": "tempo_bpm",
+    "name": "rhythm_master",
+    "short_name": "rhythm_master",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

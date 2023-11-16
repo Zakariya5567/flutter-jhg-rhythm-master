@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tempo_bpm/providers/speed_provider.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import '../utils/images.dart';
