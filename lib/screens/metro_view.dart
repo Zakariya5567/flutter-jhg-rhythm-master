@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tempo_bpm/model/sound_model.dart';
-import 'package:tempo_bpm/providers/metro_provider.dart';
-import 'package:tempo_bpm/utils/images.dart';
+import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/utils/images.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 

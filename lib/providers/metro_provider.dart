@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:tempo_bpm/db/local_db.dart';
-import 'package:tempo_bpm/model/sound_model.dart';
-import 'package:tempo_bpm/utils/app_constant.dart';
+import 'package:rhythm_master/db/local_db.dart';
+import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/utils/app_constant.dart';
 
 //The MetroProvider class is responsible for managing the metronome functionality,
 // controlling BPM, animation, and sound playback.

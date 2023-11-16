@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "tempo_bpm" "\0"
+            VALUE "FileDescription", "rhythm_master" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tempo_bpm" "\0"
+            VALUE "InternalName", "rhythm_master" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tempo_bpm.exe" "\0"
-            VALUE "ProductName", "tempo_bpm" "\0"
+            VALUE "OriginalFilename", "rhythm_master.exe" "\0"
+            VALUE "ProductName", "rhythm_master" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
