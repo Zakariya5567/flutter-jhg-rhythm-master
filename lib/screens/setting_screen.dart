@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/model/sound_model.dart';
@@ -18,9 +19,30 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+
+
+
+  PackageInfo packageInfo = PackageInfo(
+    appName: '',
+    packageName: '',
+    version: '',
+    buildNumber: '',
+    buildSignature: '',
+    installerStore: '',
+  );
+
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      packageInfo = info;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _initPackageInfo();
     final settingProvider =
         Provider.of<SettingProvider>(context, listen: false);
     settingProvider.initializeAnimationController();
@@ -277,7 +299,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           monthlySubscriptionId:
                               AppConstant.monthlySubscriptionId,
                           appName: AppConstant.appName,
-                          appVersion: AppConstant.appVersion,
+                          appVersion: packageInfo.version,
                           nextPage: () => const HomeScreen(),
                         );
                       }), (route) => false);
