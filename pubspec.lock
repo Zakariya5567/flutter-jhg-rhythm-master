@@ -379,7 +379,7 @@ packages:
   reg_page:
     dependency: "direct main"
     description:
-      path: "/Users/Development/fre_projects/flutter-jhg-reg-page"
+      path: "/Users/jamieharrison/Documents/GitHub/flutter-jhg-reg-page"
       relative: false
     source: path
     version: "0.0.1"
