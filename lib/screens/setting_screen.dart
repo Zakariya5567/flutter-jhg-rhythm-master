@@ -19,9 +19,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
-
-
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -30,7 +27,6 @@ class _SettingScreenState extends State<SettingScreen> {
     buildSignature: '',
     installerStore: '',
   );
-
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
@@ -78,7 +74,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                   child: Icon(
                     Icons.arrow_back_ios,
-                    color: AppColors.greySecondary,
+                    color: AppColors.whiteLight,
                     size: height * 0.03,
                   ),
                 ),
@@ -309,7 +305,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.redPrimary,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

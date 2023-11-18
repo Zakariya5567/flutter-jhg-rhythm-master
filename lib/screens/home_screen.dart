@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       EdgeInsets.only(top: height * 0.01, right: width * 0.01),
                   child: Icon(
                     Icons.settings,
-                    color: AppColors.whitePrimary,
+                    color: AppColors.whiteLight,
                     size: width * 0.07,
                   ),
                 ),

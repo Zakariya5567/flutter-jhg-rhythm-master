@@ -30,7 +30,7 @@ class BpmView extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: AppConstant.sansFont,
                   color: AppColors.whiteLight,
-                  fontSize: 12,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -73,8 +73,8 @@ class BpmView extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: AppConstant.sansFont,
                     color: AppColors.whitePrimary,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
