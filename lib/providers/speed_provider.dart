@@ -100,50 +100,70 @@ class SpeedProvider extends ChangeNotifier{
 
   }
 
-  // INCREASE INTERVAL
-  increaseInterval() {
-
-    if(interval<maxInterval){
-      interval = interval+1;
+  // // INCREASE INTERVAL
+  // increaseInterval() {
+  //
+  //   if(interval<maxInterval){
+  //     interval = interval+1;
+  //     notifyListeners();
+  //     if(isPlaying){
+  //       setTimer();
+  //     }
+  //   }
+  // }
+  //
+  // // DECREASE INTERVAL
+  // decreaseInterval() {
+  //   if(interval>minInterval){
+  //     interval = interval-1;
+  //     notifyListeners();
+  //     if(isPlaying){
+  //       setTimer();
+  //     }
+  //   }
+  // }
+  // CHANGE INTERVAL VALUE
+  setInterval(int value){
+    if (value >= minInterval && value <= maxInterval ){
+      interval = value;
       notifyListeners();
       if(isPlaying){
         setTimer();
       }
     }
   }
-
-  // DECREASE INTERVAL
-  decreaseInterval() {
-    if(interval>minInterval){
-      interval = interval-1;
-      notifyListeners();
-      if(isPlaying){
-        setTimer();
+  // CHANGE BAR VALUE
+  setBar(int value){
+    if( value >= minBar && value <= maxBar)
+      {
+        bar = value;
+        notifyListeners();
+        if(isPlaying){
+          setTimer();
+        }
       }
-    }
   }
-
   // INCREASE BAR
-  increaseBar() {
-    if(bar<maxBar){
-      bar = bar+1;
-      notifyListeners();
-      if(isPlaying){
-        setTimer();
-      }
-    }
-  }
+  // increaseBar() {
+  //   if(bar<maxBar){
+  //     bar = bar+1;
+  //     notifyListeners();
+  //     if(isPlaying){
+  //       setTimer();
+  //     }
+  //   }
+  // }
 
   // DECREASE BAR
-  decreaseBar() {
-    if(bar>minBar){
-      bar = bar-1;
-      notifyListeners();
-      if(isPlaying){
-        setTimer();
-      }
-    }
-  }
+  // decreaseBar() {
+  //   if(bar>minBar){
+  //     bar = bar-1;
+  //     notifyListeners();
+  //     if(isPlaying){
+  //       setTimer();
+  //
+  //   }
+  // }
 
   // START OR STOP AUDIO
   void startStop() {

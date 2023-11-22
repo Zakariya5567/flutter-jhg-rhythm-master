@@ -226,72 +226,74 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             SizedBox(
               height: height * 0.035,
             ),
+            Spacer(),
 
             //Sound button with arrow down
             Container(
-                height: height * 0.065,
-                width: width * 1,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.greyPrimary,
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: ButtonTheme(
-                    alignedDropdown: true,
-                    child: DropdownButton<SoundModel>(
-                      menuMaxHeight: height * 0.40,
-                      isExpanded: true,
-                      isDense: true,
-                      value: controller.soundList[controller.selectedIndex],
-                      padding: EdgeInsets.zero,
-                      underline: Container(),
-                      borderRadius: BorderRadius.circular(20),
-                      dropdownColor: AppColors.greyPrimary,
-                      icon: Image.asset(Images.arrowDown,
-                          width: width * 0.09,
-                          height: width * 0.09,
-                          color: AppColors.whiteSecondary),
-                      onChanged: (values) {
-                        controller.setSound(
-                          ticker: this,
-                          name: values!.name.toString(),
-                          beat1: values.beat1.toString(),
-                          beat2: values.beat2.toString().toString(),
-                          index: values.id!,
-                        );
-                      },
-                      items: [
-                        for (int i = 0; i < controller.soundList.length; i++)
-                          DropdownMenuItem<SoundModel>(
-                            value: controller.soundList[i],
-                            child: Container(
-                              height: height * 0.065,
-                              width: double.maxFinite,
-                              alignment: Alignment.centerLeft,
-                              decoration: BoxDecoration(
-                                  color: AppColors.greyPrimary,
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: AppColors.greySecondary,
-                                          width: 0.2))),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: width * 0.04),
-                                child: Text(
-                                  controller.soundList[i].name.toString(),
-                                  style: TextStyle(
-                                      color: AppColors.whitePrimary,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: AppConstant.sansFont),
-                                ),
+              height: height * 0.065,
+              width: width * 1,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: AppColors.greyPrimary,
+              ),
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<SoundModel>(
+                    menuMaxHeight: height * 0.40,
+                    isExpanded: true,
+                    isDense: true,
+                    value: controller.soundList[controller.selectedIndex],
+                    padding: EdgeInsets.zero,
+                    underline: Container(),
+                    borderRadius: BorderRadius.circular(20),
+                    dropdownColor: AppColors.greyPrimary,
+                    icon: Image.asset(Images.arrowDown,
+                        width: width * 0.09,
+                        height: width * 0.09,
+                        color: AppColors.whiteSecondary),
+                    onChanged: (values) {
+                      controller.setSound(
+                        ticker: this,
+                        name: values!.name.toString(),
+                        beat1: values.beat1.toString(),
+                        beat2: values.beat2.toString().toString(),
+                        index: values.id!,
+                      );
+                    },
+                    items: [
+                      for (int i = 0; i < controller.soundList.length; i++)
+                        DropdownMenuItem<SoundModel>(
+                          value: controller.soundList[i],
+                          child: Container(
+                            height: height * 0.065,
+                            width: double.maxFinite,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                                color: AppColors.greyPrimary,
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: AppColors.greySecondary,
+                                        width: 0.2))),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: width * 0.04),
+                              child: Text(
+                                controller.soundList[i].name.toString(),
+                                style: TextStyle(
+                                    color: AppColors.whitePrimary,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: AppConstant.sansFont),
                               ),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
 
             // SPACER
             SizedBox(
@@ -440,6 +442,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: height * 0.04,
             ),
           ],
         ),

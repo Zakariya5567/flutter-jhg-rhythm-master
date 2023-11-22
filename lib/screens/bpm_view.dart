@@ -81,10 +81,7 @@ class BpmView extends StatelessWidget {
             ),
           ),
 
-          // SPACER
-          SizedBox(
-            height: height * 0.10,
-          ),
+          const Spacer(),
 
           // RESET BUTTON
           GestureDetector(
@@ -105,11 +102,7 @@ class BpmView extends StatelessWidget {
             ),
           ),
 
-          // SPACER
-          SizedBox(
-            height: height * 0.095,
-          ),
-
+          const Spacer(),
           // BPM VALUE SECTION
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -135,6 +128,10 @@ class BpmView extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          // SPACER
+          SizedBox(
+            height: height * 0.1,
           ),
         ],
       );

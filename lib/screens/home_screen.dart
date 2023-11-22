@@ -126,13 +126,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
 
               // ScreenView base on button selection
-              controller.selectedButton == 0
-                  ? const MetroView()
-                  : // Now Metronome is first
-                  controller.selectedButton == 1
-                      ? const BpmView()
-                      : // Now Tap Tempo is second
-                      const SpeedView() // Speed Trainer remains third
+              Expanded(
+                child: controller.selectedButton == 0
+                    ? const MetroView()
+                    : // Now Metronome is first
+                    controller.selectedButton == 1
+                        ? const BpmView()
+                        : // Now Tap Tempo is second
+                        const SpeedView(),
+              ) // Speed Trainer remains third
             ],
           ),
         ),

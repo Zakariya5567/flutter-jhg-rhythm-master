@@ -44,7 +44,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // SPACER
@@ -106,35 +106,160 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             ),
             // SPACER
             SizedBox(height: height * 0.045),
-            // BARS
-            AddAndSubtractButton(
-                title: AppConstant.bars,
-                numbers: controller.bar.toString(),
-                description: AppConstant.howManyBars,
-                onAdd: () {
-                  controller.increaseBar();
-                },
-                onSubtract: () {
-                  controller.decreaseBar();
-                }),
-            // SPACER
-            SizedBox(
-              height: height * 0.035,
+            // BARS AND INTERVAL
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // BARS DROPDOWN
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppConstant.bars,style: TextStyle(
+                        fontFamily: AppConstant.sansFont,
+                        color: AppColors.whiteLight,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),),
+                      SizedBox(height: height * 0.015),
+                      Container(
+                        height: height * 0.065,
+                        width: width * .34,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.greyPrimary,
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton<int>(
+                              menuMaxHeight: height * 0.40,
+                              isExpanded: true,
+                              isDense: true,
+                              value: controller.bar,
+                              padding: EdgeInsets.zero,
+                              underline: Container(),
+                              borderRadius: BorderRadius.circular(20),
+                              dropdownColor: AppColors.greyPrimary,
+                              icon: Image.asset(Images.arrowDown,
+                                  width: width * 0.09,
+                                  height: width * 0.09,
+                                  color: AppColors.whiteSecondary),
+                              onChanged: (value) {
+                                controller.setBar(value!);
+                              },
+                              items: [
+                                for (int i = controller.minBar; i <= controller.maxBar ; i++)
+                                  DropdownMenuItem<int>(
+                                    value: i,
+                                    child: Container(
+                                      height: height * 0.065,
+                                      width: double.maxFinite,
+                                      alignment: Alignment.centerLeft,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.greyPrimary,
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: AppColors.greySecondary,
+                                                  width: 0.2))),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: width * 0.04),
+                                        child: Text(
+                                          i.toString(),
+                                          style: TextStyle(
+                                              color: AppColors.whitePrimary,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: AppConstant.sansFont),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // INTERVAL DROPDOWN
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppConstant.interval,style: TextStyle(
+                        fontFamily: AppConstant.sansFont,
+                        color: AppColors.whiteLight,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),),
+                      SizedBox(height: height * 0.015),
+                      Container(
+                        height: height * 0.065,
+                        width: width * .34,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.greyPrimary,
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton<int>(
+                              menuMaxHeight: height * 0.40,
+                              isExpanded: true,
+                              isDense: true,
+                              value: controller.interval,
+                              padding: EdgeInsets.zero,
+                              underline: Container(),
+                              borderRadius: BorderRadius.circular(20),
+                              dropdownColor: AppColors.greyPrimary,
+                              icon: Image.asset(Images.arrowDown,
+                                  width: width * 0.09,
+                                  height: width * 0.09,
+                                  color: AppColors.whiteSecondary),
+                              onChanged: (value) {
+                                controller.setInterval(value!);
+                              },
+                              items: [
+                                for (int i = controller.minInterval; i <= controller.maxInterval ; i++)
+                                  DropdownMenuItem<int>(
+                                    value: i,
+                                    child: Container(
+                                      height: height * 0.065,
+                                      width: double.maxFinite,
+                                      alignment: Alignment.centerLeft,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.greyPrimary,
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: AppColors.greySecondary,
+                                                  width: 0.2))),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: width * 0.04),
+                                        child: Text(
+                                          i.toString(),
+                                          style: TextStyle(
+                                              color: AppColors.whitePrimary,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: AppConstant.sansFont),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            // INTERVAL BUTTONS
-            AddAndSubtractButton(
-                title: AppConstant.interval,
-                numbers: controller.interval.toString(),
-                description:
-                    "${AppConstant.howMuchItShouldIncrease} ${controller.bar} Bars",
-                onAdd: () {
-                  controller.increaseInterval();
-                },
-                onSubtract: () {
-                  controller.decreaseInterval();
-                }),
-            // SPACER
-            SizedBox(height: height * 0.035),
+            const Spacer(),
             // BPM VALUE SECTION
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -237,6 +362,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            SizedBox(height: height * 0.04),
           ],
         ),
       );
