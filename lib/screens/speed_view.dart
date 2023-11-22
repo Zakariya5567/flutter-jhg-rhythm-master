@@ -5,6 +5,7 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import '../utils/images.dart';
 import '../widgets/add_add_subtract_button.dart';
+import '../widgets/custom_slider_track_shape.dart';
 import '../widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
@@ -57,13 +58,16 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             // STARTING SLIDER
             SliderTheme(
               data: SliderThemeData(
-                  thumbShape: RoundSliderThumbShape(
-                    enabledThumbRadius: height * 0.015,
-                  ),
-                  overlayShape: SliderComponentShape.noOverlay,
-                  trackHeight: height * 0.005),
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: height * 0.016,
+                ),
+                overlayShape: SliderComponentShape.noOverlay,
+                trackHeight: height * 0.008,
+                trackShape: const CustomSliderTrackShape(),
+              ),
               child: Slider(
                   activeColor: AppColors.whitePrimary,
+                  inactiveColor: AppColors.whitePrimary,
                   thumbColor: AppColors.whitePrimary,
                   min: controller.startTempoMin,
                   max: controller.startTempoMax,
@@ -83,11 +87,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             // TARGET SLIDER
             SliderTheme(
               data: SliderThemeData(
-                  thumbShape: RoundSliderThumbShape(
-                    enabledThumbRadius: height * 0.015,
-                  ),
-                  overlayShape: SliderComponentShape.noOverlay,
-                  trackHeight: height * 0.005),
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: height * 0.016,
+                ),
+                overlayShape: SliderComponentShape.noOverlay,
+                trackHeight: height * 0.008,
+                trackShape: const CustomSliderTrackShape(),
+              ),
               child: Slider(
                   activeColor: AppColors.whitePrimary,
                   thumbColor: AppColors.whitePrimary,
