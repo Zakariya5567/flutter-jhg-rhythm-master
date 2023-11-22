@@ -56,7 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Consumer<SettingProvider>(builder: (context, controller, child) {
           return Padding(
             padding: EdgeInsets.only(
-              top: height * 0.06,
+              top: height * 0.07,
               left: width * 0.08,
               right: width * 0.08,
             ),
