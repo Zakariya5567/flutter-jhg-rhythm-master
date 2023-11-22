@@ -57,12 +57,12 @@ class BpmView extends StatelessWidget {
               controller.handleTap();
             },
             child: AnimatedScale(
-              curve: Curves.bounceInOut,
-              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+              duration: const Duration(milliseconds: 100),
               scale: controller.buttonScale,
               child: Container(
-                height: height * 0.18,
-                width: height * 0.18,
+                height: height * 0.16,
+                width: height * 0.16,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: AppColors.redPrimary,
@@ -74,7 +74,7 @@ class BpmView extends StatelessWidget {
                     fontFamily: AppConstant.sansFont,
                     color: AppColors.whitePrimary,
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

@@ -22,11 +22,11 @@ class TapTempoProvider extends ChangeNotifier{
 
   double buttonScale = 1;
   // Handle tap event to calculate BPM
-  void handleTap() {
+  void handleTap() async {
 
-    buttonScale = 1.2;
+    buttonScale = 1.1;
     notifyListeners();
-    Future.delayed(const Duration(milliseconds: 200),(){
+    await Future.delayed(const Duration(milliseconds: 100),(){
       buttonScale = 1;
       notifyListeners();
     });
