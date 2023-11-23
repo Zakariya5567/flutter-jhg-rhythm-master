@@ -8,12 +8,14 @@ class SharedPref {
   static String defaultTimingKey = "defaultTimingKey";
   static String isFirstTimeOpenApp = "isFirstTimeOpenApp";
 
+  // Set [isFirstTimeOpenApp] value
   static Future<void> setIsFirstTimeOpenApp(bool value) async {
     // initialized shared preferences
     final pref = await LocalDB.getPref;
     pref!.setBool(isFirstTimeOpenApp, value);
   }
 
+  // Get [isFirstTimeOpenApp] value
   static Future<bool?> get getIsFirstTimeOpenApp async {
     // Initialized shared preferences
     final pref = await LocalDB.getPref;
