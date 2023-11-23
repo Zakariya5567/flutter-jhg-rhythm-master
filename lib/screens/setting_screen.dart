@@ -243,11 +243,77 @@ class _SettingScreenState extends State<SettingScreen> {
 
                 // SPACER
                 SizedBox(
-                  height: height * 0.24,
+                  height: height * 0.035,
                 ),
-
+                Heading(
+                  padding: 0,
+                  title: AppConstant.speedTrainer,
+                  numbers: "",
+                  fontSize: 14,
+                  textColor: AppColors.whiteLight,
+                ),
+                // SPACER
+                SizedBox(height: height * 0.01),
+                // SPEED TRAINER DROPDOWN
+                Container(
+                  height: height * 0.065,
+                  width: width * 1,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppColors.greyPrimary,
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: ButtonTheme(
+                      alignedDropdown: true,
+                      child: DropdownButton<SoundModel>(
+                        menuMaxHeight: height * 0.40,
+                        isExpanded: true,
+                        isDense: true,
+                        value: controller.soundList[controller.selectedIndex],
+                        padding: EdgeInsets.zero,
+                        underline: Container(),
+                        borderRadius: BorderRadius.circular(20),
+                        dropdownColor: AppColors.greyPrimary,
+                        icon: Image.asset(Images.arrowDown,
+                            width: width * 0.09,
+                            height: width * 0.09,
+                            color: AppColors.whiteSecondary),
+                        onChanged: (values) {},
+                        items: [
+                          for (int i = 0; i < controller.soundList.length; i++)
+                            DropdownMenuItem<SoundModel>(
+                              value: controller.soundList[i],
+                              child: Container(
+                                height: height * 0.065,
+                                width: double.maxFinite,
+                                alignment: Alignment.centerLeft,
+                                decoration: BoxDecoration(
+                                    color: AppColors.greyPrimary,
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: AppColors.greySecondary,
+                                            width: 0.2))),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.04),
+                                  child: Text(
+                                    controller.soundList[i].name.toString(),
+                                    style: TextStyle(
+                                        color: AppColors.whitePrimary,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: AppConstant.sansFont),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 // SAVE BUTTON
-
+                Spacer(),
                 InkWell(
                   onTap: () {
                     controller.onSave();
@@ -310,7 +376,11 @@ class _SettingScreenState extends State<SettingScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
+                // SPACER
+                SizedBox(
+                  height: height * 0.05,
+                ),
               ],
             ),
           );
