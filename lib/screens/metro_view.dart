@@ -304,9 +304,19 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // DECREASE BUTTON
                 GestureDetector(
                   onTap: () {
                     controller.decreaseBpm(this);
+                  },
+                  onLongPress: (){
+                    controller.continuousDecreaseBpm(this);
+                  },
+                  onLongPressUp: (){
+                    controller.bpmContinuousTimer.cancel();
+                  },
+                  onLongPressCancel: (){
+                    controller.bpmContinuousTimer.cancel();
                   },
                   child: Container(
                     height: height * 0.038,
@@ -353,9 +363,19 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                 SizedBox(
                   width: width * 0.05,
                 ),
+                // INCREASE BUTTON
                 GestureDetector(
                   onTap: () {
                     controller.increaseBpm(this);
+                  },
+                  onLongPress: (){
+                    controller.continuousIncreaseBpm(this);
+                  },
+                  onLongPressUp:(){
+                    controller.bpmContinuousTimer.cancel();
+                  } ,
+                  onLongPressCancel: (){
+                    controller.bpmContinuousTimer.cancel();
                   },
                   child: Container(
                     height: height * 0.038,

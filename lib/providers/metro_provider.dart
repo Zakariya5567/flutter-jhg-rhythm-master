@@ -10,6 +10,7 @@ import 'package:rhythm_master/utils/app_constant.dart';
 
 class MetroProvider extends ChangeNotifier {
   // initial values of BPM
+  late Timer bpmContinuousTimer;
   double bpm = 120;
   double bpmMin = 1.0;
   double bpmMax = 300.0;
@@ -274,6 +275,13 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
+  // Continuously increase bpm value until it equal to the bpmMax
+  void continuousIncreaseBpm(TickerProviderStateMixin ticker){
+    bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      increaseBpm(ticker);
+    });
+  }
+
   // Decrease BPM
   // Decreasing BPM, resetting total ticks, and notifying listeners
   void decreaseBpm(TickerProviderStateMixin ticker) {
@@ -288,6 +296,13 @@ class MetroProvider extends ChangeNotifier {
         setTimer(ticker);
       }
     }
+  }
+
+  // Continuously decrease bpm value until it equal to the bpmMin
+  void continuousDecreaseBpm(TickerProviderStateMixin ticker){
+    bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      decreaseBpm(ticker);
+    });
   }
 
   bool firstTime = true;
