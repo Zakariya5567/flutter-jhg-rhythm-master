@@ -178,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 size: width * .05,
                               ),
                               Text(
-                                "Quick Tip",
+                                AppConstant.tooltipsTitle,
                                 style: TextStyle(
                                     fontFamily: AppConstant.sansFont,
                                     color: AppColors.whitePrimary,
@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             height: width * .01,
                           ),
                           Text(
-                            "You can make quick changes to BPM using the slider, just like a mechanical metronome!",
+                            AppConstant.tooltipsContent,
                             style: TextStyle(
                                 fontFamily: AppConstant.sansFont,
                                 color: AppColors.whitePrimary),

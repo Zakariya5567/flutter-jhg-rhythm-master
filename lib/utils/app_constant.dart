@@ -101,4 +101,8 @@ class AppConstant {
   //Sonar
   static const String sonar1Sound = "assets/audio/sonar1.mp3";
   static const String sonar2Sound = "assets/audio/sonar2.mp3";
+
+  //HomeScreen
+  static const String tooltipsTitle = "Quick Tip";
+  static const String tooltipsContent = "You can make quick changes to BPM using the slider, just like a mechanical metronome!";
 }
