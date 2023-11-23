@@ -6,6 +6,20 @@ class SharedPref {
   static String defaultBpmKey = "defaultBpmKey";
   static String defaultSoundKey = "defaultSoundKey";
   static String defaultTimingKey = "defaultTimingKey";
+  static String isFirstTimeOpenApp = "isFirstTimeOpenApp";
+
+  static Future<void> setIsFirstTimeOpenApp(bool value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setBool(isFirstTimeOpenApp, value);
+  }
+
+  static Future<bool?> get getIsFirstTimeOpenApp async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    bool? result = pref!.getBool(isFirstTimeOpenApp);
+    return result;
+  }
 
   // Store default BPM
   static Future<void> storeDefaultBPM(double value) async {
