@@ -87,7 +87,7 @@ class AddAndSubtractButton extends StatelessWidget {
 
 
                     Container(
-                      height: height * 0.055,
+                      height: height * 0.065,
                       width: greyButtonSize ?? width * 0.18,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
