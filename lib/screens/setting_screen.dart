@@ -202,49 +202,43 @@ class _SettingScreenState extends State<SettingScreen> {
                 SizedBox(
                   height: height * 0.085,
                   width: width * 0.85,
-                  child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      itemCount: controller.tapButtonList.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: controller.tapButtonList.map((button) {
                         return GestureDetector(
                           onTap: () async {
-                            controller.setBeats(index);
+                            controller.setBeats(controller.tapButtonList.indexOf(button));
                           },
-                          child: Padding(
-                            padding: EdgeInsets.only(right: width * 0.15),
-                            child: Container(
-                              height: height * 0.085,
-                              width: height * 0.085,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: controller.selectedButton == index
-                                    ? AppColors.greySecondary
-                                    : AppColors.greyPrimary,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  controller.tapButtonList[index],
-                                  style: TextStyle(
-                                    fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          child: Container(
+                            height: height * 0.085,
+                            width: height * 0.085,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: controller.selectedButton == controller.tapButtonList.indexOf(button)
+                                  ? AppColors.greySecondary
+                                  : AppColors.greyPrimary,
+                            ),
+                            child: Center(
+                              child: Text(
+                                controller.tapButtonList[controller.tapButtonList.indexOf(button)],
+                                style: TextStyle(
+                                  fontFamily: AppConstant.sansFont,
+                                  color: AppColors.whitePrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
                           ),
                         );
-                      }),
+                      }).toList(),
                 ),
-
+                ),
                 // SPACER
                 SizedBox(
                   height: height * 0.035,
                 ),
+                // SPEED TRAINER HEADING
                 Heading(
                   padding: 0,
                   title: AppConstant.speedTrainer,
@@ -313,7 +307,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
                 // SAVE BUTTON
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: () {
                     controller.onSave();
