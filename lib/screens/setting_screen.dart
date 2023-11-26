@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +31,24 @@ class _SettingScreenState extends State<SettingScreen> {
     installerStore: '',
   );
 
+  String deviceName = 'Unknown';
+  DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  Future<void> getDeviceInfo() async {
+    if(Platform.isAndroid){
+      final device = await deviceInfoPlugin.androidInfo;
+      deviceName = "${device.manufacturer} ${device.model}";
+    }else if(Platform.isIOS){
+      final device = await deviceInfoPlugin.iosInfo;
+      deviceName = device.name;
+    }
+  }
+
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
     setState(() {
       packageInfo = info;
     });
+    await getDeviceInfo();
   }
 
   @override
@@ -64,19 +80,57 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // BACK ICON
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const HomeScreen();
-                    }));
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.whiteLight,
-                    size: height * 0.03,
-                  ),
+                // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return const HomeScreen();
+                        }));
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteSecondary,
+                        size: height * 0.030,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BugReportPage(
+                              device: deviceName,
+                              appName: AppConstant.appName,),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: 4.0), // Add padding to the right
+                            child: Icon(
+                              Icons.error_outline_rounded,
+                              color: AppColors.redPrimary,
+                              size: 16,
+                            ),
+                          ),
+                          Text(
+                            'Report an Issue',
+                            style: TextStyle(
+                              color: AppColors.redPrimary,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
 
                 // SPACER

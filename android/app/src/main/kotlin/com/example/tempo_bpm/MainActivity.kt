@@ -1,4 +1,4 @@
-package com.example.rhythm_master
+package com.jamieharrisonguitar.jhg_rhythm_toolkit
 
 import io.flutter.embedding.android.FlutterActivity
 
