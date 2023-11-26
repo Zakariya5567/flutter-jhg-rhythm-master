@@ -50,9 +50,14 @@ class AppConstant {
   static const String reason = 'Reason';
   static const String sonar = 'Sonar';
 
-  static const String yearlySubscriptionId =
+  // Subscription ids
+
+  static const String androidYearlySubscriptionId = "";
+  static const String androidMonthlySubscriptionId  =  "";
+
+  static const String iosYearlySubscriptionId =
       "com.jamieharrisonguitar.rhythmtoolkit.annual";
-  static const String monthlySubscriptionId =
+  static const String iosMonthlySubscriptionId =
       "com.jamieharrisonguitar.rhythmtoolkit.monthly";
 
 //BEAT Sound

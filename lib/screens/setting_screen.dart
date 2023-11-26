@@ -12,6 +12,7 @@ import 'package:rhythm_master/utils/images.dart';
 import 'package:rhythm_master/widgets/heading.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import '../utils/app_subscription.dart';
 import '../widgets/add_add_subtract_button.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -404,10 +405,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return Welcome(
-                          yearlySubscriptionId:
-                              AppConstant.yearlySubscriptionId,
-                          monthlySubscriptionId:
-                              AppConstant.monthlySubscriptionId,
+                          yearlySubscriptionId: yearlySubscription(),
+                          monthlySubscriptionId: monthlySubscription(),
                           appName: AppConstant.appName,
                           appVersion: packageInfo.version,
                           nextPage: () => const HomeScreen(),

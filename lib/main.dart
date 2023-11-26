@@ -10,6 +10,7 @@ import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/screens/home_screen.dart';
 import 'package:rhythm_master/utils/app_constant.dart';
+import 'package:rhythm_master/utils/app_subscription.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,8 +84,8 @@ class _MyAppState extends State<MyApp> {
           useMaterial3: true,
         ),
         home: SplashScreen(
-          yearlySubscriptionId: AppConstant.yearlySubscriptionId,
-          monthlySubscriptionId: AppConstant.monthlySubscriptionId,
+          yearlySubscriptionId: yearlySubscription(),
+          monthlySubscriptionId: monthlySubscription(),
           appName: AppConstant.appName,
           appVersion: packageInfo.version,
           nextPage: () => const HomeScreen(),
