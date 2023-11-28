@@ -52,13 +52,12 @@ class AppConstant {
 
   // Subscription ids
 
-  static const String androidYearlySubscriptionId = "";
-  static const String androidMonthlySubscriptionId  =  "";
+  static const String androidYearlySubscriptionId = "jhgrhythmtoolkit.annual";
+  static const String androidMonthlySubscriptionId  =  "jhgrhythmtoolkit.monthly";
 
-  static const String iosYearlySubscriptionId =
-      "com.jamieharrisonguitar.rhythmtoolkit.annual";
-  static const String iosMonthlySubscriptionId =
-      "com.jamieharrisonguitar.rhythmtoolkit.monthly";
+  static const String iosYearlySubscriptionId = "com.jamieharrisonguitar.rhythmtoolkit.annual";
+  static const String iosMonthlySubscriptionId = "com.jamieharrisonguitar.rhythmtoolkit.monthly";
+
 
 //BEAT Sound
 
