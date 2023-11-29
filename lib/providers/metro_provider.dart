@@ -192,6 +192,7 @@ class MetroProvider extends ChangeNotifier {
     isPlaying = false;
     if (controller != null) {
       controller!.dispose();
+      controller = null;
     }
   }
 

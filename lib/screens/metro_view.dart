@@ -32,7 +32,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   @override
   void dispose() {
     metroProvider!.disposeController();
-    super.dispose();
+    super.dispose();  
   }
 
   @override

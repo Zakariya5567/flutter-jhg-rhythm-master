@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import '../db/local_db.dart';
+import '../model/sound_model.dart';
 import '../utils/app_constant.dart';
 
 
@@ -50,6 +52,112 @@ class SpeedProvider extends ChangeNotifier{
 
 
   final player = AudioPlayer();
+
+
+
+  String soundName = AppConstant.logic;
+  String firstBeat = AppConstant.logic1Sound;
+  String secondBeat = AppConstant.logic2Sound;
+
+
+  // List of sound list
+  List<SoundModel> soundList = [];
+
+  // set sounds to sound list
+  setSoundList() {
+    soundList.clear();
+
+    soundList.add(SoundModel(
+        id: 0,
+        name: AppConstant.logic,
+        beat1: AppConstant.logic1Sound,
+        beat2: AppConstant.logic2Sound));
+
+    soundList.add(SoundModel(
+        id: 1,
+        name: AppConstant.click,
+        beat1: AppConstant.click1Sound,
+        beat2: AppConstant.click2Sound));
+
+    soundList.add(SoundModel(
+        id: 2,
+        name: AppConstant.drumsticks,
+        beat1: AppConstant.drumsticks1Sound,
+        beat2: AppConstant.drumsticks2Sound));
+
+    soundList.add(SoundModel(
+        id: 3,
+        name: AppConstant.ping,
+        beat1: AppConstant.ping1Sound,
+        beat2: AppConstant.ping2Sound));
+
+    soundList.add(SoundModel(
+        id: 4,
+        name: AppConstant.seiko,
+        beat1: AppConstant.seiko1Sound,
+        beat2: AppConstant.seiko2Sound));
+
+    soundList.add(SoundModel(
+        id: 5,
+        name: AppConstant.ableton,
+        beat1: AppConstant.ableton1Sound,
+        beat2: AppConstant.ableton2Sound));
+
+    soundList.add(SoundModel(
+        id: 6,
+        name: AppConstant.cubase,
+        beat1: AppConstant.cubase1Sound,
+        beat2: AppConstant.cubase2Sound));
+
+    soundList.add(SoundModel(
+        id: 7,
+        name: AppConstant.flStudio,
+        beat1: AppConstant.flStudio1Sound,
+        beat2: AppConstant.flStudio2Sound));
+
+    soundList.add(SoundModel(
+        id: 8,
+        name: AppConstant.maschine,
+        beat1: AppConstant.maschine1Sound,
+        beat2: AppConstant.maschine2Sound));
+
+    soundList.add(SoundModel(
+        id: 9,
+        name: AppConstant.protoolDefault,
+        beat1: AppConstant.protoolsDefault1Sound,
+        beat2: AppConstant.protoolsDefault2Sound));
+
+    soundList.add(SoundModel(
+        id: 10,
+        name: AppConstant.protoolMarimba,
+        beat1: AppConstant.protoolsMarimba1Sound,
+        beat2: AppConstant.protoolsMarimba2Sound));
+
+    soundList.add(SoundModel(
+        id: 11,
+        name: AppConstant.reason,
+        beat1: AppConstant.reason1Sound,
+        beat2: AppConstant.reason2Sound));
+
+    soundList.add(SoundModel(
+        id: 12,
+        name: AppConstant.sonar,
+        beat1: AppConstant.sonar1Sound,
+        beat2: AppConstant.sonar2Sound));
+  }
+
+  // Initialize  animation controller
+  initializeAnimationController() async {
+    setSoundList();
+    Future.delayed(Duration.zero, () async {
+      int? defSound = await SharedPref.getDefaultSound;
+      soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
+      firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
+      secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
+      notifyListeners();
+    });
+  }
+
 
 
   // TOTAL TICK IS USED TO IDENTIFY BEAT AUDIO
@@ -207,14 +315,14 @@ class SpeedProvider extends ChangeNotifier{
         setTimer();
       }
 
-      await player.setAsset(AppConstant.logic1Sound);
+      await player.setAsset(firstBeat);
       await player.play();
     }else{
       if(totalTick<totalBeats){
-        await player.setAsset(AppConstant.logic2Sound);
+        await player.setAsset(secondBeat);
         await player.play();
       }else{
-        await player.setAsset(AppConstant.logic2Sound);
+        await player.setAsset(secondBeat);
         await player.play();
         totalTick = 0;
       }
