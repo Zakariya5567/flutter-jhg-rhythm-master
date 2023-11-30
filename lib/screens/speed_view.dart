@@ -137,7 +137,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   controller.decreaseInterval();
                 }),
             // SPACER
-            SizedBox(height: height * 0.035),
+            SizedBox(height: height * 0.030),
             // BPM VALUE SECTION
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

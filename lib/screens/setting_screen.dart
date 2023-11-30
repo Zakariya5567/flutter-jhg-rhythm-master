@@ -318,7 +318,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         menuMaxHeight: height * 0.40,
                         isExpanded: true,
                         isDense: true,
-                        value: controller.soundList[controller.selectedIndex],
+                        value: controller.soundList[controller.speedTrainerSelectedIndex],
                         padding: EdgeInsets.zero,
                         underline: Container(),
                         borderRadius: BorderRadius.circular(20),
@@ -327,7 +327,16 @@ class _SettingScreenState extends State<SettingScreen> {
                             width: width * 0.09,
                             height: width * 0.09,
                             color: AppColors.whiteSecondary),
-                        onChanged: (values) {},
+                        onChanged: (values) {
+
+                          controller.setSpeedTrainerSound(
+                            name: values!.name.toString(),
+                            beat1: values.beat1.toString(),
+                            beat2: values.beat2.toString().toString(),
+                            index: values.id!,
+                          );
+
+                        },
                         items: [
                           for (int i = 0; i < controller.soundList.length; i++)
                             DropdownMenuItem<SoundModel>(

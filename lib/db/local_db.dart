@@ -7,6 +7,7 @@ class SharedPref {
   static String defaultSoundKey = "defaultSoundKey";
   static String defaultTimingKey = "defaultTimingKey";
   static String isFirstTimeOpenApp = "isFirstTimeOpenApp";
+  static String speedTrainerDefaultSoundKey = "speedTrainerDefaultSoundKey";
 
   // Set [isFirstTimeOpenApp] value
   static Future<void> setIsFirstTimeOpenApp(bool value) async {
@@ -52,6 +53,22 @@ class SharedPref {
     final pref = await LocalDB.getPref;
     int? bpm = pref!.getInt(defaultSoundKey);
     return bpm;
+  }
+
+
+  // Set default Speed trainer sound
+  static Future<void> storeSpeedTrainerDefaultSound(int value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setInt(speedTrainerDefaultSoundKey, value);
+  }
+
+  // Get default sound
+  static Future<int?> get getStoreSpeedTrainerDefaultSound async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    int? key = pref!.getInt(speedTrainerDefaultSoundKey);
+    return key;
   }
 
 

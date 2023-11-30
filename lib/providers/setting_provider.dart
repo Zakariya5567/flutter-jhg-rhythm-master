@@ -13,11 +13,6 @@ class SettingProvider extends ChangeNotifier {
   double bpmMin = 1.0;
   double bpmMax = 300.0;
 
-  // Set selected sound
-
-  String soundName = AppConstant.logic;
-  String firstBeat = AppConstant.logic1Sound;
-  String secondBeat = AppConstant.logic2Sound;
 
   // List of Beat buttons
   List<String> tapButtonList = ['4/4', '3/4', '6/8'];
@@ -112,6 +107,7 @@ class SettingProvider extends ChangeNotifier {
   initializeAnimationController() async {
     setSoundList();
     Future.delayed(Duration.zero, () async {
+
       double? defBPM = await SharedPref.getDefaultBPM;
 
       int? defSound = await SharedPref.getDefaultSound;
@@ -120,15 +116,23 @@ class SettingProvider extends ChangeNotifier {
 
       selectedButton = defTiming ?? 0;
       bpm = defBPM ?? 120;
+
       selectedIndex = defSound ?? 0;
-      soundName =
-          (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
-      firstBeat = (defSound == null
-          ? AppConstant.logic1Sound
-          : soundList[defSound].beat1)!;
-      secondBeat = (defSound == null
-          ? AppConstant.logic2Sound
-          : soundList[defSound].beat2)!;
+      soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
+      firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
+      secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
+
+
+
+
+      int? defSpeedTrainerSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
+
+      speedTrainerSelectedIndex =  defSpeedTrainerSound ?? 0;
+      speedTrainerSoundName = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].name)!;
+      speedTrainerFirstBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat1)!;
+      speedTrainerSecondBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat2)!;
+
+
       notifyListeners();
     });
   }
@@ -137,6 +141,10 @@ class SettingProvider extends ChangeNotifier {
   int selectedIndex = 0;
 
   // Set selected sound
+  String soundName = AppConstant.logic;
+  String firstBeat = AppConstant.logic1Sound;
+  String secondBeat = AppConstant.logic2Sound;
+
 
   // Setting selected sound and notifying listeners
   setSound(
@@ -148,6 +156,29 @@ class SettingProvider extends ChangeNotifier {
     soundName = name;
     firstBeat = beat1;
     secondBeat = beat2;
+    notifyListeners();
+  }
+
+
+
+  // select Sound index
+  int speedTrainerSelectedIndex = 0;
+
+  // Set selected sound
+  String speedTrainerSoundName = AppConstant.logic;
+  String speedTrainerFirstBeat = AppConstant.logic1Sound;
+  String speedTrainerSecondBeat = AppConstant.logic2Sound;
+
+
+  setSpeedTrainerSound(
+      {required String name,
+        required String beat1,
+        required beat2,
+        required int index}) {
+    speedTrainerSelectedIndex = index;
+    speedTrainerSoundName = name;
+    speedTrainerFirstBeat = beat1;
+    speedTrainerSecondBeat = beat2;
     notifyListeners();
   }
 
@@ -196,5 +227,9 @@ class SettingProvider extends ChangeNotifier {
     await SharedPref.storeDefaultSound(selectedIndex);
 
     await SharedPref.storeDefaultTiming(selectedButton);
+
+
+    await SharedPref.storeSpeedTrainerDefaultSound(speedTrainerSelectedIndex);
+
   }
 }

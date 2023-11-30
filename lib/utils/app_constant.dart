@@ -89,15 +89,11 @@ class AppConstant {
   static const String maschine1Sound = "assets/audio/maschine1.mp3";
   static const String maschine2Sound = "assets/audio/maschine2.mp3";
   //ProtoolsDefault
-  static const String protoolsDefault1Sound =
-      "assets/audio/protoolsDefault1.mp3";
-  static const String protoolsDefault2Sound =
-      "assets/audio/protoolsDefault2.mp3";
+  static const String protoolsDefault1Sound = "assets/audio/protoolsDefault1.mp3";
+  static const String protoolsDefault2Sound = "assets/audio/protoolsDefault2.mp3";
   //ProtocalsMaribal
-  static const String protoolsMarimba1Sound =
-      "assets/audio/protoolsMarimba1.mp3";
-  static const String protoolsMarimba2Sound =
-      "assets/audio/protoolsMarimba2.mp3";
+  static const String protoolsMarimba1Sound = "assets/audio/protoolsMarimba1.mp3";
+  static const String protoolsMarimba2Sound = "assets/audio/protoolsMarimba2.mp3";
   //Reason
   static const String reason1Sound = "assets/audio/reason1.mp3";
   static const String reason2Sound = "assets/audio/reason2.mp3";

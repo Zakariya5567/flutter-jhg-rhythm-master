@@ -150,7 +150,7 @@ class SpeedProvider extends ChangeNotifier{
   initializeAnimationController() async {
     setSoundList();
     Future.delayed(Duration.zero, () async {
-      int? defSound = await SharedPref.getDefaultSound;
+      int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
       soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
       firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
       secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
