@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
@@ -315,15 +316,35 @@ class SpeedProvider extends ChangeNotifier{
         setTimer();
       }
 
-      await player.setAsset(firstBeat);
-      await player.play();
-    }else{
-      if(totalTick<totalBeats){
-        await player.setAsset(secondBeat);
+      if(player.playing){
+        await player.stop();
+        await player.setAsset(firstBeat);
         await player.play();
       }else{
-        await player.setAsset(secondBeat);
+        await player.setAsset(firstBeat);
         await player.play();
+      }
+
+    }else{
+      if(totalTick<totalBeats){
+        if(player.playing){
+          await player.stop();
+          await player.setAsset(secondBeat);
+          await player.play();
+        }else{
+          await player.setAsset(secondBeat);
+          await player.play();
+        }
+      }else{
+        if(player.playing){
+          await player.stop();
+          await player.setAsset(secondBeat);
+          await player.play();
+        }else{
+          await player.setAsset(secondBeat);
+          await player.play();
+        }
+
         totalTick = 0;
       }
     }

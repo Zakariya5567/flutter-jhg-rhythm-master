@@ -315,10 +315,16 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.continuousDecreaseBpm(this);
                       },
                       onLongPressUp: (){
-                        controller.bpmContinuousTimer.cancel();
+                        if(controller.bpmContinuousTimer != null){
+                          controller.bpmContinuousTimer!.cancel();
+                        }
+
                       },
                       onLongPressCancel: (){
-                        controller.bpmContinuousTimer.cancel();
+                        if(controller.bpmContinuousTimer != null){
+                          controller.bpmContinuousTimer!.cancel();
+                        }
+
                       },
                       child: Container(
                         height: height * 0.038,
@@ -374,10 +380,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.continuousIncreaseBpm(this);
                       },
                       onLongPressUp:(){
-                        controller.bpmContinuousTimer.cancel();
+                        if(controller.bpmContinuousTimer != null){
+                          controller.bpmContinuousTimer!.cancel();
+                        }
                       } ,
                       onLongPressCancel: (){
-                        controller.bpmContinuousTimer.cancel();
+                        if(controller.bpmContinuousTimer != null){
+                          controller.bpmContinuousTimer!.cancel();
+                        }
+
                       },
                       child: Container(
                         height: height * 0.038,
