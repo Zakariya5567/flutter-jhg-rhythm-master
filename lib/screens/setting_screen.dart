@@ -46,9 +46,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-    setState(() {
       packageInfo = info;
-    });
     await getDeviceInfo();
   }
 

@@ -48,9 +48,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-    setState(() {
       packageInfo = info;
-    });
   }
 
 
