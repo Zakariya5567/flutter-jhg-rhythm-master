@@ -458,8 +458,14 @@ class MetroProvider extends ChangeNotifier {
           await player.setAsset(secondBeat);
           await player.play();
         }else{
-          await player.setAsset(secondBeat);
-          await player.play();
+          try{
+            print("playing==");
+            await player.setAsset(secondBeat);
+            await player.play();
+          }catch(e){
+            print("==${e}");
+          }
+
         }
         if (totalTick == totalBeat) {
           totalTick = 0;

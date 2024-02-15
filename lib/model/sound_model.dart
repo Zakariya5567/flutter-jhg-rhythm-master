@@ -6,4 +6,9 @@ class SoundModel{
    String? beat2;
 
    SoundModel({required this.id,required this.name,required this.beat1,required this.beat2});
+
+   @override
+  String toString() {
+    return name!;
+  }
 }

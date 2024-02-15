@@ -11,12 +11,14 @@ import 'metro_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   HomeProvider homeProvider = HomeProvider();
+
   // List on buttons, Metronome | Tap Tempo | Speed Trainer
   List<String> buttonList = [
     AppConstant.metronome,
@@ -65,25 +67,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         // SETTING ICON
                         Align(
-                          alignment: Alignment.topRight,
-                          child: GestureDetector(
-                            onTap: () async {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return const SettingScreen();
-                              }));
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: height * 0.01, right: width * 0.01),
-                              child: Icon(
-                                Icons.settings,
-                                color: AppColors.whiteLight,
-                                size: width * 0.07,
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () async {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return const SettingScreen();
+                                }));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: height * 0.01, right: width * 0.01),
+                                child: Container(
+                                  padding: EdgeInsets.all( width * 0.01),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.greyPrimary),
+                                  child: Icon(
+                                    Icons.settings,
+                                    color: AppColors.whiteLight,
+                                    size: width * 0.07,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
+                            )),
                         // SPACER
                         SizedBox(
                           height: height * 0.03,

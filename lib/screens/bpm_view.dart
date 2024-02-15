@@ -89,12 +89,12 @@ class BpmView extends StatelessWidget {
               controller.clearBPM();
             },
             child: Container(
-              height: height * 0.045,
-              width: height * 0.045,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
+              height: height * 0.060,
+              width: height * 0.060,
+              padding: EdgeInsets.all(width * 0.03),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.greyPrimary),
               child: Image.asset(
                 Images.iconReset,
                 color: AppColors.whitePrimary,

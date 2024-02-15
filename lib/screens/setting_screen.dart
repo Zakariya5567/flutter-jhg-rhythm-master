@@ -9,6 +9,7 @@ import 'package:rhythm_master/model/sound_model.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/screens/home_screen.dart';
 import 'package:rhythm_master/utils/images.dart';
+import 'package:rhythm_master/widgets/drop_down_widget.dart';
 import 'package:rhythm_master/widgets/heading.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
@@ -34,11 +35,12 @@ class _SettingScreenState extends State<SettingScreen> {
 
   String deviceName = 'Unknown';
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
   Future<void> getDeviceInfo() async {
-    if(Platform.isAndroid){
+    if (Platform.isAndroid) {
       final device = await deviceInfoPlugin.androidInfo;
       deviceName = "${device.manufacturer} ${device.model}";
-    }else if(Platform.isIOS){
+    } else if (Platform.isIOS) {
       final device = await deviceInfoPlugin.iosInfo;
       deviceName = device.name;
     }
@@ -46,7 +48,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-      packageInfo = info;
+    packageInfo = info;
     await getDeviceInfo();
   }
 
@@ -84,8 +86,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
                           return const HomeScreen();
                         }));
                       },
@@ -102,7 +105,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           MaterialPageRoute(
                             builder: (context) => BugReportPage(
                               device: deviceName,
-                              appName: AppConstant.appName,),
+                              appName: AppConstant.appName,
+                            ),
                           ),
                         );
                       },
@@ -167,70 +171,25 @@ class _SettingScreenState extends State<SettingScreen> {
 
                 //Sound button with arrow down
                 Container(
-                    height: height * 0.065,
-                    width: width * 1,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppColors.greyPrimary,
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: ButtonTheme(
-                        alignedDropdown: true,
-                        child: DropdownButton<SoundModel>(
-                          menuMaxHeight: height * 0.40,
-                          isExpanded: true,
-                          isDense: true,
-                          value: controller.soundList[controller.selectedIndex],
-                          padding: EdgeInsets.zero,
-                          underline: Container(),
-                          borderRadius: BorderRadius.circular(20),
-                          dropdownColor: AppColors.greyPrimary,
-                          icon: Image.asset(Images.arrowDown,
-                              width: width * 0.09,
-                              height: width * 0.09,
-                              color: AppColors.whiteSecondary),
-                          onChanged: (values) {
-                            controller.setSound(
-                              name: values!.name.toString(),
-                              beat1: values.beat1.toString(),
-                              beat2: values.beat2.toString().toString(),
-                              index: values.id!,
-                            );
-                          },
-                          items: [
-                            for (int i = 0;
-                                i < controller.soundList.length;
-                                i++)
-                              DropdownMenuItem<SoundModel>(
-                                value: controller.soundList[i],
-                                child: Container(
-                                  height: height * 0.065,
-                                  width: double.maxFinite,
-                                  alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.greyPrimary,
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: AppColors.greySecondary,
-                                              width: 0.2))),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: width * 0.04),
-                                    child: Text(
-                                      controller.soundList[i].name.toString(),
-                                      style: TextStyle(
-                                          color: AppColors.whitePrimary,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: AppConstant.sansFont),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    )),
+                  width: width * 1,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppColors.greyPrimary,
+                  ),
+                  child: DropDownWidget(
+                    value: controller.soundList[controller.selectedIndex],
+                    items: controller.soundList,
+                    expandedColor: AppColors.liteWhite,
+                    onChanged: (values) async {
+                      controller.setSound(
+                        name: values!.name.toString(),
+                        beat1: values.beat1.toString(),
+                        beat2: values.beat2.toString().toString(),
+                        index: values.id!,
+                      );
+                    },
+                  ),
+                ),
 
                 // SPACER
                 SizedBox(
@@ -258,34 +217,37 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: controller.tapButtonList.map((button) {
-                        return GestureDetector(
-                          onTap: () async {
-                            controller.setBeats(controller.tapButtonList.indexOf(button));
-                          },
-                          child: Container(
-                            height: height * 0.085,
-                            width: height * 0.085,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: controller.selectedButton == controller.tapButtonList.indexOf(button)
-                                  ? AppColors.greySecondary
-                                  : AppColors.greyPrimary,
-                            ),
-                            child: Center(
-                              child: Text(
-                                controller.tapButtonList[controller.tapButtonList.indexOf(button)],
-                                style: TextStyle(
-                                  fontFamily: AppConstant.sansFont,
-                                  color: AppColors.whitePrimary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                      return GestureDetector(
+                        onTap: () async {
+                          controller.setBeats(
+                              controller.tapButtonList.indexOf(button));
+                        },
+                        child: Container(
+                          height: height * 0.085,
+                          width: height * 0.085,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: controller.selectedButton ==
+                                    controller.tapButtonList.indexOf(button)
+                                ? AppColors.greySecondary
+                                : AppColors.greyPrimary,
+                          ),
+                          child: Center(
+                            child: Text(
+                              controller.tapButtonList[
+                                  controller.tapButtonList.indexOf(button)],
+                              style: TextStyle(
+                                fontFamily: AppConstant.sansFont,
+                                color: AppColors.whitePrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                        );
-                      }).toList(),
-                ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 // SPACER
                 SizedBox(
@@ -303,70 +265,25 @@ class _SettingScreenState extends State<SettingScreen> {
                 SizedBox(height: height * 0.01),
                 // SPEED TRAINER DROPDOWN
                 Container(
-                  height: height * 0.065,
                   width: width * 1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: AppColors.greyPrimary,
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton<SoundModel>(
-                        menuMaxHeight: height * 0.40,
-                        isExpanded: true,
-                        isDense: true,
+                  child: DropDownWidget(
                         value: controller.soundList[controller.speedTrainerSelectedIndex],
-                        padding: EdgeInsets.zero,
-                        underline: Container(),
-                        borderRadius: BorderRadius.circular(20),
-                        dropdownColor: AppColors.greyPrimary,
-                        icon: Image.asset(Images.arrowDown,
-                            width: width * 0.09,
-                            height: width * 0.09,
-                            color: AppColors.whiteSecondary),
-                        onChanged: (values) {
-
+                        items: controller.soundList,
+                        expandedColor: AppColors.liteWhite,
+                        onChanged: (values) async {
                           controller.setSpeedTrainerSound(
                             name: values!.name.toString(),
                             beat1: values.beat1.toString(),
                             beat2: values.beat2.toString().toString(),
                             index: values.id!,
                           );
-
                         },
-                        items: [
-                          for (int i = 0; i < controller.soundList.length; i++)
-                            DropdownMenuItem<SoundModel>(
-                              value: controller.soundList[i],
-                              child: Container(
-                                height: height * 0.065,
-                                width: double.maxFinite,
-                                alignment: Alignment.centerLeft,
-                                decoration: BoxDecoration(
-                                    color: AppColors.greyPrimary,
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: AppColors.greySecondary,
-                                            width: 0.2))),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: width * 0.04),
-                                  child: Text(
-                                    controller.soundList[i].name.toString(),
-                                    style: TextStyle(
-                                        color: AppColors.whitePrimary,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: AppConstant.sansFont),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
+                      )
+
                 ),
                 // SAVE BUTTON
                 const Spacer(),
@@ -391,7 +308,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.whitePrimary,
-                          fontSize: 16,
+                          fontSize: 17,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -425,7 +342,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.redPrimary,
-                        fontSize: 14,
+                        fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

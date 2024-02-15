@@ -11,4 +11,8 @@ class AppColors {
 
   static Color greyPrimary = const Color.fromRGBO(67, 67, 67, 1);
   static Color greySecondary = const Color.fromRGBO(142, 142, 142, 1);
+
+  static const Color charcol = Color(0xFF434343);
+  static const Color textHeadingColor = Color(0xffC0C0C4);
+  static const Color liteWhite = Color(0xff646464);
 }
