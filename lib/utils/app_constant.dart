@@ -23,6 +23,7 @@ class AppConstant {
   static const String tapTempo = 'Tap Tempo';
   static const String metronome = 'Metronome';
   static const String speedTrainer = 'Speed Trainer';
+  static const String speedTrainerSound = 'Speed Trainer Sound';
 
   static const String dragDescription =
       'Drag the slider on the metronome up and down to\nmake quick adjustments';

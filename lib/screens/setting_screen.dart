@@ -256,7 +256,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 // SPEED TRAINER HEADING
                 Heading(
                   padding: 0,
-                  title: AppConstant.speedTrainer,
+                  title: AppConstant.speedTrainerSound,
                   numbers: "",
                   fontSize: 14,
                   textColor: AppColors.whiteLight,
