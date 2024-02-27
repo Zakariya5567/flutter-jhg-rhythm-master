@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/screens/home_screen.dart';
-import 'package:rhythm_master/utils/app_constant.dart';
-import 'package:rhythm_master/utils/app_subscription.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +34,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -54,9 +51,9 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-      packageInfo = info;
+    packageInfo = info;
+    print('packageInfo.version ${packageInfo.version}');
   }
-
 
   // This widget is the root of your application.
   @override
@@ -77,7 +74,8 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         builder: (context, child) {
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(1.0)),
             child: child!,
           );
         },
@@ -86,14 +84,16 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
+          scaffoldBackgroundColor: JHGColors.secondryBlack,
         ),
-        home: SplashScreen(
-          yearlySubscriptionId: yearlySubscription(),
-          monthlySubscriptionId: monthlySubscription(),
-          appName: AppConstant.appName,
-          appVersion: packageInfo.version,
-          nextPage: () => const HomeScreen(),
-        ),
+        home: HomeScreen(),
+        // SplashScreen(
+        //   yearlySubscriptionId: yearlySubscription(),
+        //   monthlySubscriptionId: monthlySubscription(),
+        //   appName: AppConstant.appName,
+        //   appVersion: packageInfo.version,
+        //   nextPage: () => const HomeScreen(),
+        // ),
       ),
     );
   }

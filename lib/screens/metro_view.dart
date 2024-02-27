@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythm_master/model/sound_model.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/utils/images.dart';
+import 'package:rhythm_master/utils/responsive.dart';
 import 'package:rhythm_master/widgets/drop_down_widget.dart';
+
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
@@ -40,6 +41,13 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final metronomeWidth = Responsive.isMobile(context)
+        ? width * 0.60
+        : Responsive.isTablet(context)
+            ? width * 0.50
+            : width * 0.40;
+    final metronomeHeight =
+        Responsive.isMobile(context) ? height * 0.40 : height * 0.50;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
       return Stack(
         children: [
@@ -105,18 +113,18 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     // Metronome
                     Container(
                       alignment: Alignment.center,
-                      height: height * 0.40,
-                      width: width * 0.60,
+                      height: metronomeHeight,
+                      width: metronomeWidth,
                       child: Stack(
                         children: [
                           // Metronome
                           SizedBox(
-                            height: height * 0.40,
-                            width: width * 0.60,
+                            height: metronomeHeight,
+                            width: metronomeWidth,
                             child: Image.asset(
                               Images.metronome,
-                              height: height * 0.40,
-                              width: width * 0.60,
+                              height: metronomeHeight,
+                              width: metronomeWidth,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -126,7 +134,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                             top: height * 0.052,
                             child: Container(
                               height: height * 0.23,
-                              width: width * 0.60,
+                              width: metronomeWidth,
                               alignment: Alignment.bottomCenter,
                               child: AnimatedBuilder(
                                 animation: controller.animation!,
@@ -147,12 +155,12 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                     child: Stack(
                                       children: [
                                         Container(
-                                          height: height * 0.40,
+                                          height: metronomeHeight,
                                           width: width * 0.095,
                                           alignment: Alignment.center,
                                           child: Image.asset(
                                             Images.stalk,
-                                            height: height * 0.40,
+                                            height: metronomeHeight,
                                             width: width * 0.020,
                                             fit: BoxFit.cover,
                                           ),
@@ -180,12 +188,12 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                             top: height * 0.08,
                             left: width * 0.003,
                             child: Container(
-                              height: height * 0.40,
-                              width: width * 0.60,
+                              height: metronomeHeight,
+                              width: metronomeWidth,
                               alignment: Alignment.bottomCenter,
                               child: Image.asset(
                                 Images.metronomeBottom,
-                                height: height * 0.40,
+                                height: metronomeHeight,
                                 width: width * 0.42,
                               ),
                             ),
