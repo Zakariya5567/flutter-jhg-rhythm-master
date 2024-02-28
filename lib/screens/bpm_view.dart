@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
-import 'package:rhythm_master/utils/images.dart';
+
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
@@ -83,24 +84,28 @@ class BpmView extends StatelessWidget {
 
           const Spacer(),
 
-          // RESET BUTTON
-          GestureDetector(
-            onTap: () {
-              controller.clearBPM();
-            },
-            child: Container(
-              height: height * 0.060,
-              width: height * 0.060,
-              padding: EdgeInsets.all(width * 0.03),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.greyPrimary),
-              child: Image.asset(
-                Images.iconReset,
-                color: AppColors.whitePrimary,
-              ),
-            ),
-          ),
+          JHGResetBtn(
+              enabled: true,
+              onTap: () {
+                controller.clearBPM();
+              }),
+          // // RESET BUTTON
+          // GestureDetector(
+          //   onTap: () {
+          //     controller.clearBPM();
+          //   },
+          //   child: Container(
+          //     height: height * 0.060,
+          //     width: height * 0.060,
+          //     padding: EdgeInsets.all(width * 0.03),
+          //     decoration: BoxDecoration(
+          //         shape: BoxShape.circle, color: AppColors.greyPrimary),
+          //     child: Image.asset(
+          //       Images.iconReset,
+          //       color: AppColors.whitePrimary,
+          //     ),
+          //   ),
+          // ),
 
           const Spacer(),
           // BPM VALUE SECTION

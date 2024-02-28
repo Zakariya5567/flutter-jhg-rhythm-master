@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
 class Heading extends StatelessWidget {
-  const Heading({super.key,required this.title,
+  const Heading({
+    super.key,
+    required this.title,
     required this.numbers,
     this.textColor,
     this.fontSize,
     this.padding,
   });
 
-  final String  title;
-  final String  numbers;
+  final String title;
+  final String numbers;
   final double? fontSize;
   final Color? textColor;
   final double? padding;
@@ -20,8 +23,8 @@ class Heading extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return   Padding(
-      padding:  EdgeInsets.symmetric(horizontal:padding ?? width*0.03),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: padding ?? 14), //width * 0.03),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,7 +37,6 @@ class Heading extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-
           Text(
             numbers,
             style: TextStyle(
@@ -44,10 +46,8 @@ class Heading extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-
         ],
       ),
     );
   }
 }
-

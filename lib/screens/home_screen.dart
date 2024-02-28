@@ -6,7 +6,6 @@ import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/screens/bpm_view.dart';
 import 'package:rhythm_master/screens/setting_screen.dart';
 import 'package:rhythm_master/screens/speed_view.dart';
-import 'package:rhythm_master/utils/responsive.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
@@ -57,82 +56,109 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 autoImplyLeading: false,
                 trailingWidget: JHGSettingsButton(
                   enabled: true,
-                  onTap: () => Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const SettingScreen();
-                  })),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const SettingScreen();
+                      },
+                    ),
+                  ),
                 ),
               ),
               body: Stack(
                 children: [
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      if (!Responsive.isMobile(context))
-                        Expanded(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: buildChangeViewButtons(
-                                  controller, width, height,
-                                  scrollDirection: Axis.vertical)),
-                        ),
-                      Expanded(
-                        flex: 6,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // SETTING ICON
-                            // Align(
-                            //     alignment: Alignment.topRight,
-                            //     child: GestureDetector(
-                            //       onTap: () async {
-                            //         Navigator.of(context)
-                            //             .push(MaterialPageRoute(builder: (context) {
-                            //           return const SettingScreen();
-                            //         }));
-                            //       },
-                            //       child: Container(
-                            //         padding: EdgeInsets.only(
-                            //             top: height * 0.01, right: width * 0.01),
-                            //         child: Container(
-                            //           padding: EdgeInsets.all(width * 0.01),
-                            //           decoration: BoxDecoration(
-                            //               shape: BoxShape.circle,
-                            //               color: AppColors.greyPrimary),
-                            //           child: Icon(
-                            //             Icons.settings,
-                            //             color: AppColors.whiteLight,
-                            //             size: width * 0.07,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     )),
-                            // // SPACER
-                            // SizedBox(
-                            //   height: height * 0.03,
-                            // ),
+                      // SETTING ICON
+                      // Align(
+                      //     alignment: Alignment.topRight,
+                      //     child: GestureDetector(
+                      //       onTap: () async {
+                      //         Navigator.of(context)
+                      //             .push(MaterialPageRoute(builder: (context) {
+                      //           return const SettingScreen();
+                      //         }));
+                      //       },
+                      //       child: Container(
+                      //         padding: EdgeInsets.only(
+                      //             top: height * 0.01, right: width * 0.01),
+                      //         child: Container(
+                      //           padding: EdgeInsets.all(width * 0.01),
+                      //           decoration: BoxDecoration(
+                      //               shape: BoxShape.circle,
+                      //               color: AppColors.greyPrimary),
+                      //           child: Icon(
+                      //             Icons.settings,
+                      //             color: AppColors.whiteLight,
+                      //             size: width * 0.07,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     )),
+                      // // SPACER
+                      // SizedBox(
+                      //   height: height * 0.03,
+                      // ),
 
-                            //BUTTON SELECTION SECTION
-                            if (Responsive.isMobile(context))
-                              SizedBox(
-                                height: height * 0.05,
-                                child: Row(
-                                    children: buildChangeViewButtons(
-                                        controller, width, height,
-                                        scrollDirection: Axis.horizontal)),
-                              ),
-                            // ScreenView base on button selection
-                            Expanded(
-                              child: controller.selectedButton == 0
-                                  ? const MetroView()
-                                  : // Now Metronome is first
-                                  controller.selectedButton == 1
-                                      ? const BpmView()
-                                      : // Now Tap Tempo is second
-                                      const SpeedView(),
-                            ) // Speed Trainer remains third
-                          ],
-                        ),
+                      //BUTTON SELECTION SECTION
+                      SizedBox(
+                        height: height * 0.05,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // itemCount: buttonList.length,
+                            // shrinkWrap: true,
+                            // scrollDirection: Axis.horizontal,
+                            // itemBuilder: (context, index) {
+                            children: List.generate(buttonList.length, (index) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  controller.changeTab(index);
+                                },
+                                child: Container(
+                                  height: height * 0.05,
+                                  width: width * 0.25,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: controller.selectedButton == index
+                                          ? AppColors.greySecondary
+                                          : AppColors.greyPrimary,
+                                      border: Border.all(
+                                          color: AppColors.greySecondary)),
+                                  child: Center(
+                                    child: Text(
+                                      buttonList[index],
+                                      style: TextStyle(
+                                        fontFamily: AppConstant.sansFont,
+                                        color: AppColors.whitePrimary,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            })),
                       ),
+
+                      // ScreenView base on button selection
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: JHGResponsive.isMobile(context)
+                                  ? 0
+                                  : JHGResponsive.isTablet(context)
+                                      ? width * 0.2
+                                      : width * 0.26),
+                          child: controller.selectedButton == 0
+                              ? const MetroView()
+                              : // Now Metronome is first
+                              controller.selectedButton == 1
+                                  ? const BpmView()
+                                  : // Now Tap Tempo is second
+                                  const SpeedView(),
+                        ),
+                      ) // Speed Trainer remains third
                     ],
                   ),
                   // DIM BACKGROUND
@@ -204,41 +230,5 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ));
           });
         });
-  }
-
-  List<Widget> buildChangeViewButtons(
-      HomeProvider controller, double width, double height,
-      {Axis scrollDirection = Axis.vertical}) {
-    return List.generate(buttonList.length, (index) {
-      return GestureDetector(
-        onTap: () async {
-          controller.changeTab(index);
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-          child: Container(
-            height: height * 0.05,
-            width: width * 0.25,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: controller.selectedButton == index
-                    ? AppColors.greySecondary
-                    : AppColors.greyPrimary,
-                border: Border.all(color: AppColors.greySecondary)),
-            child: Center(
-              child: Text(
-                buttonList[index],
-                style: TextStyle(
-                  fontFamily: AppConstant.sansFont,
-                  color: AppColors.whitePrimary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
   }
 }
