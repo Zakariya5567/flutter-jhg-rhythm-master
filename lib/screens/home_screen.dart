@@ -67,99 +67,106 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               body: Stack(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // SETTING ICON
-                      // Align(
-                      //     alignment: Alignment.topRight,
-                      //     child: GestureDetector(
-                      //       onTap: () async {
-                      //         Navigator.of(context)
-                      //             .push(MaterialPageRoute(builder: (context) {
-                      //           return const SettingScreen();
-                      //         }));
-                      //       },
-                      //       child: Container(
-                      //         padding: EdgeInsets.only(
-                      //             top: height * 0.01, right: width * 0.01),
-                      //         child: Container(
-                      //           padding: EdgeInsets.all(width * 0.01),
-                      //           decoration: BoxDecoration(
-                      //               shape: BoxShape.circle,
-                      //               color: AppColors.greyPrimary),
-                      //           child: Icon(
-                      //             Icons.settings,
-                      //             color: AppColors.whiteLight,
-                      //             size: width * 0.07,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     )),
-                      // // SPACER
-                      // SizedBox(
-                      //   height: height * 0.03,
-                      // ),
+                  Container(
+                    //color: Colors.red,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // SETTING ICON
+                        // Align(
+                        //     alignment: Alignment.topRight,
+                        //     child: GestureDetector(
+                        //       onTap: () async {
+                        //         Navigator.of(context)
+                        //             .push(MaterialPageRoute(builder: (context) {
+                        //           return const SettingScreen();
+                        //         }));
+                        //       },
+                        //       child: Container(
+                        //         padding: EdgeInsets.only(
+                        //             top: height * 0.01, right: width * 0.01),
+                        //         child: Container(
+                        //           padding: EdgeInsets.all(width * 0.01),
+                        //           decoration: BoxDecoration(
+                        //               shape: BoxShape.circle,
+                        //               color: AppColors.greyPrimary),
+                        //           child: Icon(
+                        //             Icons.settings,
+                        //             color: AppColors.whiteLight,
+                        //             size: width * 0.07,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     )),
+                        // // SPACER
+                        // SizedBox(
+                        //   height: height * 0.03,
+                        // ),
 
-                      //BUTTON SELECTION SECTION
-                      SizedBox(
-                        height: height * 0.05,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            // itemCount: buttonList.length,
-                            // shrinkWrap: true,
-                            // scrollDirection: Axis.horizontal,
-                            // itemBuilder: (context, index) {
-                            children: List.generate(buttonList.length, (index) {
-                              return GestureDetector(
-                                onTap: () async {
-                                  controller.changeTab(index);
-                                },
-                                child: Container(
-                                  height: height * 0.05,
-                                  width: width * 0.25,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: controller.selectedButton == index
-                                          ? AppColors.greySecondary
-                                          : AppColors.greyPrimary,
-                                      border: Border.all(
-                                          color: AppColors.greySecondary)),
-                                  child: Center(
-                                    child: Text(
-                                      buttonList[index],
-                                      style: TextStyle(
-                                        fontFamily: AppConstant.sansFont,
-                                        color: AppColors.whitePrimary,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
+                        //BUTTON SELECTION SECTION
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 345),
+                          height: height * 0.05,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // itemCount: buttonList.length,
+                              // shrinkWrap: true,
+                              // scrollDirection: Axis.horizontal,
+                              // itemBuilder: (context, index) {
+                              children:
+                                  List.generate(buttonList.length, (index) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    controller.changeTab(index);
+                                  },
+                                  child: Container(
+                                    height: height * 0.05,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color:
+                                            controller.selectedButton == index
+                                                ? AppColors.greySecondary
+                                                : AppColors.greyPrimary,
+                                        border: Border.all(
+                                            color: AppColors.greySecondary)),
+                                    child: Center(
+                                      child: Text(
+                                        buttonList[index],
+                                        style: TextStyle(
+                                          fontFamily: AppConstant.sansFont,
+                                          color: AppColors.whitePrimary,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            })),
-                      ),
-
-                      // ScreenView base on button selection
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: JHGResponsive.isMobile(context)
-                                  ? 0
-                                  : JHGResponsive.isTablet(context)
-                                      ? width * 0.2
-                                      : width * 0.26),
-                          child: controller.selectedButton == 0
-                              ? const MetroView()
-                              : // Now Metronome is first
-                              controller.selectedButton == 1
-                                  ? const BpmView()
-                                  : // Now Tap Tempo is second
-                                  const SpeedView(),
+                                );
+                              })),
                         ),
-                      ) // Speed Trainer remains third
-                    ],
+
+                        // ScreenView base on button selection
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                // horizontal: JHGResponsive.isMobile(context)
+                                //     ? 0
+                                //     : JHGResponsive.isTablet(context)
+                                //         ? width * 0.2
+                                //         : width * 0.26,
+                                horizontal: 0),
+                            child: controller.selectedButton == 0
+                                ? const MetroView()
+                                : // Now Metronome is first
+                                controller.selectedButton == 1
+                                    ? const BpmView()
+                                    : // Now Tap Tempo is second
+                                    const SpeedView(),
+                          ),
+                        ) // Speed Trainer remains third
+                      ],
+                    ),
                   ),
                   // DIM BACKGROUND
                   if (controller.isFirstTimeOpen == true)
