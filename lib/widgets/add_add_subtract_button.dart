@@ -39,7 +39,7 @@ class AddAndSubtractButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: height * 0.07,
+            height: 54,
             width: width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

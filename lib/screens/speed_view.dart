@@ -116,8 +116,10 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     SizedBox(height: height * 0.045),
                     // BARS
                     AddAndSubtractButton(
+                      redButtonSize: 30,
                         title: AppConstant.bars,
-                        greyButtonSize: width * 0.24,
+                        //greyButtonSize: width * 0.24,
+                        greyButtonSize: 95,
                         numbers: controller.bar.toString(),
                         description: AppConstant.howManyBars,
                         onAdd: () {
@@ -132,8 +134,10 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
                     // INTERVAL BUTTONS
                     AddAndSubtractButton(
+                        redButtonSize: 30,
+
                         title: AppConstant.interval,
-                        greyButtonSize: width * 0.24,
+                        greyButtonSize: 95,
                         numbers: controller.interval.toString(),
                         description:
                             "${AppConstant.howMuchItShouldIncrease} ${controller.bar} Bars",

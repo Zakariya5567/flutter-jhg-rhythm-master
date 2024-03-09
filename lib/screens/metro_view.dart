@@ -306,8 +306,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                             }
                           },
                           child: Container(
-                            height: height * 0.038,
-                            width: height * 0.038,
+                            height: 30,
+                            width: 30,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: AppColors.redPrimary,
@@ -369,8 +369,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                             }
                           },
                           child: Container(
-                            height: height * 0.038,
-                            width: height * 0.038,
+                            height: 30,
+                            width: 30,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: AppColors.redPrimary,
