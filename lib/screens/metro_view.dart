@@ -320,7 +320,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           ),
                         ),
                         SizedBox(
-                          width: width * 0.05,
+                          width: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -348,7 +348,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           ],
                         ),
                         SizedBox(
-                          width: width * 0.05,
+                          width: 20,
                         ),
                         // INCREASE BUTTON
                         GestureDetector(

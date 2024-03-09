@@ -93,7 +93,7 @@ class BpmView extends StatelessWidget {
                     // SPACER
                     SizedBox(
                       height: height * 0.07,
-                    ), 
+                    ),
                     JHGResetBtn(
                         enabled: true,
                         onTap: () {

@@ -76,7 +76,7 @@ class AddAndSubtractButton extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(width: width * 0.05),
+                    SizedBox(width: 12),
 
                     Container(
                       height: height * 0.065,
@@ -98,7 +98,7 @@ class AddAndSubtractButton extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(width: width * 0.05),
+                    SizedBox(width: 12),
                     // PLUS BUTTON
 
                     GestureDetector(
