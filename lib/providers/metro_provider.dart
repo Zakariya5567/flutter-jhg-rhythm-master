@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rhythm_master/db/local_db.dart';
@@ -137,13 +138,10 @@ class MetroProvider extends ChangeNotifier {
     }
     timer =
         Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
-
-         Future.delayed(Duration.zero,() async {
-           await player.setVolume(0);
-           playSound();
-         });
-
-
+      Future.delayed(Duration.zero, () async {
+        await player.setVolume(0);
+        playSound();
+      });
     });
     // calling sound list to add sound to sound list
 
@@ -199,7 +197,7 @@ class MetroProvider extends ChangeNotifier {
       controller!.dispose();
       controller = null;
     }
-    if(bpmContinuousTimer != null){
+    if (bpmContinuousTimer != null) {
       bpmContinuousTimer!.cancel();
     }
   }
@@ -285,15 +283,14 @@ class MetroProvider extends ChangeNotifier {
   }
 
   // Continuously increase bpm value until it equal to the bpmMax
-  void continuousIncreaseBpm(TickerProviderStateMixin ticker){
-    if(bpmContinuousTimer != null){
+  void continuousIncreaseBpm(TickerProviderStateMixin ticker) {
+    if (bpmContinuousTimer != null) {
       bpmContinuousTimer!.cancel;
     }
-      bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        increaseBpm(ticker);
-      });
-
-
+    bpmContinuousTimer =
+        Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      increaseBpm(ticker);
+    });
   }
 
   // Decrease BPM
@@ -313,14 +310,14 @@ class MetroProvider extends ChangeNotifier {
   }
 
   // Continuously decrease bpm value until it equal to the bpmMin
-  void continuousDecreaseBpm(TickerProviderStateMixin ticker){
-    if(bpmContinuousTimer != null){
+  void continuousDecreaseBpm(TickerProviderStateMixin ticker) {
+    if (bpmContinuousTimer != null) {
       bpmContinuousTimer!.cancel;
     }
-      bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        decreaseBpm(ticker);
-      });
-
+    bpmContinuousTimer =
+        Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      decreaseBpm(ticker);
+    });
   }
 
   bool firstTime = true;
@@ -421,7 +418,7 @@ class MetroProvider extends ChangeNotifier {
 
   // Setting selected sound and notifying listeners
   setSound(
-      {required TickerProviderStateMixin ticker,
+      {required TickerProviderStateMixin? ticker,
       required String name,
       required String beat1,
       required beat2,
@@ -433,6 +430,7 @@ class MetroProvider extends ChangeNotifier {
     notifyListeners();
     totalTick = 0;
     notifyListeners();
+    if (ticker == null) return;
     if (isPlaying == true) {
       setTimer(ticker);
     }
@@ -442,30 +440,28 @@ class MetroProvider extends ChangeNotifier {
   Future playSound() async {
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-      if(player.playing){
-         player.stop();
-         player.setAsset(firstBeat);
-         player.play();
-      }else{
-         player.setAsset(firstBeat);
-         player.play();
+      if (player.playing) {
+        await player.stop();
+        await player.setAsset(firstBeat);
+        await player.play();
+      } else {
+        await player.setAsset(firstBeat);
+        await player.play();
       }
-
     } else {
       if (totalTick < totalBeat + 1) {
-        if(player.playing){
-           player.stop();
-           player.setAsset(secondBeat);
-           player.play();
-        }else{
-          try{
+        if (player.playing) {
+          await player.stop();
+          await player.setAsset(secondBeat);
+          await player.play();
+        } else {
+          try {
             print("playing==");
-             player.setAsset(secondBeat);
-             player.play();
-          }catch(e){
+            await player.setAsset(secondBeat);
+            await player.play();
+          } catch (e) {
             print("==${e}");
           }
-
         }
         if (totalTick == totalBeat) {
           totalTick = 0;
