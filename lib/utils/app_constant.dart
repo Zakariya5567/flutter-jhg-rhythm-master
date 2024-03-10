@@ -17,6 +17,7 @@ class AppConstant {
   static const String logout = 'Logout';
   static const String save = 'Save';
   static const String defaultTiming = 'Default Timing';
+  static const String defaultSpeedTrainerTiming = 'Speed Trainer Timing';
   static const String defaultSound = 'Default Sound';
   static const String defaultBpm = 'Default BPM';
 

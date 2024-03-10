@@ -7,6 +7,7 @@ import 'package:rhythm_master/utils/images.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import '../widgets/custom_slider_track_shape.dart';
 
 class MetroView extends StatefulWidget {
   const MetroView({super.key});

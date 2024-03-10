@@ -1,14 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
 class AddAndSubtractButton extends StatelessWidget {
-  const AddAndSubtractButton({
+   AddAndSubtractButton({
     super.key,
     required this.title,
     required this.numbers,
-    required this.description,
+    this.description,
     required this.onAdd,
     required this.onSubtract,
     this.redButtonSize,
@@ -18,7 +20,7 @@ class AddAndSubtractButton extends StatelessWidget {
   });
 
   final String title;
-  final String description;
+  String? description;
   final String numbers;
   final VoidCallback onSubtract;
   final VoidCallback onAdd;
@@ -120,11 +122,14 @@ class AddAndSubtractButton extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: height * 0.01,
-          ),
+          // Container(
+          //   color: Colors.grey,
+          //   height: height * 0.01,
+          // ),
+
+          description == null ? SizedBox() :
           Text(
-            description,
+            description!,
             style: TextStyle(
               fontFamily: AppConstant.sansFont,
               color: AppColors.whiteLight,

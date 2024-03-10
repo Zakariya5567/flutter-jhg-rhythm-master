@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -97,62 +98,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         Navigator.push(context,
-                  //             MaterialPageRoute(builder: (context) {
-                  //           return const HomeScreen();
-                  //         }));
-                  //       },
-                  //       child: Icon(
-                  //         Icons.arrow_back_ios,
-                  //         color: AppColors.whiteSecondary,
-                  //         size: height * 0.030,
-                  //       ),
-                  //     ),
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) => BugReportPage(
-                  //               device: deviceName,
-                  //               appName: AppConstant.appName,
-                  //             ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Row(
-                  //         children: [
-                  //           SizedBox(width: 10),
-                  //           Padding(
-                  //             padding: EdgeInsets.only(
-                  //                 right: 4.0), // Add padding to the right
-                  //             child: Icon(
-                  //               Icons.error_outline_rounded,
-                  //               color: AppColors.redPrimary,
-                  //               size: 16,
-                  //             ),
-                  //           ),
-                  //           Text(
-                  //             'Report an Issue',
-                  //             style: TextStyle(
-                  //               color: AppColors.redPrimary,
-                  //               fontSize: 12,
-                  //               fontWeight: FontWeight.w600,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-
-                  // SPACER
-                  // SizedBox(height: height * 0.05),
 
                   // DEFAULT BPM
                   AddAndSubtractButton(
@@ -161,7 +106,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       numbers: controller.bpm.toStringAsFixed(0),
                       redButtonSize: height * 0.044,
                       greyButtonSize: width * 0.24,
-                      description: "",
+                      description: null,
                       onAdd: () {
                         controller.increaseBpm();
                       },
@@ -208,7 +153,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
                   // SPACER
                   SizedBox(
-                    height: height * 0.035,
+                    height: height * 0.01,
                   ),
 
                   // DEFAULT SOUND
@@ -222,7 +167,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
                   // SPACER
                   SizedBox(
-                    height: height * 0.020,
+                    height: height * 0.01,
                   ),
 
                   // Button selection 3/3 ....
@@ -266,7 +211,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   // SPACER
                   SizedBox(
-                    height: height * 0.035,
+                    height: height * 0.01,
                   ),
                   // SPEED TRAINER HEADING
                   Heading(
@@ -299,8 +244,67 @@ class _SettingScreenState extends State<SettingScreen> {
                           );
                         },
                       )),
+
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
+
+                  // DEFAULT SOUND
+                  Heading(
+                    padding: 0,
+                    title: AppConstant.defaultSpeedTrainerTiming,
+                    numbers: "",
+                    fontSize: 14,
+                    textColor: AppColors.whiteLight,
+                  ),
+
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
+                  // Button selection 3/3 ....
+                  SizedBox(
+                    height: height * 0.085,
+                    width: width * 0.85,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: controller.tapButtonList.map((button) {
+                        return GestureDetector(
+                          onTap: () async {
+                            controller.setBeats(
+                                controller.tapButtonList.indexOf(button));
+                          },
+                          child: Container(
+                            height: height * 0.085,
+                            width: height * 0.085,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: controller.selectedButton ==
+                                  controller.tapButtonList.indexOf(button)
+                                  ? AppColors.greySecondary
+                                  : AppColors.greyPrimary,
+                            ),
+                            child: Center(
+                              child: Text(
+                                controller.tapButtonList[
+                                controller.tapButtonList.indexOf(button)],
+                                style: TextStyle(
+                                  fontFamily: AppConstant.sansFont,
+                                  color: AppColors.whitePrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                   // SAVE BUTTON
-                  const Spacer(),
+                  // const Spacer(),
+                  SizedBox(
+                    height: height * 0.03,
+                  ),
                   InkWell(
                     onTap: () {
                       controller.onSave();
@@ -331,9 +335,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
 
                   // SPACER
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
+                  // SizedBox(
+                  //   height: height * 0.02,
+                  // ),
                   JHGSecondaryBtn(
                     label: AppConstant.logout,
                     onPressed: () async {
@@ -352,37 +356,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     },
                   ),
 
-                  // Center(
-                  //   child: TextButton(
-                  //     onPressed: () async {
-                  //       await LocalDB.clearLocalDB();
-                  //       // ignore: use_build_context_synchronously
-                  //       Navigator.pushAndRemoveUntil(context,
-                  //           MaterialPageRoute(builder: (context) {
-                  //         return Welcome(
-                  //           yearlySubscriptionId: yearlySubscription(),
-                  //           monthlySubscriptionId: monthlySubscription(),
-                  //           appName: AppConstant.appName,
-                  //           appVersion: packageInfo.version,
-                  //           nextPage: () => const HomeScreen(),
-                  //         );
-                  //       }), (route) => false);
-                  //     },
-                  //     child: Text(
-                  //       AppConstant.logout,
-                  //       style: TextStyle(
-                  //         fontFamily: AppConstant.sansFont,
-                  //         color: AppColors.redPrimary,
-                  //         fontSize: 17,
-                  //         fontWeight: FontWeight.w400,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   // // SPACER
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
+                  // SizedBox(
+                  //   height: height * 0.03,
+                  // ),
                 ],
               ),
             );

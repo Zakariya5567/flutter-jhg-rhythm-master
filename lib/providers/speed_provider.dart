@@ -282,7 +282,7 @@ class SpeedProvider extends ChangeNotifier{
     _timer = Timer.periodic( Duration( milliseconds: (60000 / bpm).round()),
           (Timer timer) async {
         if(targetTempo > bpm){
-          await playSound();
+           playSound();
         }else{
           _timer!.cancel();
           totalTick = 0;
@@ -302,7 +302,7 @@ class SpeedProvider extends ChangeNotifier{
   int barCounter = 0;
   bool firstTime = true;
 
-  // Play sound based on the metronome ticks
+  //Play sound based on the metronome ticks
   Future playSound()async{
     barCounter = barCounter + 1;
     totalTick = totalTick+1;
@@ -317,32 +317,32 @@ class SpeedProvider extends ChangeNotifier{
       }
 
       if(player.playing){
-        await player.stop();
-        await player.setAsset(firstBeat);
+         player.stop();
+         player.setAsset(firstBeat);
         await player.play();
       }else{
-        await player.setAsset(firstBeat);
-        await player.play();
+         player.setAsset(firstBeat);
+         player.play();
       }
 
     }else{
       if(totalTick<totalBeats){
         if(player.playing){
-          await player.stop();
-          await player.setAsset(secondBeat);
-          await player.play();
+           player.stop();
+           player.setAsset(secondBeat);
+           player.play();
         }else{
-          await player.setAsset(secondBeat);
-          await player.play();
+           player.setAsset(secondBeat);
+           player.play();
         }
       }else{
         if(player.playing){
-          await player.stop();
-          await player.setAsset(secondBeat);
-          await player.play();
+           player.stop();
+           player.setAsset(secondBeat);
+           player.play();
         }else{
-          await player.setAsset(secondBeat);
-          await player.play();
+           player.setAsset(secondBeat);
+           player.play();
         }
 
         totalTick = 0;
@@ -351,7 +351,7 @@ class SpeedProvider extends ChangeNotifier{
   }
 
 
-  // Dispose controller and reset settings
+//  Dispose controller and reset settings
   disposeController() {
     if(_timer != null){
       _timer!.cancel();
