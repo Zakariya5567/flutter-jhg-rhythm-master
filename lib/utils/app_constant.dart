@@ -18,6 +18,7 @@ class AppConstant {
   static const String save = 'Save';
   static const String defaultTiming = 'Default Timing';
   static const String defaultSound = 'Default Sound';
+  static const String soundS = 'Sound';
   static const String defaultBpm = 'Default BPM';
 
   static const String tapTempo = 'Tap Tempo';
@@ -54,11 +55,12 @@ class AppConstant {
   // Subscription ids
 
   static const String androidYearlySubscriptionId = "jhgrhythmtoolkit.annual";
-  static const String androidMonthlySubscriptionId  =  "jhgrhythmtoolkit.monthly";
+  static const String androidMonthlySubscriptionId = "jhgrhythmtoolkit.monthly";
 
-  static const String iosYearlySubscriptionId = "com.jamieharrisonguitar.rhythmtoolkit.annual";
-  static const String iosMonthlySubscriptionId = "com.jamieharrisonguitar.rhythmtoolkit.monthly";
-
+  static const String iosYearlySubscriptionId =
+      "com.jamieharrisonguitar.rhythmtoolkit.annual";
+  static const String iosMonthlySubscriptionId =
+      "com.jamieharrisonguitar.rhythmtoolkit.monthly";
 
 //BEAT Sound
 
@@ -90,11 +92,15 @@ class AppConstant {
   static const String maschine1Sound = "assets/audio/maschine1.mp3";
   static const String maschine2Sound = "assets/audio/maschine2.mp3";
   //ProtoolsDefault
-  static const String protoolsDefault1Sound = "assets/audio/protoolsDefault1.mp3";
-  static const String protoolsDefault2Sound = "assets/audio/protoolsDefault2.mp3";
+  static const String protoolsDefault1Sound =
+      "assets/audio/protoolsDefault1.mp3";
+  static const String protoolsDefault2Sound =
+      "assets/audio/protoolsDefault2.mp3";
   //ProtocalsMaribal
-  static const String protoolsMarimba1Sound = "assets/audio/protoolsMarimba1.mp3";
-  static const String protoolsMarimba2Sound = "assets/audio/protoolsMarimba2.mp3";
+  static const String protoolsMarimba1Sound =
+      "assets/audio/protoolsMarimba1.mp3";
+  static const String protoolsMarimba2Sound =
+      "assets/audio/protoolsMarimba2.mp3";
   //Reason
   static const String reason1Sound = "assets/audio/reason1.mp3";
   static const String reason2Sound = "assets/audio/reason2.mp3";
@@ -105,5 +111,6 @@ class AppConstant {
 
   //HomeScreen
   static const String tooltipsTitle = "Quick Tip";
-  static const String tooltipsContent = "You can make quick changes to BPM using the slider, just like a mechanical metronome!";
+  static const String tooltipsContent =
+      "You can make quick changes to BPM using the slider, just like a mechanical metronome!";
 }

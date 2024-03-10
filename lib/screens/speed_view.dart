@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
+import 'package:rhythm_master/widgets/custom_slider_widget.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import '../widgets/add_add_subtract_button.dart';
-import '../widgets/custom_slider_track_shape.dart';
 import '../widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
@@ -62,26 +62,14 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // SPACER
                     SizedBox(height: height * 0.015),
                     // STARTING SLIDER
-                    SliderTheme(
-                      data: SliderThemeData(
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: height * 0.016,
-                        ),
-                        overlayShape: SliderComponentShape.noOverlay,
-                        trackHeight: height * 0.008,
-                        trackShape: const CustomSliderTrackShape(),
-                      ),
-                      child: Slider(
-                          activeColor: AppColors.whitePrimary,
-                          inactiveColor: AppColors.whitePrimary,
-                          thumbColor: AppColors.whitePrimary,
-                          min: controller.startTempoMin,
-                          max: controller.startTempoMax,
-                          value: controller.startTempo,
-                          onChanged: (values) {
-                            controller.setStartTempo(values);
-                          }),
-                    ),
+                    SliderWidget(
+                        height: height,
+                        min: controller.startTempoMin,
+                        max: controller.startTempoMax,
+                        value: controller.startTempo,
+                        onChanged: (values) {
+                          controller.setStartTempo(values);
+                        }),
                     // SPACER
                     SizedBox(height: height * 0.025),
                     // TARGET TEMPO
@@ -91,30 +79,21 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // SPACER
                     SizedBox(height: height * 0.020),
                     // TARGET SLIDER
-                    SliderTheme(
-                      data: SliderThemeData(
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: height * 0.016,
-                        ),
-                        overlayShape: SliderComponentShape.noOverlay,
-                        trackHeight: height * 0.008,
-                        trackShape: const CustomSliderTrackShape(),
-                      ),
-                      child: Slider(
-                          activeColor: AppColors.whitePrimary,
-                          thumbColor: AppColors.whitePrimary,
-                          min: controller.targetTempoMin,
-                          max: controller.targetTempoMax,
-                          value: controller.targetTempo,
-                          onChanged: (values) {
-                            controller.setTargetTempo(values);
-                          }),
+                    SliderWidget(
+                      height: height,
+                      min: controller.targetTempoMin,
+                      max: controller.targetTempoMax,
+                      value: controller.targetTempo,
+                      onChanged: (values) {
+                        controller.setTargetTempo(values);
+                      },
                     ),
+
                     // SPACER
                     SizedBox(height: height * 0.045),
                     // BARS
                     AddAndSubtractButton(
-                      redButtonSize: 30,
+                        redButtonSize: 30,
                         title: AppConstant.bars,
                         //greyButtonSize: width * 0.24,
                         greyButtonSize: 95,
@@ -133,7 +112,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // INTERVAL BUTTONS
                     AddAndSubtractButton(
                         redButtonSize: 30,
-
                         title: AppConstant.interval,
                         greyButtonSize: 95,
                         numbers: controller.interval.toString(),
@@ -176,7 +154,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // SPACER
                     SizedBox(height: height * 0.020),
                     // Reset and play pause BUTTON
-
                   ],
                 ),
               ),

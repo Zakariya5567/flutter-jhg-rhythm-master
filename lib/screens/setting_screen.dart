@@ -6,9 +6,10 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
+import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/screens/home_screen.dart';
-import 'package:rhythm_master/widgets/drop_down_widget.dart';
 import 'package:rhythm_master/widgets/heading.dart';
 
 import '../utils/app_ colors.dart';
@@ -88,7 +89,7 @@ class _SettingScreenState extends State<SettingScreen> {
               Consumer<SettingProvider>(builder: (context, controller, child) {
             return Padding(
               padding: EdgeInsets.only(
-                top: height * 0.07,
+                top: height * 0.02,
                 left: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
                 right: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
               ),
@@ -96,6 +97,33 @@ class _SettingScreenState extends State<SettingScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Heading(
+                    padding: 0,
+                    title: AppConstant.soundS,
+                    numbers: "",
+                    fontSize: 14,
+                    textColor: JHGColors.whiteText,
+                  ),
+                  const SizedBox(height: 5),
+                  Consumer<MetroProvider>(
+                      builder: (context, controller, child) {
+                    return JHGDropDown<SoundModel>(
+                      value: controller.soundList[controller.selectedIndex],
+                      items: controller.soundList,
+                      expandedColor: AppColors.liteWhite,
+                      onChanged: (values) async {
+                        controller.setSound(
+                          ticker: null,
+                          name: values!.name.toString(),
+                          beat1: values.beat1.toString(),
+                          beat2: values.beat2.toString().toString(),
+                          index: values.id!,
+                        );
+                      },
+                    );
+                  }),
+
+                  const SizedBox(height: 20),
                   // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,7 +198,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       }),
 
                   // SPACER
-                  SizedBox(height: height * 0.01),
+                  // SizedBox(height: 20),
 
                   // DEFAULT SOUND
                   Heading(
@@ -178,7 +206,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     title: AppConstant.defaultSound,
                     numbers: "",
                     fontSize: 14,
-                    textColor: AppColors.whiteLight,
+                    textColor: JHGColors.whiteText,
                   ),
 
                   // SPACER
@@ -191,10 +219,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       borderRadius: BorderRadius.circular(15),
                       color: AppColors.greyPrimary,
                     ),
-                    child: DropDownWidget(
+                    child: JHGDropDown(
                       value: controller.soundList[controller.selectedIndex],
                       items: controller.soundList,
-                      expandedColor: AppColors.liteWhite,
                       onChanged: (values) async {
                         controller.setSound(
                           name: values!.name.toString(),
@@ -208,7 +235,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
                   // SPACER
                   SizedBox(
-                    height: height * 0.035,
+                    height: height * 0.020,
                   ),
 
                   // DEFAULT SOUND
@@ -266,7 +293,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   // SPACER
                   SizedBox(
-                    height: height * 0.035,
+                    height: height * 0.02,
                   ),
                   // SPEED TRAINER HEADING
                   Heading(
@@ -285,11 +312,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         borderRadius: BorderRadius.circular(15),
                         color: AppColors.greyPrimary,
                       ),
-                      child: DropDownWidget(
+                      child: JHGDropDown(
                         value: controller
                             .soundList[controller.speedTrainerSelectedIndex],
                         items: controller.soundList,
-                        expandedColor: AppColors.liteWhite,
                         onChanged: (values) async {
                           controller.setSpeedTrainerSound(
                             name: values!.name.toString(),
@@ -381,7 +407,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   // ),
                   // // SPACER
                   SizedBox(
-                    height: height * 0.03,
+                    height: 10,
                   ),
                 ],
               ),

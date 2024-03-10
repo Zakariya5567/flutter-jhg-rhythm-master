@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythm_master/model/sound_model.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/utils/images.dart';
+import 'package:rhythm_master/widgets/custom_slider_widget.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
@@ -260,18 +260,27 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                     //Sound button with arrow down
 
-                    JHGDropDown<SoundModel>(
-                      value: controller.soundList[controller.selectedIndex],
-                      items: controller.soundList,
-                      expandedColor: AppColors.liteWhite,
-                      onChanged: (values) async {
-                        controller.setSound(
-                          ticker: this,
-                          name: values!.name.toString(),
-                          beat1: values.beat1.toString(),
-                          beat2: values.beat2.toString().toString(),
-                          index: values.id!,
-                        );
+                    // JHGDropDown<SoundModel>(
+                    //   value: controller.soundList[controller.selectedIndex],
+                    //   items: controller.soundList,
+                    //   expandedColor: AppColors.liteWhite,
+                    //   onChanged: (values) async {
+                    //     controller.setSound(
+                    //       ticker: this,
+                    //       name: values!.name.toString(),
+                    //       beat1: values.beat1.toString(),
+                    //       beat2: values.beat2.toString().toString(),
+                    //       index: values.id!,
+                    //     );
+                    //   },
+                    // ),
+                    SliderWidget(
+                      height: height,
+                      value: controller.bpm,
+                      min: 1,
+                      max: 300,
+                      onChanged: (value) {
+                        controller.setPosition(value, this);
                       },
                     ),
 
