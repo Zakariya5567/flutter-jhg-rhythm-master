@@ -165,11 +165,7 @@ class MetroProvider extends ChangeNotifier {
 
       selectedIndex = defaultSound ?? 0;
       selectedButton = defaultTiming ?? 0;
-      totalBeat = selectedButton == 0
-          ? 4
-          : selectedButton == 1
-              ? 3
-              : 6;
+      totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 : 6;
       bpm = defaultBPM ?? 120;
       position = 0;
       totalTick = 0;

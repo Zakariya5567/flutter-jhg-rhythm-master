@@ -122,10 +122,10 @@ class AddAndSubtractButton extends StatelessWidget {
               ],
             ),
           ),
-          // Container(
-          //   color: Colors.grey,
-          //   height: height * 0.01,
-          // ),
+          Container(
+            //color: Colors.grey,
+            height: height * 0.01,
+          ),
 
           description == null ? SizedBox() :
           Text(

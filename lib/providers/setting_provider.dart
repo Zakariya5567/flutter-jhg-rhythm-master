@@ -17,6 +17,9 @@ class SettingProvider extends ChangeNotifier {
   // List of Beat buttons
   List<String> tapButtonList = ['4/4', '3/4', '6/8'];
 
+  // List of Speed Trainer Beat buttons
+  List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8'];
+
   // List of sound list
   List<SoundModel> soundList = [];
 
@@ -114,7 +117,10 @@ class SettingProvider extends ChangeNotifier {
 
       int? defTiming = await SharedPref.getDefaultTiming;
 
+      int? defSpeedTrainerTiming = await SharedPref.getSpeedTrainerDefaultTiming;
+
       selectedButton = defTiming ?? 0;
+      selectedSpeedTrainerButton = defSpeedTrainerTiming ?? 0;
       bpm = defBPM ?? 120;
 
       selectedIndex = defSound ?? 0;
@@ -208,6 +214,7 @@ class SettingProvider extends ChangeNotifier {
   // Setting total beats based on the selected button and notifying listeners
 
   int selectedButton = 0;
+  int selectedSpeedTrainerButton = 0;
   setBeats(index) {
     if (index == 0) {
       selectedButton = index;
@@ -221,6 +228,19 @@ class SettingProvider extends ChangeNotifier {
     }
   }
 
+  setSpeedTrainerBeats(index) {
+    if (index == 0) {
+      selectedSpeedTrainerButton = index;
+      notifyListeners();
+    } else if (index == 1) {
+      selectedSpeedTrainerButton = index;
+      notifyListeners();
+    } else if (index == 2) {
+      selectedSpeedTrainerButton = index;
+      notifyListeners();
+    }
+  }
+
   onSave() async {
     await SharedPref.storeDefaultBPM(bpm);
 
@@ -228,6 +248,7 @@ class SettingProvider extends ChangeNotifier {
 
     await SharedPref.storeDefaultTiming(selectedButton);
 
+    await SharedPref.storeSpeedTrainerDefaultTiming(selectedSpeedTrainerButton);
 
     await SharedPref.storeSpeedTrainerDefaultSound(speedTrainerSelectedIndex);
 
