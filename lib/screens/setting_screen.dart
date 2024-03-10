@@ -89,8 +89,8 @@ class _SettingScreenState extends State<SettingScreen> {
             return Padding(
               padding: EdgeInsets.only(
                 top: height * 0.07,
-                left: JHGResponsive.isMobile(context) ? 0 : width * 0.2,
-                right: JHGResponsive.isMobile(context) ? 0 : width * 0.2,
+                left: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
+                right: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

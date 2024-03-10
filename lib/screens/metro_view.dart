@@ -89,19 +89,17 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       height: height * 0.08,
                                       width: height * 0.08,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                        color: controller.selectedButton ==
-                                                index
-                                            ? AppColors.greySecondary
-                                            : AppColors.greyPrimary,
+                                        borderRadius: BorderRadius.circular(10),
+                                        color:
+                                            controller.selectedButton == index
+                                                ? AppColors.greySecondary
+                                                : AppColors.greyPrimary,
                                       ),
                                       child: Center(
                                         child: Text(
                                           controller.tapButtonList[index],
                                           style: TextStyle(
-                                            fontFamily:
-                                                AppConstant.sansFont,
+                                            fontFamily: AppConstant.sansFont,
                                             color: AppColors.whitePrimary,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
@@ -161,8 +159,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                         alignment: Alignment.bottomCenter,
                                         transform: Matrix4.identity()
                                           ..translate(translationValue, 0.0)
-                                          ..rotateZ(
-                                              rotationValue * 0.0034533),
+                                          ..rotateZ(rotationValue * 0.0034533),
                                         // Convert degrees to radians
                                         child: Stack(
                                           children: [
@@ -173,7 +170,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                               child: Image.asset(
                                                 Images.stalk,
                                                 height: height * 0.40,
-                                                width: 13, // width * 0.020,
+                                                width: JHGResponsive.isMobile(
+                                                        context)
+                                                    ? 11
+                                                    : 9, // width * 0.020,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -203,15 +203,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 top: height * 0.08,
                                 left: width * 0.003,
                                 child: Container(
+                                  // color: Colors.amber,
                                   height: height * 0.40,
                                   width: metroWidth,
                                   alignment: Alignment.bottomCenter,
                                   child: Image.asset(
                                     Images.metronomeBottom,
                                     height: height * 0.40,
-                                    width: width * 0.42 > 240
-                                        ? 240
-                                        : width * 0.42,
+                                    width:
+                                        width * 0.42 > 160 ? 160 : width * 0.42,
                                   ),
                                 ),
                               ),
@@ -240,8 +240,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                         min: 1,
                                         max: 300,
                                         onChanged: (value) {
-                                          controller.setPosition(
-                                              value, this);
+                                          controller.setPosition(value, this);
                                         },
                                       ),
                                     ),
@@ -394,19 +393,16 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           ),
           // Reset button and play pause button
 
-          Container(
-            color: JHGColors.secondryBlack,
-            child: JHGAppBar(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              leadingWidget: JHGResetBtn(
-                  enabled: true,
-                  onTap: () {
-                    controller.clearMetronome();
-                  }),
-              centerWidget: JHGPlayPauseBtn(onChanged: (val) {
-                controller.startStop(this);
-              }),
-            ),
+          JHGAppBar(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            leadingWidget: JHGResetBtn(
+                enabled: true,
+                onTap: () {
+                  controller.clearMetronome();
+                }),
+            centerWidget: JHGPlayPauseBtn(onChanged: (val) {
+              controller.startStop(this);
+            }),
           ),
         ],
       );

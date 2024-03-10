@@ -26,7 +26,7 @@ class BpmView extends StatelessWidget {
                   children: [
                     // SPACER
                     SizedBox(height: height * 0.09),
-              
+
                     // THIS SONG IS ANDANTE SECTION
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -52,14 +52,14 @@ class BpmView extends StatelessWidget {
                         ),
                       ],
                     ),
-              
+
                     // SPACER
                     SizedBox(
                       height: height * 0.104,
                     ),
-              
+
                     // RED  TAP BUTTON
-                    InkWell(
+                    JHGIconButton(
                       onTap: () {
                         controller.handleTap();
                       },
@@ -87,7 +87,7 @@ class BpmView extends StatelessWidget {
                         ),
                       ),
                     ),
-              
+
                     //const Spacer(),
                     // SPACER
                     SizedBox(
