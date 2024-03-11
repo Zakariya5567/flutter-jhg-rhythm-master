@@ -45,57 +45,52 @@ class AddAndSubtractButton extends StatelessWidget {
             width: width,
             child: Row(
               children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: AppConstant.sansFont,
+                    color: AppColors.whiteLight,
+                    fontSize: headingSize ?? 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Spacer(),
                 // MINUS BUTTON
-                Row(
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whiteLight,
-                        fontSize: headingSize ?? 14,
-                        fontWeight: FontWeight.w700,
-                      ),
+
+                GestureDetector(
+                  onTap: (onSubtract),
+                  child: Container(
+                    height: redButtonSize ?? height * 0.038,
+                    width: redButtonSize ?? height * 0.038,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.redPrimary,
                     ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: (onSubtract),
-                      child: Container(
-                        height: redButtonSize ?? height * 0.038,
-                        width: redButtonSize ?? height * 0.038,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.redPrimary,
-                        ),
-                        child: Center(
-                            child: Icon(
+                    child: Center(
+                        child: Icon(
                           Icons.remove,
                           color: AppColors.whitePrimary,
                         )),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
 
                 SizedBox(width: 12),
 
-                Expanded(
-                  child: Container(
-                    height: height * 0.065,
-                    // width: greyButtonSize ?? width * 0.18,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppColors.greyPrimary,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      numbers,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                      ),
+                Container(
+                  height: height * 0.065,
+                  width: greyButtonSize ?? width * 0.18,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppColors.greyPrimary,
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    numbers,
+                    style: TextStyle(
+                      fontFamily: AppConstant.sansFont,
+                      color: AppColors.whitePrimary,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
