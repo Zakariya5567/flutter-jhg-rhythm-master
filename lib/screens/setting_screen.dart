@@ -86,10 +86,10 @@ class _SettingScreenState extends State<SettingScreen> {
           height: height,
           width: width,
           color: AppColors.blackPrimary,
-          child:
-              SingleChildScrollView(
-                child: Consumer<SettingProvider>(builder: (context, controller, child) {
-                            return Padding(
+          child: SingleChildScrollView(
+            child: Consumer<SettingProvider>(
+                builder: (context, controller, child) {
+              return Padding(
                 padding: EdgeInsets.only(
                   top: height * 0.02,
                   left: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
@@ -124,10 +124,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       );
                     }),
-                
+
                     const SizedBox(height: 20),
                     // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-                
+
                     // DEFAULT BPM
                     AddAndSubtractButton(
                         padding: 0,
@@ -142,10 +142,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         onSubtract: () {
                           controller.decreaseBpm();
                         }),
-                
+
                     // SPACER
                     // SizedBox(height: 20),
-                
+
                     // DEFAULT SOUND
                     Heading(
                       padding: 0,
@@ -154,10 +154,10 @@ class _SettingScreenState extends State<SettingScreen> {
                       fontSize: 14,
                       textColor: JHGColors.white,
                     ),
-                
+
                     // SPACER
                     SizedBox(height: height * 0.01),
-                
+
                     //Sound button with arrow down
                     Container(
                       width: width * 1,
@@ -178,12 +178,12 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       ),
                     ),
-                
+
                     // SPACER
                     SizedBox(
                       height: height * 0.020,
                     ),
-                
+
                     // DEFAULT SOUND
                     Heading(
                       padding: 0,
@@ -192,12 +192,12 @@ class _SettingScreenState extends State<SettingScreen> {
                       fontSize: 14,
                       textColor: AppColors.whiteLight,
                     ),
-                
+
                     // SPACER
                     SizedBox(
                       height: height * 0.01,
                     ),
-                
+
                     // Button selection 3/3 ....
                     SizedBox(
                       height: height * 0.085,
@@ -271,11 +271,11 @@ class _SettingScreenState extends State<SettingScreen> {
                             );
                           },
                         )),
-                
+
                     SizedBox(
                       height: height * 0.02,
                     ),
-                
+
                     // DEFAULT SOUND
                     Heading(
                       padding: 0,
@@ -284,7 +284,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       fontSize: 14,
                       textColor: AppColors.whiteLight,
                     ),
-                
+
                     SizedBox(
                       height: height * 0.01,
                     ),
@@ -294,11 +294,13 @@ class _SettingScreenState extends State<SettingScreen> {
                       width: width * 0.85,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: controller.tapSpeedTrainerButtonList.map((button) {
+                        children:
+                            controller.tapSpeedTrainerButtonList.map((button) {
                           return GestureDetector(
                             onTap: () async {
-                              controller.setSpeedTrainerBeats(
-                                  controller.tapSpeedTrainerButtonList.indexOf(button));
+                              controller.setSpeedTrainerBeats(controller
+                                  .tapSpeedTrainerButtonList
+                                  .indexOf(button));
                             },
                             child: Container(
                               height: height * 0.085,
@@ -306,14 +308,16 @@ class _SettingScreenState extends State<SettingScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: controller.selectedSpeedTrainerButton ==
-                                    controller.tapSpeedTrainerButtonList.indexOf(button)
+                                        controller.tapSpeedTrainerButtonList
+                                            .indexOf(button)
                                     ? AppColors.greySecondary
                                     : AppColors.greyPrimary,
                               ),
                               child: Center(
                                 child: Text(
                                   controller.tapSpeedTrainerButtonList[
-                                  controller.tapSpeedTrainerButtonList.indexOf(button)],
+                                      controller.tapSpeedTrainerButtonList
+                                          .indexOf(button)],
                                   style: TextStyle(
                                     fontFamily: AppConstant.sansFont,
                                     color: AppColors.whitePrimary,
@@ -339,6 +343,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             context: context,
                             message: "Setting Saved Successfully",
                             isError: false);
+                        Navigator.pop(context);
                       },
                       child: Center(
                         child: Container(
@@ -360,7 +365,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                     ),
-                
+
                     // SPACER
                     // SizedBox(
                     //   height: height * 0.02,
@@ -382,16 +387,16 @@ class _SettingScreenState extends State<SettingScreen> {
                         }), (route) => false);
                       },
                     ),
-                
+
                     // // SPACER
                     SizedBox(
                       height: 10,
                     ),
                   ],
                 ),
-                            );
-                          }),
-              ),
+              );
+            }),
+          ),
         ),
       ),
     );
