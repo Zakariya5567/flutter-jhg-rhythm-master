@@ -361,7 +361,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Center(
                       child: Container(
                         constraints: BoxConstraints(maxWidth: 347),
-                        padding: EdgeInsets.only(bottom: 10, top: 10),
+                        padding: EdgeInsets.only(top: 10),
                         color: AppColors.blackPrimary,
                         child: Column(
                           children: [
