@@ -137,7 +137,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 title: AppConstant.defaultBpm,
                                 numbers: controller.bpm.toStringAsFixed(0),
                                 redButtonSize: height * 0.044,
-                                greyButtonSize: width * 0.24,
+                                greyButtonSize: 120,
                                 description: null,
                                 onAdd: () {
                                   controller.increaseBpm();

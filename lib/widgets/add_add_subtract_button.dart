@@ -56,7 +56,6 @@ class AddAndSubtractButton extends StatelessWidget {
                 ),
                 Spacer(),
                 // MINUS BUTTON
-
                 GestureDetector(
                   onTap: (onSubtract),
                   child: Container(
