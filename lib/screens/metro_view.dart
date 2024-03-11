@@ -328,18 +328,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         SizedBox(
                           width: 20,
                         ),
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              AppConstant.bpm,
-                              style: TextStyle(
-                                fontFamily: AppConstant.sansFont,
-                                color: AppColors.whiteSecondary,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+
                             Text(
                               controller.bpm == null
                                   ? AppConstant.bpmNull
@@ -347,7 +339,16 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                               style: TextStyle(
                                 fontFamily: AppConstant.sansFont,
                                 color: AppColors.whiteSecondary,
-                                fontSize: 40,
+                                fontSize: 35,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              AppConstant.bpm,
+                              style: TextStyle(
+                                fontFamily: AppConstant.sansFont,
+                                color: AppColors.greySecondary,
+                                fontSize: 25,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),

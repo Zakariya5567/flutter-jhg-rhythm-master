@@ -8,7 +8,7 @@ class AppConstant {
   static const String guitar = 'Guitar';
   static const String tap = 'Tap';
   static const String tempo = 'Tempo';
-  static const String bpm = 'BPM: ';
+  static const String bpm = 'BPM';
   static const String bpmNull = '- -';
   static const String thisSongIs = 'This song is';
   static const String tempoDescription =

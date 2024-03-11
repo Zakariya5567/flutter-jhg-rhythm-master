@@ -130,11 +130,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppConstant.bpm,
+                          '${AppConstant.bpm}: ',
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
-                            fontSize: 40,
+                            fontSize: 35,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -145,7 +145,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
-                            fontSize: 40,
+                            fontSize: 35,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
