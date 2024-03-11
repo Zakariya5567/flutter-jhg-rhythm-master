@@ -273,7 +273,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         )),
                 
                     SizedBox(
-                      height: height * 0.01,
+                      height: height * 0.02,
                     ),
                 
                     // DEFAULT SOUND
