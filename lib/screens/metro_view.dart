@@ -44,13 +44,13 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
     final width = MediaQuery.of(context).size.width;
     //final metroWidth = width * 0.60 > 300 ? 300.0 : width * 0.60;
     final metroWidth = 240.0;
+    final metroHeight = 308.0;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
       return Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                //height: height * .7,
                 //color: Colors.blue,
                 constraints: BoxConstraints(maxWidth: 345, minHeight: 200),
                 child: Column(
@@ -119,18 +119,19 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                         // Metronome
                         Container(
+                          //color: Colors.red,
                           alignment: Alignment.center,
-                          height: height * 0.40,
+                          height: metroHeight,
                           width: metroWidth,
                           child: Stack(
                             children: [
                               // Metronome
                               SizedBox(
-                                height: height * 0.40,
+                                height: metroHeight,
                                 width: metroWidth,
                                 child: Image.asset(
                                   Images.metronome,
-                                  height: height * 0.40,
+                                  height: metroHeight,
                                   width: metroWidth,
                                   fit: BoxFit.fill,
                                 ),
@@ -138,13 +139,14 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                               // Stalk
                               Positioned(
-                                top: height * 0.052,
+                                top: 40,
                                 left: 1,
                                 right: 1,
                                 // right: 20,
                                 child: Container(
-                                  height: height * 0.23,
-                                  width: width * 0.60,
+                                  //color: Colors.yellow,
+                                  height: 177,
+                                  //width: 100,
                                   alignment: Alignment.bottomCenter,
                                   child: AnimatedBuilder(
                                     animation: controller.animation!,
@@ -165,12 +167,13 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                         child: Stack(
                                           children: [
                                             Container(
-                                              height: height * 0.40,
-                                              width: width * 0.095,
+                                              //color: Colors.green,
+                                              height: metroHeight,
+                                              width: 37,
                                               alignment: Alignment.center,
                                               child: Image.asset(
                                                 Images.stalk,
-                                                height: height * 0.40,
+                                                height: metroHeight,
                                                 width: JHGResponsive.isMobile(
                                                         context)
                                                     ? 11
@@ -180,15 +183,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             ),
                                             //slider
                                             Positioned(
-                                              top: height *
+                                              top: 765 *
                                                   controller.bpm *
                                                   0.00058,
-                                              left: width * 0.002,
-                                              right: width * 0.002,
+                                              left: 1,
+                                              right: 1,
                                               child: Image.asset(
                                                 Images.slider,
-                                                height: height * 0.045,
-                                                width: width * 0.045,
+                                                height: 37,
+                                                width: 37,
                                               ),
                                             ),
                                           ],
@@ -201,32 +204,28 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                               //Slider wood
                               Positioned(
-                                top: height * 0.08,
-                                left: width * 0.003,
+                                top: 61.5,
+                                left: 2,
                                 child: Container(
-                                  // color: Colors.amber,
-                                  height: height * 0.40,
+                                  height: metroHeight,
                                   width: metroWidth,
                                   alignment: Alignment.bottomCenter,
                                   child: Image.asset(
                                     Images.metronomeBottom,
-                                    height: height * 0.40,
-                                    width:
-                                        width * 0.42 > 160 ? 160 : width * 0.42,
+                                    height: metroHeight,
+                                    width: 203,
                                   ),
                                 ),
                               ),
 
                               // Slider up down
                               Positioned(
-                                // left: width * 0.270,
                                 left: 1,
                                 right: 1,
-                                top: height * 0.050,
+                                top: 39,
                                 child: Container(
                                   alignment: Alignment.topCenter,
-                                  height: height * 0.21,
-                                  width: width * 0.060,
+                                  height: 162,
                                   color: Colors.transparent,
                                   child: RotatedBox(
                                     quarterTurns: 1,
