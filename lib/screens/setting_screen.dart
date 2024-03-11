@@ -82,322 +82,338 @@ class _SettingScreenState extends State<SettingScreen> {
             );
           }),
         ),
-        body: Container(
-          height: height,
-          width: width,
-          color: AppColors.blackPrimary,
-          child: SingleChildScrollView(
-            child: Consumer<SettingProvider>(
-                builder: (context, controller, child) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: height * 0.02,
-                  left: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
-                  right: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Heading(
-                      padding: 0,
-                      title: AppConstant.soundS,
-                      numbers: "",
-                      fontSize: 14,
-                      textColor: JHGColors.white,
+        body: Consumer<SettingProvider>(builder: (context, controller, child) {
+          return Container(
+            height: height,
+            width: width,
+            color: AppColors.blackPrimary,
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: height * 0.02,
+                      left: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
+                      right: JHGResponsive.isMobile(context) ? 0 : width * 0.36,
                     ),
-                    const SizedBox(height: 5),
-                    Consumer<MetroProvider>(
-                        builder: (context, controller, child) {
-                      return JHGDropDown<SoundModel>(
-                        value: controller.soundList[controller.selectedIndex],
-                        items: controller.soundList,
-                        expandedColor: AppColors.liteWhite,
-                        onChanged: (values) async {
-                          controller.setSound(
-                            ticker: null,
-                            name: values!.name.toString(),
-                            beat1: values.beat1.toString(),
-                            beat2: values.beat2.toString().toString(),
-                            index: values.id!,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Heading(
+                          padding: 0,
+                          title: AppConstant.soundS,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: JHGColors.white,
+                        ),
+                        const SizedBox(height: 5),
+                        Consumer<MetroProvider>(
+                            builder: (context, controller, child) {
+                          return JHGDropDown<SoundModel>(
+                            value:
+                                controller.soundList[controller.selectedIndex],
+                            items: controller.soundList,
+                            expandedColor: AppColors.liteWhite,
+                            onChanged: (values) async {
+                              controller.setSound(
+                                ticker: null,
+                                name: values!.name.toString(),
+                                beat1: values.beat1.toString(),
+                                beat2: values.beat2.toString().toString(),
+                                index: values.id!,
+                              );
+                            },
                           );
-                        },
-                      );
-                    }),
-
-                    const SizedBox(height: 20),
-                    // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-
-                    // DEFAULT BPM
-                    AddAndSubtractButton(
-                        padding: 0,
-                        title: AppConstant.defaultBpm,
-                        numbers: controller.bpm.toStringAsFixed(0),
-                        redButtonSize: height * 0.044,
-                        greyButtonSize: width * 0.24,
-                        description: null,
-                        onAdd: () {
-                          controller.increaseBpm();
-                        },
-                        onSubtract: () {
-                          controller.decreaseBpm();
                         }),
 
-                    // SPACER
-                    // SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
 
-                    // DEFAULT SOUND
-                    Heading(
-                      padding: 0,
-                      title: AppConstant.defaultSound,
-                      numbers: "",
-                      fontSize: 14,
-                      textColor: JHGColors.white,
-                    ),
-
-                    // SPACER
-                    SizedBox(height: height * 0.01),
-
-                    //Sound button with arrow down
-                    Container(
-                      width: width * 1,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColors.greyPrimary,
-                      ),
-                      child: JHGDropDown(
-                        value: controller.soundList[controller.selectedIndex],
-                        items: controller.soundList,
-                        onChanged: (values) async {
-                          controller.setSound(
-                            name: values!.name.toString(),
-                            beat1: values.beat1.toString(),
-                            beat2: values.beat2.toString().toString(),
-                            index: values.id!,
-                          );
-                        },
-                      ),
-                    ),
-
-                    // SPACER
-                    SizedBox(
-                      height: height * 0.020,
-                    ),
-
-                    // DEFAULT SOUND
-                    Heading(
-                      padding: 0,
-                      title: AppConstant.defaultTiming,
-                      numbers: "",
-                      fontSize: 14,
-                      textColor: AppColors.whiteLight,
-                    ),
-
-                    // SPACER
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-
-                    // Button selection 3/3 ....
-                    SizedBox(
-                      height: height * 0.085,
-                      width: width * 0.85,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: controller.tapButtonList.map((button) {
-                          return GestureDetector(
-                            onTap: () async {
-                              controller.setBeats(
-                                  controller.tapButtonList.indexOf(button));
+                        // DEFAULT BPM
+                        AddAndSubtractButton(
+                            padding: 0,
+                            title: AppConstant.defaultBpm,
+                            numbers: controller.bpm.toStringAsFixed(0),
+                            redButtonSize: height * 0.044,
+                            greyButtonSize: width * 0.24,
+                            description: null,
+                            onAdd: () {
+                              controller.increaseBpm();
                             },
-                            child: Container(
-                              height: height * 0.085,
-                              width: height * 0.085,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: controller.selectedButton ==
-                                        controller.tapButtonList.indexOf(button)
-                                    ? AppColors.greySecondary
-                                    : AppColors.greyPrimary,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  controller.tapButtonList[
-                                      controller.tapButtonList.indexOf(button)],
-                                  style: TextStyle(
-                                    fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    // SPACER
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
-                    // SPEED TRAINER HEADING
-                    Heading(
-                      padding: 0,
-                      title: AppConstant.speedTrainerSound,
-                      numbers: "",
-                      fontSize: 14,
-                      textColor: AppColors.whiteLight,
-                    ),
-                    // SPACER
-                    SizedBox(height: height * 0.01),
-                    // SPEED TRAINER DROPDOWN
-                    Container(
-                        width: width * 1,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.greyPrimary,
+                            onSubtract: () {
+                              controller.decreaseBpm();
+                            }),
+
+                        // SPACER
+                        // SizedBox(height: 20),
+
+                        // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppConstant.defaultSound,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: JHGColors.white,
                         ),
-                        child: JHGDropDown(
-                          value: controller
-                              .soundList[controller.speedTrainerSelectedIndex],
-                          items: controller.soundList,
-                          onChanged: (values) async {
-                            controller.setSpeedTrainerSound(
-                              name: values!.name.toString(),
-                              beat1: values.beat1.toString(),
-                              beat2: values.beat2.toString().toString(),
-                              index: values.id!,
-                            );
-                          },
-                        )),
 
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
+                        // SPACER
+                        SizedBox(height: height * 0.01),
 
-                    // DEFAULT SOUND
-                    Heading(
-                      padding: 0,
-                      title: AppConstant.defaultSpeedTrainerTiming,
-                      numbers: "",
-                      fontSize: 14,
-                      textColor: AppColors.whiteLight,
-                    ),
-
-                    SizedBox(
-                      height: height * 0.01,
-                    ),
-                    // Button selection 3/3 ....
-                    SizedBox(
-                      height: height * 0.085,
-                      width: width * 0.85,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:
-                            controller.tapSpeedTrainerButtonList.map((button) {
-                          return GestureDetector(
-                            onTap: () async {
-                              controller.setSpeedTrainerBeats(controller
-                                  .tapSpeedTrainerButtonList
-                                  .indexOf(button));
-                            },
-                            child: Container(
-                              height: height * 0.085,
-                              width: height * 0.085,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: controller.selectedSpeedTrainerButton ==
-                                        controller.tapSpeedTrainerButtonList
-                                            .indexOf(button)
-                                    ? AppColors.greySecondary
-                                    : AppColors.greyPrimary,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  controller.tapSpeedTrainerButtonList[
-                                      controller.tapSpeedTrainerButtonList
-                                          .indexOf(button)],
-                                  style: TextStyle(
-                                    fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    // SAVE BUTTON
-                    // const Spacer(),
-                    SizedBox(
-                      height: height * 0.03,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.onSave();
-                        showToast(
-                            context: context,
-                            message: "Setting Saved Successfully",
-                            isError: false);
-                        Navigator.pop(context);
-                      },
-                      child: Center(
-                        child: Container(
-                          height: height * 0.07,
+                        //Sound button with arrow down
+                        Container(
                           width: width * 1,
-                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: AppColors.redPrimary,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            AppConstant.save,
-                            style: TextStyle(
-                              fontFamily: AppConstant.sansFont,
-                              color: AppColors.whitePrimary,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.greyPrimary,
+                          ),
+                          child: JHGDropDown(
+                            value:
+                                controller.soundList[controller.selectedIndex],
+                            items: controller.soundList,
+                            onChanged: (values) async {
+                              controller.setSound(
+                                name: values!.name.toString(),
+                                beat1: values.beat1.toString(),
+                                beat2: values.beat2.toString().toString(),
+                                index: values.id!,
+                              );
+                            },
                           ),
                         ),
+
+                        // SPACER
+                        SizedBox(
+                          height: height * 0.020,
+                        ),
+
+                        // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppConstant.defaultTiming,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.whiteLight,
+                        ),
+
+                        // SPACER
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+
+                        // Button selection 3/3 ....
+                        SizedBox(
+                          height: height * 0.085,
+                          width: width * 0.85,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: controller.tapButtonList.map((button) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  controller.setBeats(
+                                      controller.tapButtonList.indexOf(button));
+                                },
+                                child: Container(
+                                  height: height * 0.085,
+                                  width: height * 0.085,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: controller.selectedButton ==
+                                            controller.tapButtonList
+                                                .indexOf(button)
+                                        ? AppColors.greySecondary
+                                        : AppColors.greyPrimary,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      controller.tapButtonList[controller
+                                          .tapButtonList
+                                          .indexOf(button)],
+                                      style: TextStyle(
+                                        fontFamily: AppConstant.sansFont,
+                                        color: AppColors.whitePrimary,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        // SPACER
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        // SPEED TRAINER HEADING
+                        Heading(
+                          padding: 0,
+                          title: AppConstant.speedTrainerSound,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.whiteLight,
+                        ),
+                        // SPACER
+                        SizedBox(height: height * 0.01),
+                        // SPEED TRAINER DROPDOWN
+                        Container(
+                            width: width * 1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: AppColors.greyPrimary,
+                            ),
+                            child: JHGDropDown(
+                              value: controller.soundList[
+                                  controller.speedTrainerSelectedIndex],
+                              items: controller.soundList,
+                              onChanged: (values) async {
+                                controller.setSpeedTrainerSound(
+                                  name: values!.name.toString(),
+                                  beat1: values.beat1.toString(),
+                                  beat2: values.beat2.toString().toString(),
+                                  index: values.id!,
+                                );
+                              },
+                            )),
+
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+
+                        // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppConstant.defaultSpeedTrainerTiming,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.whiteLight,
+                        ),
+
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        // Button selection 3/3 ....
+                        SizedBox(
+                          height: height * 0.085,
+                          width: width * 0.85,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: controller.tapSpeedTrainerButtonList
+                                .map((button) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  controller.setSpeedTrainerBeats(controller
+                                      .tapSpeedTrainerButtonList
+                                      .indexOf(button));
+                                },
+                                child: Container(
+                                  height: height * 0.085,
+                                  width: height * 0.085,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: controller
+                                                .selectedSpeedTrainerButton ==
+                                            controller.tapSpeedTrainerButtonList
+                                                .indexOf(button)
+                                        ? AppColors.greySecondary
+                                        : AppColors.greyPrimary,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      controller.tapSpeedTrainerButtonList[
+                                          controller.tapSpeedTrainerButtonList
+                                              .indexOf(button)],
+                                      style: TextStyle(
+                                        fontFamily: AppConstant.sansFont,
+                                        color: AppColors.whitePrimary,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        // SAVE BUTTON
+                        // const Spacer(),
+                        SizedBox(
+                          height: height * 0.23,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Column(
+                  children: [
+                    Spacer(),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 10, top: 10),
+                      color: AppColors.blackPrimary,
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              controller.onSave();
+                              showToast(
+                                  context: context,
+                                  message: "Setting Saved Successfully",
+                                  isError: false);
+                              Navigator.pop(context);
+                            },
+                            child: Center(
+                              child: Container(
+                                height: height * 0.07,
+                                width: width * 1,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.redPrimary,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  AppConstant.save,
+                                  style: TextStyle(
+                                    fontFamily: AppConstant.sansFont,
+                                    color: AppColors.whitePrimary,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          // SPACER
+                          // SizedBox(
+                          //   height: height * 0.02,
+                          // ),
+                          JHGSecondaryBtn(
+                            label: AppConstant.logout,
+                            onPressed: () async {
+                              await LocalDB.clearLocalDB();
+                              // ignore: use_build_context_synchronously
+                              Navigator.pushAndRemoveUntil(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Welcome(
+                                  yearlySubscriptionId: yearlySubscription(),
+                                  monthlySubscriptionId: monthlySubscription(),
+                                  appName: AppConstant.appName,
+                                  appVersion: packageInfo.version,
+                                  nextPage: () => const HomeScreen(),
+                                );
+                              }), (route) => false);
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-
-                    // SPACER
-                    // SizedBox(
-                    //   height: height * 0.02,
-                    // ),
-                    JHGSecondaryBtn(
-                      label: AppConstant.logout,
-                      onPressed: () async {
-                        await LocalDB.clearLocalDB();
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushAndRemoveUntil(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Welcome(
-                            yearlySubscriptionId: yearlySubscription(),
-                            monthlySubscriptionId: monthlySubscription(),
-                            appName: AppConstant.appName,
-                            appVersion: packageInfo.version,
-                            nextPage: () => const HomeScreen(),
-                          );
-                        }), (route) => false);
-                      },
-                    ),
-
-                    // // SPACER
-                    SizedBox(
-                      height: 10,
                     ),
                   ],
                 ),
-              );
-            }),
-          ),
-        ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
