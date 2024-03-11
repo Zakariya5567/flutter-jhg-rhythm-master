@@ -54,7 +54,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.025),
                     // STARTING TEMPO
                     Heading(
                         title: AppConstant.startingTempo,
@@ -172,6 +172,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   controller.startStop();
                 }),
           ),
+          SizedBox(height: 20,),
         ],
       );
     });

@@ -75,37 +75,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // SETTING ICON
-                            // Align(
-                            //     alignment: Alignment.topRight,
-                            //     child: GestureDetector(
-                            //       onTap: () async {
-                            //         Navigator.of(context)
-                            //             .push(MaterialPageRoute(builder: (context) {
-                            //           return const SettingScreen();
-                            //         }));
-                            //       },
-                            //       child: Container(
-                            //         padding: EdgeInsets.only(
-                            //             top: height * 0.01, right: width * 0.01),
-                            //         child: Container(
-                            //           padding: EdgeInsets.all(width * 0.01),
-                            //           decoration: BoxDecoration(
-                            //               shape: BoxShape.circle,
-                            //               color: AppColors.greyPrimary),
-                            //           child: Icon(
-                            //             Icons.settings,
-                            //             color: AppColors.whiteLight,
-                            //             size: width * 0.07,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     )),
-                            // // SPACER
-                            // SizedBox(
-                            //   height: height * 0.03,
-                            // ),
-
                             //BUTTON SELECTION SECTION
                             Container(
                               constraints: BoxConstraints(maxWidth: 345),
@@ -154,22 +123,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                             // ScreenView base on button selection
                             Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    // horizontal: JHGResponsive.isMobile(context)
-                                    //     ? 0
-                                    //     : JHGResponsive.isTablet(context)
-                                    //         ? width * 0.2
-                                    //         : width * 0.26,
-                                    horizontal: 0),
-                                child: controller.selectedButton == 0
-                                    ? const MetroView()
-                                    : // Now Metronome is first
-                                    controller.selectedButton == 1
-                                        ? const BpmView()
-                                        : // Now Tap Tempo is second
-                                        const SpeedView(),
-                              ),
+                              child: controller.selectedButton == 0
+                                  ? const MetroView()
+                                  : // Now Metronome is first
+                                  controller.selectedButton == 1
+                                      ? const BpmView()
+                                      : // Now Tap Tempo is second
+                                      const SpeedView(),
                             ) // Speed Trainer remains third
                           ],
                         ),
