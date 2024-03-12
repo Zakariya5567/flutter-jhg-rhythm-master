@@ -25,7 +25,7 @@ class BpmView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // SPACER
-                    SizedBox(height: height * 0.09),
+                    SizedBox(height: height * 0.07),
 
                     // THIS SONG IS ANDANTE SECTION
                     Column(
@@ -55,7 +55,7 @@ class BpmView extends StatelessWidget {
 
                     // SPACER
                     SizedBox(
-                      height: height * 0.104,
+                      height: height * 0.06,
                     ),
 
                     // RED  TAP BUTTON
@@ -125,7 +125,7 @@ class BpmView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppConstant.bpm,
+                          '${AppConstant.bpm}: ',
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
@@ -141,7 +141,7 @@ class BpmView extends StatelessWidget {
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 40,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],

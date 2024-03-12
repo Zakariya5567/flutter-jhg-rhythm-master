@@ -414,7 +414,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             }),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
         ],
       );

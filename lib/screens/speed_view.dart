@@ -146,7 +146,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 35,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -172,7 +172,9 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   controller.startStop();
                 }),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 10,
+          ),
         ],
       );
     });
