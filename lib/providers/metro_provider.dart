@@ -437,9 +437,9 @@ class MetroProvider extends ChangeNotifier {
     totalTick = totalTick + 1;
     if (totalTick == 1) {
       if (player.playing) {
-        await player.stop();
-        await player.setAsset(firstBeat);
-        await player.play();
+         player.stop();
+         player.setAsset(firstBeat);
+         player.play();
       } else {
         await player.setAsset(firstBeat);
         await player.play();
@@ -447,14 +447,14 @@ class MetroProvider extends ChangeNotifier {
     } else {
       if (totalTick < totalBeat + 1) {
         if (player.playing) {
-          await player.stop();
-          await player.setAsset(secondBeat);
-          await player.play();
+          player.stop();
+          player.setAsset(secondBeat);
+          player.play();
         } else {
           try {
             print("playing==");
-            await player.setAsset(secondBeat);
-            await player.play();
+             player.setAsset(secondBeat);
+             player.play();
           } catch (e) {
             print("==${e}");
           }
