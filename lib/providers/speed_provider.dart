@@ -151,17 +151,19 @@ class SpeedProvider extends ChangeNotifier{
   initializeAnimationController() async {
     setSoundList();
     Future.delayed(Duration.zero, () async {
-      int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
-      int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
-      soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
-      firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
-      secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
-      totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 : 6;
-      notifyListeners();
+      setSpeedTrainerDefaultValue();
     });
   }
 
-
+  setSpeedTrainerDefaultValue() async {
+    int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
+    int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
+    soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
+    totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 : 6;
+    notifyListeners();
+  }
 
   // TOTAL TICK IS USED TO IDENTIFY BEAT AUDIO
   // TWO TYPE OF AUDIO TICK / TAP

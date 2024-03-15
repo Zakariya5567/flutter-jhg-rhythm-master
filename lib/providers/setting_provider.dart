@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:rhythm_master/db/local_db.dart';
 import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/utils/app_constant.dart';
 
 //The MetroProvider class is responsible for managing the metronome functionality,
@@ -241,7 +243,8 @@ class SettingProvider extends ChangeNotifier {
     }
   }
 
-  onSave() async {
+  onSave(BuildContext context) async {
+
     await SharedPref.storeDefaultBPM(bpm);
 
     await SharedPref.storeDefaultSound(selectedIndex);
@@ -251,6 +254,8 @@ class SettingProvider extends ChangeNotifier {
     await SharedPref.storeSpeedTrainerDefaultTiming(selectedSpeedTrainerButton);
 
     await SharedPref.storeSpeedTrainerDefaultSound(speedTrainerSelectedIndex);
+
+    Provider.of<SpeedProvider>(context,listen: false).setSpeedTrainerDefaultValue();
 
   }
 }

@@ -8,8 +8,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/screens/home_screen.dart';
 import 'package:rhythm_master/widgets/heading.dart';
 
@@ -366,8 +368,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         child: Column(
                           children: [
                             InkWell(
-                              onTap: () {
-                                controller.onSave();
+                              onTap: () async {
+                                await controller.onSave(context);
                                 showToast(
                                     context: context,
                                     message: "Setting Saved Successfully",
