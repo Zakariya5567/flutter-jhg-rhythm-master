@@ -20,7 +20,7 @@ class SettingProvider extends ChangeNotifier {
   List<String> tapButtonList = ['4/4', '3/4', '6/8'];
 
   // List of Speed Trainer Beat buttons
-  List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8'];
+  List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8', '12/8' ];
 
   // List of sound list
   List<SoundModel> soundList = [];
@@ -218,29 +218,13 @@ class SettingProvider extends ChangeNotifier {
   int selectedButton = 0;
   int selectedSpeedTrainerButton = 0;
   setBeats(index) {
-    if (index == 0) {
       selectedButton = index;
       notifyListeners();
-    } else if (index == 1) {
-      selectedButton = index;
-      notifyListeners();
-    } else if (index == 2) {
-      selectedButton = index;
-      notifyListeners();
-    }
   }
 
   setSpeedTrainerBeats(index) {
-    if (index == 0) {
       selectedSpeedTrainerButton = index;
       notifyListeners();
-    } else if (index == 1) {
-      selectedSpeedTrainerButton = index;
-      notifyListeners();
-    } else if (index == 2) {
-      selectedSpeedTrainerButton = index;
-      notifyListeners();
-    }
   }
 
   onSave(BuildContext context) async {

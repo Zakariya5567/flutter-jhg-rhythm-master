@@ -304,13 +304,10 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: height * 0.085,
                               width: width * 0.85,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: controller.tapSpeedTrainerButtonList
-                                    .map((button) {
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: controller.tapSpeedTrainerButtonList.map((button) {
                                   return GestureDetector(
-                                    onTap: () async {
-                                      controller.setSpeedTrainerBeats(controller
+                                    onTap: () async {controller.setSpeedTrainerBeats(controller
                                           .tapSpeedTrainerButtonList
                                           .indexOf(button));
                                     },
@@ -319,13 +316,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       width: height * 0.085,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: controller
-                                                    .selectedSpeedTrainerButton ==
-                                                controller
-                                                    .tapSpeedTrainerButtonList
-                                                    .indexOf(button)
-                                            ? AppColors.greySecondary
-                                            : AppColors.greyPrimary,
+                                        color: controller.selectedSpeedTrainerButton ==
+                                        controller.tapSpeedTrainerButtonList.indexOf(button) ? AppColors.greySecondary : AppColors.greyPrimary,
                                       ),
                                       child: Center(
                                         child: Text(

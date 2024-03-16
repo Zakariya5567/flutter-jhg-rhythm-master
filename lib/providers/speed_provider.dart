@@ -161,7 +161,12 @@ class SpeedProvider extends ChangeNotifier{
     soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
     firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
     secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
-    totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 : 6;
+    totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 :  defBeat == 2 ? 6 : 12;
+    if(totalBeats == 6 || totalBeats == 12){
+      timeStamp = 30000;
+    }else{
+      timeStamp = 60000;
+    }
     notifyListeners();
   }
 
@@ -272,9 +277,9 @@ class SpeedProvider extends ChangeNotifier{
     }
     isPlaying = !isPlaying;
     notifyListeners();
-
-
   }
+
+  int timeStamp = 60000;
 
 
   // Set timer for BPM
@@ -283,7 +288,7 @@ class SpeedProvider extends ChangeNotifier{
     if(_timer != null){
       _timer!.cancel();
     }
-    _timer = Timer.periodic( Duration( milliseconds: (60000 / bpm).round()),
+    _timer = Timer.periodic( Duration( milliseconds: (timeStamp / bpm).round()),
           (Timer timer) async {
         if(targetTempo > bpm){
            playSound();
