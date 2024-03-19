@@ -6,6 +6,7 @@ class AppColors {
 
   static Color whitePrimary = JHGColors.white;
   static Color whiteSecondary = const Color.fromRGBO(241, 241, 241, 1);
+  static Color whiteTextColor = const Color.fromRGBO(192, 192, 196, 1);
   static Color whiteLight = JHGColors.white;
 
   static Color redPrimary = const Color.fromRGBO(254, 93, 67, 1);

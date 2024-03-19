@@ -43,7 +43,8 @@ class AddAndSubtractButton extends StatelessWidget {
           SizedBox(
             height: 54,
             width: width,
-            child: Row(
+            child:
+            Row(
               children: [
                 Text(
                   title,

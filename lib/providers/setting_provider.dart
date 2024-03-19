@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/db/local_db.dart';
 import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/utils/app_constant.dart';
 
@@ -17,7 +18,7 @@ class SettingProvider extends ChangeNotifier {
 
 
   // List of Beat buttons
-  List<String> tapButtonList = ['4/4', '3/4', '6/8'];
+  List<String> tapButtonList = ['4/4', '3/4', '6/8','12/8'];
 
   // List of Speed Trainer Beat buttons
   List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8', '12/8' ];
@@ -140,8 +141,8 @@ class SettingProvider extends ChangeNotifier {
       speedTrainerFirstBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat1)!;
       speedTrainerSecondBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat2)!;
 
-
       notifyListeners();
+
     });
   }
 
@@ -240,6 +241,8 @@ class SettingProvider extends ChangeNotifier {
     await SharedPref.storeSpeedTrainerDefaultSound(speedTrainerSelectedIndex);
 
     Provider.of<SpeedProvider>(context,listen: false).setSpeedTrainerDefaultValue();
+
+    Provider.of<MetroProvider>(context,listen: false).setMetronomeDefaultValue();
 
   }
 }

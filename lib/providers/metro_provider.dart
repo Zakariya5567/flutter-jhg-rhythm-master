@@ -10,6 +10,52 @@ import 'package:rhythm_master/utils/app_constant.dart';
 // controlling BPM, animation, and sound playback.
 
 class MetroProvider extends ChangeNotifier {
+
+  int beatNumerator = 4;
+  int beatDenominator = 4;
+
+
+  clearBottomSheetBeats(){
+    beatNumerator = 4;
+    beatDenominator = 4;
+    notifyListeners();
+  }
+
+  incrementBeatNumerator(){
+    beatNumerator  = beatNumerator +1;
+    notifyListeners();
+  }
+
+  decrementBeatNumerator(){
+    if(beatNumerator > 2){
+      beatNumerator = beatNumerator - 1;
+       notifyListeners();
+    }
+  }
+
+
+  incrementBeatDenominator(){
+    beatDenominator  = beatDenominator +1;
+    notifyListeners();
+  }
+
+  decrementBeatDenominator(){
+    if(beatDenominator > 2){
+      beatDenominator = beatDenominator - 1;
+      notifyListeners();
+    }
+  }
+
+
+  double timeStamp = 0;
+
+  setTimeStamp(int value){
+    timeStamp = 240000/value;
+    notifyListeners();
+  }
+
+
+
   // initial values of BPM
   Timer? bpmContinuousTimer;
   double bpm = 120;
@@ -21,7 +67,7 @@ class MetroProvider extends ChangeNotifier {
   double sliderMax = 300.0;
 
   // List of Beat buttons
-  List<String> tapButtonList = ['4/4', '3/4', '6/8'];
+  List<String> tapButtonList = ['4/4', '3/4', '6/8','12/8'];
 
   // Position of the slider
   double position = 0;
@@ -136,18 +182,13 @@ class MetroProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
-    timer =
-        Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
-      Future.delayed(Duration.zero, () async {
-        await player.setVolume(0);
-        playSound();
+    timer = Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
+      Future.delayed(Duration.zero, () async {await player.setVolume(0);playSound();
       });
     });
-    // calling sound list to add sound to sound list
+    // calling sound list to add sound to sound list  
 
-    controller = AnimationController(
-      duration: Duration(milliseconds: (30000 / bpm).round()),
-      vsync: ticker,
+    controller = AnimationController(duration: Duration(milliseconds: (30000 / bpm).round()), vsync: ticker,
     );
 
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
@@ -155,32 +196,30 @@ class MetroProvider extends ChangeNotifier {
     controller!.stop();
 
     Future.delayed(Duration.zero, () async {
-      double? defBPM = await SharedPref.getDefaultBPM;
-      int? defSound = await SharedPref.getDefaultSound;
-      int? defTiming = await SharedPref.getDefaultTiming;
-
-      defaultBPM = defBPM ?? 120;
-      defaultSound = defSound ?? 0;
-      defaultTiming = defTiming ?? 0;
-
-      selectedIndex = defaultSound ?? 0;
-      selectedButton = defaultTiming ?? 0;
-      totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 : 6;
-      bpm = defaultBPM ?? 120;
-      position = 0;
-      totalTick = 0;
-      isPlaying = false;
-      soundName = (defaultSound == null
-          ? AppConstant.logic
-          : soundList[defaultSound!].name)!;
-      firstBeat = (defaultSound == null
-          ? AppConstant.logic1Sound
-          : soundList[defaultSound!].beat1)!;
-      secondBeat = (defaultSound == null
-          ? AppConstant.logic2Sound
-          : soundList[defaultSound!].beat2)!;
-      notifyListeners();
+      setMetronomeDefaultValue();
     });
+  }
+
+  setMetronomeDefaultValue() async {
+    double? defBPM = await SharedPref.getDefaultBPM;
+    int? defSound = await SharedPref.getDefaultSound;
+    int? defTiming = await SharedPref.getDefaultTiming;
+
+    defaultBPM = defBPM ?? 120;
+    defaultSound = defSound ?? 0;
+    defaultTiming = defTiming ?? 0;
+
+    selectedIndex = defaultSound ?? 0;
+    selectedButton = defaultTiming ?? 0;
+    totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 :selectedButton  == 2 ? 6 : 12;
+    bpm = defaultBPM ?? 120;
+    position = 0;
+    totalTick = 0;
+    isPlaying = false;
+    soundName = (defaultSound == null ? AppConstant.logic : soundList[defaultSound!].name)!;
+    firstBeat = (defaultSound == null ? AppConstant.logic1Sound : soundList[defaultSound!].beat1)!;
+    secondBeat = (defaultSound == null ? AppConstant.logic2Sound : soundList[defaultSound!].beat2)!;
+    notifyListeners();
   }
 
   // dispose controller if off the page
@@ -211,22 +250,12 @@ class MetroProvider extends ChangeNotifier {
     totalTick = 0;
     isPlaying = false;
     selectedButton = defaultTiming ?? 0;
-    totalBeat = selectedButton == 0
-        ? 4
-        : selectedButton == 1
-            ? 3
-            : 6;
+    totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 : selectedButton == 2 ? 6 : 12;
     bpm = defaultBPM ?? 120;
     selectedIndex = defaultSound ?? 0;
-    soundName = (defaultSound == null
-        ? AppConstant.logic
-        : soundList[defaultSound!].name)!;
-    firstBeat = (defaultSound == null
-        ? AppConstant.logic1Sound
-        : soundList[defaultSound!].beat1)!;
-    secondBeat = (defaultSound == null
-        ? AppConstant.logic2Sound
-        : soundList[defaultSound!].beat2)!;
+    soundName = (defaultSound == null ? AppConstant.logic : soundList[defaultSound!].name)!;
+    firstBeat = (defaultSound == null ? AppConstant.logic1Sound : soundList[defaultSound!].beat1)!;
+    secondBeat = (defaultSound == null ? AppConstant.logic2Sound : soundList[defaultSound!].beat2)!;
 
     notifyListeners();
   }
@@ -310,7 +339,7 @@ class MetroProvider extends ChangeNotifier {
     if (bpmContinuousTimer != null) {
       bpmContinuousTimer!.cancel;
     }
-    bpmContinuousTimer =
+     bpmContinuousTimer =
         Timer.periodic(const Duration(milliseconds: 100), (timer) {
       decreaseBpm(ticker);
     });
@@ -329,7 +358,8 @@ class MetroProvider extends ChangeNotifier {
     firstTime = true;
     controller!.reset();
     controller!.dispose();
-    if (totalBeat == 6) {
+
+    if (totalBeat == 6 || totalBeat == 12 ) {
       controller = AnimationController(
         duration: Duration(milliseconds: (30000 / bpm).round()),
         vsync: ticker,
@@ -345,7 +375,8 @@ class MetroProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
-    if (totalBeat == 6) {
+
+    if (totalBeat == 6 || totalBeat == 12) {
       timer = Timer.periodic(Duration(milliseconds: (30000 / bpm).round()),
           (timer) {
         playSound();
@@ -398,6 +429,14 @@ class MetroProvider extends ChangeNotifier {
       }
     } else if (index == 2) {
       totalBeat = 6;
+      selectedButton = index;
+      notifyListeners();
+      if (isPlaying) {
+        setTimer(ticker);
+      }
+    }
+    else if (index == 3) {
+      totalBeat = 12;
       selectedButton = index;
       notifyListeners();
       if (isPlaying) {

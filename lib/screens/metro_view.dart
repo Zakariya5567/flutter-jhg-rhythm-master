@@ -7,6 +7,7 @@ import 'package:rhythm_master/widgets/custom_slider_widget.dart';
 
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import '../widgets/custom_selection_bottomsheet.dart';
 import '../widgets/custom_slider_track_shape.dart';
 
 class MetroView extends StatefulWidget {
@@ -58,51 +59,49 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    SizedBox(height: height * 0.02),
+                    SizedBox(height: height * 0.01),
                     Row(
                       children: [
                         // Button selection 3/3 ....
                         SizedBox(
-                          height: height * 0.35,
-                          // width: JHGResponsive.isMobile(context)
-                          //     ? width * 0.165
-                          //     : JHGResponsive.isMobile(context)
-                          //         ? 135
-                          //         : width * 0.0805,
+                          height: height * 0.41,
                           width: height * 0.08,
                           child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: ScrollPhysics(),
                               padding: EdgeInsets.zero,
-                              //physics: const NeverScrollableScrollPhysics(),
                               primary: false,
-                              itemCount: controller.tapButtonList.length,
+                              itemCount: controller.tapButtonList.length+1,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    controller.setBeats(this, index);
+                                    if(index ==  controller.tapButtonList.length){
+                                      controller.clearBottomSheetBeats();
+                                      customSelectionBottomSheet(context);
+                                    }else{
+                                      controller.setBeats(this, index);
+                                    }
+
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
-                                        vertical: height * 0.02),
+                                        vertical: height * 0.009),
                                     child: Container(
                                       height: height * 0.08,
                                       width: height * 0.08,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color:
-                                            controller.selectedButton == index
-                                                ? AppColors.greySecondary
-                                                : AppColors.greyPrimary,
+                                        color: controller.selectedButton == index ? AppColors.greySecondary : AppColors.greyPrimary,
                                       ),
                                       child: Center(
                                         child: Text(
+                                          index ==  controller.tapButtonList.length ? "Custom":
                                           controller.tapButtonList[index],
                                           style: TextStyle(
                                             fontFamily: AppConstant.sansFont,
                                             color: AppColors.whitePrimary,
-                                            fontSize: 18,
+                                            fontSize:  index ==  controller.tapButtonList.length ? 12 : 18,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
