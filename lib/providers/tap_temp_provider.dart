@@ -16,6 +16,7 @@ class TapTempoProvider extends ChangeNotifier{
   // Calculated BPM value
   double? bpm ;
 
+
   // Music name based on BPM
   String musicName = '';
 

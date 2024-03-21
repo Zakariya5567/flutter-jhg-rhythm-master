@@ -1,60 +1,67 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rhythm_master/db/local_db.dart';
 import 'package:rhythm_master/model/sound_model.dart';
 import 'package:rhythm_master/utils/app_constant.dart';
 
-//The MetroProvider class is responsible for managing the metronome functionality,
-// controlling BPM, animation, and sound playback.
+ //The MetroProvider class is responsible for managing the metronome functionality,
+ //controlling BPM, animation, and sound playback.
 
 class MetroProvider extends ChangeNotifier {
 
-  int beatNumerator = 4;
-  int beatDenominator = 4;
 
+  // Custom value selection
+  int beatNumerator = 2;
+  int beatDenominator = 2;
 
   clearBottomSheetBeats(){
-    beatNumerator = 4;
-    beatDenominator = 4;
+    beatNumerator = 2;
+    beatDenominator = 2;
     notifyListeners();
   }
 
   incrementBeatNumerator(){
-    beatNumerator  = beatNumerator +1;
-    notifyListeners();
+    if(beatNumerator< 96){
+      beatNumerator  = beatNumerator +1;
+      notifyListeners();
+    }
   }
 
   decrementBeatNumerator(){
     if(beatNumerator > 2){
       beatNumerator = beatNumerator - 1;
        notifyListeners();
-    }
-  }
-
+    }}
 
   incrementBeatDenominator(){
-    beatDenominator  = beatDenominator +1;
-    notifyListeners();
+    if(beatDenominator < 64){
+      beatDenominator  = beatDenominator + beatDenominator;
+      notifyListeners();
+    }
+
   }
 
   decrementBeatDenominator(){
     if(beatDenominator > 2){
-      beatDenominator = beatDenominator - 1;
+      beatDenominator = beatDenominator - beatDenominator~/2;
       notifyListeners();
     }
   }
 
+  setValueOfBottomSheet(){
+    selectedButton = 4;
+    notifyListeners();
+    String value = "${beatNumerator}/${beatDenominator}";
+    getBeatsDuration(value);
+  }
 
   double timeStamp = 0;
 
-  setTimeStamp(int value){
+  setTimeStamp(int value) {
     timeStamp = 240000/value;
     notifyListeners();
   }
-
-
 
   // initial values of BPM
   Timer? bpmContinuousTimer;
@@ -173,6 +180,9 @@ class MetroProvider extends ChangeNotifier {
   double? defaultBPM;
   int? defaultSound;
   int? defaultTiming;
+  String? defaultBeatValue;
+
+
 
   // Initialize  animation controller
   initializeAnimationController(
@@ -204,14 +214,16 @@ class MetroProvider extends ChangeNotifier {
     double? defBPM = await SharedPref.getDefaultBPM;
     int? defSound = await SharedPref.getDefaultSound;
     int? defTiming = await SharedPref.getDefaultTiming;
+    String? defValue = await SharedPref.getMetronomeDefaultValue;
 
     defaultBPM = defBPM ?? 120;
     defaultSound = defSound ?? 0;
     defaultTiming = defTiming ?? 0;
+    defaultBeatValue  = defValue ?? "4/4" ;
 
     selectedIndex = defaultSound ?? 0;
     selectedButton = defaultTiming ?? 0;
-    totalBeat = selectedButton == 0 ? 4 : selectedButton == 1 ? 3 :selectedButton  == 2 ? 6 : 12;
+    getBeatsDuration(defaultBeatValue!);
     bpm = defaultBPM ?? 120;
     position = 0;
     totalTick = 0;
@@ -221,6 +233,8 @@ class MetroProvider extends ChangeNotifier {
     secondBeat = (defaultSound == null ? AppConstant.logic2Sound : soundList[defaultSound!].beat2)!;
     notifyListeners();
   }
+
+
 
   // dispose controller if off the page
   Future<void> disposeController() async {
@@ -312,9 +326,8 @@ class MetroProvider extends ChangeNotifier {
     if (bpmContinuousTimer != null) {
       bpmContinuousTimer!.cancel;
     }
-    bpmContinuousTimer =
-        Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      increaseBpm(ticker);
+    bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+         increaseBpm(ticker);
     });
   }
 
@@ -342,7 +355,7 @@ class MetroProvider extends ChangeNotifier {
      bpmContinuousTimer =
         Timer.periodic(const Duration(milliseconds: 100), (timer) {
       decreaseBpm(ticker);
-    });
+      });
   }
 
   bool firstTime = true;
@@ -359,34 +372,22 @@ class MetroProvider extends ChangeNotifier {
     controller!.reset();
     controller!.dispose();
 
-    if (totalBeat == 6 || totalBeat == 12 ) {
+    int timerInterval  = (timeStamp / bpm).round();
+
       controller = AnimationController(
-        duration: Duration(milliseconds: (30000 / bpm).round()),
+        duration: Duration(milliseconds: timerInterval),
         vsync: ticker,
       );
-    } else {
-      controller = AnimationController(
-        duration: Duration(milliseconds: (60000 / bpm).round()),
-        vsync: ticker,
-      );
-    }
 
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     if (timer != null) {
       timer!.cancel();
     }
 
-    if (totalBeat == 6 || totalBeat == 12) {
-      timer = Timer.periodic(Duration(milliseconds: (30000 / bpm).round()),
+      timer = Timer.periodic(Duration(milliseconds: timerInterval),
           (timer) {
         playSound();
       });
-    } else {
-      timer = Timer.periodic(Duration(milliseconds: (60000 / bpm).round()),
-          (timer) {
-        playSound();
-      });
-    }
 
     controller!.repeat(reverse: true);
     // Listen to timer to animate stalk and play sound
@@ -411,37 +412,45 @@ class MetroProvider extends ChangeNotifier {
   // Set beats based on the selected button
   // Setting total beats based on the selected button and notifying listeners
 
-  int selectedButton = 0;
-  setBeats(TickerProviderStateMixin ticker, index) {
-    if (index == 0) {
-      totalBeat = 4;
-      selectedButton = index;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer(ticker);
-      }
-    } else if (index == 1) {
-      totalBeat = 3;
-      selectedButton = index;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer(ticker);
-      }
-    } else if (index == 2) {
-      totalBeat = 6;
-      selectedButton = index;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer(ticker);
-      }
+  getBeatsDuration(String value){
+    List beatValue = value.split("/");
+
+    int beatN = int.parse(beatValue[0]);
+    int beatD =  int.parse(beatValue[1]) ;
+
+    print("Beat Numerator : $beatN");
+    print("Beat Denomenator : $beatD");
+
+    totalBeat = beatN;
+
+    if(beatD == 2){
+      timeStamp = 120000;
     }
-    else if (index == 3) {
-      totalBeat = 12;
-      selectedButton = index;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer(ticker);
-      }
+    else if(beatD == 4){
+      timeStamp = 60000;
+    }
+    else if(beatD == 8){
+      timeStamp = 30000;
+    }
+    else if(beatD == 16){
+      timeStamp = 15000;
+    }
+    else if(beatD == 32){
+      timeStamp = 7500;
+    }
+    else if(beatD == 64){
+      timeStamp = 3750;
+    }
+    notifyListeners();
+  }
+
+  int selectedButton = 0;
+  setBeats({required TickerProviderStateMixin ticker,required int index, required String indexValue}) {
+    getBeatsDuration(indexValue);
+    selectedButton = index;
+    notifyListeners();
+    if (isPlaying) {
+      setTimer(ticker);
     }
   }
 
@@ -480,8 +489,8 @@ class MetroProvider extends ChangeNotifier {
          player.setAsset(firstBeat);
          player.play();
       } else {
-        await player.setAsset(firstBeat);
-        await player.play();
+         player.setAsset(firstBeat);
+         player.play();
       }
     } else {
       if (totalTick < totalBeat + 1) {
@@ -495,7 +504,7 @@ class MetroProvider extends ChangeNotifier {
              player.setAsset(secondBeat);
              player.play();
           } catch (e) {
-            print("==${e}");
+            print("==${e}");  
           }
         }
         if (totalTick == totalBeat) {
@@ -504,4 +513,6 @@ class MetroProvider extends ChangeNotifier {
       }
     }
   }
+
+
 }

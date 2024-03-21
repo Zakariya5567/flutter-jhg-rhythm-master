@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -80,9 +82,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       controller.clearBottomSheetBeats();
                                       customSelectionBottomSheet(context);
                                     }else{
-                                      controller.setBeats(this, index);
+                                      controller.setBeats(ticker: this, index: index,indexValue: controller.tapButtonList[index]);
                                     }
-
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
@@ -257,22 +258,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                       height: height * 0.03,
                     ),
 
-                    //Sound button with arrow down
-
-                    // JHGDropDown<SoundModel>(
-                    //   value: controller.soundList[controller.selectedIndex],
-                    //   items: controller.soundList,
-                    //   expandedColor: AppColors.liteWhite,
-                    //   onChanged: (values) async {
-                    //     controller.setSound(
-                    //       ticker: this,
-                    //       name: values!.name.toString(),
-                    //       beat1: values.beat1.toString(),
-                    //       beat2: values.beat2.toString().toString(),
-                    //       index: values.id!,
-                    //     );
-                    //   },
-                    // ),
                     SliderWidget(
                       height: height,
                       value: controller.bpm,

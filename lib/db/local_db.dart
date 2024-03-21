@@ -9,6 +9,9 @@ class SharedPref {
   static String speedTrainerTimingKey = "speedTrainerTimingKey";
   static String isFirstTimeOpenApp = "isFirstTimeOpenApp";
   static String speedTrainerDefaultSoundKey = "speedTrainerDefaultSoundKey";
+  static String metronomeDefaultValueKey = "metronomeDefaultValueKey";
+  static String speedTrainerDefaultValueKey = "speedTrainerDefaultValueKey";
+
 
   // Set [isFirstTimeOpenApp] value
   static Future<void> setIsFirstTimeOpenApp(bool value) async {
@@ -40,7 +43,6 @@ class SharedPref {
     return bpm;
   }
 
-
   // Set default sound
   static Future<void> storeDefaultSound(int value) async {
     // initialized shared preferences
@@ -55,7 +57,6 @@ class SharedPref {
     int? bpm = pref!.getInt(defaultSoundKey);
     return bpm;
   }
-
 
   // Set default Speed trainer sound
   static Future<void> storeSpeedTrainerDefaultSound(int value) async {
@@ -72,8 +73,6 @@ class SharedPref {
     return key;
   }
 
-
-
   // Set default timing
   static Future<void> storeDefaultTiming(int value) async {
     // initialized shared preferences
@@ -89,8 +88,6 @@ class SharedPref {
     return bpm;
   }
 
-
-
   // Set default timing
   static Future<void> storeSpeedTrainerDefaultTiming(int value) async {
     // initialized shared preferences
@@ -103,6 +100,36 @@ class SharedPref {
     // Initialized shared preferences
     final pref = await LocalDB.getPref;
     int? bpm = pref!.getInt(speedTrainerTimingKey);
+    return bpm;
+  }
+
+  // Set default timing
+  static Future<void> storeMetronomeDefaultValue(String value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setString(metronomeDefaultValueKey, value);
+  }
+
+  // Get default timing
+  static Future<String?> get getMetronomeDefaultValue async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    String? bpm = pref!.getString(metronomeDefaultValueKey);
+    return bpm;
+  }
+
+  // Set default timing
+  static Future<void> storeSpeedTrainerDefaultValue(String value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setString(speedTrainerDefaultValueKey, value);
+  }
+
+  // Get default timing
+  static Future<String?> get getSpeedTrainerDefaultValue async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    String? bpm = pref!.getString(speedTrainerDefaultValueKey);
     return bpm;
   }
 

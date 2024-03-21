@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/utils/app_%20colors.dart';
 import 'package:rhythm_master/widgets/beats_number_button.dart';
 
 import '../utils/app_constant.dart';
 
-customSelectionBottomSheet(BuildContext context){
+settingCustomBottomSheet(BuildContext context,bool isMetronome){
   return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -14,7 +15,7 @@ customSelectionBottomSheet(BuildContext context){
       builder: (context){
        final height =  MediaQuery.sizeOf(context).height;
        final  width =  MediaQuery.sizeOf(context).width;
-        return  Consumer<MetroProvider>(
+        return  Consumer<SettingProvider>(
           builder: (context,controller,child) {
             return Container(
               height:  height*0.85,
@@ -137,7 +138,11 @@ customSelectionBottomSheet(BuildContext context){
                     InkWell(
                       onTap: () async {
                         Navigator.pop(context);
-                        controller.setValueOfBottomSheet();
+                        if(isMetronome == true){
+                          controller.setValueOfMetronomeBottomSheet();
+                        }else{
+                          controller.setValueOfSpeedTrainerBottomSheet();
+                        }
                       },
                       child: Center(
                         child: Container(

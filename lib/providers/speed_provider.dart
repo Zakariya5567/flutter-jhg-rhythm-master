@@ -60,6 +60,7 @@ class SpeedProvider extends ChangeNotifier{
   String firstBeat = AppConstant.logic1Sound;
   String secondBeat = AppConstant.logic2Sound;
 
+  String? defaultBeatValue;
 
   // List of sound list
   List<SoundModel> soundList = [];
@@ -158,15 +159,18 @@ class SpeedProvider extends ChangeNotifier{
   setSpeedTrainerDefaultValue() async {
     int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
+    String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
+
+    defaultBeatValue  = defValue ?? "4/4" ;
+
     soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
     firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
     secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
-    totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 :  defBeat == 2 ? 6 : 12;
-    if(totalBeats == 6 || totalBeats == 12){
-      timeStamp = 30000;
-    }else{
-      timeStamp = 60000;
-    }
+    // totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 :  defBeat == 2 ? 6 : 12;
+
+
+    getBeatsDuration(defaultBeatValue!);
+
     notifyListeners();
   }
 
@@ -174,6 +178,38 @@ class SpeedProvider extends ChangeNotifier{
   // TWO TYPE OF AUDIO TICK / TAP
   int totalTick = 0;
 
+
+  getBeatsDuration(String value){
+    List beatValue = value.split("/");
+
+    int beatN = int.parse(beatValue[0]);
+    int beatD =  int.parse(beatValue[1]) ;
+
+    print("Beat Numerator : $beatN");
+    print("Beat Denomenator : $beatD");
+
+    totalBeats = beatN;
+
+    if(beatD == 2){
+      timeStamp = 120000;
+    }
+    else if(beatD == 4){
+      timeStamp = 60000;
+    }
+    else if(beatD == 8){
+      timeStamp = 30000;
+    }
+    else if(beatD == 16){
+      timeStamp = 15000;
+    }
+    else if(beatD == 32){
+      timeStamp = 7500;
+    }
+    else if(beatD == 64){
+      timeStamp = 3750;
+    }
+    notifyListeners();
+  }
 
 
   // Clear speed trainer settings
