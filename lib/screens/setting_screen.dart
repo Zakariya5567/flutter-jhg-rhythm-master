@@ -213,19 +213,17 @@ class _SettingScreenState extends State<SettingScreen> {
                                   itemBuilder: (context,index){
                                     return GestureDetector(
                                       onTap: () async {
-
                                         if(index ==  controller.tapButtonList.length){
                                           controller.clearBottomSheetBeats();
                                           settingCustomBottomSheet(context,true);
                                         }else{
                                           controller.setMetronomeBeats(index,controller
                                               .tapButtonList[index]);
-                                        }
-
+                                        } 
                                       },
                                       child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: width * 0.009),
+                                        padding: EdgeInsets.only(
+                                            right: width * 0.025),
                                         child: Container(
                                           height: height * 0.085,
                                           width: height * 0.085,
@@ -323,8 +321,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                     }
                                   },
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: width * 0.009),
+                                    padding: EdgeInsets.only(
+                                        right: width * 0.025),
                                     child: Container(
                                       height: height * 0.085,
                                       width: height * 0.085,
@@ -400,11 +398,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                 ),
                               ),
                             ),
-
-                            // SPACER
-                            // SizedBox(
-                            //   height: height * 0.02,
-                            // ),
                             JHGSecondaryBtn(
                               label: AppConstant.logout,
                               onPressed: () async {

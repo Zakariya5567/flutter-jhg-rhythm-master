@@ -61,7 +61,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    SizedBox(height: height * 0.01),
+                    SizedBox(height: height * 0.025),
                     Row(
                       children: [
                         // Button selection 3/3 ....
@@ -270,7 +270,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                     // SPACER
                     SizedBox(
-                      height: height * 0.025,
+                      height: height * 0.015,
                     ),
 
                     // BPM VALUE SECTION
