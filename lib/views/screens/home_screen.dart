@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
-import 'package:rhythm_master/screens/bpm_view.dart';
-import 'package:rhythm_master/screens/setting_screen.dart';
-import 'package:rhythm_master/screens/speed_view.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/views/screens/bpm_view.dart';
+import 'package:rhythm_master/views/screens/setting_screen.dart';
+import 'package:rhythm_master/views/screens/speed_view.dart';
 import 'metro_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // List on buttons, Metronome | Tap Tempo | Speed Trainer
   List<String> buttonList = [
-    AppConstant.metronome,
-    AppConstant.tapTempo,
-    AppConstant.speedTrainer
+    AppStrings.metronome,
+    AppStrings.tapTempo,
+    AppStrings.speedTrainer
   ];
 
   // Set expiry date when user login to the app
@@ -110,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           child: Text(
                                             buttonList[index],
                                             style: TextStyle(
-                                              fontFamily: AppConstant.sansFont,
+                                              fontFamily: AppStrings.sansFont,
                                               color: AppColors.whitePrimary,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w400,
@@ -167,9 +166,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     size: 30,
                                   ),
                                   Text(
-                                    AppConstant.tooltipsTitle,
+                                    AppStrings.tooltipsTitle,
                                     style: TextStyle(
-                                        fontFamily: AppConstant.sansFont,
+                                        fontFamily: AppStrings.sansFont,
                                         color: AppColors.whitePrimary,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.italic),
@@ -190,9 +189,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 height: width * .01,
                               ),
                               Text(
-                                AppConstant.tooltipsContent,
+                                AppStrings.tooltipsContent,
                                 style: TextStyle(
-                                    fontFamily: AppConstant.sansFont,
+                                    fontFamily: AppStrings.sansFont,
                                     color: AppColors.whitePrimary),
                                 textAlign: TextAlign.center,
                               )

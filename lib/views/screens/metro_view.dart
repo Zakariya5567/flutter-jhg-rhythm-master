@@ -3,12 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_assets.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
-import 'package:rhythm_master/utils/images.dart';
-import 'package:rhythm_master/widgets/custom_slider_widget.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 import '../widgets/custom_selection_bottomsheet.dart';
 import '../widgets/custom_slider_track_shape.dart';
 
@@ -45,8 +44,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    //final metroWidth = width * 0.60 > 300 ? 300.0 : width * 0.60;
     final metroWidth = 240.0;
     final metroHeight = 308.0;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
@@ -101,7 +98,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                           index ==  controller.tapButtonList.length ? "Custom":
                                           controller.tapButtonList[index],
                                           style: TextStyle(
-                                            fontFamily: AppConstant.sansFont,
+                                            fontFamily: AppStrings.sansFont,
                                             color: AppColors.whitePrimary,
                                             fontSize:  index ==  controller.tapButtonList.length ? 12 : 18,
                                             fontWeight: FontWeight.w500,
@@ -131,7 +128,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 height: metroHeight,
                                 width: metroWidth,
                                 child: Image.asset(
-                                  Images.metronome,
+                                  AppAssets.metronome,
                                   height: metroHeight,
                                   width: metroWidth,
                                   fit: BoxFit.fill,
@@ -173,7 +170,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                               width: 37,
                                               alignment: Alignment.center,
                                               child: Image.asset(
-                                                Images.stalk,
+                                                AppAssets.stalk,
                                                 height: metroHeight,
                                                 width: JHGResponsive.isMobile(
                                                         context)
@@ -190,7 +187,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(
-                                                Images.slider,
+                                                AppAssets.slider,
                                                 height: 37,
                                                 width: 37,
                                               ),
@@ -212,7 +209,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                   width: metroWidth,
                                   alignment: Alignment.bottomCenter,
                                   child: Image.asset(
-                                    Images.metronomeBottom,
+                                    AppAssets.metronomeBottom,
                                     height: metroHeight,
                                     width: 203,
                                   ),
@@ -318,19 +315,19 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           children: [
                             Text(
                               controller.bpm == null
-                                  ? AppConstant.bpmNull
+                                  ? AppStrings.bpmNull
                                   : controller.bpm.toStringAsFixed(0),
                               style: TextStyle(
-                                fontFamily: AppConstant.sansFont,
+                                fontFamily: AppStrings.sansFont,
                                 color: AppColors.whiteSecondary,
                                 fontSize: 35,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                             Text(
-                              AppConstant.bpm,
+                              AppStrings.bpm,
                               style: TextStyle(
-                                fontFamily: AppConstant.sansFont,
+                                fontFamily: AppStrings.sansFont,
                                 color: AppColors.greySecondary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500,

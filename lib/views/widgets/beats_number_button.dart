@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 
 class BeatsNumberButton extends StatelessWidget {
   const BeatsNumberButton({super.key,
@@ -53,7 +52,7 @@ class BeatsNumberButton extends StatelessWidget {
           child: Text(
             numbers,
             style: TextStyle(
-              fontFamily: AppConstant.sansFont,
+              fontFamily: AppStrings.sansFont,
               color: AppColors.whitePrimary,
               fontSize: 25,
               fontWeight: FontWeight.w500,

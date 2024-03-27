@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:rhythm_master/utils/app_%20colors.dart';
-import 'package:rhythm_master/widgets/custom_slider_track_shape.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/views/widgets/custom_slider_track_shape.dart';
 
 class SliderWidget extends StatelessWidget {
   const SliderWidget({

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
 
 class BpmView extends StatelessWidget {
   const BpmView({super.key});
@@ -12,7 +11,6 @@ class BpmView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Consumer<TapTempoProvider>(builder: (context, controller, child) {
       return Column(
         children: [
@@ -33,9 +31,9 @@ class BpmView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          AppConstant.thisSongIs,
+                          AppStrings.thisSongIs,
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteLight,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -44,7 +42,7 @@ class BpmView extends StatelessWidget {
                         Text(
                           controller.musicName,
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteLight,
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
@@ -76,9 +74,9 @@ class BpmView extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                           child: Text(
-                            AppConstant.tap,
+                            AppStrings.tap,
                             style: TextStyle(
-                              fontFamily: AppConstant.sansFont,
+                              fontFamily: AppStrings.sansFont,
                               color: AppColors.whitePrimary,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -125,9 +123,9 @@ class BpmView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${AppConstant.bpm}: ',
+                          '${AppStrings.bpm}: ',
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
@@ -135,10 +133,10 @@ class BpmView extends StatelessWidget {
                         ),
                         Text(
                           controller.bpm == null
-                              ? AppConstant.bpmNull
+                              ? AppStrings.bpmNull
                               : controller.bpm!.toStringAsFixed(0),
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 40,
                             fontWeight: FontWeight.w700,

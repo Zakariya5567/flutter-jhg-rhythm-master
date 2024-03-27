@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythm_master/db/local_db.dart';
-import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
-import 'package:rhythm_master/utils/app_constant.dart';
+import 'package:rhythm_master/services/local_db.dart';
 
 //The MetroProvider class is responsible for managing the metronome functionality,
 // controlling BPM, animation, and sound playback.
@@ -93,81 +93,81 @@ class SettingProvider extends ChangeNotifier {
 
     soundList.add(SoundModel(
         id: 0,
-        name: AppConstant.logic,
-        beat1: AppConstant.logic1Sound,
-        beat2: AppConstant.logic2Sound));
+        name: AppStrings.logic,
+        beat1: AppStrings.logic1Sound,
+        beat2: AppStrings.logic2Sound));
 
     soundList.add(SoundModel(
         id: 1,
-        name: AppConstant.click,
-        beat1: AppConstant.click1Sound,
-        beat2: AppConstant.click2Sound));
+        name: AppStrings.click,
+        beat1: AppStrings.click1Sound,
+        beat2: AppStrings.click2Sound));
 
     soundList.add(SoundModel(
         id: 2,
-        name: AppConstant.drumsticks,
-        beat1: AppConstant.drumsticks1Sound,
-        beat2: AppConstant.drumsticks2Sound));
+        name: AppStrings.drumsticks,
+        beat1: AppStrings.drumsticks1Sound,
+        beat2: AppStrings.drumsticks2Sound));
 
     soundList.add(SoundModel(
         id: 3,
-        name: AppConstant.ping,
-        beat1: AppConstant.ping1Sound,
-        beat2: AppConstant.ping2Sound));
+        name: AppStrings.ping,
+        beat1: AppStrings.ping1Sound,
+        beat2: AppStrings.ping2Sound));
 
     soundList.add(SoundModel(
         id: 4,
-        name: AppConstant.seiko,
-        beat1: AppConstant.seiko1Sound,
-        beat2: AppConstant.seiko2Sound));
+        name: AppStrings.seiko,
+        beat1: AppStrings.seiko1Sound,
+        beat2: AppStrings.seiko2Sound));
 
     soundList.add(SoundModel(
         id: 5,
-        name: AppConstant.ableton,
-        beat1: AppConstant.ableton1Sound,
-        beat2: AppConstant.ableton2Sound));
+        name: AppStrings.ableton,
+        beat1: AppStrings.ableton1Sound,
+        beat2: AppStrings.ableton2Sound));
 
     soundList.add(SoundModel(
         id: 6,
-        name: AppConstant.cubase,
-        beat1: AppConstant.cubase1Sound,
-        beat2: AppConstant.cubase2Sound));
+        name: AppStrings.cubase,
+        beat1: AppStrings.cubase1Sound,
+        beat2: AppStrings.cubase2Sound));
 
     soundList.add(SoundModel(
         id: 7,
-        name: AppConstant.flStudio,
-        beat1: AppConstant.flStudio1Sound,
-        beat2: AppConstant.flStudio2Sound));
+        name: AppStrings.flStudio,
+        beat1: AppStrings.flStudio1Sound,
+        beat2: AppStrings.flStudio2Sound));
 
     soundList.add(SoundModel(
         id: 8,
-        name: AppConstant.maschine,
-        beat1: AppConstant.maschine1Sound,
-        beat2: AppConstant.maschine2Sound));
+        name: AppStrings.maschine,
+        beat1: AppStrings.maschine1Sound,
+        beat2: AppStrings.maschine2Sound));
 
     soundList.add(SoundModel(
         id: 9,
-        name: AppConstant.protoolDefault,
-        beat1: AppConstant.protoolsDefault1Sound,
-        beat2: AppConstant.protoolsDefault2Sound));
+        name: AppStrings.protoolDefault,
+        beat1: AppStrings.protoolsDefault1Sound,
+        beat2: AppStrings.protoolsDefault2Sound));
 
     soundList.add(SoundModel(
         id: 10,
-        name: AppConstant.protoolMarimba,
-        beat1: AppConstant.protoolsMarimba1Sound,
-        beat2: AppConstant.protoolsMarimba2Sound));
+        name: AppStrings.protoolMarimba,
+        beat1: AppStrings.protoolsMarimba1Sound,
+        beat2: AppStrings.protoolsMarimba2Sound));
 
     soundList.add(SoundModel(
         id: 11,
-        name: AppConstant.reason,
-        beat1: AppConstant.reason1Sound,
-        beat2: AppConstant.reason2Sound));
+        name: AppStrings.reason,
+        beat1: AppStrings.reason1Sound,
+        beat2: AppStrings.reason2Sound));
 
     soundList.add(SoundModel(
         id: 12,
-        name: AppConstant.sonar,
-        beat1: AppConstant.sonar1Sound,
-        beat2: AppConstant.sonar2Sound));
+        name: AppStrings.sonar,
+        beat1: AppStrings.sonar1Sound,
+        beat2: AppStrings.sonar2Sound));
   }
 
   // Initialize  animation controller
@@ -192,17 +192,17 @@ class SettingProvider extends ChangeNotifier {
       bpm = defBPM ?? 120;
 
       selectedIndex = defSound ?? 0;
-      soundName = (defSound == null ? AppConstant.logic : soundList[defSound].name)!;
-      firstBeat = (defSound == null ? AppConstant.logic1Sound : soundList[defSound].beat1)!;
-      secondBeat = (defSound == null ? AppConstant.logic2Sound : soundList[defSound].beat2)!;
+      soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+      firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
+      secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
 
 
       int? defSpeedTrainerSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
 
       speedTrainerSelectedIndex =  defSpeedTrainerSound ?? 0;
-      speedTrainerSoundName = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].name)!;
-      speedTrainerFirstBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat1)!;
-      speedTrainerSecondBeat = (defSpeedTrainerSound == null ? AppConstant.logic : soundList[defSpeedTrainerSound].beat2)!;
+      speedTrainerSoundName = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].name)!;
+      speedTrainerFirstBeat = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].beat1)!;
+      speedTrainerSecondBeat = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].beat2)!;
 
       notifyListeners();
 
@@ -213,9 +213,9 @@ class SettingProvider extends ChangeNotifier {
   int selectedIndex = 0;
 
   // Set selected sound
-  String soundName = AppConstant.logic;
-  String firstBeat = AppConstant.logic1Sound;
-  String secondBeat = AppConstant.logic2Sound;
+  String soundName = AppStrings.logic;
+  String firstBeat = AppStrings.logic1Sound;
+  String secondBeat = AppStrings.logic2Sound;
 
 
   // Setting selected sound and notifying listeners
@@ -237,9 +237,9 @@ class SettingProvider extends ChangeNotifier {
   int speedTrainerSelectedIndex = 0;
 
   // Set selected sound
-  String speedTrainerSoundName = AppConstant.logic;
-  String speedTrainerFirstBeat = AppConstant.logic1Sound;
-  String speedTrainerSecondBeat = AppConstant.logic2Sound;
+  String speedTrainerSoundName = AppStrings.logic;
+  String speedTrainerFirstBeat = AppStrings.logic1Sound;
+  String speedTrainerSecondBeat = AppStrings.logic2Sound;
 
 
   setSpeedTrainerSound(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
 
 class Heading extends StatelessWidget {
   const Heading({
@@ -31,7 +31,7 @@ class Heading extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontFamily: AppConstant.sansFont,
+              fontFamily: AppStrings.sansFont,
               color: textColor ?? AppColors.whitePrimary,
               fontSize: fontSize ?? 12,
               fontWeight: FontWeight.w700,
@@ -40,7 +40,7 @@ class Heading extends StatelessWidget {
           Text(
             numbers,
             style: TextStyle(
-              fontFamily: AppConstant.sansFont,
+              fontFamily: AppStrings.sansFont,
               color: AppColors.whitePrimary,
               fontSize: 24,
               fontWeight: FontWeight.w600,

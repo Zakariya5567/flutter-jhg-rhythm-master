@@ -2,20 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-import 'app_constant.dart';
+import 'app_strings.dart';
 
 String monthlySubscription() {
   return kIsWeb
       ? 'web'
       : Platform.isAndroid
-          ? AppConstant.androidMonthlySubscriptionId
-          : AppConstant.iosMonthlySubscriptionId;
+          ? AppStrings.androidMonthlySubscriptionId
+          : AppStrings.iosMonthlySubscriptionId;
 }
 
 String yearlySubscription() {
   return kIsWeb
       ? 'web'
       : Platform.isAndroid
-          ? AppConstant.androidYearlySubscriptionId
-          : AppConstant.iosYearlySubscriptionId;
+          ? AppStrings.androidYearlySubscriptionId
+          : AppStrings.iosYearlySubscriptionId;
 }

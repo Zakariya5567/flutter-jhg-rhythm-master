@@ -8,7 +8,7 @@ import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
-import 'package:rhythm_master/screens/home_screen.dart';
+import 'package:rhythm_master/views/screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

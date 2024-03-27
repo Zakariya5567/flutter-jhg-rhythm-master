@@ -7,16 +7,16 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/model/sound_model.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_subscription.dart';
+import 'package:rhythm_master/models/sound_model.dart';
+
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
-import 'package:rhythm_master/screens/home_screen.dart';
-import 'package:rhythm_master/widgets/heading.dart';
-import 'package:rhythm_master/widgets/setting_custom_bottomsheet.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
-import '../utils/app_subscription.dart';
+import 'package:rhythm_master/views/screens/home_screen.dart';
+import 'package:rhythm_master/views/widgets/heading.dart';
+import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
 import '../widgets/add_add_subtract_button.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -77,7 +77,7 @@ class _SettingScreenState extends State<SettingScreen> {
               MaterialPageRoute(
                 builder: (context) => BugReportPage(
                   device: deviceName,
-                  appName: AppConstant.appName,
+                  appName: AppStrings.appName,
                 ),
               ),
             );
@@ -104,7 +104,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           children: [
                             Heading(
                               padding: 0,
-                              title: AppConstant.soundS,
+                              title: AppStrings.soundS,
                               numbers: "",
                               fontSize: 14,
                               textColor: JHGColors.white,
@@ -135,7 +135,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // DEFAULT BPM
                             AddAndSubtractButton(
                                 padding: 0,
-                                title: AppConstant.defaultBpm,
+                                title: AppStrings.defaultBpm,
                                 numbers: controller.bpm.toStringAsFixed(0),
                                 redButtonSize: height * 0.044,
                                 greyButtonSize: 120,
@@ -153,7 +153,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
-                              title: AppConstant.defaultSound,
+                              title: AppStrings.defaultSound,
                               numbers: "",
                               fontSize: 14,
                               textColor: JHGColors.white,
@@ -192,7 +192,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
-                              title: AppConstant.defaultTiming,
+                              title: AppStrings.defaultTiming,
                               numbers: "",
                               fontSize: 14,
                               textColor: AppColors.whiteLight,
@@ -216,6 +216,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                         if(index ==  controller.tapButtonList.length){
                                           controller.clearBottomSheetBeats();
                                           settingCustomBottomSheet(context,true);
+                                          controller.setMetronomeBeats(index,controller
+                                              .tapButtonList[index]);
                                         }else{
                                           controller.setMetronomeBeats(index,controller
                                               .tapButtonList[index]);
@@ -239,7 +241,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                               index ==  controller.tapButtonList.length ? "Custom":
                                               controller.tapButtonList[index],
                                               style: TextStyle(
-                                                fontFamily: AppConstant.sansFont,
+                                                fontFamily: AppStrings.sansFont,
                                                 color: AppColors.whitePrimary,
                                                 fontSize:  index ==  controller.tapButtonList.length ? 12 : 18,
                                                  fontWeight: FontWeight.w500,
@@ -258,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // SPEED TRAINER HEADING
                             Heading(
                               padding: 0,
-                              title: AppConstant.speedTrainerSound,
+                              title: AppStrings.speedTrainerSound,
                               numbers: "",
                               fontSize: 14,
                               textColor: AppColors.whiteLight,
@@ -293,7 +295,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
-                              title: AppConstant.defaultSpeedTrainerTiming,
+                              title: AppStrings.defaultSpeedTrainerTiming,
                               numbers: "",
                               fontSize: 14,
                               textColor: AppColors.whiteLight,
@@ -336,7 +338,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                           index ==  controller.tapSpeedTrainerButtonList.length ? "Custom":
                                           controller.tapSpeedTrainerButtonList[index],
                                           style: TextStyle(
-                                            fontFamily: AppConstant.sansFont,
+                                            fontFamily: AppStrings.sansFont,
                                             color: AppColors.whitePrimary,
                                             fontSize: index ==  controller.tapSpeedTrainerButtonList.length ? 12 : 18 ,
                                             fontWeight: FontWeight.w500,
@@ -387,9 +389,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                       color: AppColors.redPrimary,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Text(
-                                    AppConstant.save,
+                                    AppStrings.save,
                                     style: TextStyle(
-                                      fontFamily: AppConstant.sansFont,
+                                      fontFamily: AppStrings.sansFont,
                                       color: AppColors.whitePrimary,
                                       fontSize: 17,
                                       fontWeight: FontWeight.w600,
@@ -399,7 +401,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                             ),
                             JHGSecondaryBtn(
-                              label: AppConstant.logout,
+                              label: AppStrings.logout,
                               onPressed: () async {
                                 await LocalDB.clearLocalDB();
                                 // ignore: use_build_context_synchronously
@@ -409,7 +411,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     yearlySubscriptionId: yearlySubscription(),
                                     monthlySubscriptionId:
                                         monthlySubscription(),
-                                    appName: AppConstant.appName,
+                                    appName: AppStrings.appName,
                                     appVersion: packageInfo.version,
                                     nextPage: () => const HomeScreen(),
                                   );

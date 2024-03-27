@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
-import 'package:rhythm_master/utils/app_%20colors.dart';
-import 'package:rhythm_master/widgets/beats_number_button.dart';
-
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/views/widgets/beats_number_button.dart';
 
 customSelectionBottomSheet(BuildContext context){
   return showModalBottomSheet(
@@ -48,7 +47,7 @@ customSelectionBottomSheet(BuildContext context){
                     Text(
                        "Number of Beats",
                         style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
+                        fontFamily: AppStrings.sansFont,
                         color: AppColors.whiteTextColor,
                         fontSize:  18,
                         fontWeight: FontWeight.bold,),),
@@ -56,7 +55,7 @@ customSelectionBottomSheet(BuildContext context){
                      Text(
                       "This is the top number and represents how\nmany sounds you will hear between each\naccented note.",
                       style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
+                        fontFamily: AppStrings.sansFont,
                         color: AppColors.whiteTextColor,
                         fontSize:  14,
                         fontWeight: FontWeight.w500,
@@ -79,7 +78,7 @@ customSelectionBottomSheet(BuildContext context){
                     Text(
                       "Note Value",
                       style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
+                        fontFamily: AppStrings.sansFont,
                         color: AppColors.whiteTextColor,
                         fontSize:  18,
                         fontWeight: FontWeight.bold,),),
@@ -87,7 +86,7 @@ customSelectionBottomSheet(BuildContext context){
                     Text(
                       "This is the bottom number and represents, in\ncombination with the BPM setting how\nquickly the sounds will play.",
                       style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
+                        fontFamily: AppStrings.sansFont,
                         color: AppColors.whiteTextColor,
                         fontSize:  14,
                         fontWeight: FontWeight.w500,
@@ -111,7 +110,7 @@ customSelectionBottomSheet(BuildContext context){
                       child: Text(
                         "Time Signature",
                         style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
+                          fontFamily: AppStrings.sansFont,
                           color: AppColors.whiteSecondary,
                           fontSize:  18,
                           fontWeight: FontWeight.bold,
@@ -124,7 +123,7 @@ customSelectionBottomSheet(BuildContext context){
                     Text(
                       "${controller.beatNumerator}/${controller.beatDenominator}",
                       style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
+                        fontFamily: AppStrings.sansFont,
                         color: AppColors.whiteSecondary,
                         fontSize:  40,
                         fontWeight: FontWeight.bold,
@@ -148,9 +147,9 @@ customSelectionBottomSheet(BuildContext context){
                               color: AppColors.redPrimary,
                               borderRadius: BorderRadius.circular(10)),
                           child: Text(
-                            AppConstant.save,
+                            AppStrings.save,
                             style: TextStyle(
-                              fontFamily: AppConstant.sansFont,
+                              fontFamily: AppStrings.sansFont,
                               color: AppColors.whitePrimary,
                               fontSize: 17,
                               fontWeight: FontWeight.w600,

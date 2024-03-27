@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 
 class AddAndSubtractButton extends StatelessWidget {
    AddAndSubtractButton({
@@ -49,7 +48,7 @@ class AddAndSubtractButton extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
+                    fontFamily: AppStrings.sansFont,
                     color: AppColors.whiteLight,
                     fontSize: headingSize ?? 14,
                     fontWeight: FontWeight.w700,
@@ -87,7 +86,7 @@ class AddAndSubtractButton extends StatelessWidget {
                   child: Text(
                     numbers,
                     style: TextStyle(
-                      fontFamily: AppConstant.sansFont,
+                      fontFamily: AppStrings.sansFont,
                       color: AppColors.whitePrimary,
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
@@ -126,7 +125,7 @@ class AddAndSubtractButton extends StatelessWidget {
           Text(
             description!,
             style: TextStyle(
-              fontFamily: AppConstant.sansFont,
+              fontFamily: AppStrings.sansFont,
               color: AppColors.whiteLight,
               fontSize: 12,
               fontWeight: FontWeight.w400,

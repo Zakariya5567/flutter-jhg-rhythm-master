@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
-import 'package:rhythm_master/widgets/custom_slider_widget.dart';
-
-import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 import '../widgets/add_add_subtract_button.dart';
 import '../widgets/heading.dart';
 
@@ -41,7 +40,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Consumer<SpeedProvider>(builder: (context, controller, child) {
       return Column(
         children: [
@@ -57,7 +55,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     SizedBox(height: height * 0.025),
                     // STARTING TEMPO
                     Heading(
-                        title: AppConstant.startingTempo,
+                        title: AppStrings.startingTempo,
                         numbers: controller.startTempo.toStringAsFixed(0)),
                     // SPACER
                     SizedBox(height: height * 0.015),
@@ -74,7 +72,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     SizedBox(height: height * 0.025),
                     // TARGET TEMPO
                     Heading(
-                        title: AppConstant.targetTempo,
+                        title: AppStrings.targetTempo,
                         numbers: controller.targetTempo.toStringAsFixed(0)),
                     // SPACER
                     SizedBox(height: height * 0.020),
@@ -94,11 +92,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // BARS
                     AddAndSubtractButton(
                         redButtonSize: 30,
-                        title: AppConstant.bars,
+                        title: AppStrings.bars,
                         //greyButtonSize: width * 0.24,
                         greyButtonSize: 95,
                         numbers: controller.bar.toString(),
-                        description: AppConstant.howManyBars,
+                        description: AppStrings.howManyBars,
                         onAdd: () {
                           controller.increaseBar();
                         },
@@ -112,11 +110,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // INTERVAL BUTTONS
                     AddAndSubtractButton(
                         redButtonSize: 30,
-                        title: AppConstant.interval,
+                        title: AppStrings.interval,
                         greyButtonSize: 95,
                         numbers: controller.interval.toString(),
                         description:
-                            "${AppConstant.howMuchItShouldIncrease} ${controller.bar} Bars",
+                            "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
                         onAdd: () {
                           controller.increaseInterval();
                         },
@@ -130,9 +128,9 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${AppConstant.bpm}: ',
+                          '${AppStrings.bpm}: ',
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 35,
                             fontWeight: FontWeight.w500,
@@ -140,10 +138,10 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         ),
                         Text(
                           controller.bpm == null
-                              ? AppConstant.bpmNull
+                              ? AppStrings.bpmNull
                               : controller.bpm.toStringAsFixed(0),
                           style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
+                            fontFamily: AppStrings.sansFont,
                             color: AppColors.whiteSecondary,
                             fontSize: 35,
                             fontWeight: FontWeight.w700,

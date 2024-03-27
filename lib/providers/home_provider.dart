@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../db/local_db.dart';
+import 'package:rhythm_master/services/local_db.dart';
 
 class HomeProvider extends ChangeNotifier {
   // initial values tab page
