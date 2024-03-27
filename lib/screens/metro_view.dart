@@ -43,6 +43,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     //final metroWidth = width * 0.60 > 300 ? 300.0 : width * 0.60;
@@ -79,7 +80,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 return GestureDetector(
                                   onTap: () async {
                                     if(index ==  controller.tapButtonList.length){
-                                      controller.clearBottomSheetBeats();
+                                      // controller.clearBottomSheetBeats();
                                       customSelectionBottomSheet(context);
                                     }else{
                                       controller.setBeats(ticker: this, index: index,indexValue: controller.tapButtonList[index]);

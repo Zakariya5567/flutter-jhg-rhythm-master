@@ -1,8 +1,6 @@
-
 import 'package:reg_page/reg_page.dart';
 
 class SharedPref {
-
   static String defaultBpmKey = "defaultBpmKey";
   static String defaultSoundKey = "defaultSoundKey";
   static String defaultTimingKey = "defaultTimingKey";
@@ -11,7 +9,8 @@ class SharedPref {
   static String speedTrainerDefaultSoundKey = "speedTrainerDefaultSoundKey";
   static String metronomeDefaultValueKey = "metronomeDefaultValueKey";
   static String speedTrainerDefaultValueKey = "speedTrainerDefaultValueKey";
-
+  static String beatNumeratorKey = "beatNumeratorKey";
+  static String beatDenominatorKey = "beatNumeratorKey";
 
   // Set [isFirstTimeOpenApp] value
   static Future<void> setIsFirstTimeOpenApp(bool value) async {
@@ -133,6 +132,23 @@ class SharedPref {
     return bpm;
   }
 
+  static Future<void> storeBeatNumeratorValue(int value) async {
+    final pref = await LocalDB.getPref;
+    pref!.setInt(beatNumeratorKey, value);
+  }
 
+  static Future<int?> getBeatNumeratorValue() async {
+    final pref = await LocalDB.getPref;
+    return pref!.getInt(beatNumeratorKey);
+  }
 
+  static Future<void> storeBeatDenominatorValue(int value) async {
+    final pref = await LocalDB.getPref;
+    pref!.setInt(beatDenominatorKey, value);
+  }
+
+  static Future<int?> getBeatDenominatorValue() async {
+    final pref = await LocalDB.getPref;
+    return pref!.getInt(beatDenominatorKey);
+  }
 }

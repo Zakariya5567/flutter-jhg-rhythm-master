@@ -5,52 +5,60 @@ import 'package:rhythm_master/db/local_db.dart';
 import 'package:rhythm_master/model/sound_model.dart';
 import 'package:rhythm_master/utils/app_constant.dart';
 
- //The MetroProvider class is responsible for managing the metronome functionality,
- //controlling BPM, animation, and sound playback.
+//The MetroProvider class is responsible for managing the metronome functionality,
+//controlling BPM, animation, and sound playback.
 
 class MetroProvider extends ChangeNotifier {
-
-
   // Custom value selection
   int beatNumerator = 2;
   int beatDenominator = 2;
 
-  clearBottomSheetBeats(){
+
+  void init() async {
+    beatNumerator =await SharedPref.getBeatNumeratorValue() ?? 2;
+    beatDenominator =await SharedPref.getBeatDenominatorValue() ?? 2;
+    String value = "${beatNumerator}/${beatDenominator}";
+    getBeatsDuration(value);
+  }
+
+  clearBottomSheetBeats() {
     beatNumerator = 2;
     beatDenominator = 2;
     notifyListeners();
   }
 
-  incrementBeatNumerator(){
-    if(beatNumerator< 96){
-      beatNumerator  = beatNumerator +1;
+  incrementBeatNumerator() {
+    if (beatNumerator < 96) {
+      beatNumerator = beatNumerator + 1;
       notifyListeners();
     }
   }
 
-  decrementBeatNumerator(){
-    if(beatNumerator > 2){
+  decrementBeatNumerator() {
+    if (beatNumerator > 2) {
       beatNumerator = beatNumerator - 1;
-       notifyListeners();
-    }}
-
-  incrementBeatDenominator(){
-    if(beatDenominator < 64){
-      beatDenominator  = beatDenominator + beatDenominator;
-      notifyListeners();
-    }
-
-  }
-
-  decrementBeatDenominator(){
-    if(beatDenominator > 2){
-      beatDenominator = beatDenominator - beatDenominator~/2;
       notifyListeners();
     }
   }
 
-  setValueOfBottomSheet(){
+  incrementBeatDenominator() {
+    if (beatDenominator < 64) {
+      beatDenominator = beatDenominator + beatDenominator;
+      notifyListeners();
+    }
+  }
+
+  decrementBeatDenominator() {
+    if (beatDenominator > 2) {
+      beatDenominator = beatDenominator - beatDenominator ~/ 2;
+      notifyListeners();
+    }
+  }
+
+  setValueOfBottomSheet() {
     selectedButton = 4;
+    SharedPref.storeBeatNumeratorValue(beatNumerator);
+    SharedPref.storeBeatDenominatorValue(beatDenominator);
     notifyListeners();
     String value = "${beatNumerator}/${beatDenominator}";
     getBeatsDuration(value);
@@ -59,7 +67,7 @@ class MetroProvider extends ChangeNotifier {
   double timeStamp = 0;
 
   setTimeStamp(int value) {
-    timeStamp = 240000/value;
+    timeStamp = 240000 / value;
     notifyListeners();
   }
 
@@ -74,7 +82,7 @@ class MetroProvider extends ChangeNotifier {
   double sliderMax = 300.0;
 
   // List of Beat buttons
-  List<String> tapButtonList = ['4/4', '3/4', '6/8','12/8'];
+  List<String> tapButtonList = ['4/4', '3/4', '6/8', '12/8'];
 
   // Position of the slider
   double position = 0;
