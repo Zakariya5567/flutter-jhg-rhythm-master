@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -11,12 +10,12 @@ import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/models/sound_model.dart';
-
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
+
 import '../widgets/add_add_subtract_button.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -205,54 +204,72 @@ class _SettingScreenState extends State<SettingScreen> {
 
                             // Button selection 3/3 ....
                             SizedBox(
-                              height: height * 0.085,
-                              width: width * 0.85,
-                              child: ListView.builder(
-                                  itemCount:  controller.tapButtonList.length +1 ,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context,index){
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        if(index ==  controller.tapButtonList.length){
-                                          controller.clearBottomSheetBeats();
-                                          settingCustomBottomSheet(context,true);
-                                          controller.setMetronomeBeats(index,controller
-                                              .tapButtonList[index]);
-                                        }else{
-                                          controller.setMetronomeBeats(index,controller
-                                              .tapButtonList[index]);
-                                        } 
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            right: width * 0.025),
-                                        child: Container(
-                                          height: height * 0.085,
-                                          width: height * 0.085,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: controller.selectedMetronomeButton ==
-                                                index
-                                                ? AppColors.greySecondary
-                                                : AppColors.greyPrimary,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              index ==  controller.tapButtonList.length ? "Custom":
-                                              controller.tapButtonList[index],
-                                              style: TextStyle(
-                                                fontFamily: AppStrings.sansFont,
-                                                color: AppColors.whitePrimary,
-                                                fontSize:  index ==  controller.tapButtonList.length ? 12 : 18,
-                                                 fontWeight: FontWeight.w500,
+                                height: height * 0.085,
+                                width: width * 0.85,
+                                child: ListView.builder(
+                                    itemCount:
+                                        controller.tapButtonList.length + 1,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () async {
+                                          if (index ==
+                                              controller.tapButtonList.length) {
+                                            controller.clearBottomSheetBeats();
+                                            settingCustomBottomSheet(
+                                                context, true);
+                                            controller.setMetronomeBeats(
+                                                index,
+                                                controller
+                                                    .tapButtonList[index]);
+                                          } else {
+                                            controller.setMetronomeBeats(
+                                                index,
+                                                controller
+                                                    .tapButtonList[index]);
+                                          }
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: width * 0.025),
+                                          child: Container(
+                                            height: height * 0.085,
+                                            width: height * 0.085,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: controller
+                                                          .selectedMetronomeButton ==
+                                                      index
+                                                  ? AppColors.greySecondary
+                                                  : AppColors.greyPrimary,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                index ==
+                                                        controller.tapButtonList
+                                                            .length
+                                                    ? "Custom"
+                                                    : controller
+                                                        .tapButtonList[index],
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      AppStrings.sansFont,
+                                                  color: AppColors.whitePrimary,
+                                                  fontSize: index ==
+                                                          controller
+                                                              .tapButtonList
+                                                              .length
+                                                      ? 12
+                                                      : 18,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                      })
-                            ),
+                                      );
+                                    })),
                             // SPACER
                             SizedBox(
                               height: height * 0.02,
@@ -308,47 +325,70 @@ class _SettingScreenState extends State<SettingScreen> {
                             SizedBox(
                               height: height * 0.085,
                               width: width * 0.85,
-                              child:
-                              ListView.builder(
-                                  itemCount:  controller.tapSpeedTrainerButtonList.length + 1,
+                              child: ListView.builder(
+                                  itemCount: controller
+                                          .tapSpeedTrainerButtonList.length +
+                                      1,
                                   scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context,index){
-                                return   GestureDetector(
-                                  onTap: () async {
-                                    if(index ==  controller.tapSpeedTrainerButtonList.length){
-                                      controller.clearBottomSheetBeats();
-                                      settingCustomBottomSheet(context,false);
-                                    }else{
-                                      controller.setSpeedTrainerBeats(index,controller.tapSpeedTrainerButtonList[index]);
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        right: width * 0.025),
-                                    child: Container(
-                                      height: height * 0.085,
-                                      width: height * 0.085,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: controller.selectedSpeedTrainerButton ==
-                                            index ? AppColors.greySecondary : AppColors.greyPrimary,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          index ==  controller.tapSpeedTrainerButtonList.length ? "Custom":
-                                          controller.tapSpeedTrainerButtonList[index],
-                                          style: TextStyle(
-                                            fontFamily: AppStrings.sansFont,
-                                            color: AppColors.whitePrimary,
-                                            fontSize: index ==  controller.tapSpeedTrainerButtonList.length ? 12 : 18 ,
-                                            fontWeight: FontWeight.w500,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        if (index ==
+                                            controller.tapSpeedTrainerButtonList
+                                                .length) {
+                                          controller.clearBottomSheetBeats();
+                                          settingCustomBottomSheet(
+                                              context, false);
+                                        } else {
+                                          controller.setSpeedTrainerBeats(
+                                              index,
+                                              controller
+                                                      .tapSpeedTrainerButtonList[
+                                                  index]);
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: width * 0.025),
+                                        child: Container(
+                                          height: height * 0.085,
+                                          width: height * 0.085,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: controller
+                                                        .selectedSpeedTrainerButton ==
+                                                    index
+                                                ? AppColors.greySecondary
+                                                : AppColors.greyPrimary,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              index ==
+                                                      controller
+                                                          .tapSpeedTrainerButtonList
+                                                          .length
+                                                  ? "Custom"
+                                                  : controller
+                                                          .tapSpeedTrainerButtonList[
+                                                      index],
+                                              style: TextStyle(
+                                                fontFamily: AppStrings.sansFont,
+                                                color: AppColors.whitePrimary,
+                                                fontSize: index ==
+                                                        controller
+                                                            .tapSpeedTrainerButtonList
+                                                            .length
+                                                    ? 12
+                                                    : 18,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                              }),
+                                    );
+                                  }),
                             ),
                             // SAVE BUTTON
                             // const Spacer(),
@@ -414,6 +454,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     appName: AppStrings.appName,
                                     appVersion: packageInfo.version,
                                     nextPage: () => const HomeScreen(),
+                                    featuresList: [],
                                   );
                                 }), (route) => false);
                               },

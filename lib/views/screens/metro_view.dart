@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -7,9 +5,8 @@ import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
-import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
+
 import '../widgets/custom_selection_bottomsheet.dart';
-import '../widgets/custom_slider_track_shape.dart';
 
 class MetroView extends StatefulWidget {
   const MetroView({super.key});
@@ -70,17 +67,22 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                               physics: ScrollPhysics(),
                               padding: EdgeInsets.zero,
                               primary: false,
-                              itemCount: controller.tapButtonList.length+1,
+                              itemCount: controller.tapButtonList.length + 1,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    if(index ==  controller.tapButtonList.length){
+                                    if (index ==
+                                        controller.tapButtonList.length) {
                                       // controller.clearBottomSheetBeats();
                                       customSelectionBottomSheet(context);
-                                    }else{
-                                      controller.setBeats(ticker: this, index: index,indexValue: controller.tapButtonList[index]);
+                                    } else {
+                                      controller.setBeats(
+                                          ticker: this,
+                                          index: index,
+                                          indexValue:
+                                              controller.tapButtonList[index]);
                                     }
                                   },
                                   child: Padding(
@@ -91,16 +93,26 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       width: height * 0.08,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: controller.selectedButton == index ? AppColors.greySecondary : AppColors.greyPrimary,
+                                        color:
+                                            controller.selectedButton == index
+                                                ? AppColors.greySecondary
+                                                : AppColors.greyPrimary,
                                       ),
                                       child: Center(
                                         child: Text(
-                                          index ==  controller.tapButtonList.length ? "Custom":
-                                          controller.tapButtonList[index],
+                                          index ==
+                                                  controller
+                                                      .tapButtonList.length
+                                              ? "Custom"
+                                              : controller.tapButtonList[index],
                                           style: TextStyle(
                                             fontFamily: AppStrings.sansFont,
                                             color: AppColors.whitePrimary,
-                                            fontSize:  index ==  controller.tapButtonList.length ? 12 : 18,
+                                            fontSize: index ==
+                                                    controller
+                                                        .tapButtonList.length
+                                                ? 12
+                                                : 18,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -255,125 +267,14 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     SizedBox(
                       height: height * 0.03,
                     ),
-
-                    SliderWidget(
-                      height: height,
-                      value: controller.bpm,
-                      min: 1,
-                      max: 300,
+                    JHGBPMChangeWidget(
+                      reverse: true,
+                      initialBpmValue: controller.bpm,
+                      sliderWidth: null,
                       onChanged: (value) {
                         controller.setPosition(value, this);
                       },
                     ),
-
-                    // SPACER
-                    SizedBox(
-                      height: height * 0.015,
-                    ),
-
-                    // BPM VALUE SECTION
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // DECREASE BUTTON
-                        GestureDetector(
-                          onTap: () {
-                            controller.decreaseBpm(this);
-                          },
-                          onLongPress: () {
-                            controller.continuousDecreaseBpm(this);
-                          },
-                          onLongPressUp: () {
-                            if (controller.bpmContinuousTimer != null) {
-                              controller.bpmContinuousTimer!.cancel();
-                            }
-                          },
-                          onLongPressCancel: () {
-                            if (controller.bpmContinuousTimer != null) {
-                              controller.bpmContinuousTimer!.cancel();
-                            }
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColors.redPrimary,
-                            ),
-                            child: Center(
-                                child: Icon(
-                              Icons.remove,
-                              color: AppColors.whitePrimary,
-                            )),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.bpm == null
-                                  ? AppStrings.bpmNull
-                                  : controller.bpm.toStringAsFixed(0),
-                              style: TextStyle(
-                                fontFamily: AppStrings.sansFont,
-                                color: AppColors.whiteSecondary,
-                                fontSize: 35,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              AppStrings.bpm,
-                              style: TextStyle(
-                                fontFamily: AppStrings.sansFont,
-                                color: AppColors.greySecondary,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        // INCREASE BUTTON
-                        GestureDetector(
-                          onTap: () {
-                            controller.increaseBpm(this);
-                          },
-                          onLongPress: () {
-                            controller.continuousIncreaseBpm(this);
-                          },
-                          onLongPressUp: () {
-                            if (controller.bpmContinuousTimer != null) {
-                              controller.bpmContinuousTimer!.cancel();
-                            }
-                          },
-                          onLongPressCancel: () {
-                            if (controller.bpmContinuousTimer != null) {
-                              controller.bpmContinuousTimer!.cancel();
-                            }
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColors.redPrimary,
-                            ),
-                            child: Center(
-                                child: Icon(
-                              Icons.add,
-                              color: AppColors.whitePrimary,
-                            )),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // SPACER
                     SizedBox(
                       height: height * 0.02,
                     ),

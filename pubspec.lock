@@ -157,10 +157,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: "49af28382aefc53562459104f64d16b9dfd1e8ef68c862d5af436cc8356ce5a8"
+      sha256: "0978e9a3e45305a80a7210dbeaf79d6ee8bee33f70c8e542dc654c952070217f"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.1"
+    version: "5.4.2+1"
   fake_async:
     dependency: transitive
     description:
@@ -203,7 +203,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: ebf2a1a44a28411db0ee9d1f8e2d7e3b648d32c1
+      resolved-ref: "61fd73c696627eed9f41945e52a73ece7faa57fd"
       url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
@@ -534,7 +534,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "5da4283b2fe87452baed9fe30989df8990b050cd"
+      resolved-ref: "49cf61ce44adec4d77e09c8b0de09f5b1cc2b04d"
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
