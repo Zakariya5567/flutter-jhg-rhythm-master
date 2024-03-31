@@ -247,7 +247,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                         inactiveColor: Colors.transparent,
                                         thumbColor: Colors.transparent,
                                         value: controller.bpm,
-                                        min: 1,
+                                        min: 40,
                                         max: 300,
                                         onChanged: (value) {
                                           controller.setPosition(value, this);
