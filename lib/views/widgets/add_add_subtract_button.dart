@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
+import 'package:rhythm_master/views/extension/string_extension.dart';
+import 'package:rhythm_master/views/extension/widget_extension.dart';
 
 class AddAndSubtractButton extends StatelessWidget {
    AddAndSubtractButton({
@@ -49,7 +52,7 @@ class AddAndSubtractButton extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontFamily: AppStrings.sansFont,
-                    color: AppColors.whiteLight,
+                    color: AppColors.headingColor,
                     fontSize: headingSize ?? 14,
                     fontWeight: FontWeight.w700,
                   ),
@@ -73,7 +76,8 @@ class AddAndSubtractButton extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: 12),
+                12.0.width,
+
 
                 Container(
                   height: height * 0.065,
@@ -94,12 +98,14 @@ class AddAndSubtractButton extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: 12),
+                12.0.width,
+                //SizedBox(width: 12),
                 // PLUS BUTTON
 
                 GestureDetector(
                   onTap: (onAdd),
-                  child: Container(
+                  child:
+                  Container(
                     height: redButtonSize ?? height * 0.038,
                     width: redButtonSize ?? height * 0.038,
                     decoration: BoxDecoration(
@@ -111,26 +117,19 @@ class AddAndSubtractButton extends StatelessWidget {
                       Icons.add,
                       color: AppColors.whitePrimary,
                     )),
-                  ),
+                  )
                 ),
               ],
             ),
           ),
-          Container(
-            //color: Colors.grey,
-            height: height * 0.01,
-          ),
-
+          10.0.height,
           description == null ? SizedBox() :
-          Text(
-            description!,
-            style: TextStyle(
-              fontFamily: AppStrings.sansFont,
-              color: AppColors.whiteLight,
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          description!.toText(
+            fontFamily: AppStrings.sansFont,
+            color: AppColors.whiteLight,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          )
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/views/widgets/beats_number_button.dart';
 
-customSelectionBottomSheet(BuildContext context){
+customSelectionBottomSheet(BuildContext context,TickerProviderStateMixin ticker,){
   return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -136,7 +136,7 @@ customSelectionBottomSheet(BuildContext context){
                     InkWell(
                       onTap: () async {
                         Navigator.pop(context);
-                        controller.setValueOfBottomSheet();
+                        controller.setValueOfBottomSheet(ticker);
                       },
                       child: Center(
                         child: Container(

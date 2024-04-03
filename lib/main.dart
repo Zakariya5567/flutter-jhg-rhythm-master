@@ -10,6 +10,9 @@ import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -34,6 +37,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -77,6 +81,7 @@ class _MyAppState extends State<MyApp> {
             create: (context) => HomeProvider()),
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         builder: (context, child) {
           return MediaQuery(
             data: MediaQuery.of(context)

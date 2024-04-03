@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
@@ -12,10 +11,12 @@ import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
+import 'package:rhythm_master/views/extension/string_extension.dart';
+import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
-
 import '../widgets/add_add_subtract_button.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -69,18 +71,31 @@ class _SettingScreenState extends State<SettingScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: JHGBody(
-        bodyAppBar: JHGAppBar(
-          trailingWidget: JHGReportAnIssueBtn(onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BugReportPage(
-                  device: deviceName,
-                  appName: AppStrings.appName,
-                ),
-              ),
-            );
-          }),
+        bodyAppBar: Column(
+          children: [
+            JHGAppBar(
+              title:
+           AppStrings.setting.toText(
+           fontSize: 20,
+           fontWeight: FontWeight.bold,
+           color: AppColors.whiteTextColor,
+           fontFamily: AppStrings.sansFont,
+          ),
+              trailingWidget: JHGReportAnIssueBtn(onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BugReportPage(
+                      device: deviceName,
+                      appName: AppStrings.appName,
+                    ),
+                  ),
+                );
+              }),
+            ),
+
+          //  8.0.height,
+          ],
         ),
         body: Consumer<SettingProvider>(builder: (context, controller, child) {
           return Container(
@@ -90,12 +105,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Stack(
               children: [
                 SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: height * 0.02,
-                    ),
-                    child: Center(
-                      child: Container(
+                  child: Container(
                         constraints: BoxConstraints(maxWidth: 345),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -103,12 +113,21 @@ class _SettingScreenState extends State<SettingScreen> {
                           children: [
                             Heading(
                               padding: 0,
+                              title: AppStrings.metronome,
+                              numbers: "",
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              textColor: AppColors.headingColor,
+                            ),
+                            10.0.height,
+                            Heading(
+                              padding: 0,
                               title: AppStrings.soundS,
                               numbers: "",
                               fontSize: 14,
-                              textColor: JHGColors.white,
+                              textColor: AppColors.headingColor,
                             ),
-                            const SizedBox(height: 5),
+                            8.0.height,
                             Consumer<MetroProvider>(
                                 builder: (context, controller, child) {
                               return JHGDropDown<SoundModel>(
@@ -127,10 +146,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 },
                               );
                             }),
-
-                            const SizedBox(height: 20),
-                            // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-
+                            20.0.height,
                             // DEFAULT BPM
                             AddAndSubtractButton(
                                 padding: 0,
@@ -145,22 +161,15 @@ class _SettingScreenState extends State<SettingScreen> {
                                 onSubtract: () {
                                   controller.decreaseBpm();
                                 }),
-
-                            // SPACER
-                            // SizedBox(height: 20),
-
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
                               title: AppStrings.defaultSound,
                               numbers: "",
                               fontSize: 14,
-                              textColor: JHGColors.white,
+                              textColor: AppColors.headingColor,
                             ),
-
-                            // SPACER
-                            SizedBox(height: height * 0.01),
-
+                            8.0.height,
                             //Sound button with arrow down
                             Container(
                               width: width * 1,
@@ -182,26 +191,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                 },
                               ),
                             ),
-
-                            // SPACER
-                            SizedBox(
-                              height: height * 0.020,
-                            ),
-
+                            20.0.height,
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
                               title: AppStrings.defaultTiming,
                               numbers: "",
                               fontSize: 14,
-                              textColor: AppColors.whiteLight,
+                              textColor: AppColors.headingColor,
                             ),
-
-                            // SPACER
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-
+                            8.0.height,
                             // Button selection 3/3 ....
                             SizedBox(
                                 height: height * 0.085,
@@ -270,20 +269,26 @@ class _SettingScreenState extends State<SettingScreen> {
                                         ),
                                       );
                                     })),
-                            // SPACER
-                            SizedBox(
-                              height: height * 0.02,
-                            ),
+                            30.0.height,
                             // SPEED TRAINER HEADING
                             Heading(
                               padding: 0,
-                              title: AppStrings.speedTrainerSound,
+                              title: AppStrings.speedTrainer,
+                              numbers: "",
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              textColor: AppColors.headingColor,
+                            ),
+                            10.0.height,
+                            Heading(
+                              padding: 0,
+                              title: AppStrings.defaultSound,
                               numbers: "",
                               fontSize: 14,
-                              textColor: AppColors.whiteLight,
+                              textColor: AppColors.headingColor,
                             ),
                             // SPACER
-                            SizedBox(height: height * 0.01),
+                            8.0.height,
                             // SPEED TRAINER DROPDOWN
                             Container(
                                 width: width * 1,
@@ -304,23 +309,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                     );
                                   },
                                 )),
-
-                            SizedBox(
-                              height: height * 0.02,
-                            ),
-
+                            20.0.height,
                             // DEFAULT SOUND
                             Heading(
                               padding: 0,
-                              title: AppStrings.defaultSpeedTrainerTiming,
+                              title: AppStrings.defaultTiming,
                               numbers: "",
                               fontSize: 14,
-                              textColor: AppColors.whiteLight,
+                              textColor: AppColors.headingColor,
                             ),
-
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
+                            8.0.height,
                             // Button selection 3/3 ....
                             SizedBox(
                               height: height * 0.085,
@@ -390,16 +388,12 @@ class _SettingScreenState extends State<SettingScreen> {
                                     );
                                   }),
                             ),
-                            // SAVE BUTTON
-                            // const Spacer(),
-                            SizedBox(
-                              height: height * 0.23,
-                            ),
+                            180.0.height
                           ],
                         ),
-                      ),
-                    ),
-                  ),
+                      ).center.paddingOnly(top: height * 0.02),
+
+
                 ),
                 Column(
                   children: [

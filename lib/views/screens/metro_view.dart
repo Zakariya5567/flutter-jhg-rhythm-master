@@ -39,7 +39,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    metroProvider?.init();
+
+    //metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
     final metroWidth = 240.0;
     final metroHeight = 308.0;
@@ -73,16 +74,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    if (index ==
-                                        controller.tapButtonList.length) {
-                                      // controller.clearBottomSheetBeats();
-                                      customSelectionBottomSheet(context);
+                                    if (index == controller.tapButtonList.length) {
+                                        customSelectionBottomSheet(context,this);
                                     } else {
-                                      controller.setBeats(
-                                          ticker: this,
-                                          index: index,
-                                          indexValue:
-                                              controller.tapButtonList[index]);
+                                      controller.setBeats(ticker: this, index: index, indexValue: controller.tapButtonList[index]);
                                     }
                                   },
                                   child: Padding(
@@ -100,17 +95,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          index ==
-                                                  controller
-                                                      .tapButtonList.length
-                                              ? "Custom"
+                                          (index == controller.tapButtonList.length && controller.customBeatValue == null)
+                                              ? "Custom" :
+                                          (index == controller.tapButtonList.length && controller.customBeatValue != null) ?
+                                          controller.customBeatValue!
                                               : controller.tapButtonList[index],
                                           style: TextStyle(
                                             fontFamily: AppStrings.sansFont,
                                             color: AppColors.whitePrimary,
-                                            fontSize: index ==
-                                                    controller
-                                                        .tapButtonList.length
+                                            fontSize:   (index == controller.tapButtonList.length && controller.customBeatValue == null)
                                                 ? 12
                                                 : 18,
                                             fontWeight: FontWeight.w500,
@@ -155,7 +148,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 // right: 20,
                                 child: Container(
                                   //color: Colors.yellow,
-                                  height: 177,
+                                  height: 180,
                                   //width: 100,
                                   alignment: Alignment.bottomCenter,
                                   child: AnimatedBuilder(
@@ -187,15 +180,13 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                 width: JHGResponsive.isMobile(
                                                         context)
                                                     ? 11
-                                                    : 9, // width * 0.020,
+                                                    : 9,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
                                             //slider
                                             Positioned(
-                                              top: 765 *
-                                                  controller.bpm *
-                                                  0.00058,
+                                              top: 708 * controller.bpm * 0.00058,
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(
@@ -262,10 +253,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-
                     // SPACER
                     SizedBox(
-                      height: height * 0.03,
+                      height: height * 0.018,
                     ),
                     JHGBPMChangeWidget(
                       reverse: true,
@@ -284,7 +274,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             ),
           ),
           // Reset button and play pause button
-
           JHGAppBar(
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(

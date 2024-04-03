@@ -213,7 +213,7 @@ class SpeedProvider extends ChangeNotifier{
 
 
   // Clear speed trainer settings
-  clearSpeedTrainer(){
+  clearSpeedTrainer(bool isNotify){
     if(_timer != null){
       _timer!.cancel();
     }
@@ -225,7 +225,9 @@ class SpeedProvider extends ChangeNotifier{
     bar = 4;
     totalTick = 0;
     barCounter = 0;
-    notifyListeners();
+    if(isNotify == true){
+      notifyListeners();
+    }
   }
 
   // SET START TEMPO RANGE OF SLIDER
@@ -326,7 +328,7 @@ class SpeedProvider extends ChangeNotifier{
     }
     _timer = Timer.periodic( Duration( milliseconds: (timeStamp / bpm).round()),
           (Timer timer) async {
-        if(targetTempo > bpm){
+        if(targetTempo+interval > bpm){
            playSound();
         }else{
           _timer!.cancel();
@@ -360,54 +362,34 @@ class SpeedProvider extends ChangeNotifier{
         notifyListeners();
         setTimer();
       }
-
-      if(player.playing){
-         player.stop();
-         player.setAsset(firstBeat);
-        await player.play();
-      }else{
-         player.setAsset(firstBeat);
-         player.play();
-      }
+      playBeat(firstBeat);
 
     }else{
       if(totalTick<totalBeats){
-        if(player.playing){
-           player.stop();
-           player.setAsset(secondBeat);
-           player.play();
-        }else{
-           player.setAsset(secondBeat);
-           player.play();
-        }
+        playBeat(secondBeat);
       }else{
-        if(player.playing){
-           player.stop();
-           player.setAsset(secondBeat);
-           player.play();
-        }else{
-           player.setAsset(secondBeat);
-           player.play();
-        }
-
+        playBeat(secondBeat);
         totalTick = 0;
       }
     }
   }
 
-
-//  Dispose controller and reset settings
-  disposeController() {
-    if(_timer != null){
-      _timer!.cancel();
+  playBeat(String beat){
+    if(player.playing){
+      stopLoadAndPlay(beat);
+    }else{
+      loadAndPlay(beat);
     }
-    isPlaying = false;
-    bpm = 100;
-    startTempo = 100;
-    targetTempo = 180;
-    interval = 10;
-    bar = 4;
-    totalTick = 0;
-    barCounter = 0;
   }
+  stopLoadAndPlay(String beat){
+    player.stop();
+    player.setAsset(beat);
+    player.play();
+  }
+  loadAndPlay(String beat){
+    player.setAsset(beat);
+    player.play();
+  }
+
+
 }

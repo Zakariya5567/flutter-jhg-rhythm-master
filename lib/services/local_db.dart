@@ -132,23 +132,4 @@ class SharedPref {
     return bpm;
   }
 
-  static Future<void> storeBeatNumeratorValue(int value) async {
-    final pref = await LocalDB.getPref;
-    pref!.setInt(beatNumeratorKey, value);
-  }
-
-  static Future<int?> getBeatNumeratorValue() async {
-    final pref = await LocalDB.getPref;
-    return pref!.getInt(beatNumeratorKey);
-  }
-
-  static Future<void> storeBeatDenominatorValue(int value) async {
-    final pref = await LocalDB.getPref;
-    pref!.setInt(beatDenominatorKey, value);
-  }
-
-  static Future<int?> getBeatDenominatorValue() async {
-    final pref = await LocalDB.getPref;
-    return pref!.getInt(beatDenominatorKey);
-  }
 }

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -11,6 +12,7 @@ class Heading extends StatelessWidget {
     this.textColor,
     this.fontSize,
     this.padding,
+    this.fontWeight,
   });
 
   final String title;
@@ -18,23 +20,24 @@ class Heading extends StatelessWidget {
   final double? fontSize;
   final Color? textColor;
   final double? padding;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding ?? 14), //width * 0.03),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
+
           Text(
             title,
             style: TextStyle(
               fontFamily: AppStrings.sansFont,
               color: textColor ?? AppColors.whitePrimary,
               fontSize: fontSize ?? 12,
-              fontWeight: FontWeight.w700,
+              fontWeight: fontWeight?? FontWeight.w700,
             ),
           ),
           Text(

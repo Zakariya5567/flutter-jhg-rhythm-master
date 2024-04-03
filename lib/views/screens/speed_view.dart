@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
+import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 import '../widgets/add_add_subtract_button.dart';
+import '../widgets/bpm_value_widget.dart';
 import '../widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
@@ -33,7 +37,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    speedProvider!.disposeController();
+    speedProvider!.clearSpeedTrainer(false);
     super.dispose();
   }
 
@@ -52,13 +56,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    SizedBox(height: height * 0.025),
+                    22.0.height,
                     // STARTING TEMPO
                     Heading(
                         title: AppStrings.startingTempo,
                         numbers: controller.startTempo.toStringAsFixed(0)),
                     // SPACER
-                    SizedBox(height: height * 0.015),
+                    12.0.height,
                     // STARTING SLIDER
                     SliderWidget(
                         height: height,
@@ -69,13 +73,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.setStartTempo(values);
                         }),
                     // SPACER
-                    SizedBox(height: height * 0.025),
+                    18.0.height,
                     // TARGET TEMPO
                     Heading(
                         title: AppStrings.targetTempo,
                         numbers: controller.targetTempo.toStringAsFixed(0)),
                     // SPACER
-                    SizedBox(height: height * 0.020),
+                    22.0.height,
                     // TARGET SLIDER
                     SliderWidget(
                       height: height,
@@ -88,12 +92,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
 
                     // SPACER
-                    SizedBox(height: height * 0.045),
+                    32.0.height,
                     // BARS
                     AddAndSubtractButton(
                         redButtonSize: 30,
                         title: AppStrings.bars,
-                        //greyButtonSize: width * 0.24,
                         greyButtonSize: 95,
                         numbers: controller.bar.toString(),
                         description: AppStrings.howManyBars,
@@ -104,9 +107,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.decreaseBar();
                         }),
                     // SPACER
-                    SizedBox(
-                      height: height * 0.035,
-                    ),
+                    27.0.height,
                     // INTERVAL BUTTONS
                     AddAndSubtractButton(
                         redButtonSize: 30,
@@ -122,35 +123,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.decreaseInterval();
                         }),
                     // SPACER
-                    SizedBox(height: height * 0.030),
+                    22.0.height,
                     // BPM VALUE SECTION
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${AppStrings.bpm}: ',
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 35,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          controller.bpm == null
-                              ? AppStrings.bpmNull
-                              : controller.bpm.toStringAsFixed(0),
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 35,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // SPACER
-                    SizedBox(height: height * 0.020),
+                    BpmValueWidget(
+                        bpmValue:controller.bpm == null
+                            ? AppStrings.bpmNull
+                            : controller.bpm!.toStringAsFixed(0),).center,
+                    20.0.height,
                     // Reset and play pause BUTTON
                   ],
                 ),
@@ -162,7 +141,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             leadingWidget: JHGResetBtn(
                 enabled: true,
                 onTap: () {
-                  controller.clearSpeedTrainer();
+                  controller.clearSpeedTrainer(true);
                 }),
             centerWidget: JHGPlayPauseBtn(
                 isPlaying: controller.isPlaying,
@@ -170,9 +149,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   controller.startStop();
                 }),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          10.0.height,
         ],
       );
     });

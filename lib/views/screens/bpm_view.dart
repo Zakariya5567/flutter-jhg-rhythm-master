@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
+import 'package:rhythm_master/views/widgets/bpm_value_widget.dart';
 
 class BpmView extends StatelessWidget {
   const BpmView({super.key});
@@ -100,34 +101,11 @@ class BpmView extends StatelessWidget {
                     SizedBox(
                       height: height * 0.06,
                     ),
-                    //const Spacer(),
                     // BPM VALUE SECTION
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${AppStrings.bpm}: ',
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          controller.bpm == null
-                              ? AppStrings.bpmNull
-                              : controller.bpm!.toStringAsFixed(0),
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // SPACER
+                    BpmValueWidget(
+                         bpmValue:controller.bpm == null
+                        ? AppStrings.bpmNull
+                        : controller.bpm!.toStringAsFixed(0),),
                     SizedBox(
                       height: height * 0.1,
                     ),
