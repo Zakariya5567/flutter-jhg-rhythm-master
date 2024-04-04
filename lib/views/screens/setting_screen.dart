@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
@@ -17,7 +18,6 @@ import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
-import '../widgets/add_add_subtract_button.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -27,7 +27,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -74,13 +73,12 @@ class _SettingScreenState extends State<SettingScreen> {
         bodyAppBar: Column(
           children: [
             JHGAppBar(
-              title:
-           AppStrings.setting.toText(
-           fontSize: 20,
-           fontWeight: FontWeight.bold,
-           color: AppColors.whiteTextColor,
-           fontFamily: AppStrings.sansFont,
-          ),
+              title: AppStrings.setting.toText(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.whiteTextColor,
+                fontFamily: AppStrings.sansFont,
+              ),
               trailingWidget: JHGReportAnIssueBtn(onPressed: () {
                 Navigator.push(
                   context,
@@ -94,7 +92,7 @@ class _SettingScreenState extends State<SettingScreen> {
               }),
             ),
 
-          //  8.0.height,
+            //  8.0.height,
           ],
         ),
         body: Consumer<SettingProvider>(builder: (context, controller, child) {
@@ -106,294 +104,302 @@ class _SettingScreenState extends State<SettingScreen> {
               children: [
                 SingleChildScrollView(
                   child: Container(
-                        constraints: BoxConstraints(maxWidth: 345),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.metronome,
-                              numbers: "",
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              textColor: AppColors.headingColor,
-                            ),
-                            10.0.height,
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.soundS,
-                              numbers: "",
-                              fontSize: 14,
-                              textColor: AppColors.headingColor,
-                            ),
-                            8.0.height,
-                            Consumer<MetroProvider>(
-                                builder: (context, controller, child) {
-                              return JHGDropDown<SoundModel>(
-                                value: controller
-                                    .soundList[controller.selectedIndex],
-                                items: controller.soundList,
-                                expandedColor: AppColors.liteWhite,
-                                onChanged: (values) async {
-                                  controller.setSound(
-                                    ticker: null,
-                                    name: values!.name.toString(),
-                                    beat1: values.beat1.toString(),
-                                    beat2: values.beat2.toString().toString(),
-                                    index: values.id!,
-                                  );
-                                },
+                    constraints: BoxConstraints(maxWidth: 345),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.metronome,
+                          numbers: "",
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          textColor: AppColors.headingColor,
+                        ),
+                        10.0.height,
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.soundS,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.headingColor,
+                        ),
+                        8.0.height,
+                        Consumer<MetroProvider>(
+                            builder: (context, controller, child) {
+                          return JHGDropDown<SoundModel>(
+                            value:
+                                controller.soundList[controller.selectedIndex],
+                            items: controller.soundList,
+                            expandedColor: AppColors.liteWhite,
+                            onChanged: (values) async {
+                              controller.setSound(
+                                ticker: null,
+                                name: values!.name.toString(),
+                                beat1: values.beat1.toString(),
+                                beat2: values.beat2.toString().toString(),
+                                index: values.id!,
                               );
-                            }),
-                            20.0.height,
-                            // DEFAULT BPM
-                            AddAndSubtractButton(
-                                padding: 0,
-                                title: AppStrings.defaultBpm,
-                                numbers: controller.bpm.toStringAsFixed(0),
-                                redButtonSize: height * 0.044,
-                                greyButtonSize: 120,
-                                description: null,
-                                onAdd: () {
-                                  controller.increaseBpm();
-                                },
-                                onSubtract: () {
-                                  controller.decreaseBpm();
-                                }),
-                            // DEFAULT SOUND
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.defaultSound,
-                              numbers: "",
-                              fontSize: 14,
-                              textColor: AppColors.headingColor,
+                            },
+                          );
+                        }),
+                        20.0.height,
+                        // DEFAULT BPM
+                        JHGHeadAndSubHWidget(
+                          AppStrings.defaultBpm,
+                          // lableStyle: JHGTextStyles.bodyStyle.copyWith(
+                          //   fontWeight: FontWeight.w700,
+                          //   fontFamily: kFontFamilyJak,
+                          // ),
+                          lableStyle: TextStyle(
+                            fontFamily: AppStrings.sansFont,
+                            fontSize: 14,
+                            color: AppColors.headingColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          actions: [
+                            JHGValueIncDec(
+                              initialValue: controller.bpm.toInt(),
+                              onChanged: (newValue) =>
+                                  controller.onBpmChanged(newValue),
+                              maxValue: controller.bpmMax,
                             ),
-                            8.0.height,
-                            //Sound button with arrow down
-                            Container(
-                              width: width * 1,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: AppColors.greyPrimary,
-                              ),
-                              child: JHGDropDown(
-                                value: controller
-                                    .soundList[controller.selectedIndex],
-                                items: controller.soundList,
-                                onChanged: (values) async {
-                                  controller.setSound(
-                                    name: values!.name.toString(),
-                                    beat1: values.beat1.toString(),
-                                    beat2: values.beat2.toString().toString(),
-                                    index: values.id!,
-                                  );
-                                },
-                              ),
-                            ),
-                            20.0.height,
-                            // DEFAULT SOUND
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.defaultTiming,
-                              numbers: "",
-                              fontSize: 14,
-                              textColor: AppColors.headingColor,
-                            ),
-                            8.0.height,
-                            // Button selection 3/3 ....
-                            SizedBox(
-                                height: height * 0.085,
-                                width: width * 0.85,
-                                child: ListView.builder(
-                                    itemCount:
-                                        controller.tapButtonList.length + 1,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () async {
-                                          if (index ==
-                                              controller.tapButtonList.length) {
-                                            controller.clearBottomSheetBeats();
-                                            settingCustomBottomSheet(
-                                                context, true);
-                                            controller.setMetronomeBeats(
-                                                index,
-                                                controller
-                                                    .tapButtonList[index]);
-                                          } else {
-                                            controller.setMetronomeBeats(
-                                                index,
-                                                controller
-                                                    .tapButtonList[index]);
-                                          }
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: width * 0.025),
-                                          child: Container(
-                                            height: height * 0.085,
-                                            width: height * 0.085,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: controller
-                                                          .selectedMetronomeButton ==
-                                                      index
-                                                  ? AppColors.greySecondary
-                                                  : AppColors.greyPrimary,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                index ==
-                                                        controller.tapButtonList
-                                                            .length
-                                                    ? "Custom"
-                                                    : controller
-                                                        .tapButtonList[index],
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      AppStrings.sansFont,
-                                                  color: AppColors.whitePrimary,
-                                                  fontSize: index ==
-                                                          controller
-                                                              .tapButtonList
-                                                              .length
-                                                      ? 12
-                                                      : 18,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                          ],
+                        ),
+                        // AddAndSubtractButton(
+                        //     padding: 0,
+                        //     title: AppStrings.defaultBpm,
+                        //     numbers: controller.bpm.toStringAsFixed(0),
+                        //     redButtonSize: height * 0.044,
+                        //     greyButtonSize: 120,
+                        //     description: null,
+                        //     onAdd: () {
+                        //       controller.increaseBpm();
+                        //     },
+                        //     onSubtract: () {
+                        //       controller.decreaseBpm();
+                        //     }),
+                        // // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.defaultSound,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.headingColor,
+                        ),
+                        8.0.height,
+                        //Sound button with arrow down
+                        Container(
+                          width: width * 1,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.greyPrimary,
+                          ),
+                          child: JHGDropDown(
+                            value:
+                                controller.soundList[controller.selectedIndex],
+                            items: controller.soundList,
+                            onChanged: (values) async {
+                              controller.setSound(
+                                name: values!.name.toString(),
+                                beat1: values.beat1.toString(),
+                                beat2: values.beat2.toString().toString(),
+                                index: values.id!,
+                              );
+                            },
+                          ),
+                        ),
+                        20.0.height,
+                        // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.defaultTiming,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.headingColor,
+                        ),
+                        8.0.height,
+                        // Button selection 3/3 ....
+                        SizedBox(
+                            height: height * 0.085,
+                            width: width * 0.85,
+                            child: ListView.builder(
+                                itemCount: controller.tapButtonList.length + 1,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      if (index ==
+                                          controller.tapButtonList.length) {
+                                        controller.clearBottomSheetBeats();
+                                        settingCustomBottomSheet(context, true);
+                                        controller.setMetronomeBeats(index,
+                                            controller.tapButtonList[index]);
+                                      } else {
+                                        controller.setMetronomeBeats(index,
+                                            controller.tapButtonList[index]);
+                                      }
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(right: width * 0.025),
+                                      child: Container(
+                                        height: height * 0.085,
+                                        width: height * 0.085,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: controller
+                                                      .selectedMetronomeButton ==
+                                                  index
+                                              ? AppColors.greySecondary
+                                              : AppColors.greyPrimary,
                                         ),
-                                      );
-                                    })),
-                            30.0.height,
-                            // SPEED TRAINER HEADING
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.speedTrainer,
-                              numbers: "",
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              textColor: AppColors.headingColor,
-                            ),
-                            10.0.height,
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.defaultSound,
-                              numbers: "",
-                              fontSize: 14,
-                              textColor: AppColors.headingColor,
-                            ),
-                            // SPACER
-                            8.0.height,
-                            // SPEED TRAINER DROPDOWN
-                            Container(
-                                width: width * 1,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: AppColors.greyPrimary,
-                                ),
-                                child: JHGDropDown(
-                                  value: controller.soundList[
-                                      controller.speedTrainerSelectedIndex],
-                                  items: controller.soundList,
-                                  onChanged: (values) async {
-                                    controller.setSpeedTrainerSound(
-                                      name: values!.name.toString(),
-                                      beat1: values.beat1.toString(),
-                                      beat2: values.beat2.toString().toString(),
-                                      index: values.id!,
-                                    );
-                                  },
-                                )),
-                            20.0.height,
-                            // DEFAULT SOUND
-                            Heading(
-                              padding: 0,
-                              title: AppStrings.defaultTiming,
-                              numbers: "",
-                              fontSize: 14,
-                              textColor: AppColors.headingColor,
-                            ),
-                            8.0.height,
-                            // Button selection 3/3 ....
-                            SizedBox(
-                              height: height * 0.085,
-                              width: width * 0.85,
-                              child: ListView.builder(
-                                  itemCount: controller
-                                          .tapSpeedTrainerButtonList.length +
-                                      1,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        if (index ==
-                                            controller.tapSpeedTrainerButtonList
-                                                .length) {
-                                          controller.clearBottomSheetBeats();
-                                          settingCustomBottomSheet(
-                                              context, false);
-                                        } else {
-                                          controller.setSpeedTrainerBeats(
-                                              index,
-                                              controller
-                                                      .tapSpeedTrainerButtonList[
-                                                  index]);
-                                        }
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            right: width * 0.025),
-                                        child: Container(
-                                          height: height * 0.085,
-                                          width: height * 0.085,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: controller
-                                                        .selectedSpeedTrainerButton ==
-                                                    index
-                                                ? AppColors.greySecondary
-                                                : AppColors.greyPrimary,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              index ==
+                                        child: Center(
+                                          child: Text(
+                                            index ==
+                                                    controller
+                                                        .tapButtonList.length
+                                                ? "Custom"
+                                                : controller
+                                                    .tapButtonList[index],
+                                            style: TextStyle(
+                                              fontFamily: AppStrings.sansFont,
+                                              color: AppColors.whitePrimary,
+                                              fontSize: index ==
                                                       controller
-                                                          .tapSpeedTrainerButtonList
-                                                          .length
-                                                  ? "Custom"
-                                                  : controller
-                                                          .tapSpeedTrainerButtonList[
-                                                      index],
-                                              style: TextStyle(
-                                                fontFamily: AppStrings.sansFont,
-                                                color: AppColors.whitePrimary,
-                                                fontSize: index ==
-                                                        controller
-                                                            .tapSpeedTrainerButtonList
-                                                            .length
-                                                    ? 12
-                                                    : 18,
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                                          .tapButtonList.length
+                                                  ? 12
+                                                  : 18,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
                                       ),
-                                    );
-                                  }),
-                            ),
-                            180.0.height
-                          ],
+                                    ),
+                                  );
+                                })),
+                        30.0.height,
+                        // SPEED TRAINER HEADING
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.speedTrainer,
+                          numbers: "",
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          textColor: AppColors.headingColor,
                         ),
-                      ).center.paddingOnly(top: height * 0.02),
-
-
+                        10.0.height,
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.defaultSound,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.headingColor,
+                        ),
+                        // SPACER
+                        8.0.height,
+                        // SPEED TRAINER DROPDOWN
+                        Container(
+                            width: width * 1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: AppColors.greyPrimary,
+                            ),
+                            child: JHGDropDown(
+                              value: controller.soundList[
+                                  controller.speedTrainerSelectedIndex],
+                              items: controller.soundList,
+                              onChanged: (values) async {
+                                controller.setSpeedTrainerSound(
+                                  name: values!.name.toString(),
+                                  beat1: values.beat1.toString(),
+                                  beat2: values.beat2.toString().toString(),
+                                  index: values.id!,
+                                );
+                              },
+                            )),
+                        20.0.height,
+                        // DEFAULT SOUND
+                        Heading(
+                          padding: 0,
+                          title: AppStrings.defaultTiming,
+                          numbers: "",
+                          fontSize: 14,
+                          textColor: AppColors.headingColor,
+                        ),
+                        8.0.height,
+                        // Button selection 3/3 ....
+                        SizedBox(
+                          height: height * 0.085,
+                          width: width * 0.85,
+                          child: ListView.builder(
+                              itemCount:
+                                  controller.tapSpeedTrainerButtonList.length +
+                                      1,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    if (index ==
+                                        controller
+                                            .tapSpeedTrainerButtonList.length) {
+                                      controller.clearBottomSheetBeats();
+                                      settingCustomBottomSheet(context, false);
+                                    } else {
+                                      controller.setSpeedTrainerBeats(
+                                          index,
+                                          controller.tapSpeedTrainerButtonList[
+                                              index]);
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(right: width * 0.025),
+                                    child: Container(
+                                      height: height * 0.085,
+                                      width: height * 0.085,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: controller
+                                                    .selectedSpeedTrainerButton ==
+                                                index
+                                            ? AppColors.greySecondary
+                                            : AppColors.greyPrimary,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          index ==
+                                                  controller
+                                                      .tapSpeedTrainerButtonList
+                                                      .length
+                                              ? "Custom"
+                                              : controller
+                                                      .tapSpeedTrainerButtonList[
+                                                  index],
+                                          style: TextStyle(
+                                            fontFamily: AppStrings.sansFont,
+                                            color: AppColors.whitePrimary,
+                                            fontSize: index ==
+                                                    controller
+                                                        .tapSpeedTrainerButtonList
+                                                        .length
+                                                ? 12
+                                                : 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                        180.0.height
+                      ],
+                    ),
+                  ).center.paddingOnly(top: height * 0.02),
                 ),
                 Column(
                   children: [

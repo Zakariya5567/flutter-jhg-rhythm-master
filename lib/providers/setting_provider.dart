@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -11,78 +12,71 @@ import 'package:rhythm_master/services/local_db.dart';
 // controlling BPM, animation, and sound playback.
 
 class SettingProvider extends ChangeNotifier {
-
-
   // Custom value selection
   int beatNumerator = 2;
   int beatDenominator = 2;
 
-  clearBottomSheetBeats(){
+  clearBottomSheetBeats() {
     beatNumerator = 2;
     beatDenominator = 2;
     notifyListeners();
   }
 
-  incrementBeatNumerator(){
-    if(beatNumerator< 96){
-      beatNumerator  = beatNumerator +1;
+  incrementBeatNumerator() {
+    if (beatNumerator < 96) {
+      beatNumerator = beatNumerator + 1;
       notifyListeners();
     }
   }
 
-  decrementBeatNumerator(){
-    if(beatNumerator > 2){
+  decrementBeatNumerator() {
+    if (beatNumerator > 2) {
       beatNumerator = beatNumerator - 1;
       notifyListeners();
-    }}
-
-  incrementBeatDenominator(){
-    if(beatDenominator < 64){
-      beatDenominator  = beatDenominator + beatDenominator;
-      notifyListeners();
     }
-
   }
 
-  decrementBeatDenominator(){
-    if(beatDenominator > 2){
-      beatDenominator = beatDenominator - beatDenominator~/2;
+  incrementBeatDenominator() {
+    if (beatDenominator < 64) {
+      beatDenominator = beatDenominator + beatDenominator;
       notifyListeners();
     }
   }
 
+  decrementBeatDenominator() {
+    if (beatDenominator > 2) {
+      beatDenominator = beatDenominator - beatDenominator ~/ 2;
+      notifyListeners();
+    }
+  }
 
   String? metronomeSelectedValue;
   String? speedTrainerSelectedValue;
 
-  setValueOfMetronomeBottomSheet(){
+  setValueOfMetronomeBottomSheet() {
     selectedMetronomeButton = 4;
     String value = "${beatNumerator}/${beatDenominator}";
     metronomeSelectedValue = value;
     notifyListeners();
   }
 
-  setValueOfSpeedTrainerBottomSheet(){
+  setValueOfSpeedTrainerBottomSheet() {
     selectedSpeedTrainerButton = 4;
     String value = "${beatNumerator}/${beatDenominator}";
     speedTrainerSelectedValue = value;
     notifyListeners();
   }
 
-
-
-
   // initial values of BPM
-  double bpm = 120;
-  double bpmMin = 1.0;
-  double bpmMax = 300.0;
-
+  int bpm = 120;
+  int bpmMin = 1;
+  int bpmMax = 300;
 
   // List of Beat buttons
-  List<String> tapButtonList = ['4/4', '3/4', '6/8','12/8'];
+  List<String> tapButtonList = ['4/4', '3/4', '6/8', '12/8'];
 
   // List of Speed Trainer Beat buttons
-  List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8', '12/8' ];
+  List<String> tapSpeedTrainerButtonList = ['4/4', '3/4', '6/8', '12/8'];
 
   // List of sound list
   List<SoundModel> soundList = [];
@@ -174,11 +168,11 @@ class SettingProvider extends ChangeNotifier {
   initializeAnimationController() async {
     setSoundList();
     Future.delayed(Duration.zero, () async {
-
       double? defBPM = await SharedPref.getDefaultBPM;
       int? defSound = await SharedPref.getDefaultSound;
       int? defTiming = await SharedPref.getDefaultTiming;
-      int? defSpeedTrainerTiming = await SharedPref.getSpeedTrainerDefaultTiming;
+      int? defSpeedTrainerTiming =
+          await SharedPref.getSpeedTrainerDefaultTiming;
 
       String? defMetroValue = await SharedPref.getMetronomeDefaultValue;
       String? defSpeedValue = await SharedPref.getSpeedTrainerDefaultValue;
@@ -189,23 +183,33 @@ class SettingProvider extends ChangeNotifier {
       metronomeSelectedValue = defMetroValue ?? "4/4";
       speedTrainerSelectedValue = defSpeedValue ?? "4/4";
 
-      bpm = defBPM ?? 120;
+      bpm = defBPM == null ? 120 : defBPM.toInt();
 
       selectedIndex = defSound ?? 0;
-      soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-      firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
-      secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
+      soundName =
+          (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+      firstBeat = (defSound == null
+          ? AppStrings.logic1Sound
+          : soundList[defSound].beat1)!;
+      secondBeat = (defSound == null
+          ? AppStrings.logic2Sound
+          : soundList[defSound].beat2)!;
 
+      int? defSpeedTrainerSound =
+          await SharedPref.getStoreSpeedTrainerDefaultSound;
 
-      int? defSpeedTrainerSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
-
-      speedTrainerSelectedIndex =  defSpeedTrainerSound ?? 0;
-      speedTrainerSoundName = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].name)!;
-      speedTrainerFirstBeat = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].beat1)!;
-      speedTrainerSecondBeat = (defSpeedTrainerSound == null ? AppStrings.logic : soundList[defSpeedTrainerSound].beat2)!;
+      speedTrainerSelectedIndex = defSpeedTrainerSound ?? 0;
+      speedTrainerSoundName = (defSpeedTrainerSound == null
+          ? AppStrings.logic
+          : soundList[defSpeedTrainerSound].name)!;
+      speedTrainerFirstBeat = (defSpeedTrainerSound == null
+          ? AppStrings.logic
+          : soundList[defSpeedTrainerSound].beat1)!;
+      speedTrainerSecondBeat = (defSpeedTrainerSound == null
+          ? AppStrings.logic
+          : soundList[defSpeedTrainerSound].beat2)!;
 
       notifyListeners();
-
     });
   }
 
@@ -217,21 +221,18 @@ class SettingProvider extends ChangeNotifier {
   String firstBeat = AppStrings.logic1Sound;
   String secondBeat = AppStrings.logic2Sound;
 
-
   // Setting selected sound and notifying listeners
   setSound(
       {required String name,
-       required String beat1,
-       required beat2,
-       required int index}) {
+      required String beat1,
+      required beat2,
+      required int index}) {
     selectedIndex = index;
     soundName = name;
     firstBeat = beat1;
     secondBeat = beat2;
     notifyListeners();
   }
-
-
 
   // select Sound index
   int speedTrainerSelectedIndex = 0;
@@ -241,13 +242,12 @@ class SettingProvider extends ChangeNotifier {
   String speedTrainerFirstBeat = AppStrings.logic1Sound;
   String speedTrainerSecondBeat = AppStrings.logic2Sound;
 
-
-  setSpeedTrainerSound(
-      {required String name,
-        required String beat1,
-        required beat2,
-        required int index,
-      }) {
+  setSpeedTrainerSound({
+    required String name,
+    required String beat1,
+    required beat2,
+    required int index,
+  }) {
     speedTrainerSelectedIndex = index;
     speedTrainerSoundName = name;
     speedTrainerFirstBeat = beat1;
@@ -257,24 +257,29 @@ class SettingProvider extends ChangeNotifier {
 
   // Increase BPM
   // Increasing BPM, resetting total ticks, and notifying listeners
-  void increaseBpm() {
-    if (bpm < bpmMax) {
-      bpm += 1;
-    }
+  // void increaseBpm() {
+  //   if (bpm < bpmMax) {
+  //     bpm += 1;
+  //   }
+  //   notifyListeners();
+  // }
+
+  void onBpmChanged(newValue) {
+    bpm = newValue;
     notifyListeners();
   }
 
   // Decrease BPM
   // Decreasing BPM, resetting total ticks, and notifying listeners
-  void decreaseBpm() {
-    if (bpm > bpmMin) {
-      bpm -= 1;
-      if (bpm < 1) {
-        bpm = 1;
-      }
-    }
-    notifyListeners();
-  }
+  // void decreaseBpm() {
+  //   if (bpm > bpmMin) {
+  //     bpm -= 1;
+  //     if (bpm < 1) {
+  //       bpm = 1;
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
 
   ///===================================
   // Set beats based on the selected button
@@ -283,7 +288,6 @@ class SettingProvider extends ChangeNotifier {
   int selectedMetronomeButton = 0;
   int selectedSpeedTrainerButton = 0;
 
-
   setMetronomeBeats(int index, String value) {
     selectedMetronomeButton = index;
     metronomeSelectedValue = value;
@@ -291,14 +295,13 @@ class SettingProvider extends ChangeNotifier {
   }
 
   setSpeedTrainerBeats(int index, String value) {
-      selectedSpeedTrainerButton = index;
-      speedTrainerSelectedValue = value;
-      notifyListeners();
+    selectedSpeedTrainerButton = index;
+    speedTrainerSelectedValue = value;
+    notifyListeners();
   }
 
   onSave(BuildContext context) async {
-
-    await SharedPref.storeDefaultBPM(bpm);
+    await SharedPref.storeDefaultBPM(bpm.toDouble());
 
     await SharedPref.storeDefaultSound(selectedIndex);
 
@@ -312,9 +315,10 @@ class SettingProvider extends ChangeNotifier {
 
     await SharedPref.storeSpeedTrainerDefaultValue(speedTrainerSelectedValue!);
 
-    Provider.of<SpeedProvider>(context,listen: false).setSpeedTrainerDefaultValue();
+    Provider.of<SpeedProvider>(context, listen: false)
+        .setSpeedTrainerDefaultValue();
 
-    Provider.of<MetroProvider>(context,listen: false).setMetronomeDefaultValue();
-
+    Provider.of<MetroProvider>(context, listen: false)
+        .setMetronomeDefaultValue();
   }
 }
