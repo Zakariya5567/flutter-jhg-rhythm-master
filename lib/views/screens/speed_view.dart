@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
@@ -128,7 +127,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     BpmValueWidget(
                         bpmValue:controller.bpm == null
                             ? AppStrings.bpmNull
-                            : controller.bpm!.toStringAsFixed(0),).center,
+                            : controller.bpm.toStringAsFixed(0),).center,
                     20.0.height,
                     // Reset and play pause BUTTON
                   ],
