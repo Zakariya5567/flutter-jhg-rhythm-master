@@ -151,15 +151,9 @@ class SpeedProvider extends ChangeNotifier {
 
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName =
-        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null
-        ? AppStrings.logic1Sound
-        : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null
-        ? AppStrings.logic2Sound
-        : soundList[defSound].beat2)!;
-    // totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 :  defBeat == 2 ? 6 : 12;
+    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
 
@@ -323,9 +317,7 @@ class SpeedProvider extends ChangeNotifier {
     barCounter = barCounter + 1;
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-      bool check = firstTime == true
-          ? barCounter - 1 == bar * totalBeats
-          : barCounter == bar * totalBeats;
+      bool check = firstTime == true ? barCounter - 1 == bar * totalBeats : barCounter == bar * totalBeats;
       if (check == true) {
         bpm = bpm + interval;
         barCounter = 0;

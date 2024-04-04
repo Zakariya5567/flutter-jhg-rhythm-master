@@ -139,9 +139,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     22.0.height,
                     // BPM VALUE SECTION
                     BpmValueWidget(
-                      bpmValue: controller.bpm == null
-                          ? AppStrings.bpmNull
-                          : controller.bpm.toStringAsFixed(0),
+                      bpmValue: controller.bpm > controller.targetTempo ? controller.targetTempo.toStringAsFixed(0):controller.bpm.toStringAsFixed(0),
                     ).center,
                     20.0.height,
                     // Reset and play pause BUTTON
