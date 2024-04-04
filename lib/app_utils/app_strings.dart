@@ -23,9 +23,12 @@ class AppStrings {
   static const String defaultBpm = 'Default BPM';
 
   static const String tapTempo = 'Tap Tempo';
+  static const String tapTempoDesc = 'Tap Tempo Description';
   static const String metronome = 'Metronome';
+  static const String metronomeDesc = 'Metronome Description';
   static const String setting = 'Setting';
   static const String speedTrainer = 'Speed Trainer';
+  static const String speedTrainerDesc = 'Speed Trainer Description';
   static const String speedTrainerSound = 'Speed Trainer Sound';
 
   static const String dragDescription =

@@ -244,36 +244,20 @@ class SpeedProvider extends ChangeNotifier {
     }
   }
 
-  // INCREASE INTERVAL
-  increaseInterval() {
-    if (interval < maxInterval) {
-      interval = interval + 1;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer();
-      }
+  // INTERVAL
+  void onChangedInterval(int newValue) {
+    interval = newValue;
+    notifyListeners();
+    if (isPlaying) {
+      setTimer();
     }
   }
 
-  // DECREASE INTERVAL
-  decreaseInterval() {
-    if (interval > minInterval) {
-      interval = interval - 1;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer();
-      }
-    }
-  }
-
-  // INCREASE BAR
-  increaseBar() {
-    if (bar < maxBar) {
-      bar = bar + 1;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer();
-      }
+  onChangedBar(int newValue) {
+    bar = newValue;
+    notifyListeners();
+    if (isPlaying) {
+      setTimer();
     }
   }
 

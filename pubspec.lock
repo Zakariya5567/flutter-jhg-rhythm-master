@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "55d7b444feb71301ef6b8838dbc1ae02e63dd48c8773f3810ff53bb1e2945b32"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4+1"
   crypto:
     dependency: transitive
     description:
@@ -201,11 +209,9 @@ packages:
   flutter_jhg_elements:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: "61fd73c696627eed9f41945e52a73ece7faa57fd"
-      url: "https://github.com/jamie2364/flutter_jhg_elements"
-    source: git
+      path: "../flutter_jhg_elements"
+      relative: true
+    source: path
     version: "0.0.1"
   flutter_launcher_icons:
     dependency: "direct dev"
@@ -215,6 +221,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.1"
+  flutter_rating_bar:
+    dependency: transitive
+    description:
+      name: flutter_rating_bar
+      sha256: d2af03469eac832c591a1eba47c91ecc871fe5708e69967073c043b2d775ed93
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   flutter_svg:
     dependency: transitive
     description:
@@ -277,10 +291,10 @@ packages:
     dependency: transitive
     description:
       name: in_app_purchase_android
-      sha256: "996da8020228658c71eddb30f2a2e723d87d5eef77d8007f9206969605e8f803"
+      sha256: ce57f16f612d6f1c6680e333251ec3c4dbbb40826543c9d356763351062c5f8f
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.2+1"
   in_app_purchase_platform_interface:
     dependency: transitive
     description:
@@ -325,10 +339,10 @@ packages:
     dependency: "direct main"
     description:
       name: just_audio
-      sha256: b607cd1a43bac03d85c3aaee00448ff4a589ef2a77104e3d409889ff079bf823
+      sha256: b7cb6bbf3750caa924d03f432ba401ec300fd90936b3f73a9b33d58b1e96286b
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.36"
+    version: "0.9.37"
   just_audio_platform_interface:
     dependency: transitive
     description:
@@ -393,6 +407,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      sha256: "2e123074287cc9fd6c09de8336dae606d1ddb88d9ac47358826db698c176a1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   nested:
     dependency: transitive
     description:
@@ -529,12 +551,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
+  rate_my_app:
+    dependency: transitive
+    description:
+      name: rate_my_app
+      sha256: e448dc27f8e821824fe7f67c2dba22f67b18de08054efa746defd1cd1657d882
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   reg_page:
     dependency: "direct main"
     description:
       path: "."
       ref: master
-      resolved-ref: "49cf61ce44adec4d77e09c8b0de09f5b1cc2b04d"
+      resolved-ref: "243def11324e12b2b2c9ddd102e463a25012e8f7"
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
@@ -546,6 +576,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  share_plus:
+    dependency: transitive
+    description:
+      name: share_plus
+      sha256: "3ef39599b00059db0990ca2e30fca0a29d8b37aae924d60063f8e0184cf20900"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "251eb156a8b5fa9ce033747d73535bf53911071f8d3b6f4f0b578505ce0d4496"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -647,6 +693,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  super_tooltip:
+    dependency: transitive
+    description:
+      name: super_tooltip
+      sha256: "925bbc20d825922e415e9445b22a41987c10be5812f292b9f8b44c4b3ff16e21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   term_glyph:
     dependency: transitive
     description:
@@ -795,10 +849,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "8cb58b45c47dcb42ab3651533626161d6b67a2921917d8d429791f76972b3480"
+      sha256: "0a989dc7ca2bb51eac91e8fd00851297cfffd641aa7538b165c62637ca0eaa4a"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.0"
+    version: "5.4.0"
   win32_registry:
     dependency: transitive
     description:

@@ -39,7 +39,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     //metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
     final metroWidth = 240.0;
@@ -74,10 +73,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    if (index == controller.tapButtonList.length) {
-                                        customSelectionBottomSheet(context,this);
+                                    if (index ==
+                                        controller.tapButtonList.length) {
+                                      customSelectionBottomSheet(context, this);
                                     } else {
-                                      controller.setBeats(ticker: this, index: index, indexValue: controller.tapButtonList[index]);
+                                      controller.setBeats(
+                                          ticker: this,
+                                          index: index,
+                                          indexValue:
+                                              controller.tapButtonList[index]);
                                     }
                                   },
                                   child: Padding(
@@ -95,15 +99,31 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          (index == controller.tapButtonList.length && controller.customBeatValue == null)
-                                              ? "Custom" :
-                                          (index == controller.tapButtonList.length && controller.customBeatValue != null) ?
-                                          controller.customBeatValue!
-                                              : controller.tapButtonList[index],
+                                          (index ==
+                                                      controller.tapButtonList
+                                                          .length &&
+                                                  controller.customBeatValue ==
+                                                      null)
+                                              ? "Custom"
+                                              : (index ==
+                                                          controller
+                                                              .tapButtonList
+                                                              .length &&
+                                                      controller
+                                                              .customBeatValue !=
+                                                          null)
+                                                  ? controller.customBeatValue!
+                                                  : controller
+                                                      .tapButtonList[index],
                                           style: TextStyle(
                                             fontFamily: AppStrings.sansFont,
                                             color: AppColors.whitePrimary,
-                                            fontSize:   (index == controller.tapButtonList.length && controller.customBeatValue == null)
+                                            fontSize: (index ==
+                                                        controller.tapButtonList
+                                                            .length &&
+                                                    controller
+                                                            .customBeatValue ==
+                                                        null)
                                                 ? 12
                                                 : 18,
                                             fontWeight: FontWeight.w500,
@@ -186,7 +206,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             ),
                                             //slider
                                             Positioned(
-                                              top: 708 * controller.bpm * 0.00058,
+                                              top: 708 *
+                                                  controller.bpm *
+                                                  0.00058,
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(

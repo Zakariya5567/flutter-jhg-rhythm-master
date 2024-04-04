@@ -5,9 +5,9 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 
 class AddAndSubtractButton extends StatelessWidget {
-   AddAndSubtractButton({
+  AddAndSubtractButton({
     super.key,
-    required this.title,
+    this.title,
     required this.numbers,
     this.description,
     required this.onAdd,
@@ -18,7 +18,7 @@ class AddAndSubtractButton extends StatelessWidget {
     this.padding,
   });
 
-  final String title;
+  final String? title;
   String? description;
   final String numbers;
   final VoidCallback onSubtract;
@@ -42,18 +42,19 @@ class AddAndSubtractButton extends StatelessWidget {
           SizedBox(
             height: 54,
             width: width,
-            child:
-            Row(
+            child: Row(
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: AppStrings.sansFont,
-                    color: AppColors.headingColor,
-                    fontSize: headingSize ?? 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                title == null
+                    ? SizedBox()
+                    : Text(
+                        title!,
+                        style: TextStyle(
+                          fontFamily: AppStrings.sansFont,
+                          color: AppColors.headingColor,
+                          fontSize: headingSize ?? 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                 Spacer(),
                 // MINUS BUTTON
                 GestureDetector(
@@ -67,14 +68,13 @@ class AddAndSubtractButton extends StatelessWidget {
                     ),
                     child: Center(
                         child: Icon(
-                          Icons.remove,
-                          color: AppColors.whitePrimary,
-                        )),
+                      Icons.remove,
+                      color: AppColors.whitePrimary,
+                    )),
                   ),
                 ),
 
                 12.0.width,
-
 
                 Container(
                   height: height * 0.065,
@@ -100,33 +100,32 @@ class AddAndSubtractButton extends StatelessWidget {
                 // PLUS BUTTON
 
                 GestureDetector(
-                  onTap: (onAdd),
-                  child:
-                  Container(
-                    height: redButtonSize ?? height * 0.038,
-                    width: redButtonSize ?? height * 0.038,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.redPrimary,
-                    ),
-                    child: Center(
-                        child: Icon(
-                      Icons.add,
-                      color: AppColors.whitePrimary,
+                    onTap: (onAdd),
+                    child: Container(
+                      height: redButtonSize ?? height * 0.038,
+                      width: redButtonSize ?? height * 0.038,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.redPrimary,
+                      ),
+                      child: Center(
+                          child: Icon(
+                        Icons.add,
+                        color: AppColors.whitePrimary,
+                      )),
                     )),
-                  )
-                ),
               ],
             ),
           ),
           10.0.height,
-          description == null ? SizedBox() :
-          description!.toText(
-            fontFamily: AppStrings.sansFont,
-            color: AppColors.whiteLight,
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          )
+          description == null
+              ? SizedBox()
+              : description!.toText(
+                  fontFamily: AppStrings.sansFont,
+                  color: AppColors.whiteLight,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                )
         ],
       ),
     );

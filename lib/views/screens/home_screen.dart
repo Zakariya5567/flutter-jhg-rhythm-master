@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/views/screens/bpm_view.dart';
 import 'package:rhythm_master/views/screens/setting_screen.dart';
 import 'package:rhythm_master/views/screens/speed_view.dart';
+
 import 'metro_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +27,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     AppStrings.metronome,
     AppStrings.tapTempo,
     AppStrings.speedTrainer
+  ];
+  List<String> buttonsDesc = [
+    AppStrings.metronomeDesc,
+    AppStrings.tapTempoDesc,
+    AppStrings.speedTrainerDesc
   ];
 
   // Set expiry date when user login to the app
@@ -95,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: Container(
                                         height: height * 0.05,
                                         width: 100,
+                                        alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -105,16 +113,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             border: Border.all(
                                                 color:
                                                     AppColors.greySecondary)),
-                                        child: Center(
-                                          child: Text(
-                                            buttonList[index],
-                                            style: TextStyle(
-                                              fontFamily: AppStrings.sansFont,
-                                              color: AppColors.whitePrimary,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              buttonList[index],
+                                              style: TextStyle(
+                                                fontFamily: AppStrings.sansFont,
+                                                color: AppColors.whitePrimary,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
-                                          ),
+                                            GestureDetector(
+                                              onTap: () => AppUtils.showPopup(
+                                                context,
+                                                buttonList[index],
+                                                buttonsDesc[index],
+                                              ),
+                                              child: Icon(
+                                                Icons.info_outline_rounded,
+                                                size: 15,
+                                                color: JHGColors.white,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     );

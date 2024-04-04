@@ -62,7 +62,6 @@ class MetroProvider extends ChangeNotifier {
   String secondBeat = AppStrings.logic2Sound;
   int selectedButton = 0;
 
-
   clearBottomSheetBeats() {
     beatNumerator = 2;
     beatDenominator = 2;
@@ -104,7 +103,7 @@ class MetroProvider extends ChangeNotifier {
     String value = "${beatNumerator}/${beatDenominator}";
     customBeatValue = value;
     notifyListeners();
-    getBeatsDuration(value,selectedButton);
+    getBeatsDuration(value, selectedButton);
     if (isPlaying) {
       setTimer(ticker);
     }
@@ -223,7 +222,7 @@ class MetroProvider extends ChangeNotifier {
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     controller!.repeat(reverse: true);
     controller!.stop();
-
+    
     Future.delayed(Duration.zero, () async {
       setMetronomeDefaultValue();
     });
@@ -242,17 +241,22 @@ class MetroProvider extends ChangeNotifier {
 
     selectedIndex = defaultSound ?? 0;
     selectedButton = defaultTiming ?? 0;
-    getBeatsDuration(defaultBeatValue!,selectedButton);
+    getBeatsDuration(defaultBeatValue!, selectedButton);
     bpm = defaultBPM ?? 120;
     position = 0;
     totalTick = 0;
     isPlaying = false;
 
-    soundName = (defaultSound == null ? AppStrings.logic : soundList[defaultSound!].name)!;
-    firstBeat = (defaultSound == null ? AppStrings.logic1Sound : soundList[defaultSound!].beat1)!;
-    secondBeat = (defaultSound == null ? AppStrings.logic2Sound : soundList[defaultSound!].beat2)!;
+    soundName = (defaultSound == null
+        ? AppStrings.logic
+        : soundList[defaultSound!].name)!;
+    firstBeat = (defaultSound == null
+        ? AppStrings.logic1Sound
+        : soundList[defaultSound!].beat1)!;
+    secondBeat = (defaultSound == null
+        ? AppStrings.logic2Sound
+        : soundList[defaultSound!].beat2)!;
     notifyListeners();
-
   }
 
   // dispose controller if off the page
@@ -417,7 +421,7 @@ class MetroProvider extends ChangeNotifier {
   // Set beats based on the selected button
   // Setting total beats based on the selected button and notifying listeners
 
-  getBeatsDuration(String value,int buttonIndex) {
+  getBeatsDuration(String value, int buttonIndex) {
     List beatValue = value.split("/");
 
     int beatN = int.parse(beatValue[0]);
@@ -442,7 +446,7 @@ class MetroProvider extends ChangeNotifier {
       timeStamp = 3750;
     }
 
-    if(selectedButton == 4){
+    if (selectedButton == 4) {
       customBeatValue = value;
       beatNumerator = beatN;
       beatDenominator = beatD;
@@ -459,7 +463,7 @@ class MetroProvider extends ChangeNotifier {
     beatNumerator = 2;
     beatDenominator = 2;
     notifyListeners();
-    getBeatsDuration(indexValue,index);
+    getBeatsDuration(indexValue, index);
     if (isPlaying) {
       setTimer(ticker);
     }

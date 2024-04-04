@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,7 @@ import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
-import '../widgets/add_add_subtract_button.dart';
+
 import '../widgets/bpm_value_widget.dart';
 import '../widgets/heading.dart';
 
@@ -91,43 +90,59 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
 
                     // SPACER
-                    32.0.height,
+                    12.0.height,
                     // BARS
-                    AddAndSubtractButton(
-                        redButtonSize: 30,
-                        title: AppStrings.bars,
-                        greyButtonSize: 95,
-                        numbers: controller.bar.toString(),
-                        description: AppStrings.howManyBars,
-                        onAdd: () {
-                          controller.increaseBar();
-                        },
-                        onSubtract: () {
-                          controller.decreaseBar();
-                        }),
-                    // SPACER
-                    27.0.height,
+                    JHGHeadAndSubHWidget(
+                      AppStrings.bars,
+                      lableStyle: JHGTextStyles.headLabelStyle,
+                      subLableStyle: JHGTextStyles.bodyStyle,
+                      subLabel: AppStrings.howManyBars,
+                      margin: EdgeInsets.only(
+                        top: JHGHeadAndSubHWidget.top,
+                        bottom: JHGHeadAndSubHWidget.bottom,
+                        left: 10,
+                        right: 10,
+                      ),
+                      actions: [
+                        JHGValueIncDec(
+                          initialValue: controller.bar,
+                          onChanged: (int newValue) =>
+                              controller.onChangedBar(newValue),
+                          maxValue: 60,
+                        ),
+                      ],
+                    ),
+
+                    JHGHeadAndSubHWidget(
+                      AppStrings.interval,
+                      margin: EdgeInsets.only(
+                        top: JHGHeadAndSubHWidget.top,
+                        bottom: JHGHeadAndSubHWidget.bottom,
+                        left: 10,
+                        right: 10,
+                      ),
+                      subLabel:
+                          "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
+                      lableStyle: JHGTextStyles.headLabelStyle,
+                      subLableStyle: JHGTextStyles.bodyStyle,
+                      actions: [
+                        JHGValueIncDec(
+                          initialValue: controller.interval,
+                          onChanged: (int newValue) =>
+                              controller.onChangedInterval(newValue),
+                          maxValue: 120,
+                        ),
+                      ],
+                    ),
                     // INTERVAL BUTTONS
-                    AddAndSubtractButton(
-                        redButtonSize: 30,
-                        title: AppStrings.interval,
-                        greyButtonSize: 95,
-                        numbers: controller.interval.toString(),
-                        description:
-                            "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
-                        onAdd: () {
-                          controller.increaseInterval();
-                        },
-                        onSubtract: () {
-                          controller.decreaseInterval();
-                        }),
                     // SPACER
                     22.0.height,
                     // BPM VALUE SECTION
                     BpmValueWidget(
-                        bpmValue:controller.bpm == null
-                            ? AppStrings.bpmNull
-                            : controller.bpm.toStringAsFixed(0),).center,
+                      bpmValue: controller.bpm == null
+                          ? AppStrings.bpmNull
+                          : controller.bpm.toStringAsFixed(0),
+                    ).center,
                     20.0.height,
                     // Reset and play pause BUTTON
                   ],
