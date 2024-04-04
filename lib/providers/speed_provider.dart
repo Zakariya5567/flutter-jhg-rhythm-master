@@ -1,36 +1,28 @@
-
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
 
-
-
 //The SpeedProvider class manages the functionality of a speed trainer,
 // including BPM, intervals, and audio playback.
 
-class SpeedProvider extends ChangeNotifier{
-
-
+class SpeedProvider extends ChangeNotifier {
   // INDICATE SOUND IS PLAYING OR STOP
   bool isPlaying = false;
 
-
   // BPM IS BEAT PER MINUTE
-  double bpm = 40;
-
+  double bpm = 120;
 
   // TIMER IS  BPM
   Timer? _timer;
 
-
   // START TEMPO VALUES
-  double startTempo = 100;
+  double startTempo = 120;
   double startTempoMin = 1;
   double startTempoMax = 300;
-
 
   // TARGET TEMPO VALUES
   double targetTempo = 180;
@@ -43,7 +35,6 @@ class SpeedProvider extends ChangeNotifier{
   int minInterval = 1;
   int maxInterval = 120;
 
-
   // BAR IS BEAT PER BPM
   int bar = 4;
   int minBar = 1;
@@ -51,10 +42,7 @@ class SpeedProvider extends ChangeNotifier{
 
   int totalBeats = 4;
 
-
   final player = AudioPlayer();
-
-
 
   String soundName = AppStrings.logic;
   String firstBeat = AppStrings.logic1Sound;
@@ -161,13 +149,17 @@ class SpeedProvider extends ChangeNotifier{
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
     String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
 
-    defaultBeatValue  = defValue ?? "4/4" ;
+    defaultBeatValue = defValue ?? "4/4";
 
-    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
+    soundName =
+        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null
+        ? AppStrings.logic1Sound
+        : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null
+        ? AppStrings.logic2Sound
+        : soundList[defSound].beat2)!;
     // totalBeats = defBeat == 0 ? 4 : defBeat == 1 ? 3 :  defBeat == 2 ? 6 : 12;
-
 
     getBeatsDuration(defaultBeatValue!);
 
@@ -178,91 +170,86 @@ class SpeedProvider extends ChangeNotifier{
   // TWO TYPE OF AUDIO TICK / TAP
   int totalTick = 0;
 
-
-  getBeatsDuration(String value){
+  getBeatsDuration(String value) {
     List beatValue = value.split("/");
 
     int beatN = int.parse(beatValue[0]);
-    int beatD =  int.parse(beatValue[1]) ;
+    int beatD = int.parse(beatValue[1]);
 
     print("Beat Numerator : $beatN");
     print("Beat Denomenator : $beatD");
 
     totalBeats = beatN;
 
-    if(beatD == 2){
+    if (beatD == 2) {
       timeStamp = 120000;
-    }
-    else if(beatD == 4){
+    } else if (beatD == 4) {
       timeStamp = 60000;
-    }
-    else if(beatD == 8){
+    } else if (beatD == 8) {
       timeStamp = 30000;
-    }
-    else if(beatD == 16){
+    } else if (beatD == 16) {
       timeStamp = 15000;
-    }
-    else if(beatD == 32){
+    } else if (beatD == 32) {
       timeStamp = 7500;
-    }
-    else if(beatD == 64){
+    } else if (beatD == 64) {
       timeStamp = 3750;
     }
     notifyListeners();
   }
 
-
   // Clear speed trainer settings
-  clearSpeedTrainer(bool isNotify){
-    if(_timer != null){
+  clearSpeedTrainer(bool isNotify) {
+    if (_timer != null) {
       _timer!.cancel();
     }
     isPlaying = false;
-    bpm = 100;
-    startTempo = 100;
+    bpm = 120;
+    startTempo = 120;
     targetTempo = 180;
     interval = 10;
     bar = 4;
     totalTick = 0;
     barCounter = 0;
-    if(isNotify == true){
+    if (isNotify == true) {
       notifyListeners();
     }
   }
 
   // SET START TEMPO RANGE OF SLIDER
-  setStartTempo(double value,) {
+  setStartTempo(
+    double value,
+  ) {
     startTempo = value;
     bpm = startTempo;
     barCounter = 0;
     totalTick = 0;
     firstTime = true;
     notifyListeners();
-    if(isPlaying == true){
+    if (isPlaying == true) {
       setTimer();
     }
   }
 
   // SET TARGET RANGE OF SLIDER
-  setTargetTempo(double value,) {
+  setTargetTempo(
+    double value,
+  ) {
     targetTempo = value;
     barCounter = 0;
     totalTick = 0;
     firstTime = true;
     notifyListeners();
-    if(isPlaying){
+    if (isPlaying) {
       setTimer();
     }
-
   }
 
   // INCREASE INTERVAL
   increaseInterval() {
-
-    if(interval<maxInterval){
-      interval = interval+1;
+    if (interval < maxInterval) {
+      interval = interval + 1;
       notifyListeners();
-      if(isPlaying){
+      if (isPlaying) {
         setTimer();
       }
     }
@@ -270,10 +257,10 @@ class SpeedProvider extends ChangeNotifier{
 
   // DECREASE INTERVAL
   decreaseInterval() {
-    if(interval>minInterval){
-      interval = interval-1;
+    if (interval > minInterval) {
+      interval = interval - 1;
       notifyListeners();
-      if(isPlaying){
+      if (isPlaying) {
         setTimer();
       }
     }
@@ -281,10 +268,10 @@ class SpeedProvider extends ChangeNotifier{
 
   // INCREASE BAR
   increaseBar() {
-    if(bar<maxBar){
-      bar = bar+1;
+    if (bar < maxBar) {
+      bar = bar + 1;
       notifyListeners();
-      if(isPlaying){
+      if (isPlaying) {
         setTimer();
       }
     }
@@ -292,10 +279,10 @@ class SpeedProvider extends ChangeNotifier{
 
   // DECREASE BAR
   decreaseBar() {
-    if(bar>minBar){
-      bar = bar-1;
+    if (bar > minBar) {
+      bar = bar - 1;
       notifyListeners();
-      if(isPlaying){
+      if (isPlaying) {
         setTimer();
       }
     }
@@ -307,7 +294,7 @@ class SpeedProvider extends ChangeNotifier{
     bpm = startTempo;
     barCounter = 0;
     if (isPlaying) {
-      if(_timer != null){
+      if (_timer != null) {
         _timer!.cancel();
       }
     } else {
@@ -319,18 +306,18 @@ class SpeedProvider extends ChangeNotifier{
 
   int timeStamp = 60000;
 
-
   // Set timer for BPM
   // Setting or canceling timer based on BPM and target tempo
-  setTimer(){
-    if(_timer != null){
+  setTimer() {
+    if (_timer != null) {
       _timer!.cancel();
     }
-    _timer = Timer.periodic( Duration( milliseconds: (timeStamp / bpm).round()),
-          (Timer timer) async {
-        if(targetTempo+interval > bpm){
-           playSound();
-        }else{
+    _timer = Timer.periodic(
+      Duration(milliseconds: (timeStamp / bpm).round()),
+      (Timer timer) async {
+        if (targetTempo + interval > bpm) {
+          playSound();
+        } else {
           _timer!.cancel();
           totalTick = 0;
           barCounter = 0;
@@ -339,23 +326,23 @@ class SpeedProvider extends ChangeNotifier{
           bpm = targetTempo;
           notifyListeners();
         }
-
       },
     );
   }
-
 
   // Bar counter and first-time flags
   int barCounter = 0;
   bool firstTime = true;
 
   //Play sound based on the metronome ticks
-  Future playSound()async{
+  Future playSound() async {
     barCounter = barCounter + 1;
-    totalTick = totalTick+1;
-    if(totalTick == 1){
-      bool check = firstTime == true ? barCounter-1 == bar * totalBeats : barCounter == bar * totalBeats;
-      if(check == true){
+    totalTick = totalTick + 1;
+    if (totalTick == 1) {
+      bool check = firstTime == true
+          ? barCounter - 1 == bar * totalBeats
+          : barCounter == bar * totalBeats;
+      if (check == true) {
         bpm = bpm + interval;
         barCounter = 0;
         firstTime = false;
@@ -363,33 +350,32 @@ class SpeedProvider extends ChangeNotifier{
         setTimer();
       }
       playBeat(firstBeat);
-
-    }else{
-      if(totalTick<totalBeats){
+    } else {
+      if (totalTick < totalBeats) {
         playBeat(secondBeat);
-      }else{
+      } else {
         playBeat(secondBeat);
         totalTick = 0;
       }
     }
   }
 
-  playBeat(String beat){
-    if(player.playing){
+  playBeat(String beat) {
+    if (player.playing) {
       stopLoadAndPlay(beat);
-    }else{
+    } else {
       loadAndPlay(beat);
     }
   }
-  stopLoadAndPlay(String beat){
+
+  stopLoadAndPlay(String beat) {
     player.stop();
     player.setAsset(beat);
     player.play();
   }
-  loadAndPlay(String beat){
+
+  loadAndPlay(String beat) {
     player.setAsset(beat);
     player.play();
   }
-
-
 }
