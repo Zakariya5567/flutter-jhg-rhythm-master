@@ -114,10 +114,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           title: AppStrings.metronome,
                           numbers: "",
                           fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w900,
                           textColor: AppColors.headingColor,
                         ),
-                        10.0.height,
+                        8.0.height,
                         Heading(
                           padding: 0,
                           title: AppStrings.soundS,
@@ -125,7 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontSize: 14,
                           textColor: AppColors.headingColor,
                         ),
-                        8.0.height,
+                        10.0.height,
                         Consumer<MetroProvider>(
                             builder: (context, controller, child) {
                           return JHGDropDown<SoundModel>(
@@ -144,7 +144,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             },
                           );
                         }),
-                        20.0.height,
+                        10.0.height,
                         // DEFAULT BPM
                         JHGHeadAndSubHWidget(
                           AppStrings.defaultBpm,
