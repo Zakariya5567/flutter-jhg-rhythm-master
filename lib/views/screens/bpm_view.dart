@@ -103,9 +103,10 @@ class BpmView extends StatelessWidget {
                     ),
                     // BPM VALUE SECTION
                     BpmValueWidget(
-                         bpmValue:controller.bpm == null
-                        ? AppStrings.bpmNull
-                        : controller.bpm!.toStringAsFixed(0),),
+                      bpmValue: controller.bpm == null
+                          ? AppStrings.bpmNull
+                          : controller.bpm!.toStringAsFixed(0),
+                    ),
                     SizedBox(
                       height: height * 0.1,
                     ),

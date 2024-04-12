@@ -36,7 +36,7 @@ class SpeedProvider extends ChangeNotifier {
   int maxInterval = 120;
 
   // BAR IS BEAT PER BPM
-  int bar = 4;
+  int bar = 2;
   int minBar = 1;
   int maxBar = 60;
 

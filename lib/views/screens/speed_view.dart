@@ -5,9 +5,9 @@ import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
+import 'package:rhythm_master/views/widgets/bpm_value_widget.dart';
 import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 
-import '../widgets/bpm_value_widget.dart';
 import '../widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
@@ -138,18 +138,17 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // SPACER
                     22.0.height,
                     // BPM VALUE SECTION
-                    BpmValueWidget(
-                      bpmValue: controller.bpm == null
-                          ? AppStrings.bpmNull
-                          : controller.bpm.toStringAsFixed(0),
-                    ).center,
-                    20.0.height,
+
                     // Reset and play pause BUTTON
                   ],
                 ),
               ),
             ),
           ),
+          BpmValueWidget(
+            bpmValue: controller.bpm.toStringAsFixed(0),
+          ).center,
+          20.0.height,
           JHGAppBar(
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(

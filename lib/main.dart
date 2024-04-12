@@ -10,7 +10,6 @@ import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 
-
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
@@ -37,7 +36,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -90,12 +88,13 @@ class _MyAppState extends State<MyApp> {
           );
         },
         debugShowCheckedModeBanner: false,
-        title: 'JHG Rhythm ',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          scaffoldBackgroundColor: JHGColors.secondryBlack,
-        ),
+        title: 'JHG Rhythm Master',
+        theme: JHGTheme.themeData,
+        // ThemeData(
+        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        //   useMaterial3: true,
+        //   scaffoldBackgroundColor: JHGColors.secondryBlack,
+        // ),
         home: HomeScreen(),
         // SplashScreen(
         //   yearlySubscriptionId: yearlySubscription(),

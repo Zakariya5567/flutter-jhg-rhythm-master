@@ -61,7 +61,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                       children: [
                         // Button selection 3/3 ....
                         SizedBox(
-                          height: height * 0.41,
+                          height: height * 0.43,
                           width: height * 0.08,
                           child: ListView.builder(
                               physics: ScrollPhysics(),
@@ -276,9 +276,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                       ],
                     ),
                     // SPACER
-                    SizedBox(
-                      height: height * 0.018,
-                    ),
+                    SizedBox(height: height * 0.02),
                     JHGBPMChangeWidget(
                       reverse: true,
                       initialBpmValue: controller.bpm,
@@ -287,9 +285,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.setPosition(value, this);
                       },
                     ),
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
+                    // SizedBox(
+                    //     // height: height * 0.02,
+                    //     ),
                   ],
                 ),
               ),
