@@ -145,7 +145,7 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   setSpeedTrainerDefaultValue() async {
-    int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
+    // int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
     String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
 

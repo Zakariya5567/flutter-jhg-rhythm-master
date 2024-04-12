@@ -4,7 +4,7 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 class BpmValueWidget extends StatelessWidget {
   BpmValueWidget({super.key, required this.bpmValue});
 
-  String bpmValue;
+  final String bpmValue;
 
   @override
   Widget build(BuildContext context) {
