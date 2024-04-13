@@ -141,13 +141,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
 
                     // Reset and play pause BUTTON
                   ],
-                ),
+                ), 
               ),
             ),
           ),
           BpmValueWidget(
-            bpmValue: controller.bpm.toStringAsFixed(0),
-          ).center,
+            bpmValue: controller.bpm > controller.targetTempo ? controller.targetTempo.toStringAsFixed(0):controller.bpm.toStringAsFixed(0),
+           ).center,
           20.0.height,
           JHGAppBar(
             crossAxisAlignment: CrossAxisAlignment.center,
