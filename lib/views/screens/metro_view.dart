@@ -206,9 +206,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             ),
                                             //slider
                                             Positioned(
-                                              top: 708 *
-                                                  controller.bpm *
-                                                  0.00058,
+                                              top:
+                                              controller.bpm <= 250 ?
+                                              (controller.bpm * (controller.bpm*2-50) * 0.0010):
+                                              (controller.bpm * (controller.bpm*2-195) * 0.0010),
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(
