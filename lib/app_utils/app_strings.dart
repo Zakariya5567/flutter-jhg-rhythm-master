@@ -15,6 +15,7 @@ class AppStrings {
 
   static const String logout = 'Logout';
   static const String save = 'Save';
+  static const String tapTempoSettingText = "The Tap Tempo mode does not have any additional settings. Simply just tap away and we'll tell you the speed of your tapping!";
   static const String defaultTiming = 'Default Timing';
   static const String defaultSpeedTrainerTiming = 'Speed Trainer Timing';
   static const String defaultSound = 'Default Sound';
@@ -25,7 +26,7 @@ class AppStrings {
   static const String tapTempoDesc = 'Tap Tempo Description';
   static const String metronome = 'Metronome';
   static const String metronomeDesc = 'Metronome Description';
-  static const String setting = 'Setting';
+  static const String setting = 'Settings';
   static const String speedTrainer = 'Speed Trainer';
   static const String speedTrainerDesc = 'Speed Trainer Description';
   static const String speedTrainerSound = 'Speed Trainer Sound';

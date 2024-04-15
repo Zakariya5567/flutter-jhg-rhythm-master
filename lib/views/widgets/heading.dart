@@ -30,7 +30,6 @@ class Heading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
 
-
           Text(
             title,
             style: JHGTextStyles.lrlabelStyle.copyWith(

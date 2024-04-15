@@ -55,8 +55,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     // SPACER
                     SizedBox(height: height * 0.025),
+
                     Row(
                       children: [
                         // Button selection 3/3 ....
@@ -279,6 +281,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     SizedBox(
                       height: height * 0.018,
                     ),
+
                     JHGBPMChangeWidget(
                       reverse: true,
                       initialBpmValue: controller.bpm,
@@ -287,6 +290,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         controller.setPosition(value, this);
                       },
                     ),
+
                     SizedBox(
                       height: height * 0.02,
                     ),

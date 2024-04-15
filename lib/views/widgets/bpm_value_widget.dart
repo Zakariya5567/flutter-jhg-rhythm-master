@@ -4,27 +4,37 @@ import 'package:rhythm_master/views/extension/string_extension.dart';
 
 class BpmValueWidget extends StatelessWidget {
   BpmValueWidget({super.key,required this.bpmValue});
-
   String bpmValue;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        bpmValue.toText(
-          textAlign: TextAlign.center,
-          fontWeight: FontWeight.w500,
-          color: JHGColors.whiteText,
-          fontSize: 35,
-          lineHeight: 1.0
-        ),
-       'BPM'.toText(
-          textAlign: TextAlign.center,
-      fontSize: 35,
-      fontWeight: FontWeight.w500,
-      color: JHGColors.whiteText,
-        ),
 
+        Text(
+          bpmValue,
+          textAlign: TextAlign.center,
+          style:
+          TextStyle(
+            fontFamily: kFontFamilyJak,
+            package: kPkgName,
+            color: JHGColors.whiteText,
+            height: 1.0,
+            fontSize: 35,
+            fontWeight: FontWeight.w700,
+          ),
+
+
+        ),
+        Text(
+        'BPM',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.w500,
+        color:  JHGColors.greyText,
+        ),
+        )
       ],
     );
   }
