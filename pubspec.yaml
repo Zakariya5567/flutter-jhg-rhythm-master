@@ -107,7 +107,3 @@ flutter:
     - assets/images/
     - assets/audio/
 
-  fonts:
-    - family: PlusJakartaSans-Regular
-      fonts:
-        - asset: assets/fonts/PlusJakartaSans-Regular.ttf

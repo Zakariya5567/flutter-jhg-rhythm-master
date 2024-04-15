@@ -33,20 +33,16 @@ class BpmView extends StatelessWidget {
                       children: [
                         Text(
                           AppStrings.thisSongIs,
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
+                          style: JHGTextStyles.lrlabelStyle.copyWith(
                             color: AppColors.whiteLight,
                             fontSize: 16,
-                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         Text(
                           controller.musicName,
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
+                          style: JHGTextStyles.lrlabelStyle.copyWith(
                             color: AppColors.whiteLight,
                             fontSize: 24,
-                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -76,9 +72,7 @@ class BpmView extends StatelessWidget {
                           ),
                           child: Text(
                             AppStrings.tap,
-                            style: TextStyle(
-                              fontFamily: AppStrings.sansFont,
-                              color: AppColors.whitePrimary,
+                            style: JHGTextStyles.labelStyle.copyWith(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),

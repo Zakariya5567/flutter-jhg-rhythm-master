@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 
@@ -32,8 +33,7 @@ class Heading extends StatelessWidget {
 
           Text(
             title,
-            style: TextStyle(
-              fontFamily: AppStrings.sansFont,
+            style: JHGTextStyles.lrlabelStyle.copyWith(
               color: textColor ?? AppColors.whitePrimary,
               fontSize: fontSize ?? 12,
               fontWeight: fontWeight?? FontWeight.w700,
@@ -41,11 +41,9 @@ class Heading extends StatelessWidget {
           ),
           Text(
             numbers,
-            style: TextStyle(
-              fontFamily: AppStrings.sansFont,
+            style: JHGTextStyles.labelStyle.copyWith(
               color: AppColors.whitePrimary,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
+              fontSize: 24
             ),
           ),
         ],

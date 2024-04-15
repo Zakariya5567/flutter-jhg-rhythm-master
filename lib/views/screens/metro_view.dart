@@ -115,8 +115,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                   ? controller.customBeatValue!
                                                   : controller
                                                       .tapButtonList[index],
-                                          style: TextStyle(
-                                            fontFamily: AppStrings.sansFont,
+                                          style: JHGTextStyles.subLabelStyle.copyWith(
                                             color: AppColors.whitePrimary,
                                             fontSize: (index ==
                                                         controller.tapButtonList

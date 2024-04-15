@@ -74,10 +74,8 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             JHGAppBar(
               title: AppStrings.setting.toText(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColors.whiteTextColor,
-                fontFamily: AppStrings.sansFont,
+                textStyle: JHGTextStyles.labelStyle.copyWith(
+                fontSize: 20)
               ),
               trailingWidget: JHGReportAnIssueBtn(onPressed: () {
                 Navigator.push(
@@ -152,12 +150,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           //   fontWeight: FontWeight.w700,
                           //   fontFamily: kFontFamilyJak,
                           // ),
-                          lableStyle: TextStyle(
-                            fontFamily: AppStrings.sansFont,
+                          lableStyle: JHGTextStyles.lrlabelStyle.copyWith(
                             fontSize: 14,
-                            color: AppColors.headingColor,
-                            fontWeight: FontWeight.w700,
-                          ),
+                            color: AppColors.headingColor),
                           actions: [
                             JHGValueIncDec(
                               initialValue: controller.bpm.toInt(),
@@ -264,15 +259,13 @@ class _SettingScreenState extends State<SettingScreen> {
                                                 ? "Custom"
                                                 : controller
                                                     .tapButtonList[index],
-                                            style: TextStyle(
-                                              fontFamily: AppStrings.sansFont,
+                                            style: JHGTextStyles.subLabelStyle.copyWith(
                                               color: AppColors.whitePrimary,
                                               fontSize: index ==
                                                       controller
                                                           .tapButtonList.length
                                                   ? 12
-                                                  : 18,
-                                              fontWeight: FontWeight.w500,
+                                                  : 18
                                             ),
                                           ),
                                         ),
@@ -378,8 +371,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                               : controller
                                                       .tapSpeedTrainerButtonList[
                                                   index],
-                                          style: TextStyle(
-                                            fontFamily: AppStrings.sansFont,
+                                          style: JHGTextStyles.subLabelStyle.copyWith(
                                             color: AppColors.whitePrimary,
                                             fontSize: index ==
                                                     controller
@@ -387,7 +379,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                                         .length
                                                 ? 12
                                                 : 18,
-                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
@@ -430,11 +421,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Text(
                                     AppStrings.save,
-                                    style: TextStyle(
-                                      fontFamily: AppStrings.sansFont,
+                                    style: JHGTextStyles.labelStyle.copyWith(
                                       color: AppColors.whitePrimary,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 17
                                     ),
                                   ),
                                 ),

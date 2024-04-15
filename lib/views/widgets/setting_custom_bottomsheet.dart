@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -46,20 +47,11 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                     SizedBox(height: 40),
                     Text(
                        "Number of Beats",
-                        style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: AppColors.whiteTextColor,
-                        fontSize:  18,
-                        fontWeight: FontWeight.bold,),),
+                        style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 18),),
                     SizedBox(height: 10),
                      Text(
                       "This is the top number and represents how\nmany sounds you will hear between each\naccented note.",
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: AppColors.whiteTextColor,
-                        fontSize:  14,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
                     ),
                     SizedBox(height: 15),
                      Center(
@@ -77,20 +69,11 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                     SizedBox(height: 30),
                     Text(
                       "Note Value",
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: AppColors.whiteTextColor,
-                        fontSize:  18,
-                        fontWeight: FontWeight.bold,),),
+                      style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 18),),
                     SizedBox(height: 10),
                     Text(
                       "This is the bottom number and represents, in\ncombination with the BPM setting how\nquickly the sounds will play.",
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: AppColors.whiteTextColor,
-                        fontSize:  14,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
                     ),
                     SizedBox(height: 15),
                     Center(
@@ -109,12 +92,7 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                     Center(
                       child: Text(
                         "Time Signature",
-                        style: TextStyle(
-                          fontFamily: AppStrings.sansFont,
-                          color: AppColors.whiteSecondary,
-                          fontSize:  18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 18),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -122,12 +100,7 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                       child:
                     Text(
                       "${controller.beatNumerator}/${controller.beatDenominator}",
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: AppColors.whiteSecondary,
-                        fontSize:  40,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 40),
                     ),),
 
 
@@ -152,12 +125,7 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                               borderRadius: BorderRadius.circular(10)),
                           child: Text(
                             AppStrings.save,
-                            style: TextStyle(
-                              fontFamily: AppStrings.sansFont,
-                              color: AppColors.whitePrimary,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style:  JHGTextStyles.labelStyle.copyWith(fontSize: 17),
                           ),
                         ),
                       ),

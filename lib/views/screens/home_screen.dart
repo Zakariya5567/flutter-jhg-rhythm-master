@@ -119,9 +119,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           children: [
                                             Text(
                                               buttonList[index],
-                                              style: TextStyle(
-                                                fontFamily: AppStrings.sansFont,
-                                                color: AppColors.whitePrimary,
+                                              style: JHGTextStyles.labelStyle.copyWith(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -191,11 +189,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                   Text(
                                     AppStrings.tooltipsTitle,
-                                    style: TextStyle(
-                                        fontFamily: AppStrings.sansFont,
-                                        color: AppColors.whitePrimary,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic),
+                                    style: JHGTextStyles.lrlabelStyle.copyWith(fontStyle: FontStyle.italic),
                                   ),
                                   InkWell(
                                       borderRadius: BorderRadius.circular(50),
@@ -214,9 +208,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ),
                               Text(
                                 AppStrings.tooltipsContent,
-                                style: TextStyle(
-                                    fontFamily: AppStrings.sansFont,
-                                    color: AppColors.whitePrimary),
+                                style: JHGTextStyles.bodyStyle,
                                 textAlign: TextAlign.center,
                               )
                             ],

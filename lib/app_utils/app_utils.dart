@@ -30,9 +30,7 @@ class AppUtils {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(chordName,
-                      style: TextStyle(
-                          color: JHGColors.whiteText,
-                          fontWeight: FontWeight.bold,
+                      style: JHGTextStyles.lrlabelStyle.copyWith(
                           fontSize: 21)),
                   JHGIconButton(
                     iconData: Icons.close,
@@ -44,8 +42,7 @@ class AppUtils {
                 width: 100,
                 child: Text(
                   details,
-                  style: TextStyle(
-                    color: JHGColors.whiteText,
+                  style: JHGTextStyles.bodyStyle.copyWith(
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),

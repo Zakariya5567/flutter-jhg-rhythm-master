@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:reg_page/reg_page.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
@@ -91,19 +94,14 @@ class _MyAppState extends State<MyApp> {
         },
         debugShowCheckedModeBanner: false,
         title: 'JHG Rhythm ',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          scaffoldBackgroundColor: JHGColors.secondryBlack,
+        theme: JHGTheme.themeData,
+        home: SplashScreen(
+          yearlySubscriptionId: yearlySubscription(),
+          monthlySubscriptionId: monthlySubscription(),
+          appName: AppStrings.appName,
+          appVersion: packageInfo.version,
+          nextPage: () => const HomeScreen(), featuresList: getFeaturesList(),
         ),
-        home: HomeScreen(),
-        // SplashScreen(
-        //   yearlySubscriptionId: yearlySubscription(),
-        //   monthlySubscriptionId: monthlySubscription(),
-        //   appName: AppConstant.appName,
-        //   appVersion: packageInfo.version,
-        //   nextPage: () => const HomeScreen(),
-        // ),
       ),
     );
   }

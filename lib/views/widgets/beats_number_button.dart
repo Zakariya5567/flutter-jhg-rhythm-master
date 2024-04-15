@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 
@@ -50,11 +51,8 @@ class BeatsNumberButton extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             numbers,
-            style: TextStyle(
-              fontFamily: AppStrings.sansFont,
-              color: AppColors.whitePrimary,
+            style: JHGTextStyles.subLabelStyle.copyWith(
               fontSize: 25,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ),
