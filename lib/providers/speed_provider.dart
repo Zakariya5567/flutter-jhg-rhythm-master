@@ -36,7 +36,7 @@ class SpeedProvider extends ChangeNotifier {
   int maxInterval = 120;
 
   // BAR IS BEAT PER BPM
-  int bar = 4;
+  int bar = 2;
   int minBar = 1;
   int maxBar = 60;
 
@@ -201,7 +201,7 @@ class SpeedProvider extends ChangeNotifier {
     startTempo = 120;
     targetTempo = 180;
     interval = 10;
-    bar = 4;
+    bar = 2;
     totalTick = 0;
     barCounter = 0;
     if (isNotify == true) {
@@ -325,13 +325,14 @@ class SpeedProvider extends ChangeNotifier {
         notifyListeners();
         setTimer();
       }
-      playBeat(firstBeat);
+      if(bpm >= targetTempo+bar*interval)return;
+       playBeat(firstBeat);
     } else {
       if (totalTick < totalBeats) {
         playBeat(secondBeat);
       } else {
-        playBeat(secondBeat);
         totalTick = 0;
+        playBeat(secondBeat);
       }
     }
   }
