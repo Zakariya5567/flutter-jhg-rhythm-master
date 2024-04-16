@@ -422,9 +422,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           height: height * 0.085,
           width: width * 0.85,
           child: ListView.builder(
-              itemCount:
-              controller.tapSpeedTrainerButtonList.length +
-                  1,
+              itemCount: controller.tapSpeedTrainerButtonList.length + 1,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return GestureDetector(

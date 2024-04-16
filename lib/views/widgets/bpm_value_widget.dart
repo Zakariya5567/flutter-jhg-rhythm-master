@@ -18,7 +18,7 @@ class BpmValueWidget extends StatelessWidget {
           TextStyle(
             fontFamily: kFontFamilyJak,
             package: kPkgName,
-            color: JHGColors.whiteText,
+            color: JHGColors.white,
             height: 1.0,
             fontSize: 35,
             fontWeight: FontWeight.w700,
