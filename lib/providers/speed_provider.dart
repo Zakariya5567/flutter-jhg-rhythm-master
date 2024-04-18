@@ -50,6 +50,8 @@ class SpeedProvider extends ChangeNotifier {
 
   String? defaultBeatValue;
 
+  double gafInterval = 1;
+
   // List of sound list
   List<SoundModel> soundList = [];
 
@@ -145,9 +147,12 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   setSpeedTrainerDefaultValue() async {
-    int? defBeat = await SharedPref.getSpeedTrainerDefaultTiming;
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
     String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
+
+    double? defSpeedInterval = await SharedPref.getSpeedTrainerDefaultInterval;
+
+    gafInterval = defSpeedInterval ?? 1;
 
     defaultBeatValue = defValue ?? "4/4";
 
@@ -255,16 +260,6 @@ class SpeedProvider extends ChangeNotifier {
     }
   }
 
-  // DECREASE BAR
-  decreaseBar() {
-    if (bar > minBar) {
-      bar = bar - 1;
-      notifyListeners();
-      if (isPlaying) {
-        setTimer();
-      }
-    }
-  }
 
   // START OR STOP AUDIO
   void startStop() {

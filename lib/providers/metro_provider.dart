@@ -96,6 +96,7 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
+
   String? customBeatValue;
 
   setValueOfBottomSheet(TickerProviderStateMixin ticker) {
@@ -197,6 +198,10 @@ class MetroProvider extends ChangeNotifier {
         beat2: AppStrings.sonar2Sound));
   }
 
+
+  double gafInterval  = 1;
+
+
   // Initialize  animation controller
   initializeAnimationController(
     TickerProviderStateMixin ticker,
@@ -233,6 +238,11 @@ class MetroProvider extends ChangeNotifier {
     int? defSound = await SharedPref.getDefaultSound;
     int? defTiming = await SharedPref.getDefaultTiming;
     String? defValue = await SharedPref.getMetronomeDefaultValue;
+
+
+    double? defMetroInterval = await SharedPref.getMetronomeDefaultInterval;
+
+    gafInterval = defMetroInterval ?? 1;
 
     defaultBPM = defBPM ?? 120;
     defaultSound = defSound ?? 0;

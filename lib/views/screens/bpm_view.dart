@@ -49,9 +49,7 @@ class BpmView extends StatelessWidget {
                     ),
 
                     // SPACER
-                    SizedBox(
-                      height: height * 0.06,
-                    ),
+                    SizedBox(height: height * 0.06,),
 
                     // RED  TAP BUTTON
                     JHGIconButton(
@@ -81,28 +79,23 @@ class BpmView extends StatelessWidget {
                       ),
                     ),
 
-                    //const Spacer(),
                     // SPACER
-                    SizedBox(
-                      height: height * 0.07,
-                    ),
+                    SizedBox(height: height * 0.07,),
+
                     JHGResetBtn(
                         enabled: true,
                         onTap: () {
                           controller.clearBPM();
                         }),
+
                     // SPACER
-                    SizedBox(
-                      height: height * 0.06,
-                    ),
+                    SizedBox(height: height * 0.06,),
+
                     // BPM VALUE SECTION
-                    BpmValueWidget(
-                         bpmValue:controller.bpm == null
-                        ? AppStrings.bpmNull
-                        : controller.bpm!.toStringAsFixed(0),),
-                    SizedBox(
-                      height: height * 0.1,
-                    ),
+                    BpmValueWidget(bpmValue:controller.bpm == null ? AppStrings.bpmNull : controller.bpm!.toStringAsFixed(0),),
+
+                    SizedBox(height: height * 0.1,),
+
                   ],
                 ),
               ),

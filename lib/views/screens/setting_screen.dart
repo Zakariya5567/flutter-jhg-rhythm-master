@@ -1,12 +1,10 @@
-import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_info.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/models/sound_model.dart';
@@ -17,6 +15,7 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
+import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
 
@@ -28,40 +27,20 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  PackageInfo packageInfo = PackageInfo(
-    appName: '',
-    packageName: '',
-    version: '',
-    buildNumber: '',
-    buildSignature: '',
-    installerStore: '',
-  );
 
+  PackageInfo? packageInfo;
   String deviceName = 'Unknown';
-  DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
-  Future<void> getDeviceInfo() async {
-    if (Platform.isAndroid) {
-      final device = await deviceInfoPlugin.androidInfo;
-      deviceName = "${device.manufacturer} ${device.model}";
-    } else if (Platform.isIOS) {
-      final device = await deviceInfoPlugin.iosInfo;
-      deviceName = device.name;
-    }
-  }
-
-  Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    packageInfo = info;
-    await getDeviceInfo();
+  Future<void> initPackageInfo() async {
+   packageInfo = await getDeviceInfo();
+   deviceName =  await getDeviceName();
   }
 
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
-    final settingProvider =
-        Provider.of<SettingProvider>(context, listen: false);
+    initPackageInfo();
+    final settingProvider = Provider.of<SettingProvider>(context, listen: false);
     settingProvider.initializeAnimationController();
   }
 
@@ -169,7 +148,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     monthlySubscriptionId:
                                         monthlySubscription(),
                                     appName: AppStrings.appName,
-                                    appVersion: packageInfo.version,
+                                    appVersion: packageInfo!.version,
                                     nextPage: () => const HomeScreen(),
                                     featuresList: [],
                                   );
@@ -351,6 +330,23 @@ class MetronomeSetting extends StatelessWidget {
                     ),
                   );
                 })),
+        20.0.height,
+        Heading(
+          padding: 0,
+          title: AppStrings.sliderInterval,
+          numbers: controller.metronomeDefaultInterval.toStringAsFixed(0),
+          fontSize: 14,
+          textColor: AppColors.headingColor,
+        ),
+        8.0.height,
+        SliderWidget(
+            height: height,
+            min: 1,
+            max: 99,
+            value: controller.metronomeDefaultInterval,
+            onChanged: (value){
+              controller.setMetronomeDefaultInterval(value);
+            }),
         30.0.height,
 
       ],
@@ -479,6 +475,24 @@ class SpeedTrainerSetting extends StatelessWidget {
                 );
               }),
         ),
+        20.0.height,
+        Heading(
+            padding: 0,
+            title: AppStrings.sliderInterval,
+            numbers: controller.speedDefaultInterval.toStringAsFixed(0),
+            fontSize: 14,
+            textColor: AppColors.headingColor,
+            ),
+        8.0.height,
+        SliderWidget(
+            height: height,
+            min: 1,
+            max: 99,
+            value: controller.speedDefaultInterval,
+            onChanged: (value){
+              controller.setSpeedTrainerDefaultInterval(value);
+            }),
+
         180.0.height
       ],
     );

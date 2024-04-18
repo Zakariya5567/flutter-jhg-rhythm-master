@@ -5,8 +5,10 @@ import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
 
 import '../widgets/custom_selection_bottomsheet.dart';
+import '../widgets/custom_slider_widget.dart';
 
 class MetroView extends StatefulWidget {
   const MetroView({super.key});
@@ -281,10 +283,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     SizedBox(
                       height: height * 0.018,
                     ),
-
+                    
                     JHGBPMChangeWidget(
                       reverse: true,
                       initialBpmValue: controller.bpm,
+                      interval: controller.gafInterval.toInt(),
                       sliderWidth: null,
                       onChanged: (value) {
                         controller.setPosition(value, this);

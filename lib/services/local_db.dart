@@ -12,6 +12,9 @@ class SharedPref {
   static String beatNumeratorKey = "beatNumeratorKey";
   static String beatDenominatorKey = "beatNumeratorKey";
 
+  static String metronomeDefaultIntervalKey = "metronomeDefaultIntervalKey";
+  static String speedDefaultIntervalKey = "speedDefaultIntervalKey";
+
   // Set [isFirstTimeOpenApp] value
   static Future<void> setIsFirstTimeOpenApp(bool value) async {
     // initialized shared preferences
@@ -130,6 +133,40 @@ class SharedPref {
     final pref = await LocalDB.getPref;
     String? bpm = pref!.getString(speedTrainerDefaultValueKey);
     return bpm;
+  }
+
+
+
+  // Set default interval
+  static Future<void> storeSpeedTrainerDefaultInterval(double value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setDouble(speedDefaultIntervalKey, value);
+  }
+
+  // Get default interval
+  static Future<double?> get getSpeedTrainerDefaultInterval async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    double? value = pref!.getDouble(speedDefaultIntervalKey);
+    return value;
+  }
+
+
+
+  // Set default interval
+  static Future<void> storeMetronomeDefaultInterval(double value) async {
+    // initialized shared preferences
+    final pref = await LocalDB.getPref;
+    pref!.setDouble(metronomeDefaultIntervalKey, value);
+  }
+
+  // Get default interval
+  static Future<double?> get getMetronomeDefaultInterval async {
+    // Initialized shared preferences
+    final pref = await LocalDB.getPref;
+    double? value = pref!.getDouble(metronomeDefaultIntervalKey);
+    return value;
   }
 
 }
