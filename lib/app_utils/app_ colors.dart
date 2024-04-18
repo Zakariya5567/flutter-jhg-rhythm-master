@@ -5,7 +5,6 @@ class AppColors {
   static Color blackPrimary = const Color.fromRGBO(31, 31, 31, 1);
 
   static Color whitePrimary = JHGColors.whiteText;
-  static Color whiteSecondary = const Color.fromRGBO(241, 241, 241, 1);
   static Color whiteTextColor = const Color.fromRGBO(192, 192, 196, 1);
   static Color headingColor = const Color.fromRGBO(196, 196, 196, 1);
   static Color whiteLight = JHGColors.whiteText;
