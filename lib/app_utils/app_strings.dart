@@ -1,23 +1,14 @@
 class AppStrings {
 
   static const String appName = 'JHG Rhythm Toolkit';
-  static const String appVersion = '1.0.0';
-
-  static const String jamieHarrison = 'JAMIE HARRISON';
-  static const String guitar = 'Guitar';
   static const String tap = 'Tap';
-  static const String tempo = 'Tempo';
-  static const String bpm = 'BPM';
   static const String bpmNull = '- -';
   static const String thisSongIs = 'This song is';
-  static const String tempoDescription =
-      'Tap the blue button in the time with the beat to identify its tempo';
 
   static const String logout = 'Logout';
   static const String save = 'Save';
   static const String tapTempoSettingText = "The Tap Tempo mode does not have any additional settings. Simply just tap away and we'll tell you the speed of your tapping!";
   static const String defaultTiming = 'Default Timing';
-  static const String defaultSpeedTrainerTiming = 'Speed Trainer Timing';
   static const String defaultSound = 'Default Sound';
   static const String soundS = 'Sound';
   static const String defaultBpm = 'Default BPM';
@@ -29,11 +20,8 @@ class AppStrings {
   static const String setting = 'Settings';
   static const String speedTrainer = 'Speed Trainer';
   static const String speedTrainerDesc = 'Speed Trainer Description';
-  static const String speedTrainerSound = 'Speed Trainer Sound';
 
-  static const String dragDescription =
-      'Drag the slider on the metronome up and down to\nmake quick adjustments';
-  static const String sound = 'Sound...';
+
   static const String howMuchItShouldIncrease =
       'How much it should increase by every';
   static const String howManyBars =
