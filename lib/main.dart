@@ -13,6 +13,8 @@ import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 
+import 'app_utils/app_info.dart';
+
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -41,28 +43,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  PackageInfo packageInfo = PackageInfo(
-    appName: '',
-    packageName: '',
-    version: '',
-    buildNumber: '',
-    buildSignature: '',
-    installerStore: '',
-  );
+  PackageInfo? packageInfo;
+
+  Future<void> initPackageInfo() async {
+      packageInfo = await getDeviceInfo();
+  }
 
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
+    initPackageInfo();
   }
 
-  Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    setState(() {
-      packageInfo = info;
-    });
-    print('packageInfo.version ${packageInfo.version}');
-  }
 
   // This widget is the root of your application.
   @override
@@ -101,7 +93,7 @@ class _MyAppState extends State<MyApp> {
           yearlySubscriptionId: yearlySubscription(),
           monthlySubscriptionId: monthlySubscription(),
           appName: AppStrings.appName,
-          appVersion: packageInfo.version,
+          appVersion: packageInfo?.version ?? "",
           nextPage: () => const HomeScreen(), featuresList: getFeaturesList(),
         ),
       ),
