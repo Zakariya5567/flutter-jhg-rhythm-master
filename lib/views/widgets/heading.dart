@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
 
 
 class Heading extends StatelessWidget {

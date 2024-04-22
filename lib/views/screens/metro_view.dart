@@ -3,12 +3,8 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
-import 'package:rhythm_master/views/extension/int_extension.dart';
-
 import '../widgets/custom_selection_bottomsheet.dart';
-import '../widgets/custom_slider_widget.dart';
 
 class MetroView extends StatefulWidget {
   const MetroView({super.key});
@@ -50,6 +46,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
         children: [
           Expanded(
             child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
               child: Container(
                 //color: Colors.blue,
                 constraints: BoxConstraints(maxWidth: 345, minHeight: 200),
@@ -57,7 +54,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     // SPACER
                     SizedBox(height: height * 0.025),
 
@@ -119,7 +115,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                   ? controller.customBeatValue!
                                                   : controller
                                                       .tapButtonList[index],
-                                          style: JHGTextStyles.subLabelStyle.copyWith(
+                                          style: JHGTextStyles.subLabelStyle
+                                              .copyWith(
                                             color: AppColors.whitePrimary,
                                             fontSize: (index ==
                                                         controller.tapButtonList
@@ -209,10 +206,15 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             ),
                                             //slider
                                             Positioned(
-                                              top:
-                                              controller.bpm <= 250 ?
-                                              (controller.bpm * (controller.bpm*2-50) * 0.0010):
-                                              (controller.bpm * (controller.bpm*2-195) * 0.0010),
+                                              top: controller.bpm <= 250
+                                                  ? (controller.bpm *
+                                                      (controller.bpm * 2 -
+                                                          50) *
+                                                      0.0010)
+                                                  : (controller.bpm *
+                                                      (controller.bpm * 2 -
+                                                          195) *
+                                                      0.0010),
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(
@@ -281,9 +283,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     ),
                     // SPACER
                     SizedBox(
-                      height: height * 0.018,
+                      height: height * 0.007,
                     ),
-                    
+
                     JHGBPMChangeWidget(
                       reverse: true,
                       initialBpmValue: controller.bpm,
@@ -304,6 +306,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           ),
           // Reset button and play pause button
           JHGAppBar(
+            
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(
                 enabled: true,

@@ -84,8 +84,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             SizedBox(height: 10),
                             //BUTTON SELECTION SECTION
                             Container(
+                              //color: Colors.red,
                               constraints: BoxConstraints(maxWidth: 345),
-                              height: height * 0.05,
+                              height: height * 0.057,
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -100,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         controller.changeTab(index);
                                       },
                                       child: Container(
-                                        height: height * 0.05,
-                                        width: 100,
+                                        height: height * 0.057,
+                                        width: width * 0.27,
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                             borderRadius:
@@ -119,7 +120,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           children: [
                                             Text(
                                               buttonList[index],
-                                              style: JHGTextStyles.labelStyle.copyWith(
+                                              style: JHGTextStyles.labelStyle
+                                                  .copyWith(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -189,7 +191,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                   Text(
                                     AppStrings.tooltipsTitle,
-                                    style: JHGTextStyles.lrlabelStyle.copyWith(fontStyle: FontStyle.italic),
+                                    style: JHGTextStyles.lrlabelStyle
+                                        .copyWith(fontStyle: FontStyle.italic),
                                   ),
                                   InkWell(
                                       borderRadius: BorderRadius.circular(50),

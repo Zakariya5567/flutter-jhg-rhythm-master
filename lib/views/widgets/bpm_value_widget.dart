@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:rhythm_master/views/extension/string_extension.dart';
 
+// ignore: must_be_immutable
 class BpmValueWidget extends StatelessWidget {
   BpmValueWidget({super.key,required this.bpmValue});
   String bpmValue;
