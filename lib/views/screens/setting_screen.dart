@@ -27,20 +27,20 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
   PackageInfo? packageInfo;
   String deviceName = 'Unknown';
 
   Future<void> initPackageInfo() async {
-   packageInfo = await getDeviceInfo();
-   deviceName =  await getDeviceName();
+    packageInfo = await getDeviceInfo();
+    deviceName = await getDeviceName();
   }
 
   @override
   void initState() {
     super.initState();
     initPackageInfo();
-    final settingProvider = Provider.of<SettingProvider>(context, listen: false);
+    final settingProvider =
+        Provider.of<SettingProvider>(context, listen: false);
     settingProvider.initializeAnimationController();
   }
 
@@ -54,9 +54,7 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             JHGAppBar(
               title: AppStrings.setting.toText(
-                textStyle: JHGTextStyles.labelStyle.copyWith(
-                fontSize: 20)
-              ),
+                  textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
               trailingWidget: JHGReportAnIssueBtn(onPressed: () {
                 Navigator.push(
                   context,
@@ -73,7 +71,8 @@ class _SettingScreenState extends State<SettingScreen> {
             //  8.0.height,
           ],
         ),
-        body: Consumer2<SettingProvider,HomeProvider>(builder: (context, controller,homeProvider, child) {
+        body: Consumer2<SettingProvider, HomeProvider>(
+            builder: (context, controller, homeProvider, child) {
           return Container(
             height: height,
             width: width,
@@ -87,13 +86,11 @@ class _SettingScreenState extends State<SettingScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
-                        homeProvider.selectedButton == 0 ?
-                        MetronomeSetting(controller: controller):
-                        homeProvider.selectedButton == 1 ?
-                        TapTempoSetting(controller: controller):
-                        SpeedTrainerSetting(controller: controller),
-
+                        homeProvider.selectedButton == 0
+                            ? MetronomeSetting(controller: controller)
+                            : homeProvider.selectedButton == 1
+                                ? TapTempoSetting(controller: controller)
+                                : SpeedTrainerSetting(controller: controller),
                       ],
                     ),
                   ).center.paddingOnly(top: height * 0.02),
@@ -108,34 +105,36 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: AppColors.blackPrimary,
                         child: Column(
                           children: [
-                            homeProvider.selectedButton == 1 ? SizedBox():
-                            InkWell(
-                              onTap: () async {
-                                await controller.onSave(context);
-                                showToast(
-                                    context: context,
-                                    message: "Setting Saved Successfully",
-                                    isError: false);
-                                Navigator.pop(context);
-                              },
-                              child: Center(
-                                child: Container(
-                                  height: height * 0.07,
-                                  width: width * 1,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.redPrimary,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Text(
-                                    AppStrings.save,
-                                    style: JHGTextStyles.labelStyle.copyWith(
-                                      color: AppColors.whitePrimary,
-                                      fontSize: 17
+                            homeProvider.selectedButton == 1
+                                ? SizedBox()
+                                : InkWell(
+                                    onTap: () async {
+                                      await controller.onSave(context);
+                                      showToast(
+                                          context: context,
+                                          message: "Setting Saved Successfully",
+                                          isError: false);
+                                      Navigator.pop(context);
+                                    },
+                                    child: Center(
+                                      child: Container(
+                                        height: height * 0.07,
+                                        width: width * 1,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.redPrimary,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Text(
+                                          AppStrings.save,
+                                          style: JHGTextStyles.labelStyle
+                                              .copyWith(
+                                                  color: AppColors.whitePrimary,
+                                                  fontSize: 17),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
                             JHGSecondaryBtn(
                               label: AppStrings.logout,
                               onPressed: () async {
@@ -171,16 +170,15 @@ class _SettingScreenState extends State<SettingScreen> {
 }
 
 class MetronomeSetting extends StatelessWidget {
-  const MetronomeSetting({super.key,required this.controller});
-   final SettingProvider controller;
+  const MetronomeSetting({super.key, required this.controller});
+  final SettingProvider controller;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return  Column(
+    return Column(
       children: [
-
         Heading(
           padding: 0,
           title: AppStrings.metronome,
@@ -198,36 +196,32 @@ class MetronomeSetting extends StatelessWidget {
           textColor: AppColors.headingColor,
         ),
         8.0.height,
-        Consumer<MetroProvider>(
-            builder: (context, controller, child) {
-              return JHGDropDown<SoundModel>(
-                value:
-                controller.soundList[controller.selectedIndex],
-                items: controller.soundList,
-                expandedColor: AppColors.liteWhite,
-                onChanged: (values) async {
-                  controller.setSound(
-                    ticker: null,
-                    name: values!.name.toString(),
-                    beat1: values.beat1.toString(),
-                    beat2: values.beat2.toString().toString(),
-                    index: values.id!,
-                  );
-                },
+        Consumer<MetroProvider>(builder: (context, controller, child) {
+          return JHGDropDown<SoundModel>(
+            value: controller.soundList[controller.selectedIndex],
+            items: controller.soundList,
+            expandedColor: AppColors.liteWhite,
+            onChanged: (values) async {
+              controller.setSound(
+                ticker: null,
+                name: values!.name.toString(),
+                beat1: values.beat1.toString(),
+                beat2: values.beat2.toString().toString(),
+                index: values.id!,
               );
-            }),
+            },
+          );
+        }),
         10.0.height,
         // DEFAULT BPM
         JHGHeadAndSubHWidget(
           AppStrings.defaultBpm,
-          lableStyle: JHGTextStyles.lrlabelStyle.copyWith(
-              fontSize: 14,
-              color: AppColors.headingColor),
+          lableStyle: JHGTextStyles.lrlabelStyle
+              .copyWith(fontSize: 14, color: AppColors.headingColor),
           actions: [
             JHGValueIncDec(
               initialValue: controller.bpm.toInt(),
-              onChanged: (newValue) =>
-                  controller.onBpmChanged(newValue),
+              onChanged: (newValue) => controller.onBpmChanged(newValue),
               maxValue: controller.bpmMax,
             ),
           ],
@@ -249,8 +243,7 @@ class MetronomeSetting extends StatelessWidget {
             color: AppColors.greyPrimary,
           ),
           child: JHGDropDown(
-            value:
-            controller.soundList[controller.selectedIndex],
+            value: controller.soundList[controller.selectedIndex],
             items: controller.soundList,
             onChanged: (values) async {
               controller.setSound(
@@ -282,88 +275,97 @@ class MetronomeSetting extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () async {
-                      if (index ==
-                          controller.tapButtonList.length) {
+                      if (index == controller.tapButtonList.length) {
                         controller.clearBottomSheetBeats();
                         settingCustomBottomSheet(context, true);
-                        controller.setMetronomeBeats(index,
-                            controller.tapButtonList[index]);
+                        controller.setMetronomeBeats(
+                            index, controller.tapButtonList[index]);
                       } else {
-                        controller.setMetronomeBeats(index,
-                            controller.tapButtonList[index]);
+                        controller.setMetronomeBeats(
+                            index, controller.tapButtonList[index]);
                       }
                     },
                     child: Padding(
-                      padding:
-                      EdgeInsets.only(right: width * 0.025),
+                      padding: EdgeInsets.only(right: width * 0.025),
                       child: Container(
                         height: height * 0.085,
                         width: height * 0.085,
                         decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.circular(10),
-                          color: controller
-                              .selectedMetronomeButton ==
-                              index
+                          borderRadius: BorderRadius.circular(10),
+                          color: controller.selectedMetronomeButton == index
                               ? AppColors.greySecondary
                               : AppColors.greyPrimary,
                         ),
                         child: Center(
                           child: Text(
-                            index ==
-                                controller
-                                    .tapButtonList.length
+                            index == controller.tapButtonList.length
                                 ? "Custom"
-                                : controller
-                                .tapButtonList[index],
+                                : controller.tapButtonList[index],
                             style: JHGTextStyles.subLabelStyle.copyWith(
                                 color: AppColors.whitePrimary,
-                                fontSize: index ==
-                                    controller
-                                        .tapButtonList.length
-                                    ? 12
-                                    : 18
-                            ),
+                                fontSize:
+                                    index == controller.tapButtonList.length
+                                        ? 12
+                                        : 18),
                           ),
                         ),
                       ),
                     ),
                   );
                 })),
-        20.0.height,
-        Heading(
-          padding: 0,
-          title: AppStrings.sliderInterval,
-          numbers: controller.metronomeDefaultInterval.toStringAsFixed(0),
-          fontSize: 14,
-          textColor: AppColors.headingColor,
+        15.0.height,
+        Row(
+          children: [
+            Heading(
+              padding: 0,
+              title: AppStrings.sliderInterval,
+              numbers: '',
+              // numbers: controller.speedDefaultInterval.toStringAsFixed(0),
+              fontSize: 14,
+              textColor: AppColors.headingColor,
+            ),
+            Spacer(),
+            //8.0.height,
+            JHGValueIncDec(
+                initialValue: controller.metronomeDefaultInterval.toInt(),
+                onChanged: (value) {
+                  controller.setMetronomeDefaultInterval(value.toDouble());
+                },
+                maxValue: 10),
+          ],
         ),
-        8.0.height,
-        SliderWidget(
-            height: height,
-            min: 1,
-            max: 99,
-            value: controller.metronomeDefaultInterval,
-            onChanged: (value){
-              controller.setMetronomeDefaultInterval(value);
-            }),
+        // 20.0.height,
+        // Heading(
+        //   padding: 0,
+        //   title: AppStrings.sliderInterval,
+        //   numbers: controller.metronomeDefaultInterval.toStringAsFixed(0),
+        //   fontSize: 14,
+        //   textColor: AppColors.headingColor,
+        // ),
+        // 8.0.height,
+        // SliderWidget(
+        //     height: height,
+        //     min: 1,
+        //     max: 99,
+        //     value: controller.metronomeDefaultInterval,
+        //     onChanged: (value) {
+        //       controller.setMetronomeDefaultInterval(value);
+        //     }),
         30.0.height,
-
       ],
     );
   }
 }
 
-
 class SpeedTrainerSetting extends StatelessWidget {
-  const SpeedTrainerSetting({super.key,required this.controller});
+  const SpeedTrainerSetting({super.key, required this.controller});
   final SettingProvider controller;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return   Column(
+    return Column(
       children: [
         // SPEED TRAINER HEADING
         Heading(
@@ -391,8 +393,7 @@ class SpeedTrainerSetting extends StatelessWidget {
               color: AppColors.greyPrimary,
             ),
             child: JHGDropDown(
-              value: controller.soundList[
-              controller.speedTrainerSelectedIndex],
+              value: controller.soundList[controller.speedTrainerSelectedIndex],
               items: controller.soundList,
               onChanged: (values) async {
                 controller.setSpeedTrainerSound(
@@ -423,48 +424,34 @@ class SpeedTrainerSetting extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () async {
-                    if (index ==
-                        controller
-                            .tapSpeedTrainerButtonList.length) {
+                    if (index == controller.tapSpeedTrainerButtonList.length) {
                       controller.clearBottomSheetBeats();
                       settingCustomBottomSheet(context, false);
                     } else {
                       controller.setSpeedTrainerBeats(
-                          index,
-                          controller.tapSpeedTrainerButtonList[
-                          index]);
+                          index, controller.tapSpeedTrainerButtonList[index]);
                     }
                   },
                   child: Padding(
-                    padding:
-                    EdgeInsets.only(right: width * 0.025),
+                    padding: EdgeInsets.only(right: width * 0.025),
                     child: Container(
                       height: height * 0.085,
                       width: height * 0.085,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: controller
-                            .selectedSpeedTrainerButton ==
-                            index
+                        color: controller.selectedSpeedTrainerButton == index
                             ? AppColors.greySecondary
                             : AppColors.greyPrimary,
                       ),
                       child: Center(
                         child: Text(
-                          index ==
-                              controller
-                                  .tapSpeedTrainerButtonList
-                                  .length
+                          index == controller.tapSpeedTrainerButtonList.length
                               ? "Custom"
-                              : controller
-                              .tapSpeedTrainerButtonList[
-                          index],
+                              : controller.tapSpeedTrainerButtonList[index],
                           style: JHGTextStyles.subLabelStyle.copyWith(
                             color: AppColors.whitePrimary,
                             fontSize: index ==
-                                controller
-                                    .tapSpeedTrainerButtonList
-                                    .length
+                                    controller.tapSpeedTrainerButtonList.length
                                 ? 12
                                 : 18,
                           ),
@@ -476,22 +463,34 @@ class SpeedTrainerSetting extends StatelessWidget {
               }),
         ),
         20.0.height,
-        Heading(
-            padding: 0,
-            title: AppStrings.sliderInterval,
-            numbers: controller.speedDefaultInterval.toStringAsFixed(0),
-            fontSize: 14,
-            textColor: AppColors.headingColor,
+        Row(
+          children: [
+            Heading(
+              padding: 0,
+              title: AppStrings.sliderInterval,
+              numbers: '',
+              // numbers: controller.speedDefaultInterval.toStringAsFixed(0),
+              fontSize: 14,
+              textColor: AppColors.headingColor,
             ),
-        8.0.height,
-        SliderWidget(
-            height: height,
-            min: 1,
-            max: 99,
-            value: controller.speedDefaultInterval,
-            onChanged: (value){
-              controller.setSpeedTrainerDefaultInterval(value);
-            }),
+            Spacer(),
+            //8.0.height,
+            JHGValueIncDec(
+                initialValue: controller.speedDefaultInterval.toInt(),
+                onChanged: (value) {
+                  controller.setSpeedTrainerDefaultInterval(value.toDouble());
+                },
+                maxValue: 10),
+          ],
+        ),
+        // SliderWidget(
+        //     height: height,
+        //     min: 1,
+        //     max: 99,
+        //     value: controller.speedDefaultInterval,
+        //     onChanged: (value){
+        //       controller.setSpeedTrainerDefaultInterval(value);
+        //     }),
 
         180.0.height
       ],
@@ -499,22 +498,17 @@ class SpeedTrainerSetting extends StatelessWidget {
   }
 }
 
-
-
 class TapTempoSetting extends StatelessWidget {
-  const TapTempoSetting({super.key,required this.controller});
+  const TapTempoSetting({super.key, required this.controller});
   final SettingProvider controller;
 
   @override
   Widget build(BuildContext context) {
-    return   Text(
+    return Text(
       textAlign: TextAlign.center,
       AppStrings.tapTempoSettingText,
-      style: JHGTextStyles.labelStyle.copyWith(
-          color: AppColors.whitePrimary,
-          fontSize: 17
-      ),
+      style: JHGTextStyles.labelStyle
+          .copyWith(color: AppColors.whitePrimary, fontSize: 17),
     ).paddingOnly(top: 290.0.h);
   }
 }
-
