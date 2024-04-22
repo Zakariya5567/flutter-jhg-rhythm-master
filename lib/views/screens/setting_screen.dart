@@ -331,7 +331,7 @@ class MetronomeSetting extends StatelessWidget {
                 onChanged: (value) {
                   controller.setMetronomeDefaultInterval(value.toDouble());
                 },
-                maxValue: 10),
+                maxValue: 99),
           ],
         ),
         // 20.0.height,
@@ -480,7 +480,7 @@ class SpeedTrainerSetting extends StatelessWidget {
                 onChanged: (value) {
                   controller.setSpeedTrainerDefaultInterval(value.toDouble());
                 },
-                maxValue: 10),
+                maxValue: 99),
           ],
         ),
         // SliderWidget(
