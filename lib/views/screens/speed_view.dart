@@ -45,6 +45,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
     return Consumer<SpeedProvider>(builder: (context, controller, child) {
       return Column(
         children: [
+          15.0.height,
+
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -128,7 +130,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       actions: [
                         JHGValueIncDec(
                           initialValue: controller.interval,
-                           interval: controller.gafInterval.toInt(),
+                          interval: controller.gafInterval.toInt(),
                           onChanged: (int newValue) =>
                               controller.onChangedInterval(newValue),
                           maxValue: 120,
@@ -137,7 +139,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
                     // INTERVAL BUTTONS
                     // SPACER
-                    22.0.height,
+                    25.0.height,
                     // BPM VALUE SECTION
 
                     // Reset and play pause BUTTON
@@ -146,12 +148,13 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ),
             ),
           ),
+          //  0.0.height,
+
           BpmValueWidget(
             bpmValue: controller.bpm > controller.targetTempo
                 ? controller.targetTempo.toStringAsFixed(0)
                 : controller.bpm.toStringAsFixed(0),
           ).center,
-          25.0.height,
           JHGAppBar(
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(

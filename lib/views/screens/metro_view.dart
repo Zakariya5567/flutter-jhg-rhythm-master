@@ -283,7 +283,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     ),
                     // SPACER
                     SizedBox(
-                      height: height * 0.007,
+                      height: height * 0.0,
                     ),
 
                     JHGBPMChangeWidget(
@@ -297,7 +297,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     ),
 
                     SizedBox(
-                      height: height * 0.02,
+                      height: height * 0.0,
                     ),
                   ],
                 ),
