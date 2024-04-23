@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
@@ -14,7 +15,6 @@ import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
 
 import 'app_utils/app_info.dart';
-
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -42,11 +42,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   PackageInfo? packageInfo;
 
   Future<void> initPackageInfo() async {
-      packageInfo = await getDeviceInfo();
+    packageInfo = await getDeviceInfo();
   }
 
   @override
@@ -54,7 +53,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPackageInfo();
   }
-
 
   // This widget is the root of your application.
   @override
@@ -88,14 +86,21 @@ class _MyAppState extends State<MyApp> {
         },
         debugShowCheckedModeBanner: false,
         title: 'JHG Rhythm ',
-        theme: JHGTheme.themeData,
-        home: SplashScreen(
-          yearlySubscriptionId: yearlySubscription(),
-          monthlySubscriptionId: monthlySubscription(),
-          appName: AppStrings.appName,
-          appVersion: packageInfo?.version ?? "",
-          nextPage: () => const HomeScreen(), featuresList: getFeaturesList(),
+        theme: JHGTheme.themeData.copyWith(
+          scrollbarTheme: ScrollbarThemeData(
+            thumbColor: MaterialStateProperty.all(JHGColors.whiteGrey),
+          ),
         ),
+        home: kIsWeb
+            ? const HomeScreen()
+            : SplashScreen(
+                yearlySubscriptionId: yearlySubscription(),
+                monthlySubscriptionId: monthlySubscription(),
+                appName: AppStrings.appName,
+                appVersion: packageInfo?.version ?? "",
+                nextPage: () => const HomeScreen(),
+                featuresList: getFeaturesList(),
+              ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ customSelectionBottomSheet(
         final width = MediaQuery.sizeOf(context).width;
         return Consumer<MetroProvider>(builder: (context, controller, child) {
           return Container(
-            height: height * 0.85,
+            height: height * (kIsWeb ? 0.95 : 0.85),
             width: width,
             decoration: BoxDecoration(
                 color: AppColors.greyPrimary,
@@ -121,7 +122,8 @@ customSelectionBottomSheet(
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(
                           AppStrings.save,
-                          style: JHGTextStyles.labelStyle.copyWith(fontSize: 17),
+                          style:
+                              JHGTextStyles.labelStyle.copyWith(fontSize: 17),
                         ),
                       ),
                     ),

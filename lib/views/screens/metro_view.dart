@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
     //metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
     final metroWidth = 240.0;
-    final metroHeight = 308.0;
+    final metroHeight = kIsWeb ? 270.0 : 308.0;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
       return Column(
         children: [
@@ -306,7 +307,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           ),
           // Reset button and play pause button
           JHGAppBar(
-            
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(
                 enabled: true,

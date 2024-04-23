@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rhythm_master/services/local_db.dart';
+import 'package:universal_html/html.dart';
 
 class HomeProvider extends ChangeNotifier {
+
+  // disable the web when active status is false
+  var userNameWeb = 'DefaultUserName';
+  var isActive = true;
+
   // initial values tab page
   // 0 for Metronome | 1 for Tap Tempo | 2 for Speed Trainer
   int selectedButton = 0;
@@ -32,6 +38,15 @@ class HomeProvider extends ChangeNotifier {
     isFirstTimeOpen = false;
     await SharedPref.setIsFirstTimeOpenApp(false);
     notifyListeners();
+  }
+
+  void getUserNameFromRL() async {
+    try {
+      var uri = Uri.parse(window.location.href);
+      userNameWeb = uri.queryParameters['username'].toString();
+      isActive = bool.parse(uri.queryParameters['active'].toString());
+      notifyListeners();
+    } on Exception {}
   }
 
 }

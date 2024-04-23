@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -50,9 +51,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: JHGBody(
-        bodyAppBar: Column(
-          children: [
-            JHGAppBar(
+        bodyAppBar: JHGAppBar(
               title: AppStrings.setting.toText(
                   textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
               trailingWidget: JHGReportAnIssueBtn(onPressed: () {
@@ -67,19 +66,15 @@ class _SettingScreenState extends State<SettingScreen> {
                 );
               }),
             ),
-
-            //  8.0.height,
-          ],
-        ),
         body: Consumer2<SettingProvider, HomeProvider>(
             builder: (context, controller, homeProvider, child) {
           return Container(
-            height: height,
-            width: width,
+            width: kIsWeb ? 345 : width,
             color: AppColors.blackPrimary,
-            child: Stack(
+            child: Column(
               children: [
-                SingleChildScrollView(
+                Expanded(
+                    child: SingleChildScrollView(
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 345),
                     child: Column(
@@ -94,10 +89,10 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ).center.paddingOnly(top: height * 0.02),
-                ),
+                )),
                 Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Spacer(),
                     Center(
                       child: Container(
                         constraints: BoxConstraints(maxWidth: 347),
@@ -171,6 +166,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
 class MetronomeSetting extends StatelessWidget {
   const MetronomeSetting({super.key, required this.controller});
+
   final SettingProvider controller;
 
   @override
@@ -359,6 +355,7 @@ class MetronomeSetting extends StatelessWidget {
 
 class SpeedTrainerSetting extends StatelessWidget {
   const SpeedTrainerSetting({super.key, required this.controller});
+
   final SettingProvider controller;
 
   @override
@@ -500,6 +497,7 @@ class SpeedTrainerSetting extends StatelessWidget {
 
 class TapTempoSetting extends StatelessWidget {
   const TapTempoSetting({super.key, required this.controller});
+
   final SettingProvider controller;
 
   @override
