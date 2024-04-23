@@ -130,7 +130,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       actions: [
                         JHGValueIncDec(
                           initialValue: controller.interval,
-                          interval: controller.gafInterval.toInt(),
+                          //interval: controller.gafInterval.toInt(),
                           onChanged: (int newValue) =>
                               controller.onChangedInterval(newValue),
                           maxValue: 120,
