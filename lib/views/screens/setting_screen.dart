@@ -16,7 +16,6 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
-import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
 
@@ -52,20 +51,20 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: JHGBody(
         bodyAppBar: JHGAppBar(
-              title: AppStrings.setting.toText(
-                  textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
-              trailingWidget: JHGReportAnIssueBtn(onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BugReportPage(
-                      device: deviceName,
-                      appName: AppStrings.appName,
-                    ),
-                  ),
-                );
-              }),
-            ),
+          title: AppStrings.setting.toText(
+              textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
+          trailingWidget: JHGReportAnIssueBtn(onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BugReportPage(
+                  device: deviceName,
+                  appName: AppStrings.appName,
+                ),
+              ),
+            );
+          }),
+        ),
         body: Consumer2<SettingProvider, HomeProvider>(
             builder: (context, controller, homeProvider, child) {
           return Container(
@@ -193,20 +192,22 @@ class MetronomeSetting extends StatelessWidget {
         ),
         8.0.height,
         Consumer<MetroProvider>(builder: (context, controller, child) {
-          return JHGDropDown<SoundModel>(
-            value: controller.soundList[controller.selectedIndex],
-            items: controller.soundList,
-            expandedColor: AppColors.liteWhite,
-            onChanged: (values) async {
-              controller.setSound(
-                ticker: null,
-                name: values!.name.toString(),
-                beat1: values.beat1.toString(),
-                beat2: values.beat2.toString().toString(),
-                index: values.id!,
-              );
-            },
-          );
+          return MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: JHGDropDown<SoundModel>(
+                value: controller.soundList[controller.selectedIndex],
+                items: controller.soundList,
+                expandedColor: AppColors.liteWhite,
+                onChanged: (values) async {
+                  controller.setSound(
+                    ticker: null,
+                    name: values!.name.toString(),
+                    beat1: values.beat1.toString(),
+                    beat2: values.beat2.toString().toString(),
+                    index: values.id!,
+                  );
+                },
+              ));
         }),
         10.0.height,
         // DEFAULT BPM
@@ -238,18 +239,20 @@ class MetronomeSetting extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             color: AppColors.greyPrimary,
           ),
-          child: JHGDropDown(
-            value: controller.soundList[controller.selectedIndex],
-            items: controller.soundList,
-            onChanged: (values) async {
-              controller.setSound(
-                name: values!.name.toString(),
-                beat1: values.beat1.toString(),
-                beat2: values.beat2.toString().toString(),
-                index: values.id!,
-              );
-            },
-          ),
+          child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: JHGDropDown(
+                value: controller.soundList[controller.selectedIndex],
+                items: controller.soundList,
+                onChanged: (values) async {
+                  controller.setSound(
+                    name: values!.name.toString(),
+                    beat1: values.beat1.toString(),
+                    beat2: values.beat2.toString().toString(),
+                    index: values.id!,
+                  );
+                },
+              )),
         ),
         10.0.height,
         // DEFAULT SOUND
@@ -269,45 +272,47 @@ class MetronomeSetting extends StatelessWidget {
                 itemCount: controller.tapButtonList.length + 1,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () async {
-                      if (index == controller.tapButtonList.length) {
-                        controller.clearBottomSheetBeats();
-                        settingCustomBottomSheet(context, true);
-                        controller.setMetronomeBeats(
-                            index, controller.tapButtonList[index]);
-                      } else {
-                        controller.setMetronomeBeats(
-                            index, controller.tapButtonList[index]);
-                      }
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(right: width * 0.025),
-                      child: Container(
-                        height: height * 0.085,
-                        width: height * 0.085,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: controller.selectedMetronomeButton == index
-                              ? AppColors.greySecondary
-                              : AppColors.greyPrimary,
-                        ),
-                        child: Center(
-                          child: Text(
-                            index == controller.tapButtonList.length
-                                ? "Custom"
-                                : controller.tapButtonList[index],
-                            style: JHGTextStyles.subLabelStyle.copyWith(
-                                color: AppColors.whitePrimary,
-                                fontSize:
-                                    index == controller.tapButtonList.length
-                                        ? 12
-                                        : 18),
+                  return MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () async {
+                          if (index == controller.tapButtonList.length) {
+                            controller.clearBottomSheetBeats();
+                            settingCustomBottomSheet(context, true);
+                            controller.setMetronomeBeats(
+                                index, controller.tapButtonList[index]);
+                          } else {
+                            controller.setMetronomeBeats(
+                                index, controller.tapButtonList[index]);
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(right: width * 0.025),
+                          child: Container(
+                            height: height * 0.085,
+                            width: height * 0.085,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: controller.selectedMetronomeButton == index
+                                  ? AppColors.greySecondary
+                                  : AppColors.greyPrimary,
+                            ),
+                            child: Center(
+                              child: Text(
+                                index == controller.tapButtonList.length
+                                    ? "Custom"
+                                    : controller.tapButtonList[index],
+                                style: JHGTextStyles.subLabelStyle.copyWith(
+                                    color: AppColors.whitePrimary,
+                                    fontSize:
+                                        index == controller.tapButtonList.length
+                                            ? 12
+                                            : 18),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  );
+                      ));
                 })),
         15.0.height,
         Row(
@@ -384,23 +389,27 @@ class SpeedTrainerSetting extends StatelessWidget {
         // SPACER
         8.0.height,
         Container(
-            width: width * 1,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: AppColors.greyPrimary,
-            ),
-            child: JHGDropDown(
-              value: controller.soundList[controller.speedTrainerSelectedIndex],
-              items: controller.soundList,
-              onChanged: (values) async {
-                controller.setSpeedTrainerSound(
-                  name: values!.name.toString(),
-                  beat1: values.beat1.toString(),
-                  beat2: values.beat2.toString().toString(),
-                  index: values.id!,
-                );
-              },
-            )),
+          width: width * 1,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: AppColors.greyPrimary,
+          ),
+          child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: JHGDropDown(
+                value:
+                    controller.soundList[controller.speedTrainerSelectedIndex],
+                items: controller.soundList,
+                onChanged: (values) async {
+                  controller.setSpeedTrainerSound(
+                    name: values!.name.toString(),
+                    beat1: values.beat1.toString(),
+                    beat2: values.beat2.toString().toString(),
+                    index: values.id!,
+                  );
+                },
+              )),
+        ),
         10.0.height,
         // DEFAULT SOUND
         Heading(
@@ -419,38 +428,43 @@ class SpeedTrainerSetting extends StatelessWidget {
               itemCount: controller.tapSpeedTrainerButtonList.length + 1,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () async {
-                    if (index == controller.tapSpeedTrainerButtonList.length) {
-                      controller.clearBottomSheetBeats();
-                      settingCustomBottomSheet(context, false);
-                    } else {
-                      controller.setSpeedTrainerBeats(
-                          index, controller.tapSpeedTrainerButtonList[index]);
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: width * 0.025),
-                    child: Container(
-                      height: height * 0.085,
-                      width: height * 0.085,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: controller.selectedSpeedTrainerButton == index
-                            ? AppColors.greySecondary
-                            : AppColors.greyPrimary,
-                      ),
-                      child: Center(
-                        child: Text(
-                          index == controller.tapSpeedTrainerButtonList.length
-                              ? "Custom"
-                              : controller.tapSpeedTrainerButtonList[index],
-                          style: JHGTextStyles.subLabelStyle.copyWith(
-                            color: AppColors.whitePrimary,
-                            fontSize: index ==
-                                    controller.tapSpeedTrainerButtonList.length
-                                ? 12
-                                : 18,
+                return MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      if (index ==
+                          controller.tapSpeedTrainerButtonList.length) {
+                        controller.clearBottomSheetBeats();
+                        settingCustomBottomSheet(context, false);
+                      } else {
+                        controller.setSpeedTrainerBeats(
+                            index, controller.tapSpeedTrainerButtonList[index]);
+                      }
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: width * 0.025),
+                      child: Container(
+                        height: height * 0.085,
+                        width: height * 0.085,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: controller.selectedSpeedTrainerButton == index
+                              ? AppColors.greySecondary
+                              : AppColors.greyPrimary,
+                        ),
+                        child: Center(
+                          child: Text(
+                            index == controller.tapSpeedTrainerButtonList.length
+                                ? "Custom"
+                                : controller.tapSpeedTrainerButtonList[index],
+                            style: JHGTextStyles.subLabelStyle.copyWith(
+                              color: AppColors.whitePrimary,
+                              fontSize: index ==
+                                      controller
+                                          .tapSpeedTrainerButtonList.length
+                                  ? 12
+                                  : 18,
+                            ),
                           ),
                         ),
                       ),

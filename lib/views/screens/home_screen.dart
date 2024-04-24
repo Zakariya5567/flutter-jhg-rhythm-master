@@ -139,7 +139,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         // itemBuilder: (context, index) {
                                         children: List.generate(
                                             buttonList.length, (index) {
-                                          return GestureDetector(
+                                          return MouseRegion(child:
+                                            GestureDetector(
                                             onTap: () async {
                                               controller.changeTab(index);
                                             },
@@ -190,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 ],
                                               ),
                                             ),
-                                          );
+                                          ),cursor: SystemMouseCursors.click,);
                                         })),
                                   ),
 

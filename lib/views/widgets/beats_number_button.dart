@@ -21,7 +21,7 @@ class BeatsNumberButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // MINUS BUTTON
-        GestureDetector(
+      MouseRegion(cursor: SystemMouseCursors.click,child: GestureDetector(
           onTap: (onSubtract),
           child: Container(
             height: height * 0.038,
@@ -36,7 +36,7 @@ class BeatsNumberButton extends StatelessWidget {
                   color: AppColors.whitePrimary,
                 )),
           ),
-        ),
+        )),
 
         SizedBox(width: 8),
 
@@ -59,7 +59,7 @@ class BeatsNumberButton extends StatelessWidget {
         SizedBox(width: 8),
         // PLUS BUTTON
 
-        GestureDetector(
+        MouseRegion(cursor: SystemMouseCursors.click,child:   GestureDetector(
           onTap: (onAdd),
           child: Container(
             height:  height * 0.038,
@@ -74,7 +74,7 @@ class BeatsNumberButton extends StatelessWidget {
                   color: AppColors.whitePrimary,
                 )),
           ),
-        ),
+        ),)
       ],
     );
   }
