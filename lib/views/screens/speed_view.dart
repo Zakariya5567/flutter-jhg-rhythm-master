@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
@@ -22,14 +23,17 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
   void initState() {
     final speedProvider = Provider.of<SpeedProvider>(context, listen: false);
     speedProvider.initializeAnimationController();
+    settingProvider = Provider.of<SettingProvider>(context, listen: false);
     super.initState();
   }
 
   SpeedProvider? speedProvider;
+  SettingProvider? settingProvider;
 
   @override
   void didChangeDependencies() {
     speedProvider = Provider.of<SpeedProvider>(context, listen: false);
+    settingProvider = Provider.of<SettingProvider>(context, listen: false);
     super.didChangeDependencies();
   }
 
@@ -63,10 +67,12 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       numbers: controller.startTempo.toStringAsFixed(0),
                       showButtons: true,
                       addButton: () {
-                        controller.incrementTempo();
+                        controller.incrementTempo(
+                            settingProvider!.speedDefaultInterval.toInt());
                       },
                       minusButton: () {
-                        controller.decrementTempo();
+                        controller.decrementTempo(
+                            settingProvider!.speedDefaultInterval.toInt());
                       },
                     ),
                     // SPACER
@@ -89,10 +95,12 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       showButtons: true,
                       addButton: () {
                         print("im incerment");
-                        controller.incrementTargetTempo();
+                        controller.incrementTargetTempo(
+                            settingProvider!.speedDefaultInterval.toInt());
                       },
                       minusButton: () {
-                        controller.decrementTargetTempo();
+                        controller.decrementTargetTempo(
+                            settingProvider!.speedDefaultInterval.toInt());
                       },
                     ),
                     // SPACER

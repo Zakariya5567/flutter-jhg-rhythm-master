@@ -38,7 +38,7 @@ class Heading extends StatelessWidget {
             title,
             style: JHGTextStyles.lrlabelStyle.copyWith(
               color: textColor ?? AppColors.whitePrimary,
-              fontSize: fontSize ?? 20,
+              fontSize: fontSize ?? 18,
               fontWeight: fontWeight ?? FontWeight.w700,
             ),
           ),

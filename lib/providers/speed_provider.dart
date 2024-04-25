@@ -352,7 +352,7 @@ class SpeedProvider extends ChangeNotifier {
     player.play();
   }
 
-  void incrementTempo() {
+  void incrementTempo(int interval) {
     if (startTempo + interval <= targetTempo) {
       startTempo += interval;
     } else {
@@ -363,7 +363,7 @@ class SpeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void decrementTempo() {
+  void decrementTempo(int interval) {
     if (startTempo - interval >= 1) {
       startTempo -= interval;
     } else {
@@ -375,7 +375,7 @@ class SpeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void incrementTargetTempo() {
+  void incrementTargetTempo(int interval) {
     if (targetTempo + interval <= 300) {
       targetTempo += interval;
     } else {
@@ -386,7 +386,7 @@ class SpeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void decrementTargetTempo() {
+  void decrementTargetTempo(int interval) {
     if (targetTempo - interval >= 1) {
       targetTempo -= interval;
     } else {
