@@ -12,6 +12,7 @@ import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
@@ -29,7 +30,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   PackageInfo? packageInfo;
   String deviceName = 'Unknown';
-
+  SpeedProvider? speedController;
   Future<void> initPackageInfo() async {
     packageInfo = await getDeviceInfo();
     deviceName = await getDeviceName();
@@ -41,6 +42,8 @@ class _SettingScreenState extends State<SettingScreen> {
     initPackageInfo();
     final settingProvider =
         Provider.of<SettingProvider>(context, listen: false);
+    speedController = Provider.of<SpeedProvider>(context, listen: false);
+
     settingProvider.initializeAnimationController();
   }
 
@@ -84,7 +87,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             ? MetronomeSetting(controller: controller)
                             : homeProvider.selectedButton == 1
                                 ? TapTempoSetting(controller: controller)
-                                : SpeedTrainerSetting(controller: controller),
+                                : SpeedTrainerSetting(
+                                    controller: controller,
+                                    speedController: speedController!),
                       ],
                     ),
                   ).center.paddingOnly(top: height * 0.02),
@@ -359,9 +364,11 @@ class MetronomeSetting extends StatelessWidget {
 }
 
 class SpeedTrainerSetting extends StatelessWidget {
-  const SpeedTrainerSetting({super.key, required this.controller});
+  const SpeedTrainerSetting(
+      {super.key, required this.controller, required this.speedController});
 
   final SettingProvider controller;
+  final SpeedProvider speedController;
 
   @override
   Widget build(BuildContext context) {
@@ -473,37 +480,64 @@ class SpeedTrainerSetting extends StatelessWidget {
                 );
               }),
         ),
-        20.0.height,
-        Row(
-          children: [
-            Heading(
-              padding: 0,
-              title: AppStrings.sliderInterval,
-              numbers: '',
-              // numbers: controller.speedDefaultInterval.toStringAsFixed(0),
-              fontSize: 14,
-              textColor: AppColors.headingColor,
-            ),
-            Spacer(),
-            //8.0.height,
-            JHGValueIncDec(
-                initialValue: controller.speedDefaultInterval.toInt(),
-                onChanged: (value) {
-                  controller.setSpeedTrainerDefaultInterval(value.toDouble());
-                },
-                maxValue: 99),
-          ],
-        ),
-        // SliderWidget(
-        //     height: height,
-        //     min: 1,
-        //     max: 99,
-        //     value: controller.speedDefaultInterval,
-        //     onChanged: (value){
-        //       controller.setSpeedTrainerDefaultInterval(value);
-        //     }),
 
+        20.0.height,
+        defaultWid(
+          AppStrings.defaultBars,
+          speedController.defaultBar,
+          onChanged: (value) {
+            speedController.onChangedDefaultBar(value);
+          },
+        ),
+        20.0.height,
+        defaultWid(
+          AppStrings.defaultInterval,
+          speedController.defaultInterval,
+          onChanged: (value) {
+            speedController.onChangedDefaultInterval(value);
+          },
+        ),
+        20.0.height,
+        defaultWid(
+          AppStrings.sliderInterval,
+          speedController.sliderInterval.toInt(),
+          onChanged: (value) {
+            speedController.onChangedSliderInterval(value);
+          },
+        ),
+
+        //  Heading(
+        //               title: AppStrings.startingTempo,
+        //               numbers: controller.startTempo.toStringAsFixed(0),
+        //               showButtons: true,
+        //               addButton: () {
+        //                 controller.incrementTempo(
+        //                     settingProvider!.speedDefaultInterval.toInt());
+        //               },
+        //               minusButton: () {
+        //                 controller.decrementTempo(
+        //                     settingProvider!.speedDefaultInterval.toInt());
+        //               },
+        //             ),
         180.0.height
+      ],
+    );
+  }
+
+  Row defaultWid(String title, int initialValue,
+      {required dynamic Function(int) onChanged}) {
+    return Row(
+      children: [
+        Heading(
+          padding: 0,
+          title: title,
+          numbers: '',
+          fontSize: 14,
+          textColor: AppColors.headingColor,
+        ),
+        Spacer(),
+        JHGValueIncDec(
+            initialValue: initialValue, onChanged: onChanged, maxValue: 99),
       ],
     );
   }

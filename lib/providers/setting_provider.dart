@@ -18,17 +18,20 @@ class SettingProvider extends ChangeNotifier {
   double speedDefaultInterval = 1;
   double metronomeDefaultInterval = 1;
 
-
-  setSpeedTrainerDefaultInterval(double value){
+  setSpeedTrainerDefaultInterval(double value) {
     speedDefaultInterval = value;
     notifyListeners();
   }
 
-  setMetronomeDefaultInterval(double value){
-    metronomeDefaultInterval = value;
+  setSpeedTrainerSInterval(double value) {
+    speedDefaultInterval = value;
     notifyListeners();
   }
 
+  setMetronomeDefaultInterval(double value) {
+    metronomeDefaultInterval = value;
+    notifyListeners();
+  }
 
   clearBottomSheetBeats() {
     beatNumerator = 2;
@@ -185,15 +188,17 @@ class SettingProvider extends ChangeNotifier {
       double? defBPM = await SharedPref.getDefaultBPM;
       int? defSound = await SharedPref.getDefaultSound;
       int? defTiming = await SharedPref.getDefaultTiming;
-      int? defSpeedTrainerTiming = await SharedPref.getSpeedTrainerDefaultTiming;
+      int? defSpeedTrainerTiming =
+          await SharedPref.getSpeedTrainerDefaultTiming;
 
       String? defMetroValue = await SharedPref.getMetronomeDefaultValue;
       String? defSpeedValue = await SharedPref.getSpeedTrainerDefaultValue;
 
       double? defMetroInterval = await SharedPref.getMetronomeDefaultInterval;
-      double? defSpeedInterval = await SharedPref.getSpeedTrainerDefaultInterval;
+      double? defSpeedInterval =
+          await SharedPref.getSpeedTrainerDefaultInterval;
 
-      metronomeDefaultInterval  = defMetroInterval ?? 1;
+      metronomeDefaultInterval = defMetroInterval ?? 1;
       speedDefaultInterval = defSpeedInterval ?? 1;
 
       selectedMetronomeButton = defTiming ?? 0;
@@ -337,7 +342,6 @@ class SettingProvider extends ChangeNotifier {
     await SharedPref.storeSpeedTrainerDefaultInterval(speedDefaultInterval);
 
     await SharedPref.storeMetronomeDefaultInterval(metronomeDefaultInterval);
-
 
     Provider.of<SpeedProvider>(context, listen: false)
         .setSpeedTrainerDefaultValue();

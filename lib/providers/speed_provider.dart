@@ -39,7 +39,9 @@ class SpeedProvider extends ChangeNotifier {
   int bar = 2;
   int minBar = 1;
   int maxBar = 60;
-
+  int defaultBar = 2;
+  int defaultInterval = 1;
+  int sliderInterval = 1;
   int totalBeats = 4;
 
   final player = AudioPlayer();
@@ -210,8 +212,8 @@ class SpeedProvider extends ChangeNotifier {
     bpm = 120;
     startTempo = 120;
     targetTempo = 180;
-    interval = 10;
-    bar = 2;
+    interval = defaultInterval;
+    bar = defaultBar;
     totalTick = 0;
     barCounter = 0;
     if (isNotify == true) {
@@ -263,6 +265,21 @@ class SpeedProvider extends ChangeNotifier {
     if (isPlaying) {
       setTimer();
     }
+  }
+
+  onChangedDefaultBar(int newValue) {
+    defaultBar = newValue;
+    notifyListeners();
+  }
+
+  onChangedDefaultInterval(int newValue) {
+    defaultInterval = newValue;
+    notifyListeners();
+  }
+
+  onChangedSliderInterval(int newValue) {
+    sliderInterval = newValue;
+    notifyListeners();
   }
 
   // START OR STOP AUDIO
@@ -353,8 +370,8 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   void incrementTempo(int interval) {
-    if (startTempo + interval <= targetTempo) {
-      startTempo += interval;
+    if (startTempo + sliderInterval <= targetTempo) {
+      startTempo += sliderInterval;
     } else {
       // If incrementing would exceed targetTempo, set startTempo to targetTempo
       startTempo = targetTempo;
@@ -364,8 +381,8 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   void decrementTempo(int interval) {
-    if (startTempo - interval >= 1) {
-      startTempo -= interval;
+    if (startTempo - sliderInterval >= 1) {
+      startTempo -= sliderInterval;
     } else {
       // If reducing would go below 1, just set startTempo to 1
       startTempo = 1;
@@ -376,8 +393,8 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   void incrementTargetTempo(int interval) {
-    if (targetTempo + interval <= 300) {
-      targetTempo += interval;
+    if (targetTempo + sliderInterval <= 300) {
+      targetTempo += sliderInterval;
     } else {
       // If incrementing would exceed targetTempo, set startTempo to targetTempo
       targetTempo = 300;
@@ -387,8 +404,8 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   void decrementTargetTempo(int interval) {
-    if (targetTempo - interval >= 1) {
-      targetTempo -= interval;
+    if (targetTempo - sliderInterval >= 1) {
+      targetTempo -= sliderInterval;
     } else {
       targetTempo = 1;
     }

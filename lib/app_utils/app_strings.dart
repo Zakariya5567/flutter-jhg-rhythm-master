@@ -14,6 +14,8 @@ class AppStrings {
   static const String defaultBpm = 'Default BPM';
 
   static const String sliderInterval = 'Slider Interval';
+  static const String defaultInterval = 'Default Interval';
+  static const String defaultBars = 'Default Bars';
   static const String tapTempo = 'Tap Tempo';
   static const String tapTempoDesc = 'Tap Tempo Description';
   static const String metronome = 'Metronome';

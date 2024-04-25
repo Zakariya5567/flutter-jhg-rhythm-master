@@ -96,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ? false
                         : true
                     : false,
+                // ignore: deprecated_member_use
                 child: WillPopScope(
                   onWillPop: onWillPop,
                   child: Scaffold(
