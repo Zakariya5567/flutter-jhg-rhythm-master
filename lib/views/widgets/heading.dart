@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 
-
+// ignore: must_be_immutable
 class Heading extends StatelessWidget {
-  const Heading({
-    super.key,
-    required this.title,
-    required this.numbers,
-    this.textColor,
-    this.fontSize,
-    this.padding,
-    this.fontWeight,
-  });
+  Heading(
+      {super.key,
+      required this.title,
+      required this.numbers,
+      this.textColor,
+      this.fontSize,
+      this.padding,
+      this.fontWeight,
+      this.addButton,
+      this.minusButton,
+      this.showButtons = false});
 
   final String title;
   final String numbers;
@@ -20,6 +23,9 @@ class Heading extends StatelessWidget {
   final Color? textColor;
   final double? padding;
   final FontWeight? fontWeight;
+  void Function()? addButton;
+  void Function()? minusButton;
+  bool showButtons;
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +34,53 @@ class Heading extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           Text(
             title,
             style: JHGTextStyles.lrlabelStyle.copyWith(
               color: textColor ?? AppColors.whitePrimary,
-              fontSize: fontSize ?? 12,
-              fontWeight: fontWeight?? FontWeight.w700,
+              fontSize: fontSize ?? 20,
+              fontWeight: fontWeight ?? FontWeight.w700,
             ),
           ),
-          Text(
-            numbers,
-            style: JHGTextStyles.labelStyle.copyWith(
-              color: AppColors.whitePrimary,
-              fontSize: 24
-            ),
+          Row(
+            children: [
+              Visibility(
+                visible: showButtons,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 2.0),
+                  child: GestureDetector(
+                    onTap: minusButton,
+                    child: Icon(
+                      Icons.remove,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 38,
+                child: Center(
+                  child: Text(
+                    numbers,
+                    style: JHGTextStyles.labelStyle
+                        .copyWith(color: AppColors.whitePrimary, fontSize: 24),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: showButtons,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: GestureDetector(
+                    onTap: addButton,
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -59,8 +59,16 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     22.0.height,
                     // STARTING TEMPO
                     Heading(
-                        title: AppStrings.startingTempo,
-                        numbers: controller.startTempo.toStringAsFixed(0)),
+                      title: AppStrings.startingTempo,
+                      numbers: controller.startTempo.toStringAsFixed(0),
+                      showButtons: true,
+                      addButton: () {
+                        controller.incrementTempo();
+                      },
+                      minusButton: () {
+                        controller.decrementTempo();
+                      },
+                    ),
                     // SPACER
                     12.0.height,
                     // STARTING SLIDER
@@ -76,8 +84,17 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     18.0.height,
                     // TARGET TEMPO
                     Heading(
-                        title: AppStrings.targetTempo,
-                        numbers: controller.targetTempo.toStringAsFixed(0)),
+                      title: AppStrings.targetTempo,
+                      numbers: controller.targetTempo.toStringAsFixed(0),
+                      showButtons: true,
+                      addButton: () {
+                        print("im incerment");
+                        controller.incrementTargetTempo();
+                      },
+                      minusButton: () {
+                        controller.decrementTargetTempo();
+                      },
+                    ),
                     // SPACER
                     22.0.height,
                     // TARGET SLIDER

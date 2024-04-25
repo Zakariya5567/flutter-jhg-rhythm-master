@@ -156,9 +156,14 @@ class SpeedProvider extends ChangeNotifier {
 
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
+    soundName =
+        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null
+        ? AppStrings.logic1Sound
+        : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null
+        ? AppStrings.logic2Sound
+        : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
 
@@ -260,7 +265,6 @@ class SpeedProvider extends ChangeNotifier {
     }
   }
 
-
   // START OR STOP AUDIO
   void startStop() {
     totalTick = 0;
@@ -312,7 +316,9 @@ class SpeedProvider extends ChangeNotifier {
     barCounter = barCounter + 1;
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-      bool check = firstTime == true ? barCounter - 1 == bar * totalBeats : barCounter == bar * totalBeats;
+      bool check = firstTime == true
+          ? barCounter - 1 == bar * totalBeats
+          : barCounter == bar * totalBeats;
       if (check == true) {
         bpm = bpm + interval;
         barCounter = 0;
@@ -320,8 +326,8 @@ class SpeedProvider extends ChangeNotifier {
         notifyListeners();
         setTimer();
       }
-      if(bpm >= targetTempo+bar*interval)return;
-       playBeat(firstBeat);
+      if (bpm >= targetTempo + bar * interval) return;
+      playBeat(firstBeat);
     } else {
       if (totalTick < totalBeats) {
         playBeat(secondBeat);
@@ -344,6 +350,49 @@ class SpeedProvider extends ChangeNotifier {
     player.stop();
     player.setAsset(beat);
     player.play();
+  }
+
+  void incrementTempo() {
+    if (startTempo + interval <= targetTempo) {
+      startTempo += interval;
+    } else {
+      // If incrementing would exceed targetTempo, set startTempo to targetTempo
+      startTempo = targetTempo;
+    }
+    bpm = startTempo;
+    notifyListeners();
+  }
+
+  void decrementTempo() {
+    if (startTempo - interval >= 1) {
+      startTempo -= interval;
+    } else {
+      // If reducing would go below 1, just set startTempo to 1
+      startTempo = 1;
+    }
+    bpm = startTempo;
+
+    notifyListeners();
+  }
+
+  void incrementTargetTempo() {
+    if (targetTempo + interval <= 300) {
+      targetTempo += interval;
+    } else {
+      // If incrementing would exceed targetTempo, set startTempo to targetTempo
+      targetTempo = 300;
+    }
+
+    notifyListeners();
+  }
+
+  void decrementTargetTempo() {
+    if (targetTempo - interval >= 1) {
+      targetTempo -= interval;
+    } else {
+      targetTempo = 1;
+    }
+    notifyListeners();
   }
 
   loadAndPlay(String beat) {
