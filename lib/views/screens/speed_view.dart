@@ -94,7 +94,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       numbers: controller.targetTempo.toStringAsFixed(0),
                       showButtons: true,
                       addButton: () {
-                        print("im incerment");
                         controller.incrementTargetTempo(
                             settingProvider!.speedDefaultInterval.toInt());
                       },
@@ -121,7 +120,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // BARS
                     JHGHeadAndSubHWidget(
                       AppStrings.bars,
-                      lableStyle: JHGTextStyles.headLabelStyle,
+                      lableStyle:
+                          JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
                       subLableStyle: JHGTextStyles.bodyStyle,
                       subLabel: AppStrings.howManyBars,
                       margin: EdgeInsets.only(
@@ -150,7 +150,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       ),
                       subLabel:
                           "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
-                      lableStyle: JHGTextStyles.headLabelStyle,
+                      lableStyle:
+                          JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
                       subLableStyle: JHGTextStyles.bodyStyle,
                       actions: [
                         JHGValueIncDec(
