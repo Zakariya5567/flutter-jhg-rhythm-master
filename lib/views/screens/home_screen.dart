@@ -51,7 +51,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     setExpiryDate();
     super.initState();
-
+    StringsDownloadService()
+        .isStringsDownloaded(context, AppStrings.nameOfApp);
     if (kIsWeb) {
       homeProvider.getUserNameFromRL();
     }
@@ -140,59 +141,63 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         // itemBuilder: (context, index) {
                                         children: List.generate(
                                             buttonList.length, (index) {
-                                          return MouseRegion(child:
-                                            GestureDetector(
-                                            onTap: () async {
-                                              controller.changeTab(index);
-                                            },
-                                            child: Container(
-                                              height: height * 0.057,
-                                              width: width * 0.27,
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: controller
-                                                              .selectedButton ==
-                                                          index
-                                                      ? AppColors.greySecondary
-                                                      : AppColors.greyPrimary,
-                                                  border: Border.all(
-                                                      color: AppColors
-                                                          .greySecondary)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Text(
-                                                    buttonList[index],
-                                                    style: JHGTextStyles
-                                                        .labelStyle
-                                                        .copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: () =>
-                                                        AppUtils.showPopup(
-                                                      context,
+                                          return MouseRegion(
+                                            child: GestureDetector(
+                                              onTap: () async {
+                                                controller.changeTab(index);
+                                              },
+                                              child: Container(
+                                                height: height * 0.057,
+                                                width: width * 0.27,
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: controller
+                                                                .selectedButton ==
+                                                            index
+                                                        ? AppColors
+                                                            .greySecondary
+                                                        : AppColors.greyPrimary,
+                                                    border: Border.all(
+                                                        color: AppColors
+                                                            .greySecondary)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Text(
                                                       buttonList[index],
-                                                      buttonsDesc[index],
+                                                      style: JHGTextStyles
+                                                          .labelStyle
+                                                          .copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
                                                     ),
-                                                    child: Icon(
-                                                      Icons
-                                                          .info_outline_rounded,
-                                                      size: 15,
-                                                      color: JHGColors.white,
+                                                    GestureDetector(
+                                                      onTap: () =>
+                                                          AppUtils.showPopup(
+                                                        context,
+                                                        buttonList[index],
+                                                        buttonsDesc[index],
+                                                      ),
+                                                      child: Icon(
+                                                        Icons
+                                                            .info_outline_rounded,
+                                                        size: 15,
+                                                        color: JHGColors.white,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),cursor: SystemMouseCursors.click,);
+                                            cursor: SystemMouseCursors.click,
+                                          );
                                         })),
                                   ),
 

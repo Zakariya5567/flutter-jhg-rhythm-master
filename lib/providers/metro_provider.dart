@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
@@ -95,7 +96,6 @@ class MetroProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 
   String? customBeatValue;
 
@@ -198,9 +198,7 @@ class MetroProvider extends ChangeNotifier {
         beat2: AppStrings.sonar2Sound));
   }
 
-
-  double gafInterval  = 1;
-
+  double gafInterval = 1;
 
   // Initialize  animation controller
   initializeAnimationController(
@@ -227,7 +225,7 @@ class MetroProvider extends ChangeNotifier {
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     controller!.repeat(reverse: true);
     controller!.stop();
-    
+
     Future.delayed(Duration.zero, () async {
       setMetronomeDefaultValue();
     });
@@ -238,7 +236,6 @@ class MetroProvider extends ChangeNotifier {
     int? defSound = await SharedPref.getDefaultSound;
     int? defTiming = await SharedPref.getDefaultTiming;
     String? defValue = await SharedPref.getMetronomeDefaultValue;
-
 
     double? defMetroInterval = await SharedPref.getMetronomeDefaultInterval;
 
@@ -505,22 +502,30 @@ class MetroProvider extends ChangeNotifier {
     if (totalTick == 1) {
       if (player.playing) {
         player.stop();
-        player.setAsset(firstBeat);
+        var directory = getAsset(firstBeat);
+        player.setFilePath(directory.path, preload: true);
+        //player.setAsset(firstBeat);
         player.play();
       } else {
-        player.setAsset(firstBeat);
+        var directory = getAsset(firstBeat);
+        player.setFilePath(directory.path, preload: true);
+        //  player.setAsset(firstBeat);
         player.play();
       }
     } else {
       if (totalTick < totalBeat + 1) {
         if (player.playing) {
           player.stop();
-          player.setAsset(secondBeat);
+          var directory = getAsset(secondBeat);
+          player.setFilePath(directory.path, preload: true);
+          //player.setAsset(secondBeat);
           player.play();
         } else {
           try {
             print("playing==");
-            player.setAsset(secondBeat);
+            var directory = getAsset(secondBeat);
+            player.setFilePath(directory.path, preload: true);
+            //player.setAsset(secondBeat);
             player.play();
           } catch (e) {
             print("==${e}");

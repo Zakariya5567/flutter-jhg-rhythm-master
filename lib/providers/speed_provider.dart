@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
@@ -365,7 +366,9 @@ class SpeedProvider extends ChangeNotifier {
 
   stopLoadAndPlay(String beat) {
     player.stop();
-    player.setAsset(beat);
+    var directory = getAsset(beat);
+    player.setFilePath(directory.path, preload: true);
+    //player.setAsset(beat);
     player.play();
   }
 
@@ -413,7 +416,9 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   loadAndPlay(String beat) {
-    player.setAsset(beat);
+    var directory = getAsset(beat);
+    player.setFilePath(directory.path, preload: true);
+    // player.setAsset(beat);
     player.play();
   }
 }
