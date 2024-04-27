@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
 
@@ -502,13 +504,25 @@ class MetroProvider extends ChangeNotifier {
     if (totalTick == 1) {
       if (player.playing) {
         player.stop();
-        var directory = getAsset(firstBeat);
-        player.setFilePath(directory.path, preload: true);
+        if (!kIsWeb) {
+          var directory = getAsset(firstBeat);
+          player.setFilePath(directory.path, preload: true);
+        } else {
+          var directory = AppUtils.setWebAsset(firstBeat);
+          player.setFilePath(directory.path, preload: true);
+        }
+
         //player.setAsset(firstBeat);
         player.play();
       } else {
-        var directory = getAsset(firstBeat);
-        player.setFilePath(directory.path, preload: true);
+        if (!kIsWeb) {
+          var directory = getAsset(firstBeat);
+          player.setFilePath(directory.path, preload: true);
+        } else {
+          var directory = AppUtils.setWebAsset(firstBeat);
+          player.setFilePath(directory.path, preload: true);
+        }
+
         //  player.setAsset(firstBeat);
         player.play();
       }
@@ -516,15 +530,29 @@ class MetroProvider extends ChangeNotifier {
       if (totalTick < totalBeat + 1) {
         if (player.playing) {
           player.stop();
-          var directory = getAsset(secondBeat);
-          player.setFilePath(directory.path, preload: true);
+          if (!kIsWeb) {
+            var directory = getAsset(secondBeat);
+            player.setFilePath(directory.path, preload: true);
+          } else {
+            var directory = AppUtils.setWebAsset(secondBeat);
+            player.setFilePath(directory.path, preload: true);
+          }
+          // var directory = getAsset(secondBeat);
+          // player.setFilePath(directory.path, preload: true);
           //player.setAsset(secondBeat);
           player.play();
         } else {
           try {
             print("playing==");
-            var directory = getAsset(secondBeat);
-            player.setFilePath(directory.path, preload: true);
+            if (!kIsWeb) {
+              var directory = getAsset(secondBeat);
+              player.setFilePath(directory.path, preload: true);
+            } else {
+              var directory = AppUtils.setWebAsset(secondBeat);
+              player.setFilePath(directory.path, preload: true);
+            }
+            // var directory = getAsset(secondBeat);
+            // player.setFilePath(directory.path, preload: true);
             //player.setAsset(secondBeat);
             player.play();
           } catch (e) {

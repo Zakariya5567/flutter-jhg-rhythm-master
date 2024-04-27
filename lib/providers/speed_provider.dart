@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
 
@@ -366,8 +368,14 @@ class SpeedProvider extends ChangeNotifier {
 
   stopLoadAndPlay(String beat) {
     player.stop();
-    var directory = getAsset(beat);
-    player.setFilePath(directory.path, preload: true);
+    if (!kIsWeb) {
+      var directory = getAsset(beat);
+      player.setFilePath(directory.path, preload: true);
+    } else {
+      var directory = AppUtils.setWebAsset(beat);
+      player.setFilePath(directory.path, preload: true);
+    }
+
     //player.setAsset(beat);
     player.play();
   }
@@ -416,8 +424,15 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   loadAndPlay(String beat) {
-    var directory = getAsset(beat);
-    player.setFilePath(directory.path, preload: true);
+    // var directory = getAsset(beat);
+    if (!kIsWeb) {
+      var directory = getAsset(beat);
+      player.setFilePath(directory.path, preload: true);
+    } else {
+      var directory = AppUtils.setWebAsset(beat);
+      player.setFilePath(directory.path, preload: true);
+    }
+    //player.setFilePath(directory.path, preload: true);
     // player.setAsset(beat);
     player.play();
   }

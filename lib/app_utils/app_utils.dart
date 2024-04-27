@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
 
 class AppUtils {
   AppUtils._();
@@ -30,8 +33,7 @@ class AppUtils {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(chordName,
-                      style: JHGTextStyles.lrlabelStyle.copyWith(
-                          fontSize: 21)),
+                      style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 21)),
                   JHGIconButton(
                     iconData: Icons.close,
                     onTap: () => Navigator.pop(context),
@@ -53,5 +55,11 @@ class AppUtils {
         );
       },
     );
+  }
+
+  static File setWebAsset(soundTracks) {
+    Uri uri = Uri.parse("${AppStrings.webAsset}/$soundTracks");
+    File file = File.fromUri(uri);
+    return file;
   }
 }

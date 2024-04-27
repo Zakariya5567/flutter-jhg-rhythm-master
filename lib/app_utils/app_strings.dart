@@ -48,6 +48,7 @@ class AppStrings {
   static const String protoolMarimba = 'Protools Marimba';
   static const String reason = 'Reason';
   static const String sonar = 'Sonar';
+  static const String webAsset = 'web';
 
   // Subscription ids
 
