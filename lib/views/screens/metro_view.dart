@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
 import '../widgets/custom_selection_bottomsheet.dart';
 
 class MetroView extends StatefulWidget {
@@ -40,9 +43,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     //metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
-    final metroWidth = 240.0;
-    final metroHeight = kIsWeb ? 270.0 : 308.0;
+    final metroWidth = 235.0.w;
+    final metroHeight = kIsWeb ? 270.0.h : 308.0.h;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
+      final bpm = controller.bpm;
+      final bpm2x = controller.bpm * 2;
       return Column(
         children: [
           Expanded(
@@ -50,7 +55,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
               physics: NeverScrollableScrollPhysics(),
               child: Container(
                 //color: Colors.blue,
-                constraints: BoxConstraints(maxWidth: 345, minHeight: 200),
+                constraints: BoxConstraints(maxWidth: 345.0.w, minHeight: 200.0.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +66,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                     Row(
                       children: [
                         // Button selection 3/3 ....
-                        SizedBox(
+                        Container(
                           height: height * 0.41,
                           width: height * 0.08,
                           child: ListView.builder(
@@ -147,20 +152,21 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                         // SPACER
                         //SizedBox(width: width * 0.03),
-                        SizedBox(width: 14),
+                        SizedBox(width: 10.0.w),
 
                         // Metronome
                         Container(
-                          //color: Colors.red,
+                         // color: Colors.red,
                           alignment: Alignment.center,
                           height: metroHeight,
                           width: metroWidth,
                           child: Stack(
                             children: [
                               // Metronome
-                              SizedBox(
+                              Container(
+                                //color: Colors.green,
                                 height: metroHeight,
-                                width: metroWidth,
+                                width: metroWidth,  
                                 child: Image.asset(
                                   AppAssets.metronome,
                                   height: metroHeight,
@@ -177,7 +183,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                 // right: 20,
                                 child: Container(
                                   //color: Colors.yellow,
-                                  height: 180,
+                                  height: kIsWeb ? 160 : 180,
                                   //width: 100,
                                   alignment: Alignment.bottomCenter,
                                   child: AnimatedBuilder(
@@ -215,15 +221,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             ),
                                             //slider
                                             Positioned(
-                                              top: controller.bpm <= 250
-                                                  ? (controller.bpm *
-                                                      (controller.bpm * 2 -
-                                                          50) *
-                                                      0.0010)
-                                                  : (controller.bpm *
-                                                      (controller.bpm * 2 -
-                                                          195) *
-                                                      0.0010),
+                                              top: kIsWeb ?
+                                              bpm <= 250 ?
+                                              (bpm * (bpm2x - 40) * 0.0010) : (bpm * (bpm2x - 175) * 0.0008)
+                                                  :
+                                              bpm <= 250 ? (bpm * (bpm2x - 50) * 0.0010) : (bpm * (bpm2x - 195) * 0.0010),
                                               left: 1,
                                               right: 1,
                                               child: Image.asset(
@@ -290,10 +292,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    // SPACER
-                    SizedBox(
-                      height: height * 0.0,
-                    ),
+
 
                     JHGBPMChangeWidget(
                       reverse: true,

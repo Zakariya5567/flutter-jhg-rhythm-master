@@ -10,6 +10,7 @@ import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
+import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/screens/bpm_view.dart';
 import 'package:rhythm_master/views/screens/setting_screen.dart';
 import 'package:rhythm_master/views/screens/speed_view.dart';
@@ -130,10 +131,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   SizedBox(height: 10),
                                   //BUTTON SELECTION SECTION
                                   Container(
-                                    //color: Colors.red,
+                                  //  color: Colors.red,
                                     constraints: BoxConstraints(
-                                        maxWidth: kIsWeb ? width * .90 : 345),
-                                    height: height * 0.057,
+                                        maxWidth: kIsWeb ? 380.0.w : 345.0.w),
+                                       height: height * 0.057,
                                     child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -150,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               },
                                               child: Container(
                                                 height: height * 0.057,
-                                                width: width * 0.27,
+                                                width: kIsWeb ? 120 : 110.0.w,
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -190,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       child: Icon(
                                                         Icons
                                                             .info_outline_rounded,
-                                                        size: 15,
+                                                        size: 15.0.w,
                                                         color: JHGColors.white,
                                                       ),
                                                     ),
