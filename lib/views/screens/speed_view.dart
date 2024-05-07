@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
@@ -140,7 +141,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       ],
                     ),
 
-                    JHGHeadAndSubHWidget(
+                    JHGHeadAndSubHWidget  (
                       AppStrings.interval,
                       margin: EdgeInsets.only(
                         top: JHGHeadAndSubHWidget.top,
@@ -174,7 +175,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ),
             ),
           ),
-          //  0.0.height,
+          kIsWeb ? 30.0.height : 0.0.height,
 
           BpmValueWidget(
             bpmValue: controller.bpm > controller.targetTempo

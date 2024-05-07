@@ -217,11 +217,9 @@ packages:
   flutter_jhg_elements:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: efd9dae251b41ef506b3b3690d2198fde9659435
-      url: "https://github.com/jamie2364/flutter_jhg_elements"
-    source: git
+      path: "/Users/Development/fre_projects/flutter_jhg_elements"
+      relative: false
+    source: path
     version: "0.0.1"
   flutter_launcher_icons:
     dependency: "direct dev"
