@@ -128,7 +128,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: 10),
+
+                                  kIsWeb ?  0.0.height:
+                                  10.0.height,
+                                //  SizedBox(height: 10),
                                   //BUTTON SELECTION SECTION
                                   Container(
                                   //  color: Colors.red,

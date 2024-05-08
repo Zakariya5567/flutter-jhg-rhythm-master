@@ -44,7 +44,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
     //metroProvider?.init();
     final height = MediaQuery.of(context).size.height;
     final metroWidth = 235.0.w;
-    final metroHeight = kIsWeb ? 270.0.h : 308.0.h;
+    final metroHeight = kIsWeb ? 290.0.h : 308.0.h;
     return Consumer<MetroProvider>(builder: (context, controller, child) {
       final bpm = controller.bpm;
       final bpm2x = controller.bpm * 2;
@@ -249,7 +249,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                                 //Slider wood
                                 Positioned(
-                                  top: 61.5,
+                                  top:  kIsWeb ? 76.0 :88.0.h,
                                   left: 2,
                                   child: Container(
                                     height: 260.0,

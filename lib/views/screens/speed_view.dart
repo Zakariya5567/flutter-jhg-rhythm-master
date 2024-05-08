@@ -9,7 +9,7 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/widgets/bpm_value_widget.dart';
 import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
-
+import 'package:flutter/foundation.dart';
 import '../widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
@@ -50,8 +50,9 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
     return Consumer<SpeedProvider>(builder: (context, controller, child) {
       return Column(
         children: [
-          15.0.height,
 
+          kIsWeb ?  10.0.height:
+          15.0.height,
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -61,6 +62,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
+                    kIsWeb ?  16.0.height:
                     22.0.height,
                     // STARTING TEMPO
                     Heading(
@@ -77,6 +79,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
+                    kIsWeb ?  8.0.height:
                     12.0.height,
                     // STARTING SLIDER
                     SliderWidget(
@@ -88,6 +91,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.setStartTempo(values);
                         }),
                     // SPACER
+                    kIsWeb ?  15.0.height:
                     18.0.height,
                     // TARGET TEMPO
                     Heading(
@@ -104,6 +108,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
+                    kIsWeb ?  16.0.height:
                     22.0.height,
                     // TARGET SLIDER
                     SliderWidget(
@@ -117,6 +122,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
 
                     // SPACER
+                    kIsWeb ?  10.0.height:
                     12.0.height,
                     // BARS
                     JHGHeadAndSubHWidget(
@@ -166,6 +172,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
                     // INTERVAL BUTTONS
                     // SPACER
+                    kIsWeb ?  18.0.height:
+                    // BARS
                     25.0.height,
                     // BPM VALUE SECTION
 
@@ -175,7 +183,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ),
             ),
           ),
-          kIsWeb ? 30.0.height : 0.0.height,
+          kIsWeb ? 20.0.height : 0.0.height,
 
           BpmValueWidget(
             bpmValue: controller.bpm > controller.targetTempo
