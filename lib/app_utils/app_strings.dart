@@ -1,5 +1,4 @@
 class AppStrings {
-
   static const String appName = 'JHG Rhythm Toolkit';
   static const String nameOfApp = 'jhg-rhythm-toolkit';
   static const String tap = 'Tap';
@@ -8,7 +7,8 @@ class AppStrings {
 
   static const String logout = 'Logout';
   static const String save = 'Save';
-  static const String tapTempoSettingText = "The Tap Tempo mode does not have any additional settings. Simply just tap away and we'll tell you the speed of your tapping!";
+  static const String tapTempoSettingText =
+      "The Tap Tempo mode does not have any additional settings. Simply just tap away and we'll tell you the speed of your tapping!";
   static const String defaultTiming = 'Default Timing';
   static const String defaultSound = 'Default Sound';
   static const String soundS = 'Sound';
@@ -18,13 +18,15 @@ class AppStrings {
   static const String defaultInterval = 'Default Interval';
   static const String defaultBars = 'Default Bars';
   static const String tapTempo = 'Tap Tempo';
-  static const String tapTempoDesc = 'Tap Tempo Description';
+  static const String tapTempoDesc =
+      "Need to find the tempo of a song or match the beat of your current environment? Use our Tap Tempo mode! Simply tap the screen to the rhythm you hear, and the app will calculate the BPM for you. It's easy to use and instantly responsive, ensuring that you can adjust your tempo on the fly without missing a beat. The longer you tap, the more accurate the BPM result will be.";
   static const String metronome = 'Metronome';
-  static const String metronomeDesc = 'Metronome Description';
+  static const String metronomeDesc =
+      'This classic metronome allows you to set a precise beats-per-minute (BPM) to ensure you maintain consistent timing throughout your practice sessions. Choose from a variety of time signatures and sound options to personalise your rhythmic experience. You can use the white slider for large adjustments, and you can also move the vertical slider (the little gold thumb piece) on the actual metronome itself up and down. For fine adjustments use the + and - buttons. The amount that these buttons change the BPM is also entirely customisable in the settings page.';
   static const String setting = 'Settings';
   static const String speedTrainer = 'Speed Trainer';
-  static const String speedTrainerDesc = 'Speed Trainer Description';
-
+  static const String speedTrainerDesc =
+      'The Speed Trainer allows you to set a starting and ending BPM, and gradually increase the speed over a specified number of bars (Bars) and by a certain amount each time (Interval). So basically, it is a metronome that starts off slow and gradually speeds up to as fast as you like. Ideal for practicing scales, arpeggios, or challenging passages, the Speed Trainer helps you build up speed and precision incrementally. Customise the rate of acceleration and the length of training sessions to suit your practice goals, making complex pieces more approachable and improving your overall musical agility.';
 
   static const String howMuchItShouldIncrease =
       'How much it should increase by every';
