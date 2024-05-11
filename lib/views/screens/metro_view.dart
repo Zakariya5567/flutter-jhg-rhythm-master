@@ -71,88 +71,85 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                           Container(
                             height: height * 0.41,
                             width: height * 0.08,
-                            child: Scrollbar(
-                              thumbVisibility: false,
-                              child: ListView.builder(
-                                  physics: AlwaysScrollableScrollPhysics(),
-                                  padding: EdgeInsets.zero,
-                                  primary: true,
-                                  itemCount: controller.tapButtonList.length + 1,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) {
-                                    return MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        child: GestureDetector(
-                                          onTap: () async {
-                                            if (index ==
-                                                controller.tapButtonList.length) {
-                                              customSelectionBottomSheet(
-                                                  context, this);
-                                            } else {
-                                              controller.setBeats(
-                                                  ticker: this,
-                                                  index: index,
-                                                  indexValue: controller
-                                                      .tapButtonList[index]);
-                                            }
-                                          },
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: height * 0.009),
-                                            child: Container(
-                                              height: height * 0.08,
-                                              width: height * 0.08,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: controller.selectedButton ==
-                                                        index
-                                                    ? AppColors.greySecondary
-                                                    : AppColors.greyPrimary,
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  (index ==
+                            child: ListView.builder(
+                                physics: AlwaysScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                primary: true,
+                                itemCount: controller.tapButtonList.length + 1,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          if (index ==
+                                              controller.tapButtonList.length) {
+                                            customSelectionBottomSheet(
+                                                context, this);
+                                          } else {
+                                            controller.setBeats(
+                                                ticker: this,
+                                                index: index,
+                                                indexValue: controller
+                                                    .tapButtonList[index]);
+                                          }
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: height * 0.009),
+                                          child: Container(
+                                            height: height * 0.08,
+                                            width: height * 0.08,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: controller.selectedButton ==
+                                                      index
+                                                  ? AppColors.greySecondary
+                                                  : AppColors.greyPrimary,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                (index ==
+                                                            controller
+                                                                .tapButtonList
+                                                                .length &&
+                                                        controller
+                                                                .customBeatValue ==
+                                                            null)
+                                                    ? "Custom"
+                                                    : (index ==
+                                                                controller
+                                                                    .tapButtonList
+                                                                    .length &&
+                                                            controller
+                                                                    .customBeatValue !=
+                                                                null)
+                                                        ? controller
+                                                            .customBeatValue!
+                                                        : controller
+                                                            .tapButtonList[index],
+                                                style: JHGTextStyles.subLabelStyle
+                                                    .copyWith(
+                                                  color: AppColors.whitePrimary,
+                                                  fontSize: (index ==
                                                               controller
                                                                   .tapButtonList
                                                                   .length &&
                                                           controller
                                                                   .customBeatValue ==
                                                               null)
-                                                      ? "Custom"
-                                                      : (index ==
-                                                                  controller
-                                                                      .tapButtonList
-                                                                      .length &&
-                                                              controller
-                                                                      .customBeatValue !=
-                                                                  null)
-                                                          ? controller
-                                                              .customBeatValue!
-                                                          : controller
-                                                              .tapButtonList[index],
-                                                  style: JHGTextStyles.subLabelStyle
-                                                      .copyWith(
-                                                    color: AppColors.whitePrimary,
-                                                    fontSize: (index ==
-                                                                controller
-                                                                    .tapButtonList
-                                                                    .length &&
-                                                            controller
-                                                                    .customBeatValue ==
-                                                                null)
-                                                        ? 12
-                                                        : 18,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                      ? 12
+                                                      : 18,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ));
-                                  }),
-                            ),
+                                        ),
+                                      ));
+                                }),
                           ),
 
                           // SPACER

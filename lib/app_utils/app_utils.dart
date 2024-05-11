@@ -42,11 +42,12 @@ class AppUtils {
               ),
               content: Container(
                 width: 100,
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   details,
                   style: JHGTextStyles.bodyStyle.copyWith(
                     fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ),
