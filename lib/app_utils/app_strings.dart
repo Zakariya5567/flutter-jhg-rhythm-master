@@ -6,6 +6,7 @@ class AppStrings {
   static const String thisSongIs = 'This song is';
 
   static const String logout = 'Logout';
+  static const String done = 'Done';
   static const String save = 'Save';
   static const String tapTempoSettingText =
       "The Tap Tempo mode does not have any additional settings. Simply just tap away and we'll tell you the speed of your tapping!";
