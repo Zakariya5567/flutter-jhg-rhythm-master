@@ -128,16 +128,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-
-                                  kIsWeb ?  0.0.height:
-                                  10.0.height,
-                                //  SizedBox(height: 10),
+                                  kIsWeb ? 0.0.height : 10.0.height,
+                                  //  SizedBox(height: 10),
                                   //BUTTON SELECTION SECTION
                                   Container(
-                                  //  color: Colors.red,
+                                    //  color: Colors.red,
                                     constraints: BoxConstraints(
                                         maxWidth: kIsWeb ? 380.0.w : 345.0.w),
-                                       height: height * 0.057,
+                                    height: height * 0.057,
                                     child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -186,10 +184,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () =>
-                                                          AppUtils.showPopup(
-                                                        context,
-                                                        buttonList[index],
-                                                        buttonsDesc[index],
+                                                      // index!=0?
+                                                      //     AppUtils.showPopup(
+                                                      //         context,
+                                                      //         buttonList[index],
+                                                      //         buttonsDesc[
+                                                      //             index]):
+                                                          JHGDialogPopup
+                                                              .showPopup(
+                                                        context: context,
+                                                        chordName:
+                                                            buttonList[index],
+                                                        details:
+                                                            buttonsDesc[index],
+                                                        width: 360.0.w,
+                                                        iconSize: 40.0.w, buttonLabel: AppStrings.done,
                                                       ),
                                                       child: Icon(
                                                         Icons
