@@ -31,6 +31,7 @@ class _SettingScreenState extends State<SettingScreen> {
   PackageInfo? packageInfo;
   String deviceName = 'Unknown';
   SpeedProvider? speedController;
+
   Future<void> initPackageInfo() async {
     packageInfo = await getDeviceInfo();
     deviceName = await getDeviceName();
@@ -104,6 +105,12 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: AppColors.blackPrimary,
                         child: Column(
                           children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: JHGNativeBanner(
+                                adID: nativeBannerAdId,
+                              ),
+                            ),
                             homeProvider.selectedButton == 1
                                 ? SizedBox()
                                 : InkWell(

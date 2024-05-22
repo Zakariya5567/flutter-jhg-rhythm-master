@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   HomeProvider homeProvider = HomeProvider();
+  JHGInterstitialAd? interstitialAd;
   DateTime? currentBackPressTime;
 
   // List on buttons, Metronome | Tap Tempo | Speed Trainer
@@ -53,8 +55,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setExpiryDate();
     super.initState();
     if (!kIsWeb) {
+      JHGAdsHelper().initializeConsentManager();
       StringsDownloadService()
           .isStringsDownloaded(context, AppStrings.nameOfApp);
+      interstitialAd = JHGInterstitialAd(interstitialAdId);
+      interstitialAd?.loadAd();
     }
     if (kIsWeb) {
       homeProvider.getUserNameFromRL();
@@ -114,13 +119,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               autoImplyLeading: false,
                               trailingWidget: JHGSettingsButton(
                                 enabled: true,
-                                onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const SettingScreen();
-                                    },
-                                  ),
-                                ),
+                                onTap: () {
+                                  interstitialAd?.showInterstitial();
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return const SettingScreen();
+                                        },
+                                      )
+                                  );
+                                }
                               ),
                             ),
                             body: Container(

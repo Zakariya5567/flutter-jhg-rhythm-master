@@ -31,7 +31,7 @@ Future<void> main() async {
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,
   ));
-
+  JHGAdsHelper().init();
   runApp(const MyApp());
 }
 
