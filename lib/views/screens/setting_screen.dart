@@ -56,17 +56,19 @@ class _SettingScreenState extends State<SettingScreen> {
         bodyAppBar: JHGAppBar(
           title: AppStrings.setting.toText(
               textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
-          trailingWidget: JHGReportAnIssueBtn(onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BugReportPage(
-                  device: deviceName,
-                  appName: AppStrings.appName,
-                ),
-              ),
-            );
-          }),
+          trailingWidget: kIsWeb
+              ? null
+              : JHGReportAnIssueBtn(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BugReportPage(
+                        device: deviceName,
+                        appName: AppStrings.appName,
+                      ),
+                    ),
+                  );
+                }),
         ),
         body: Consumer2<SettingProvider, HomeProvider>(
             builder: (context, controller, homeProvider, child) {
