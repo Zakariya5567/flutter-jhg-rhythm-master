@@ -10,7 +10,6 @@ class BpmValueWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         Text(
           bpmValue,
           textAlign: TextAlign.center,

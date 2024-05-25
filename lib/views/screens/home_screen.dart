@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/screens/bpm_view.dart';
@@ -184,15 +183,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () =>
-                                                      // index!=0?
-                                                      //     AppUtils.showPopup(
-                                                      //         context,
-                                                      //         buttonList[index],
-                                                      //         buttonsDesc[
-                                                      //             index]):
+                                                          // index!=0?
+                                                          //     AppUtils.showPopup(
+                                                          //         context,
+                                                          //         buttonList[index],
+                                                          //         buttonsDesc[
+                                                          //             index]):
 
-                                                      jHGInfoDialog(context: context, title:  buttonList[index], description: buttonsDesc[index]),
-
+                                                          jHGInfoDialog(
+                                                              context: context,
+                                                              title: buttonList[
+                                                                  index],
+                                                              description:
+                                                                  buttonsDesc[
+                                                                      index]),
                                                       child: Icon(
                                                         Icons
                                                             .info_outline_rounded,
