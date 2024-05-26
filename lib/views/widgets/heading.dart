@@ -36,11 +36,12 @@ class Heading extends StatelessWidget {
         children: [
           Text(
             title,
-            style: JHGTextStyles.lrlabelStyle.copyWith(
-              color: textColor ?? AppColors.whitePrimary,
-              fontSize: fontSize ?? 18,
-              fontWeight: fontWeight ?? FontWeight.w700,
-            ),
+            style: JHGTextStyles.labelStyle,
+            // JHGTextStyles.lrlabelStyle.copyWith(
+            //   color: textColor ?? AppColors.whitePrimary,
+            //   fontSize: fontSize ?? 18,
+            //   fontWeight: fontWeight ?? FontWeight.w700,
+            // ),
           ),
           Row(
             children: [

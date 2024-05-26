@@ -55,8 +55,8 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: JHGBody(
         bodyAppBar: JHGAppBar(
-          title: AppStrings.setting.toText(
-              textStyle: JHGTextStyles.labelStyle.copyWith(fontSize: 20)),
+          title:
+              AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
           trailingWidget: JHGReportAnIssueBtn(onPressed: () {
             Navigator.push(
               context,
@@ -113,34 +113,44 @@ class _SettingScreenState extends State<SettingScreen> {
                             ),
                             homeProvider.selectedButton == 1
                                 ? SizedBox()
-                                : InkWell(
-                                    onTap: () async {
+                                : JHGPrimaryBtn(
+                                    label: AppStrings.save,
+                                    onPressed: () async {
                                       await controller.onSave(context);
                                       showToast(
                                           context: context,
-                                          message: "Setting Saved Successfully",
+                                          message: AppStrings.ableton,
                                           isError: false);
                                       Navigator.pop(context);
-                                    },
-                                    child: Center(
-                                      child: Container(
-                                        height: height * 0.07,
-                                        width: width * 1,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            color: AppColors.redPrimary,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Text(
-                                          AppStrings.save,
-                                          style: JHGTextStyles.labelStyle
-                                              .copyWith(
-                                                  color: AppColors.whitePrimary,
-                                                  fontSize: 17),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                    }),
+                            // InkWell(
+                            //     onTap: () async {
+                            //       await controller.onSave(context);
+                            //       showToast(
+                            //           context: context,
+                            //           message: AppStrings.ableton,
+                            //           isError: false);
+                            //       Navigator.pop(context);
+                            //     },
+                            //     child: Center(
+                            //       child: Container(
+                            //         height: height * 0.07,
+                            //         width: width * 1,
+                            //         alignment: Alignment.center,
+                            //         decoration: BoxDecoration(
+                            //             color: AppColors.redPrimary,
+                            //             borderRadius:
+                            //                 BorderRadius.circular(10)),
+                            //         child: Text(
+                            //           AppStrings.save,
+                            //           style: JHGTextStyles.labelStyle
+                            //               .copyWith(
+                            //                   color: AppColors.whitePrimary,
+                            //                   fontSize: 17),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
                             JHGSecondaryBtn(
                               label: AppStrings.logout,
                               onPressed: () async {
@@ -225,8 +235,9 @@ class MetronomeSetting extends StatelessWidget {
         // DEFAULT BPM
         JHGHeadAndSubHWidget(
           AppStrings.defaultBpm,
-          lableStyle: JHGTextStyles.lrlabelStyle
-              .copyWith(fontSize: 14, color: AppColors.headingColor),
+          lableStyle: JHGTextStyles.labelStyle,
+          // JHGTextStyles.lrlabelStyle
+          //     .copyWith(fontSize: 14, color: AppColors.headingColor),
           actions: [
             JHGValueIncDec(
               initialValue: controller.bpm.toInt(),

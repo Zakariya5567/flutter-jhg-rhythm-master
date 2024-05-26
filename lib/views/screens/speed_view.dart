@@ -9,8 +9,7 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/widgets/bpm_value_widget.dart';
 import 'package:rhythm_master/views/widgets/custom_slider_widget.dart';
-import 'package:flutter/foundation.dart';
-import '../widgets/heading.dart';
+import 'package:rhythm_master/views/widgets/heading.dart';
 
 class SpeedView extends StatefulWidget {
   const SpeedView({super.key});
