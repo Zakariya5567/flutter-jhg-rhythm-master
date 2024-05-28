@@ -217,8 +217,8 @@ class MetronomeSetting extends StatelessWidget {
           return MouseRegion(
               cursor: SystemMouseCursors.click,
               child: JHGDropDown<SoundModel>(
-                value: controller.soundList[controller.selectedIndex],
-                items: controller.soundList,
+                value: soundList[controller.selectedIndex],
+                items: soundList,
                 expandedColor: AppColors.liteWhite,
                 onChanged: (values) async {
                   controller.setSound(
@@ -265,8 +265,8 @@ class MetronomeSetting extends StatelessWidget {
           child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: JHGDropDown(
-                value: controller.soundList[controller.selectedIndex],
-                items: controller.soundList,
+                value: soundList[controller.selectedIndex],
+                items: soundList,
                 onChanged: (values) async {
                   controller.setSound(
                     name: values!.name.toString(),
@@ -422,9 +422,8 @@ class SpeedTrainerSetting extends StatelessWidget {
           child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: JHGDropDown(
-                value:
-                    controller.soundList[controller.speedTrainerSelectedIndex],
-                items: controller.soundList,
+                value: soundList[controller.speedTrainerSelectedIndex],
+                items: soundList,
                 onChanged: (values) async {
                   controller.setSpeedTrainerSound(
                     name: values!.name.toString(),
