@@ -330,7 +330,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           JHGAppBar(
             isBottom: true,
             isResponsive: true,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             leadingWidget: JHGResetBtn(
                 enabled: true,
                 onTap: () {

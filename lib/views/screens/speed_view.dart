@@ -186,7 +186,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
           JHGAppBar(
             isResponsive: true,
             isBottom: true,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end  ,
             leadingWidget: JHGResetBtn(
                 enabled: true,
                 onTap: () {
