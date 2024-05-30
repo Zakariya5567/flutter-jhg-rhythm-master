@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
+
 import '../widgets/custom_selection_bottomsheet.dart';
 
 class MetroView extends StatefulWidget {
@@ -51,18 +50,19 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
       return Column(
         children: [
           Expanded(
-            child:  ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
               child: SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(),
                 child: Container(
                   //color: Colors.blue,
-                  constraints: BoxConstraints(maxWidth: 345.0.w, minHeight: 200.0.h),
+                  constraints:
+                      BoxConstraints(maxWidth: 345.0.w, minHeight: 200.0.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       // SPACER
                       SizedBox(height: height * 0.025),
                       Row(
@@ -104,10 +104,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: controller.selectedButton ==
-                                                      index
-                                                  ? AppColors.greySecondary
-                                                  : AppColors.greyPrimary,
+                                              color:
+                                                  controller.selectedButton ==
+                                                          index
+                                                      ? AppColors.greySecondary
+                                                      : AppColors.greyPrimary,
                                             ),
                                             child: Center(
                                               child: Text(
@@ -129,8 +130,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                         ? controller
                                                             .customBeatValue!
                                                         : controller
-                                                            .tapButtonList[index],
-                                                style: JHGTextStyles.subLabelStyle
+                                                                .tapButtonList[
+                                                            index],
+                                                style: JHGTextStyles
+                                                    .subLabelStyle
                                                     .copyWith(
                                                   color: AppColors.whitePrimary,
                                                   fontSize: (index ==
@@ -158,7 +161,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                           // Metronome
                           Container(
-                           // color: Colors.red,
+                            // color: Colors.red,
                             alignment: Alignment.center,
                             height: metroHeight,
                             width: metroWidth,
@@ -202,7 +205,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                           alignment: Alignment.bottomCenter,
                                           transform: Matrix4.identity()
                                             ..translate(translationValue, 0.0)
-                                            ..rotateZ(rotationValue * 0.0034533),
+                                            ..rotateZ(
+                                                rotationValue * 0.0034533),
                                           // Convert degrees to radians
                                           child: Stack(
                                             children: [
@@ -223,11 +227,21 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                               ),
                                               //slider
                                               Positioned(
-                                                top: kIsWeb ?
-                                                bpm <= 250 ?
-                                                (bpm * (bpm2x - 40) * 0.0010) : (bpm * (bpm2x - 175) * 0.0008)
-                                                    :
-                                                bpm <= 250 ? (bpm * (bpm2x - 50) * 0.0010) : (bpm * (bpm2x - 195) * 0.0010),
+                                                top: kIsWeb
+                                                    ? bpm <= 250
+                                                        ? (bpm *
+                                                            (bpm2x - 40) *
+                                                            0.0010)
+                                                        : (bpm *
+                                                            (bpm2x - 175) *
+                                                            0.0008)
+                                                    : bpm <= 250
+                                                        ? (bpm *
+                                                            (bpm2x - 50) *
+                                                            0.0010)
+                                                        : (bpm *
+                                                            (bpm2x - 195) *
+                                                            0.0010),
                                                 left: 1,
                                                 right: 1,
                                                 child: Image.asset(
@@ -246,7 +260,7 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
 
                                 //Slider wood
                                 Positioned(
-                                  top:  kIsWeb ? 76.0 :88.0.h,
+                                  top: kIsWeb ? 76.0 : 88.0.h,
                                   left: 2,
                                   child: Container(
                                     height: 260.0,
@@ -314,6 +328,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
           ),
           // Reset button and play pause button
           JHGAppBar(
+            isBottom: true,
+            isResponsive: true,
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(
                 enabled: true,
@@ -323,9 +339,6 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             centerWidget: JHGPlayPauseBtn(onChanged: (val) {
               controller.startStop(this);
             }),
-          ),
-          SizedBox(
-            height: 10,
           ),
         ],
       );

@@ -49,9 +49,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
     return Consumer<SpeedProvider>(builder: (context, controller, child) {
       return Column(
         children: [
-
-          kIsWeb ?  10.0.height:
-          15.0.height,
+          kIsWeb ? 10.0.height : 15.0.height,
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -61,8 +59,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    kIsWeb ?  16.0.height:
-                    22.0.height,
+                    kIsWeb ? 16.0.height : 22.0.height,
                     // STARTING TEMPO
                     Heading(
                       title: AppStrings.startingTempo,
@@ -78,8 +75,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
-                    kIsWeb ?  8.0.height:
-                    12.0.height,
+                    kIsWeb ? 8.0.height : 12.0.height,
                     // STARTING SLIDER
                     SliderWidget(
                         height: height,
@@ -90,8 +86,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.setStartTempo(values);
                         }),
                     // SPACER
-                    kIsWeb ?  15.0.height:
-                    18.0.height,
+                    kIsWeb ? 15.0.height : 18.0.height,
                     // TARGET TEMPO
                     Heading(
                       title: AppStrings.targetTempo,
@@ -107,8 +102,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
-                    kIsWeb ?  16.0.height:
-                    22.0.height,
+                    kIsWeb ? 16.0.height : 22.0.height,
                     // TARGET SLIDER
                     SliderWidget(
                       height: height,
@@ -121,8 +115,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
 
                     // SPACER
-                    kIsWeb ?  10.0.height:
-                    12.0.height,
+                    kIsWeb ? 10.0.height : 12.0.height,
                     // BARS
                     JHGHeadAndSubHWidget(
                       AppStrings.bars,
@@ -146,7 +139,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       ],
                     ),
 
-                    JHGHeadAndSubHWidget  (
+                    JHGHeadAndSubHWidget(
                       AppStrings.interval,
                       margin: EdgeInsets.only(
                         top: JHGHeadAndSubHWidget.top,
@@ -171,9 +164,11 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
                     // INTERVAL BUTTONS
                     // SPACER
-                    kIsWeb ?  18.0.height:
-                    // BARS
-                    25.0.height,
+                    kIsWeb
+                        ? 18.0.height
+                        :
+                        // BARS
+                        25.0.height,
                     // BPM VALUE SECTION
 
                     // Reset and play pause BUTTON
@@ -183,13 +178,14 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             ),
           ),
           kIsWeb ? 20.0.height : 0.0.height,
-
           BpmValueWidget(
             bpmValue: controller.bpm > controller.targetTempo
                 ? controller.targetTempo.toStringAsFixed(0)
                 : controller.bpm.toStringAsFixed(0),
           ).center,
           JHGAppBar(
+            isResponsive: true,
+            isBottom: true,
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: JHGResetBtn(
                 enabled: true,
@@ -202,7 +198,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   controller.startStop();
                 }),
           ),
-          10.0.height,
         ],
       );
     });

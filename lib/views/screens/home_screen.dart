@@ -114,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         children: [
                           JHGBody(
                             bodyAppBar: JHGAppBar(
+                              isResponsive: true,
                               autoImplyLeading: false,
                               trailingWidget: JHGSettingsButton(
                                 enabled: true,

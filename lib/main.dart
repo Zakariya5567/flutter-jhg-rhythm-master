@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         title: 'JHG Rhythm ',
         theme: JHGTheme.themeData.copyWith(
           scrollbarTheme: ScrollbarThemeData(
-            thumbColor: MaterialStateProperty.all(JHGColors.whiteGrey),
+            thumbColor: WidgetStateProperty.all(JHGColors.whiteGrey),
           ),
         ),
         home: kIsWeb

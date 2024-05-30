@@ -55,19 +55,22 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: JHGBody(
         bodyAppBar: JHGAppBar(
+          isResponsive: true,
           title:
               AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
-          trailingWidget: JHGReportAnIssueBtn(onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BugReportPage(
-                  device: deviceName,
-                  appName: AppStrings.appName,
-                ),
-              ),
-            );
-          }),
+          trailingWidget: kIsWeb
+              ? null
+              : JHGReportAnIssueBtn(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BugReportPage(
+                        device: deviceName,
+                        appName: AppStrings.appName,
+                      ),
+                    ),
+                  );
+                }),
         ),
         body: Consumer2<SettingProvider, HomeProvider>(
             builder: (context, controller, homeProvider, child) {
