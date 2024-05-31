@@ -218,9 +218,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: bed4da29df46d2833e92d2f0df326ac526da236f
-      url: "https://github.com/jamie2364/flutter_jhg_elements.git"
+      ref: temporary-while-adding-ads
+      resolved-ref: "02176a480060f47ac7e84ffff8cf71946ec7ce40"
+      url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
   flutter_launcher_icons:

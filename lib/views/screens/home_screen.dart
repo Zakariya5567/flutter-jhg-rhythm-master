@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               },
                                               child: Container(
                                                 height: height * 0.057,
-                                                width: kIsWeb ? 120 : 110.0.w,
+                                                width: kIsWeb ? 120 : width/4,
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -243,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               right: width * .06,
                               child: Container(
                                 padding: EdgeInsets.all(width * .035),
-                                width: width * .6,
+                                width: width * .7,
                                 decoration: BoxDecoration(
                                   color: Colors.black.withOpacity(.7),
                                   borderRadius: BorderRadius.circular(16),
