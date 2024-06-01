@@ -219,7 +219,7 @@ packages:
     description:
       path: "."
       ref: temporary-while-adding-ads
-      resolved-ref: "02176a480060f47ac7e84ffff8cf71946ec7ce40"
+      resolved-ref: "06db0676e3a6124ccebd11b9fdd28880e1c6162a"
       url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"

@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
           );
         },
         debugShowCheckedModeBanner: false,
-        title: 'JHG Rhythm ',
+        title: 'JHG Rhythm',
         theme: JHGTheme.themeData.copyWith(
           scrollbarTheme: ScrollbarThemeData(
             thumbColor: WidgetStateProperty.all(JHGColors.whiteGrey),
