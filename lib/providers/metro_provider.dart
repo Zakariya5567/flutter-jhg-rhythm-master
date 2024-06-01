@@ -127,7 +127,11 @@ class MetroProvider extends ChangeNotifier {
         Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
       Future.delayed(Duration.zero, () async {
         await player.setVolume(0);
-        playSound();
+        try {
+          playSound();
+        } catch (e) {
+          print('exception on player $e');
+        }
       });
     });
     // calling sound list to add sound to sound list
@@ -411,71 +415,110 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
-  // Play sound based on the metronome ticks
-  Future playSound() async {
-    totalTick = totalTick + 1;
-    if (totalTick == 1) {
-      if (player.playing) {
-        player.stop();
-        if (!kIsWeb) {
-          var directory = getAsset(firstBeat);
-          player.setFilePath(directory.path, preload: true);
-        } else {
-          var directory = AppUtils.setWebAsset(firstBeat);
-          player.setFilePath(directory.path, preload: true);
-        }
-
-        //player.setAsset(firstBeat);
-        player.play();
-      } else {
-        if (!kIsWeb) {
-          var directory = getAsset(firstBeat);
-          player.setFilePath(directory.path, preload: true);
-        } else {
-          var directory = AppUtils.setWebAsset(firstBeat);
-          player.setFilePath(directory.path, preload: true);
-        }
-
-        //  player.setAsset(firstBeat);
-        player.play();
-      }
+  int count = 0;
+  Future<void> playSound() async {
+    var directory;
+    if (count % 2 == 0) {
+      directory =
+          kIsWeb ? AppUtils.setWebAsset(firstBeat) : getAsset(firstBeat);
     } else {
-      if (totalTick < totalBeat + 1) {
-        if (player.playing) {
-          player.stop();
-          if (!kIsWeb) {
-            var directory = getAsset(secondBeat);
-            player.setFilePath(directory.path, preload: true);
-          } else {
-            var directory = AppUtils.setWebAsset(secondBeat);
-            player.setFilePath(directory.path, preload: true);
-          }
-          // var directory = getAsset(secondBeat);
-          // player.setFilePath(directory.path, preload: true);
-          //player.setAsset(secondBeat);
-          player.play();
-        } else {
-          try {
-            print("playing==");
-            if (!kIsWeb) {
-              var directory = getAsset(secondBeat);
-              player.setFilePath(directory.path, preload: true);
-            } else {
-              var directory = AppUtils.setWebAsset(secondBeat);
-              player.setFilePath(directory.path, preload: true);
-            }
-            // var directory = getAsset(secondBeat);
-            // player.setFilePath(directory.path, preload: true);
-            //player.setAsset(secondBeat);
-            player.play();
-          } catch (e) {
-            print("==${e}");
-          }
-        }
-        if (totalTick == totalBeat) {
-          totalTick = 0;
-        }
-      }
+      directory =
+          kIsWeb ? AppUtils.setWebAsset(secondBeat) : getAsset(secondBeat);
     }
+    if (player.playing) {
+      await player.setFilePath(directory.path, preload: true);
+      await player.play();
+    } else {
+      await player.setFilePath(directory.path, preload: true);
+      await player.play();
+    }
+    count++;
+  }
+  // Play sound based on the metronome ticks
+//   Future playSound() async {
+//     if (player.playing) return;
+//     print('in player play sound $totalTick');
+//     totalTick = totalTick + 1;
+//     print('in player play sound $totalTick after ');
+//     if (totalTick == 1) {
+//       if (player.playing) {
+//         print('player is playing ${player.playing}');
+//         player.stop();
+//         if (!kIsWeb) {
+//           var directory = getAsset(firstBeat);
+//           player.setFilePath(directory.path, preload: true);
+//         } else {
+//           var directory = AppUtils.setWebAsset(firstBeat);
+//           try {
+//             player.setFilePath(directory.path, preload: true);
+//           } catch (e) {
+//             print('errror on play sound $e');
+//           }
+//         }
+
+//         //player.setAsset(firstBeat);
+//         player.play();
+//       } else {
+//         if (!kIsWeb) {
+//           var directory = getAsset(firstBeat);
+//           player.setFilePath(directory.path, preload: true);
+//         } else {
+//           var directory = AppUtils.setWebAsset(firstBeat);
+//           player.setFilePath(directory.path, preload: true);
+//         }
+
+//         //  player.setAsset(firstBeat);
+//         player.play();
+//       }
+//     } else {
+//       print('object is playing ${player.playing}');
+//       if (totalTick < totalBeat + 1) {
+//         if (player.playing) {
+//           player.stop();
+//           if (!kIsWeb) {
+//             var directory = getAsset(secondBeat);
+//             player.setFilePath(directory.path, preload: true);
+//           } else {
+//             var directory = AppUtils.setWebAsset(secondBeat);
+//             player.setFilePath(directory.path, preload: true);
+//           }
+//           // var directory = getAsset(secondBeat);
+//           // player.setFilePath(directory.path, preload: true);
+//           //player.setAsset(secondBeat);
+//           player.play();
+//         } else {
+//           try {
+//             print("playing==");
+//             if (!kIsWeb) {
+//               var directory = getAsset(secondBeat);
+//               player.setFilePath(directory.path, preload: true);
+//             } else {
+//               var directory = AppUtils.setWebAsset(secondBeat);
+//               player.setFilePath(directory.path, preload: true);
+//             }
+//             // var directory = getAsset(secondBeat);
+//             // player.setFilePath(directory.path, preload: true);
+//             //player.setAsset(secondBeat);
+//             player.play();
+//           } catch (e) {
+//             print("==${e}");
+//           }
+//         }
+//         if (totalTick == totalBeat) {
+//           totalTick = 0;
+//         }
+//       }
+//     }
+//   }
+// //
+  // Dispose method to clean up resources
+  @override
+  void dispose() {
+    timer?.cancel();
+    bpmContinuousTimer?.cancel();
+    player.dispose();
+    controller?.dispose();
+
+    super.dispose();
   }
 }

@@ -20,21 +20,24 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final metroProvider = Provider.of<MetroProvider>(context, listen: false);
+    metroProvider = Provider.of<MetroProvider>(context, listen: false);
     metroProvider.initializeAnimationController(this);
   }
 
-  MetroProvider? metroProvider;
+  late MetroProvider metroProvider;
 
   @override
   void didChangeDependencies() {
-    metroProvider = Provider.of<MetroProvider>(context, listen: false);
+    // metroProvider = Provider.of<MetroProvider>(context, listen: false);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    metroProvider!.disposeController();
+    metroProvider.disposeController();
+     
+    metroProvider.dispose();  // Dispose the MetroProvider
+   
     super.dispose();
   }
 
