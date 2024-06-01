@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -77,7 +78,7 @@ class AppUtils {
   }
 
   static File setWebAsset(soundTracks) {
-    Uri uri = Uri.parse("${AppStrings.webAsset}/$soundTracks");
+    Uri uri = Uri.parse("${kDebugMode? '${AppStrings.webAsset}/':''}$soundTracks");
     File file = File.fromUri(uri);
     // print('file path:::-------------- ${file.path}');
     return file;
