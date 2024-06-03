@@ -23,14 +23,14 @@ String yearlySubscription() {
 String get nativeBannerAdId => kIsWeb
     ? ''
     : Platform.isAndroid
-    ? 'ca-app-pub-3940256099942544/2247696110'
-    : 'ca-app-pub-3940256099942544/3986624511';
+    ? 'ca-app-pub-8243857750402094/5169233790'
+    : 'ca-app-pub-8243857750402094/5635690548';
 
 String get interstitialAdId => kIsWeb
     ? ''
     : Platform.isAndroid
-    ? 'ca-app-pub-3940256099942544/1033173712'
-    : 'ca-app-pub-3940256099942544/4411468910';
+    ? 'ca-app-pub-8243857750402094/4586332752'
+    : 'ca-app-pub-8243857750402094/8916907116';
 
 List<String> getFeaturesList() =>
     ["Feature1,Feature2,Feature3,Feature4,Feature5"];

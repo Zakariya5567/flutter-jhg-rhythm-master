@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               trailingWidget: JHGSettingsButton(
                                 enabled: true,
                                 onTap: () {
-                                  interstitialAd?.showInterstitial();
+                                  interstitialAd?.showInterstitial(showAlways: true);
                                   Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) {

@@ -32,6 +32,7 @@ Future<void> main() async {
     statusBarIconBrightness: Brightness.light,
   ));
   JHGAdsHelper().init();
+  JHGAdsHelper().addATestDevice("");
   runApp(const MyApp());
 }
 
