@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               },
                                               child: Container(
                                                 height: height * 0.057,
-                                                width: kIsWeb ? 120 : width/4,
+                                                width: kIsWeb ? 120 : width/3.5,
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
