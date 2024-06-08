@@ -117,18 +117,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               isResponsive: true,
                               autoImplyLeading: false,
                               trailingWidget: JHGSettingsButton(
-                                enabled: true,
-                                onTap: () {
-                                  interstitialAd?.showInterstitial(showAlways: true);
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return const SettingScreen();
-                                        },
-                                      )
-                                  );
-                                }
-                              ),
+                                  enabled: true,
+                                  onTap: () {
+                                    interstitialAd?.showInterstitial(
+                                        showAlways: true);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) {
+                                        return const SettingScreen();
+                                      },
+                                    ));
+                                  }),
                             ),
                             body: Container(
                               //color: Colors.red,
@@ -139,9 +138,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   //  SizedBox(height: 10),
                                   //BUTTON SELECTION SECTION
                                   Container(
-                                    //  color: Colors.red,
+                                    //color: Colors.red,
                                     constraints: BoxConstraints(
-                                        maxWidth: kIsWeb ? 380.0.w : 345.0.w),
+                                        maxWidth: kIsWeb ? 380.0.w : 375.0.w),
                                     height: height * 0.057,
                                     child: Row(
                                         mainAxisAlignment:
@@ -159,7 +158,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               },
                                               child: Container(
                                                 height: height * 0.057,
-                                                width: kIsWeb ? 120 : width/3.5,
+                                                width:
+                                                    kIsWeb ? 120 : width / 3.5,
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -191,15 +191,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () =>
-                                                      // index!=0?
-                                                      //     AppUtils.showPopup(
-                                                      //         context,
-                                                      //         buttonList[index],
-                                                      //         buttonsDesc[
-                                                      //             index]):
+                                                          // index!=0?
+                                                          //     AppUtils.showPopup(
+                                                          //         context,
+                                                          //         buttonList[index],
+                                                          //         buttonsDesc[
+                                                          //             index]):
 
-                                                      jHGInfoDialog(context: context, title:  buttonList[index], description: buttonsDesc[index]),
-
+                                                          jHGInfoDialog(
+                                                              context: context,
+                                                              title: buttonList[
+                                                                  index],
+                                                              description:
+                                                                  buttonsDesc[
+                                                                      index]),
                                                       child: Icon(
                                                         Icons
                                                             .info_outline_rounded,
