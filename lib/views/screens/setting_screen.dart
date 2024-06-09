@@ -50,144 +50,80 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: JHGBody(
-        bodyAppBar: JHGAppBar(
-          isResponsive: true,
-          title:
-              AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
-          trailingWidget: kIsWeb
-              ? null
-              : JHGReportAnIssueBtn(onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BugReportPage(
-                        device: deviceName,
-                        appName: AppStrings.appName,
-                      ),
+    return JHGSettings(
+      androidAppIdentifier: "",
+      iosAppIdentifier: "",
+      bodyAppBar: JHGAppBar(
+        isResponsive: true,
+        title: AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
+        trailingWidget: kIsWeb
+            ? null
+            : JHGReportAnIssueBtn(onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BugReportPage(
+                      device: deviceName,
+                      appName: AppStrings.appName,
                     ),
-                  );
-                }),
-        ),
-        body: Consumer2<SettingProvider, HomeProvider>(
-            builder: (context, controller, homeProvider, child) {
-          return Container(
-            width: kIsWeb ? 345 : width,
-            color: AppColors.blackPrimary,
-            child: Column(
-              children: [
-                Expanded(
-                    child: SingleChildScrollView(
-                  child: Container(
-                    constraints: BoxConstraints(maxWidth: 345),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        homeProvider.selectedButton == 0
-                            ? MetronomeSetting(controller: controller)
-                            : homeProvider.selectedButton == 1
-                                ? TapTempoSetting(controller: controller)
-                                : SpeedTrainerSetting(
-                                    controller: controller,
-                                    speedController: speedController!),
-                      ],
-                    ),
-                  ).center.paddingOnly(top: height * 0.02),
-                )),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Center(
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 347),
-                        padding: EdgeInsets.only(top: 10),
-                        color: AppColors.blackPrimary,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              child: JHGNativeBanner(
-                                adID: nativeBannerAdId,
-                              ),
-                            ),
-                            homeProvider.selectedButton == 1
-                                ? SizedBox()
-                                : JHGPrimaryBtn(
-                                    label: AppStrings.save,
-                                    onPressed: () async {
-                                      await controller.onSave(context);
-                                      showToast(
-                                          context: context,
-                                          message: AppStrings.ableton,
-                                          isError: false);
-                                      Navigator.pop(context);
-                                    }),
-                            // InkWell(
-                            //     onTap: () async {
-                            //       await controller.onSave(context);
-                            //       showToast(
-                            //           context: context,
-                            //           message: AppStrings.ableton,
-                            //           isError: false);
-                            //       Navigator.pop(context);
-                            //     },
-                            //     child: Center(
-                            //       child: Container(
-                            //         height: height * 0.07,
-                            //         width: width * 1,
-                            //         alignment: Alignment.center,
-                            //         decoration: BoxDecoration(
-                            //             color: AppColors.redPrimary,
-                            //             borderRadius:
-                            //                 BorderRadius.circular(10)),
-                            //         child: Text(
-                            //           AppStrings.save,
-                            //           style: JHGTextStyles.labelStyle
-                            //               .copyWith(
-                            //                   color: AppColors.whitePrimary,
-                            //                   fontSize: 17),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            JHGSecondaryBtn(
-                              label: AppStrings.logout,
-                              onPressed: () async {
-                                await LocalDB.clearLocalDB();
-                                // ignore: use_build_context_synchronously
-                                Navigator.pushAndRemoveUntil(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return Welcome(
-                                    yearlySubscriptionId: yearlySubscription(),
-                                    monthlySubscriptionId:
-                                        monthlySubscription(),
-                                    appName: AppStrings.appName,
-                                    appVersion: packageInfo!.version,
-                                    nextPage: () => const HomeScreen(),
-                                    featuresList: [],
-                                  );
-                                }), (route) => false);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        }),
+                  ),
+                );
+              }),
       ),
+      body: Consumer2<SettingProvider, HomeProvider>(
+          builder: (context, controller, homeProvider, child) {
+        return Container(
+
+          height: MediaQuery.sizeOf(context).height/.8,
+          color: AppColors.blackPrimary,
+          child: Column(
+            children: [
+              Expanded(
+                  child: SingleChildScrollView(
+                child: Container(
+                  // constraints: BoxConstraints(maxWidth: 345),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      homeProvider.selectedButton == 0
+                          ? MetronomeSetting(controller: controller)
+                          : homeProvider.selectedButton == 1
+                              ? TapTempoSetting(controller: controller)
+                              : SpeedTrainerSetting(
+                                  controller: controller,
+                                  speedController: speedController!),
+                    ],
+                  ),
+                ).center.paddingOnly(top: height * 0.02),
+              )),
+            ],
+          ),
+        );
+      }),
+      onTapSave: () async {
+        await Provider.of<SettingProvider>(context, listen: false)
+            .onSave(context);
+
+        showToast(
+            context: context, message: AppStrings.ableton, isError: false);
+        Navigator.pop(context);
+      },
+      onTapLogout: () async {
+        await LocalDB.clearLocalDB();
+        // ignore: use_build_context_synchronously
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+          return Welcome(
+            yearlySubscriptionId: yearlySubscription(),
+            monthlySubscriptionId: monthlySubscription(),
+            appName: AppStrings.appName,
+            appVersion: packageInfo!.version,
+            nextPage: () => const HomeScreen(),
+            featuresList: [],
+          );
+        }), (route) => false);
+      },
     );
   }
 }
-
-
-
-
-
-
