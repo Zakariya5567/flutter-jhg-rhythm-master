@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +57,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       JHGAdsHelper().initializeConsentManager();
       StringsDownloadService()
           .isStringsDownloaded(context, AppStrings.nameOfApp);
-      interstitialAd = JHGInterstitialAd(interstitialAdId);
+      interstitialAd = JHGInterstitialAd(
+        interstitialAdId,
+        onAdClosed: (ad) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const SettingScreen();
+            },
+          ));
+        },
+      );
       interstitialAd?.loadAd();
     }
     if (kIsWeb) {
@@ -121,12 +131,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   onTap: () {
                                     interstitialAd?.showInterstitial(
                                         showAlways: true);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) {
-                                        return const SettingScreen();
-                                      },
-                                    ));
                                   }),
                             ),
                             body: Container(
