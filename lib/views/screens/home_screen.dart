@@ -58,14 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       StringsDownloadService()
           .isStringsDownloaded(context, AppStrings.nameOfApp);
       interstitialAd = JHGInterstitialAd(
-        interstitialAdId,
-        onAdClosed: (ad) {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) {
-              return const SettingScreen();
-            },
-          ));
-        },
+        interstitialAdId
       );
       interstitialAd?.loadAd();
     }
@@ -129,6 +122,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               trailingWidget: JHGSettingsButton(
                                   enabled: true,
                                   onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) {
+                                        return const SettingScreen();
+                                      },
+                                    ));
                                     interstitialAd?.showInterstitial(
                                         showAlways: true);
                                   }),

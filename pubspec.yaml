@@ -47,9 +47,9 @@ dependencies:
      git:
        url: https://github.com/jamie2364/flutter-jhg-reg-page
        ref: master
-  flutter_jhg_elements:  
+  flutter_jhg_elements:
     git:
-      url: https://github.com/jamie2364/flutter_jhg_elements
+      url: https://github.com/jamie2364/flutter_jhg_elements.git
       ref: main
 
   # flutter_jhg_elements:
