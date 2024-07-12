@@ -18,6 +18,7 @@ import 'app_utils/app_info.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+var isFreePlan = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb) await StringsDownloadService();

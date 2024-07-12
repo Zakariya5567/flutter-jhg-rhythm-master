@@ -9,6 +9,7 @@ import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/app_utils/app_subscription.dart';
+import 'package:rhythm_master/main.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/screens/bpm_view.dart';
@@ -54,13 +55,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setExpiryDate();
     super.initState();
     if (!kIsWeb) {
-      JHGAdsHelper().initializeConsentManager();
       StringsDownloadService()
           .isStringsDownloaded(context, AppStrings.nameOfApp);
-      interstitialAd = JHGInterstitialAd(
-        interstitialAdId
-      );
-      interstitialAd?.loadAd();
+      LocalDB.getIsFreePlan().then((value) {
+        isFreePlan = value;
+        if (value) {
+          JHGAdsHelper().initializeConsentManager();
+          interstitialAd = JHGInterstitialAd(interstitialAdId);
+          interstitialAd?.loadAd();
+        }
+      });
     }
     if (kIsWeb) {
       homeProvider.getUserNameFromRL();
@@ -122,13 +126,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               trailingWidget: JHGSettingsButton(
                                   enabled: true,
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
                                       builder: (context) {
                                         return const SettingScreen();
                                       },
                                     ));
-                                    interstitialAd?.showInterstitial(
-                                        showAlways: true);
+                                    if (isFreePlan) {
+                                      interstitialAd?.showInterstitial(
+                                          showAlways: true);
+                                    }
                                   }),
                             ),
                             body: Container(

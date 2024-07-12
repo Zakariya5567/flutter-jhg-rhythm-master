@@ -8,6 +8,7 @@ import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_info.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/app_utils/app_subscription.dart';
+import 'package:rhythm_master/main.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
@@ -73,8 +74,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Consumer2<SettingProvider, HomeProvider>(
           builder: (context, controller, homeProvider, child) {
         return Container(
-
-          height: MediaQuery.sizeOf(context).height/.8,
+          height: MediaQuery.sizeOf(context).height / .8,
           color: AppColors.blackPrimary,
           child: Column(
             children: [
@@ -101,6 +101,14 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         );
       }),
+      trailing: isFreePlan
+          ? Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              child: JHGNativeBanner(
+                adID: nativeBannerAdId,
+              ),
+            )
+          : const SizedBox(),
       onTapSave: () async {
         await Provider.of<SettingProvider>(context, listen: false)
             .onSave(context);
