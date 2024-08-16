@@ -37,6 +37,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+final navKey = GlobalKey<NavigatorState>();
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -102,6 +103,7 @@ class _MyAppState extends State<MyApp> {
                 appName: AppStrings.appName,
                 appVersion: packageInfo?.version ?? "",
                 nextPage: () => const HomeScreen(),
+          navKey: navKey,
                 featuresList: getFeaturesList(),
               ),
       ),

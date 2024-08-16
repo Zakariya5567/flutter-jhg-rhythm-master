@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     setExpiryDate();
     super.initState();
+    print('user session ${SplashScreen.session}');
     if (!kIsWeb) {
       StringsDownloadService()
           .isStringsDownloaded(context, AppStrings.nameOfApp);
