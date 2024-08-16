@@ -16,7 +16,6 @@ import 'package:rhythm_master/views/screens/home_screen.dart';
 
 import 'app_utils/app_info.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 var isFreePlan = false;
 Future<void> main() async {
@@ -80,7 +79,7 @@ class _MyAppState extends State<MyApp> {
             create: (context) => HomeProvider()),
       ],
       child: MaterialApp(
-        navigatorKey: navigatorKey,
+        navigatorKey: navKey,
         builder: (context, child) {
           return MediaQuery(
             data: MediaQuery.of(context)
