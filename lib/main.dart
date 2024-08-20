@@ -20,7 +20,7 @@ import 'app_utils/app_info.dart';
 var isFreePlan = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) await StringsDownloadService();
+  if (!kIsWeb) await StringsDownloadService().init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
