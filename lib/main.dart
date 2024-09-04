@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -13,9 +12,6 @@ import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/screens/home_screen.dart';
-
-import 'app_utils/app_info.dart';
-
 
 var isFreePlan = false;
 Future<void> main() async {
@@ -37,6 +33,7 @@ Future<void> main() async {
 }
 
 final navKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -45,18 +42,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  PackageInfo? packageInfo;
-
-  Future<void> initPackageInfo() async {
-    packageInfo = await getDeviceInfo();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initPackageInfo();
-  }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -100,9 +85,8 @@ class _MyAppState extends State<MyApp> {
                 yearlySubscriptionId: yearlySubscription(),
                 monthlySubscriptionId: monthlySubscription(),
                 appName: AppStrings.appName,
-                appVersion: packageInfo?.version ?? "",
                 nextPage: () => const HomeScreen(),
-          navKey: navKey,
+                navKey: navKey,
                 featuresList: getFeaturesList(),
               ),
       ),

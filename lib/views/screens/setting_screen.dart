@@ -58,9 +58,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BugReportScreen(
-                      device: deviceName,
-                    ),
+                    builder: (context) => BugReportScreen(),
                   ),
                 );
               }),
