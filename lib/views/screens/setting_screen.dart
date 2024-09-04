@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
@@ -26,12 +25,10 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  PackageInfo? packageInfo;
   String deviceName = 'Unknown';
   SpeedProvider? speedController;
 
   Future<void> initPackageInfo() async {
-    packageInfo = await getDeviceInfo();
     deviceName = await getDeviceName();
   }
 
