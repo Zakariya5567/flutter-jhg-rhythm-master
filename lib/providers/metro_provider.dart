@@ -434,7 +434,7 @@ class MetroProvider extends ChangeNotifier {
 
   playBeat(String beat, bool isStop) {
     isStop == true ? player.stop() : null;
-    var directory = !kIsWeb ? getAsset(beat) : AppUtils.setWebAsset(beat);
+    var directory = !kIsWeb ? Utils.getAsset(beat) : AppUtils.setWebAsset(beat);
     player.setFilePath(directory.path, preload: true);
     player.play();
   }

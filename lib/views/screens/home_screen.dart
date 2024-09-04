@@ -56,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     print('user session ${SplashScreen.session}');
     if (!kIsWeb) {
-      StringsDownloadService()
-          .isStringsDownloaded(context, AppStrings.nameOfApp);
+      StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
       LocalDB.getIsFreePlan().then((value) {
         isFreePlan = value;
         if (value) {

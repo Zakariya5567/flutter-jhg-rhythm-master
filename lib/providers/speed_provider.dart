@@ -282,7 +282,7 @@ class SpeedProvider extends ChangeNotifier {
   stopLoadAndPlay(String beat) {
     player.stop();
     if (!kIsWeb) {
-      var directory = getAsset(beat);
+      var directory = Utils.getAsset(beat);
       player.setFilePath(directory.path, preload: true);
     } else {
       var directory = AppUtils.setWebAsset(beat);
@@ -339,7 +339,7 @@ class SpeedProvider extends ChangeNotifier {
   loadAndPlay(String beat) {
     // var directory = getAsset(beat);
     if (!kIsWeb) {
-      var directory = getAsset(beat);
+      var directory = Utils.getAsset(beat);
       player.setFilePath(directory.path, preload: true);
     } else {
       var directory = AppUtils.setWebAsset(beat);

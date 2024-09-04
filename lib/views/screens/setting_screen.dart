@@ -14,7 +14,6 @@ import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
-import 'package:rhythm_master/views/screens/home_screen.dart';
 import 'package:rhythm_master/views/screens/settings_tab/metronome_setting.dart';
 import 'package:rhythm_master/views/screens/settings_tab/speed_trainer_setting.dart';
 import 'package:rhythm_master/views/screens/settings_tab/tap_tempo_setting.dart';
@@ -50,7 +49,6 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return JHGSettings(
       androidAppIdentifier: "",
       iosAppIdentifier: "",
@@ -63,9 +61,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BugReportPage(
+                    builder: (context) => BugReportScreen(
                       device: deviceName,
-                      appName: AppStrings.appName,
                     ),
                   ),
                 );
@@ -74,7 +71,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Consumer2<SettingProvider, HomeProvider>(
           builder: (context, controller, homeProvider, child) {
         return Container(
-          height: MediaQuery.sizeOf(context).height / .8,
+          height: MediaQuery.sizeOf(context).height / 1.4,
           color: AppColors.blackPrimary,
           child: Column(
             children: [
@@ -122,14 +119,7 @@ class _SettingScreenState extends State<SettingScreen> {
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) {
-          return Welcome(
-            yearlySubscriptionId: yearlySubscription(),
-            monthlySubscriptionId: monthlySubscription(),
-            appName: AppStrings.appName,
-            appVersion: packageInfo!.version,
-            nextPage: () => const HomeScreen(),
-            featuresList: [],
-          );
+          return WelcomeScreen();
         }), (route) => false);
       },
     );
