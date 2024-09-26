@@ -43,6 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
     settingProvider.initializeAnimationController();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -68,29 +69,22 @@ class _SettingScreenState extends State<SettingScreen> {
         return Container(
           height: MediaQuery.sizeOf(context).height / 1.4,
           color: AppColors.blackPrimary,
-          child: Column(
-            children: [
+          child:
               Expanded(
-                  child: SingleChildScrollView(
-                child: Container(
-                  // constraints: BoxConstraints(maxWidth: 345),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      homeProvider.selectedButton == 0
-                          ? MetronomeSetting(controller: controller)
-                          : homeProvider.selectedButton == 1
-                              ? TapTempoSetting(controller: controller)
-                              : SpeedTrainerSetting(
-                                  controller: controller,
-                                  speedController: speedController!),
-                    ],
-                  ),
-                ).center.paddingOnly(top: height * 0.02),
-              )),
-            ],
-          ),
+                  child: Container(
+                    // constraints: BoxConstraints(maxWidth: 345),
+                    child:
+                        homeProvider.selectedButton == 0
+                            ? MetronomeSetting(controller: controller)
+                            : homeProvider.selectedButton == 1
+                                ? TapTempoSetting(controller: controller)
+                                : SpeedTrainerSetting(
+                                    controller: controller,
+                                    speedController: speedController!),
+
+                  ).center.paddingOnly(top: height * 0.02)),
+
+
         );
       }),
       trailing: isFreePlan
