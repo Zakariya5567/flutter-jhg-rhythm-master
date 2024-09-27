@@ -235,7 +235,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: a90e73aa70daff4d0cb96a85f17c881b77d1f317
+      resolved-ref: bc7d0f470f75239822dda20ed4324ff5cb47def0
       url: "https://github.com/jamie2364/flutter_jhg_elements.git"
     source: git
     version: "0.0.1"
@@ -421,10 +421,10 @@ packages:
     dependency: transitive
     description:
       name: just_audio_web
-      sha256: b163878529d9b028c53a6972fcd58cae2405bcd11cbfcea620b6fb9f151429d6
+      sha256: "9a98035b8b24b40749507687520ec5ab404e291d2b0937823ff45d92cb18d448"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.12"
+    version: "0.4.13"
   leak_tracker:
     dependency: transitive
     description:
@@ -670,7 +670,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: ac5caa2cb80fa008b56425fda11a095984c240f9
+      resolved-ref: f5c61ef34b336c22a7a2557431be0d8315296e7d
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
