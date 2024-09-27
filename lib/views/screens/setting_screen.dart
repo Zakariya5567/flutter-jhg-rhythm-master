@@ -47,8 +47,9 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return JHGSettings(
-      androidAppIdentifier: "",
-      iosAppIdentifier: "",
+      androidAppIdentifier: 'com.jamieharrisonguitar.jhg_rhythm_toolkit',
+      iosAppIdentifier: 'com.jamieharrisonguitar.jhg-rhythm-toolkit',
+      appStoreId: 'id6461775359',
       bodyAppBar: JHGAppBar(
         isResponsive: true,
         title: AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
@@ -68,29 +69,16 @@ class _SettingScreenState extends State<SettingScreen> {
         return Container(
           height: MediaQuery.sizeOf(context).height / 1.4,
           color: AppColors.blackPrimary,
-          child: Column(
-            children: [
-              Expanded(
-                  child: SingleChildScrollView(
-                child: Container(
-                  // constraints: BoxConstraints(maxWidth: 345),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      homeProvider.selectedButton == 0
-                          ? MetronomeSetting(controller: controller)
-                          : homeProvider.selectedButton == 1
-                              ? TapTempoSetting(controller: controller)
-                              : SpeedTrainerSetting(
-                                  controller: controller,
-                                  speedController: speedController!),
-                    ],
-                  ),
-                ).center.paddingOnly(top: height * 0.02),
-              )),
-            ],
-          ),
+          child: Container(
+                      // constraints: BoxConstraints(maxWidth: 345),
+                      child: homeProvider.selectedButton == 0
+            ? MetronomeSetting(controller: controller)
+            : homeProvider.selectedButton == 1
+                ? TapTempoSetting(controller: controller)
+                : SpeedTrainerSetting(
+                    controller: controller,
+                    speedController: speedController!),
+                    ).center.paddingOnly(top: height * 0.02),
         );
       }),
       trailing: isFreePlan

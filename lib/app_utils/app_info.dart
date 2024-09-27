@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 Future<String> getDeviceName() async {
 
@@ -19,7 +18,7 @@ Future<String> getDeviceName() async {
   return deviceName;
 }
 
-Future<PackageInfo> getDeviceInfo() async {
-  final info = await PackageInfo.fromPlatform();
-  return info;
-}
+// Future<PackageInfo> getDeviceInfo() async {
+//   final info = await PackageInfo.fromPlatform();
+//   return info;
+// }

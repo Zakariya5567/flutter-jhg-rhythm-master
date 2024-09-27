@@ -165,7 +165,7 @@ class SpeedTrainerSetting extends StatelessWidget {
         //                     settingProvider!.speedDefaultInterval.toInt());
         //               },
         //             ),
-        180.0.height
+        10.0.height
       ],
     );
   }
