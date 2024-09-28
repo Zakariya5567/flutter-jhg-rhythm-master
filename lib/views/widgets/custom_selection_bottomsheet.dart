@@ -14,7 +14,7 @@ customSelectionBottomSheet(
   return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       builder: (context) {
         final height = MediaQuery.sizeOf(context).height;
         final width = MediaQuery.sizeOf(context).width;

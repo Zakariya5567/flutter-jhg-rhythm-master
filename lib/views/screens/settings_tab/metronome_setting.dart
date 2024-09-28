@@ -93,6 +93,7 @@ class MetronomeSetting extends StatelessWidget {
               child: JHGDropDown(
                 value: soundList[controller.selectedIndex],
                 items: soundList,
+                expandedColor: AppColors.liteWhite,
                 onChanged: (values) async {
                   controller.setSound(
                     name: values!.name.toString(),
