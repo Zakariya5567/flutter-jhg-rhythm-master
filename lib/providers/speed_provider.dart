@@ -18,7 +18,9 @@ class SpeedProvider extends ChangeNotifier {
 
   // BPM IS BEAT PER MINUTE
   double bpm = 120;
-
+// Instance of the Player
+  final player1 = AudioPlayer();
+  final player2 = AudioPlayer();
   // TIMER IS  BPM
   Timer? _timer;
 
@@ -62,6 +64,17 @@ class SpeedProvider extends ChangeNotifier {
     Future.delayed(Duration.zero, () async {
       setSpeedTrainerDefaultValue();
     });
+    await preloadSounds();
+  }
+
+  Future<void> preloadSounds() async {
+    var directory1 =
+        !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
+    var directory2 =
+        !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
+
+    await player1.setFilePath(directory1.path, preload: true);
+    await player2.setFilePath(directory2.path, preload: true);
   }
 
   setSpeedTrainerDefaultValue() async {
@@ -260,19 +273,32 @@ class SpeedProvider extends ChangeNotifier {
         setTimer();
       }
       if (bpm >= targetTempo + bar * interval) return;
-      playBeat(firstBeat);
+      playBeat1();
+      //    playBeat(firstBeat);
     } else {
       if (totalTick < totalBeats) {
-        playBeat(secondBeat);
+        playBeat2();
+        // playBeat(secondBeat);
       } else {
         totalTick = 0;
-        playBeat(secondBeat);
+        playBeat2();
+        //playBeat(secondBeat);
       }
     }
   }
 
+  playBeat1() {
+    player1.seek(Duration.zero);
+    player1.play();
+  }
+
+  playBeat2() {
+    player2.seek(Duration.zero);
+    player2.play();
+  }
+
   playBeat(String beat) {
-    if (player.playing) {
+    if (player1.playing) {
       stopLoadAndPlay(beat);
     } else {
       loadAndPlay(beat);
@@ -280,18 +306,31 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   stopLoadAndPlay(String beat) {
-    player.stop();
+    // player.stop();
     if (!kIsWeb) {
-      var directory = Utils.getAsset(beat);
-      player.setFilePath(directory.path, preload: true);
+      player1.seek(Duration.zero);
     } else {
       var directory = AppUtils.setWebAsset(beat);
       player.setFilePath(directory.path, preload: true);
     }
 
     //player.setAsset(beat);
-    player.play();
+    player1.play();
   }
+
+  // stopLoadAndPlay(String beat) {
+  //   player.stop();
+  //   if (!kIsWeb) {
+  //     var directory = Utils.getAsset(beat);
+  //     player.setFilePath(directory.path, preload: true);
+  //   } else {
+  //     var directory = AppUtils.setWebAsset(beat);
+  //     player.setFilePath(directory.path, preload: true);
+  //   }
+
+  //   //player.setAsset(beat);
+  //   player.play();
+  // }
 
   void incrementTempo(int interval) {
     if (startTempo + sliderInterval <= targetTempo) {
@@ -339,14 +378,28 @@ class SpeedProvider extends ChangeNotifier {
   loadAndPlay(String beat) {
     // var directory = getAsset(beat);
     if (!kIsWeb) {
-      var directory = Utils.getAsset(beat);
-      player.setFilePath(directory.path, preload: true);
+      player2.seek(Duration.zero);
+      // var directory = Utils.getAsset(beat);
+      // player2.setFilePath(directory.path, preload: true);
     } else {
       var directory = AppUtils.setWebAsset(beat);
-      player.setFilePath(directory.path, preload: true);
+      player2.setFilePath(directory.path, preload: true);
     }
     //player.setFilePath(directory.path, preload: true);
     // player.setAsset(beat);
-    player.play();
+    player2.play();
   }
+  // loadAndPlay(String beat) {
+  //   // var directory = getAsset(beat);
+  //   if (!kIsWeb) {
+  //     var directory = Utils.getAsset(beat);
+  //     player.setFilePath(directory.path, preload: true);
+  //   } else {
+  //     var directory = AppUtils.setWebAsset(beat);
+  //     player.setFilePath(directory.path, preload: true);
+  //   }
+  //   //player.setFilePath(directory.path, preload: true);
+  //   // player.setAsset(beat);
+  //   player.play();
+  // }
 }
