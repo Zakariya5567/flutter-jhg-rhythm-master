@@ -137,7 +137,7 @@ class MetroProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
-    await preloadSounds();    
+
     // timer =
     //     Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
     //   Future.delayed(Duration.zero, () async {
@@ -159,7 +159,7 @@ class MetroProvider extends ChangeNotifier {
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     controller!.repeat(reverse: true);
     controller!.stop();
-
+    await preloadSounds();
     Future.delayed(Duration.zero, () async {
       setMetronomeDefaultValue();
     });
