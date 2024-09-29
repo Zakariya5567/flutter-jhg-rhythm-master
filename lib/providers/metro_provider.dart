@@ -41,7 +41,6 @@ class MetroProvider extends ChangeNotifier {
   Animation<double>? animation;
 
   // Instance of the Player
-  final player = AudioPlayer();
 
   int selectedIndex = 0;
 
@@ -252,9 +251,9 @@ class MetroProvider extends ChangeNotifier {
       if (timer != null) {
         timer!.cancel();
       }
-      if (player.playing) {
-        await player.stop();
-      }
+      // if (player.playing) {
+      //   await player.stop();
+      // }
     } else {
       setTimer(ticker);
     }
@@ -316,7 +315,7 @@ class MetroProvider extends ChangeNotifier {
   ///=================================
   //Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {
-    player.setVolume(1.0);
+    // player.setVolume(1.0);
     // dispose the previous timer adn add new one base on BPM
     totalTick = 0;
     firstTime = true;
@@ -434,10 +433,10 @@ class MetroProvider extends ChangeNotifier {
   Future playSound() async {
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-      player.playing ? playBeat(firstBeat, true) : playBeat(firstBeat, false);
+      player1.playing ? playBeat(firstBeat, true) : playBeat(firstBeat, false);
     } else {
       if (totalTick < totalBeat + 1) {
-        player.playing
+        player2.playing
             ? playBeat(secondBeat, true)
             : playBeat(secondBeat, false);
         if (totalTick == totalBeat) {
