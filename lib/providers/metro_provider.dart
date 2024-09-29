@@ -52,6 +52,10 @@ class MetroProvider extends ChangeNotifier {
   int? defaultTiming;
   String? defaultBeatValue;
 
+  // Instance of the Player
+  final player1 = AudioPlayer();
+  final player2 = AudioPlayer();
+
   bool firstTime = true;
   bool isRepeat = true;
   Timer? timer;
@@ -66,6 +70,16 @@ class MetroProvider extends ChangeNotifier {
     beatNumerator = 2;
     beatDenominator = 2;
     notifyListeners();
+  }
+
+  Future<void> preloadSounds() async {
+    var directory1 =
+        !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
+    var directory2 =
+        !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
+
+    await player1.setFilePath(directory1.path, preload: true);
+    await player2.setFilePath(directory2.path, preload: true);
   }
 
   incrementBeatNumerator() {
@@ -123,17 +137,18 @@ class MetroProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
-    timer =
-        Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
-      Future.delayed(Duration.zero, () async {
-        await player.setVolume(0);
-        try {
-          playSound();
-        } catch (e) {
-          print('exception on player $e');
-        }
-      });
-    });
+    await preloadSounds();    
+    // timer =
+    //     Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
+    //   Future.delayed(Duration.zero, () async {
+    //     await player.setVolume(0);
+    //     try {
+    //       playSound();
+    //     } catch (e) {
+    //       print('exception on player $e');
+    //     }
+    //   });
+    // });
     // calling sound list to add sound to sound list
 
     controller = AnimationController(
@@ -432,10 +447,23 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
+  // playBeat(String beat, bool isStop) {
+  //   isStop == true ? player.stop() : null;
+  //   var directory = !kIsWeb ? Utils.getAsset(beat) : AppUtils.setWebAsset(beat);
+  //   player.setFilePath(directory.path, preload: true);
+  //   player.play();
+  // }
+
   playBeat(String beat, bool isStop) {
-    isStop == true ? player.stop() : null;
-    var directory = !kIsWeb ? Utils.getAsset(beat) : AppUtils.setWebAsset(beat);
-    player.setFilePath(directory.path, preload: true);
-    player.play();
+    //  isStop == true ? player.stop() : null;
+    if (beat == AppStrings.logic1Sound) {
+      player1.seek(Duration.zero);
+      // player1.load();
+      player1.play();
+    } else {
+      player2.seek(Duration.zero);
+      // player2.load();
+      player2.play();
+    }
   }
 }

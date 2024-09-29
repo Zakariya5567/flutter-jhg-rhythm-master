@@ -49,7 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return JHGSettings(
       androidAppIdentifier: 'com.jamieharrisonguitar.jhg_rhythm_toolkit',
       iosAppIdentifier: 'com.jamieharrisonguitar.jhg-rhythm-toolkit',
-      appStoreId: 'id6461775359',
+    //  appStoreId: 'id6461775359',
       bodyAppBar: JHGAppBar(
         isResponsive: true,
         title: AppStrings.setting.toText(textStyle: JHGTextStyles.smlabelStyle),
