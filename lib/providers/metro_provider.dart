@@ -312,6 +312,9 @@ class MetroProvider extends ChangeNotifier {
     });
   }
 
+// Define a flag to prevent multiple calls within a very short interval
+  bool _isSoundPlaying = false;
+
   ///=================================
   //Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {
@@ -335,7 +338,16 @@ class MetroProvider extends ChangeNotifier {
     }
 
     timer = Timer.periodic(Duration(milliseconds: timerInterval), (timer) {
-      playSound();
+      if (!_isSoundPlaying) {
+        _isSoundPlaying = true;
+        playSound();
+        // Reset the flag after sound finishes or after a delay
+        Future.delayed(Duration(milliseconds: timerInterval)).then((_) {
+          _isSoundPlaying = false;
+        });
+      }
+      print("timerInterval is $timerInterval");
+      // playSound();
     });
 
     controller!.repeat(reverse: true);
