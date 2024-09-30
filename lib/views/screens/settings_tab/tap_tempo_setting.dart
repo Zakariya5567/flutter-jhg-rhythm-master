@@ -19,6 +19,6 @@ class TapTempoSetting extends StatelessWidget {
       AppStrings.tapTempoSettingText,
       style: JHGTextStyles.labelStyle
           .copyWith(color: AppColors.whitePrimary, fontSize: 17),
-    ).paddingOnly(top: 290.0.h);
+    ).paddingOnly(top: 0.0.h);
   }
 }

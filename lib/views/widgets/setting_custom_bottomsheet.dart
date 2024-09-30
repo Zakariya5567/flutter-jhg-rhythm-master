@@ -10,7 +10,13 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
   return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor:  AppColors.greyPrimary,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          )
+      ),
       builder: (context){
        final height =  MediaQuery.sizeOf(context).height;
        final  width =  MediaQuery.sizeOf(context).width;

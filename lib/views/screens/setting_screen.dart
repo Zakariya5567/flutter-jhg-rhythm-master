@@ -67,7 +67,10 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Consumer2<SettingProvider, HomeProvider>(
           builder: (context, controller, homeProvider, child) {
         return Container(
-          height: MediaQuery.sizeOf(context).height / 1.4,
+          height:
+          homeProvider.selectedButton == 0 ?  height / 1.4
+          : homeProvider.selectedButton == 1 ?  height /2.8 :
+          height / 1.5,
           color: AppColors.blackPrimary,
           child: Container(
                       // constraints: BoxConstraints(maxWidth: 345),

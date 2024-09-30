@@ -467,7 +467,7 @@ class MetroProvider extends ChangeNotifier {
 
   playBeat(String beat, bool isStop) {
     //  isStop == true ? player.stop() : null;
-    if (beat == AppStrings.logic1Sound) {
+    if (beat == firstBeat) {
       player1.seek(Duration.zero);
       // player1.load();
       player1.play();
