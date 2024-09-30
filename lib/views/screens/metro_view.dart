@@ -192,7 +192,11 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                     height: kIsWeb ? 160 : 180,
                                     //width: 100,
                                     alignment: Alignment.bottomCenter,
-                                    child: AnimatedBuilder(
+                                    /// =========== animation null
+                                    child:
+                                    controller.animation == null ? SizedBox():
+
+                                    AnimatedBuilder(
                                       animation: controller.animation!,
                                       builder: (context, child) {
                                         //You can customize the translation and rotation values
