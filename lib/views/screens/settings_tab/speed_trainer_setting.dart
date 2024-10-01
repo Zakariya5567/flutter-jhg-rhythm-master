@@ -85,13 +85,14 @@ class SpeedTrainerSetting extends StatelessWidget {
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
                     onTap: () async {
-                      if (index ==
-                          controller.tapSpeedTrainerButtonList.length) {
+                      if (index == controller.tapSpeedTrainerButtonList.length) {
                         controller.clearBottomSheetBeats();
                         settingCustomBottomSheet(context, false);
                       } else {
                         controller.setSpeedTrainerBeats(
-                            index, controller.tapSpeedTrainerButtonList[index]);
+                            index,
+                            controller.tapSpeedTrainerButtonList[index]
+                        );
                       }
                     },
                     child: Padding(

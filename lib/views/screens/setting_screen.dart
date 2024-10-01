@@ -36,8 +36,7 @@ class _SettingScreenState extends State<SettingScreen> {
   void initState() {
     super.initState();
     initPackageInfo();
-    final settingProvider =
-        Provider.of<SettingProvider>(context, listen: false);
+    final settingProvider = Provider.of<SettingProvider>(context, listen: false);
     speedController = Provider.of<SpeedProvider>(context, listen: false);
 
     settingProvider.initializeAnimationController();

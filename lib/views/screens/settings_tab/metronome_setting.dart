@@ -129,11 +129,9 @@ class MetronomeSetting extends StatelessWidget {
                           if (index == controller.tapButtonList.length) {
                             controller.clearBottomSheetBeats();
                             settingCustomBottomSheet(context, true);
-                            controller.setMetronomeBeats(
-                                index, controller.tapButtonList[index]);
+                           // controller.setMetronomeBeats(index, controller.tapButtonList[index]);
                           } else {
-                            controller.setMetronomeBeats(
-                                index, controller.tapButtonList[index]);
+                            controller.setMetronomeBeats(index, controller.tapButtonList[index]);
                           }
                         },
                         child: Padding(
@@ -149,9 +147,7 @@ class MetronomeSetting extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                index == controller.tapButtonList.length
-                                    ? "Custom"
-                                    : controller.tapButtonList[index],
+                                index == controller.tapButtonList.length ? "Custom" : controller.tapButtonList[index],
                                 style: JHGTextStyles.subLabelStyle.copyWith(
                                     color: AppColors.whitePrimary,
                                     fontSize:

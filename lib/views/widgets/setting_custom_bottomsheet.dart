@@ -6,6 +6,8 @@ import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/views/widgets/beats_number_button.dart';
 
+import 'bottom_sheet_widget.dart';
+
 settingCustomBottomSheet(BuildContext context,bool isMetronome){
   return showModalBottomSheet(
       context: context,
@@ -38,7 +40,7 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 15,),
+                    SizedBox(height: 17,),
                     Center(
                       child: Container(
                         height: 5,
@@ -49,52 +51,31 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                         ),
                       ),
                     ),
-
                     SizedBox(height: 40),
-                    Text(
-                       "Number of Beats",
-                        style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 18),),
-                    SizedBox(height: 10),
-                     Text(
-                      "This is the top number and represents how\nmany sounds you will hear between each\naccented note.",
-                      style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
-                    ),
-                    SizedBox(height: 15),
-                     Center(
-                       child:
-                       BeatsNumberButton(
-                        numbers: controller.beatNumerator.toString(),
-                        onAdd: (){
+                    BottomSheetWidget(
+                        title:  "Number of Beats",
+                        subtitle:   "This is the top number and represents how many sounds you will hear between each accented note.",
+                        numbers:  controller.beatNumerator.toString(),
+                        onAdd: () {
                           controller.incrementBeatNumerator();
                         },
-                        onSubtract: (){
+                        onSubtract: () {
                           controller.decrementBeatNumerator();
                         }
-                    ),),
-
-                    SizedBox(height: 30),
-                    Text(
-                      "Note Value",
-                      style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 18),),
-                    SizedBox(height: 10),
-                    Text(
-                      "This is the bottom number and represents, in\ncombination with the BPM setting how\nquickly the sounds will play.",
-                      style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
                     ),
-                    SizedBox(height: 15),
-                    Center(
-                      child:
-                      BeatsNumberButton(
-                          numbers: controller.beatDenominator.toString(),
-                          onAdd: (){
-                            controller.incrementBeatDenominator();
-                          },
-                          onSubtract: (){
-                            controller.decrementBeatDenominator();
-                          }
-                      ),),
-
-                    SizedBox(height: 25),
+                    SizedBox(height: 30),
+                    BottomSheetWidget(
+                        title:   "Note Value",
+                        subtitle:   "This is the bottom number and represents, in combination with the BPM setting how quickly the sounds will play.",
+                        numbers:  controller.beatDenominator.toString(),
+                        onAdd: () {
+                          controller.incrementBeatDenominator();
+                        },
+                        onSubtract: () {
+                          controller.decrementBeatDenominator();
+                        }
+                    ),
+                    SizedBox(height: 30),
                     Center(
                       child: Text(
                         "Time Signature",
@@ -104,14 +85,10 @@ settingCustomBottomSheet(BuildContext context,bool isMetronome){
                     SizedBox(height: 20),
                     Center(
                       child:
-                    Text(
-                      "${controller.beatNumerator}/${controller.beatDenominator}",
+                    Text("${controller.beatNumerator}/${controller.beatDenominator}",
                       style: JHGTextStyles.lrlabelStyle.copyWith(fontSize: 40),
                     ),),
-
-
-
-                    SizedBox(height: 30),
+                    SizedBox(height: 35),
                     InkWell(
                       onTap: () async {
                         Navigator.pop(context);

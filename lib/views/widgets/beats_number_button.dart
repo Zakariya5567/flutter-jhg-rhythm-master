@@ -38,7 +38,7 @@ class BeatsNumberButton extends StatelessWidget {
           ),
         )),
 
-        SizedBox(width: 8),
+        SizedBox(width: 25),
 
         Container(
           height: height * 0.065,
@@ -51,12 +51,12 @@ class BeatsNumberButton extends StatelessWidget {
           child: Text(
             numbers,
             style: JHGTextStyles.subLabelStyle.copyWith(
-              fontSize: 25,
+              fontSize: 32,
             ),
           ),
         ),
 
-        SizedBox(width: 8),
+        SizedBox(width: 25),
         // PLUS BUTTON
 
         MouseRegion(cursor: SystemMouseCursors.click,child:   GestureDetector(
