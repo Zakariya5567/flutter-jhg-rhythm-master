@@ -77,6 +77,8 @@ class MetroProvider extends ChangeNotifier {
     var directory2 =
         !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
 
+    player1.stop();
+    player1.stop();
     await player1.setFilePath(directory1.path, preload: true);
     await player2.setFilePath(directory2.path, preload: true);
   }
@@ -136,18 +138,6 @@ class MetroProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
-
-    // timer =
-    //     Timer.periodic(Duration(milliseconds: (60000 / bpm).round()), (timer) {
-    //   Future.delayed(Duration.zero, () async {
-    //     await player.setVolume(0);
-    //     try {
-    //       playSound();
-    //     } catch (e) {
-    //       print('exception on player $e');
-    //     }
-    //   });
-    // });
     // calling sound list to add sound to sound list
 
     controller = AnimationController(
@@ -318,7 +308,7 @@ class MetroProvider extends ChangeNotifier {
   ///=================================
   //Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {
-    // player.setVolume(1.0);
+    //player.setVolume(1.0);
     // dispose the previous timer adn add new one base on BPM
     totalTick = 0;
     firstTime = true;
@@ -338,16 +328,7 @@ class MetroProvider extends ChangeNotifier {
     }
 
     timer = Timer.periodic(Duration(milliseconds: timerInterval), (timer) {
-      if (!_isSoundPlaying) {
-        _isSoundPlaying = true;
-        playSound();
-        // Reset the flag after sound finishes or after a delay
-        Future.delayed(Duration(milliseconds: timerInterval)).then((_) {
-          _isSoundPlaying = false;
-        });
-      }
-      print("timerInterval is $timerInterval");
-      // playSound();
+      playSound();
     });
 
     controller!.repeat(reverse: true);
