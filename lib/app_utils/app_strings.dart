@@ -1,5 +1,10 @@
 class AppStrings {
-  static const String appName = 'JHG Rhythm Toolkit';
+  static const String appName = 'Rhythm Toolkit';
+  static const String appStoreId = '6471913481';
+  static const String androidBuildId =
+      'com.jamieharrisonguitar.jhg_rhythm_toolkit';
+  static const String iOSBuildId = 'com.jamieharrisonguitar.jhg-rhythm-toolkit';
+
   static const String nameOfApp = 'jhg-rhythm-toolkit';
   static const String tap = 'Tap';
   static const String bpmNull = '- -';

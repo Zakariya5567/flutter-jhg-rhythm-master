@@ -3,7 +3,7 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <application
-        android:label="JHG Rhythm Toolkit"
+        android:label="Rhythm Toolkit"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
