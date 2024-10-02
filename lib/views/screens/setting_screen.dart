@@ -98,8 +98,8 @@ class _SettingScreenState extends State<SettingScreen> {
         await Provider.of<SettingProvider>(context, listen: false)
             .onSave(context);
 
-        showToast(
-            context: context, message: AppStrings.ableton, isError: false);
+        // showToast(
+        //     context: context, message: AppStrings.ableton, isError: false);
         Navigator.pop(context);
       },
       onTapLogout: () async {

@@ -77,8 +77,6 @@ class MetroProvider extends ChangeNotifier {
     var directory2 =
         !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
 
-    player1.stop();
-    player1.stop();
     await player1.setFilePath(directory1.path, preload: true);
     await player2.setFilePath(directory2.path, preload: true);
   }
@@ -148,7 +146,7 @@ class MetroProvider extends ChangeNotifier {
     animation = Tween<double>(begin: 0, end: 1).animate(controller!);
     controller!.repeat(reverse: true);
     controller!.stop();
-    await preloadSounds();
+    // await preloadSounds();
     Future.delayed(Duration.zero, () async {
       setMetronomeDefaultValue();
     });
@@ -186,6 +184,8 @@ class MetroProvider extends ChangeNotifier {
     secondBeat = (defaultSound == null
         ? AppStrings.logic2Sound
         : soundList[defaultSound!].beat2)!;
+
+    await preloadSounds();
     notifyListeners();
   }
 

@@ -49,7 +49,7 @@ class SpeedProvider extends ChangeNotifier {
   int sliderInterval = 1;
   int totalBeats = 4;
 
-  final player = AudioPlayer();
+   final player = AudioPlayer();
 
   String soundName = AppStrings.logic;
   String firstBeat = AppStrings.logic1Sound;
@@ -64,7 +64,7 @@ class SpeedProvider extends ChangeNotifier {
     Future.delayed(Duration.zero, () async {
       setSpeedTrainerDefaultValue();
     });
-    await preloadSounds();
+    // await preloadSounds();
   }
 
   Future<void> preloadSounds() async {
@@ -72,7 +72,6 @@ class SpeedProvider extends ChangeNotifier {
         !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
     var directory2 =
         !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
-
     await player1.setFilePath(directory1.path, preload: true);
     await player2.setFilePath(directory2.path, preload: true);
   }
@@ -98,6 +97,7 @@ class SpeedProvider extends ChangeNotifier {
 
     getBeatsDuration(defaultBeatValue!);
 
+    await preloadSounds();
     notifyListeners();
   }
 

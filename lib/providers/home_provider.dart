@@ -7,6 +7,11 @@ class HomeProvider extends ChangeNotifier {
   // disable the web when active status is false
   var userNameWeb = 'DefaultUserName';
   var isActive = true;
+  bool? isAudioDownloading = true;
+  setDownloadingStatus(status){
+    isAudioDownloading = status;
+    notifyListeners();
+  }
 
   // initial values tab page
   // 0 for Metronome | 1 for Tap Tempo | 2 for Speed Trainer

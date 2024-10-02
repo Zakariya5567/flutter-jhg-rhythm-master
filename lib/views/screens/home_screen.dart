@@ -26,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  HomeProvider homeProvider = HomeProvider();
+  // HomeProvider homeProvider = HomeProvider();
   JHGInterstitialAd? interstitialAd;
   DateTime? currentBackPressTime;
 
@@ -50,13 +50,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     await LocalDB.storeEndDate(endDate.toString());
   }
 
+
+  bool downloadingStatus = true;
+
   @override
   void initState() {
     setExpiryDate();
+    checkToDownloadFile();
     super.initState();
     print('user session ${SplashScreen.session}');
+  }
+
+  checkToDownloadFile() async {
+    final homeController = Provider.of<HomeProvider>(context,listen: false);
     if (!kIsWeb) {
-      StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
+      downloadingStatus = await StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
+      homeController.setDownloadingStatus(downloadingStatus);
       LocalDB.getIsFreePlan().then((value) {
         isFreePlan = value;
         if (value) {
@@ -67,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       });
     }
     if (kIsWeb) {
-      homeProvider.getUserNameFromRL();
+      homeController.setDownloadingStatus(false);
+      homeController.getUserNameFromRL();
+
     }
   }
 
@@ -106,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             return GestureDetector(
               child: AbsorbPointer(
                 absorbing: kIsWeb
-                    ? homeProvider.isActive == true
+                    ? controller.isActive == true
                         ? false
                         : true
                     : false,
@@ -231,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
 
                                   // ScreenView base on button selection
+                                  controller.isAudioDownloading == true ? SizedBox():
                                   Expanded(
                                     child: controller.selectedButton == 0
                                         ? const MetroView()
@@ -311,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
               onTap: () {
-                if (!homeProvider.isActive) {
+                if (!controller.isActive) {
                   showToast(
                       context: context,
                       message:
