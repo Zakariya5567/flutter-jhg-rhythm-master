@@ -228,28 +228,17 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   int timeStamp = 60000;
-  bool _isSoundPlaying = false;
 
-  // Set timer for BPM
-  // Setting or canceling timer based on BPM and target tempo
+  ///===========
   setTimer() {
     if (_timer != null) {
       _timer!.cancel();
     }
-    int timerInterval = (timeStamp / bpm).round();
     _timer = Timer.periodic(
       Duration(milliseconds: (timeStamp / bpm).round()),
-      (Timer timer) async {
+          (Timer timer) async {
         if (targetTempo + interval > bpm) {
-          if (!_isSoundPlaying) {
-            _isSoundPlaying = true;
-            playSound();
-            // Reset the flag after sound finishes or after a delay
-            Future.delayed(Duration(milliseconds: timerInterval)).then((_) {
-              _isSoundPlaying = false;
-            });
-          }
-          //   playSound();
+          playSound();
         } else {
           _timer!.cancel();
           totalTick = 0;
@@ -262,6 +251,7 @@ class SpeedProvider extends ChangeNotifier {
       },
     );
   }
+
 
   // Bar counter and first-time flags
   int barCounter = 0;
