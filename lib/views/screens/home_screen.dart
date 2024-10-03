@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     await LocalDB.storeEndDate(endDate.toString());
   }
 
-
   bool downloadingStatus = true;
 
   @override
@@ -62,9 +61,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   checkToDownloadFile() async {
-    final homeController = Provider.of<HomeProvider>(context,listen: false);
+    final homeController = Provider.of<HomeProvider>(context, listen: false);
     if (!kIsWeb) {
-      downloadingStatus = await StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
+      downloadingStatus = await StringsDownloadService()
+          .isStringsDownloaded(AppStrings.nameOfApp);
       homeController.setDownloadingStatus(downloadingStatus);
       LocalDB.getIsFreePlan().then((value) {
         isFreePlan = value;
@@ -78,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (kIsWeb) {
       homeController.setDownloadingStatus(false);
       homeController.getUserNameFromRL();
-
     }
   }
 
@@ -242,7 +241,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
 
                                   // ScreenView base on button selection
-                                  controller.isAudioDownloading == true ? SizedBox():
+
+                                  // controller.isAudioDownloading == true
+                                  //     ? SizedBox()
+                                  //     :
                                   Expanded(
                                     child: controller.selectedButton == 0
                                         ? const MetroView()

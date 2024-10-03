@@ -3,12 +3,11 @@ import 'package:rhythm_master/services/local_db.dart';
 import 'package:universal_html/html.dart';
 
 class HomeProvider extends ChangeNotifier {
-
   // disable the web when active status is false
   var userNameWeb = 'DefaultUserName';
   var isActive = true;
   bool? isAudioDownloading = true;
-  setDownloadingStatus(status){
+  setDownloadingStatus(bool status) {
     isAudioDownloading = status;
     notifyListeners();
   }
@@ -17,7 +16,7 @@ class HomeProvider extends ChangeNotifier {
   // 0 for Metronome | 1 for Tap Tempo | 2 for Speed Trainer
   int selectedButton = 0;
 
-  bool? isFirstTimeOpen ;
+  bool? isFirstTimeOpen;
 
   /// Initial crucial saved value for this provider.
   initialize() async {
@@ -53,5 +52,4 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
     } on Exception {}
   }
-
 }

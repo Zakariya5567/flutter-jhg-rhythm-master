@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
@@ -49,7 +49,7 @@ class SpeedProvider extends ChangeNotifier {
   int sliderInterval = 1;
   int totalBeats = 4;
 
-   final player = AudioPlayer();
+  final player = AudioPlayer();
 
   String soundName = AppStrings.logic;
   String firstBeat = AppStrings.logic1Sound;
@@ -236,7 +236,7 @@ class SpeedProvider extends ChangeNotifier {
     }
     _timer = Timer.periodic(
       Duration(milliseconds: (timeStamp / bpm).round()),
-          (Timer timer) async {
+      (Timer timer) async {
         if (targetTempo + interval > bpm) {
           playSound();
         } else {
@@ -251,7 +251,6 @@ class SpeedProvider extends ChangeNotifier {
       },
     );
   }
-
 
   // Bar counter and first-time flags
   int barCounter = 0;
