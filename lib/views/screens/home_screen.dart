@@ -64,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   checkToDownloadFile() async {
     final homeController = Provider.of<HomeProvider>(context,listen: false);
     if (!kIsWeb) {
-      downloadingStatus = await StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
+      // downloadingStatus = 
+      await StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
       homeController.setDownloadingStatus(downloadingStatus);
       LocalDB.getIsFreePlan().then((value) {
         isFreePlan = value;
