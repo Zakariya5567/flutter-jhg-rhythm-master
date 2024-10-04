@@ -303,8 +303,6 @@ class MetroProvider extends ChangeNotifier {
   }
 
 // Define a flag to prevent multiple calls within a very short interval
-  bool _isSoundPlaying = false;
-
   ///=================================
   //Set timer base on the BPM
   setTimer(TickerProviderStateMixin ticker) async {

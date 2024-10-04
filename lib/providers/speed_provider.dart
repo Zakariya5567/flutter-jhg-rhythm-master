@@ -182,6 +182,7 @@ class SpeedProvider extends ChangeNotifier {
   // INTERVAL
   void onChangedInterval(int newValue) {
     interval = newValue;
+    print("intervalIs $interval");
     notifyListeners();
     if (isPlaying) {
       setTimer();
@@ -237,6 +238,7 @@ class SpeedProvider extends ChangeNotifier {
     _timer = Timer.periodic(
       Duration(milliseconds: (timeStamp / bpm).round()),
       (Timer timer) async {
+        print("interval is $interval targetTempo is $targetTempo bpm is $bpm");
         if (targetTempo + interval > bpm) {
           playSound();
         } else {
@@ -264,8 +266,10 @@ class SpeedProvider extends ChangeNotifier {
       bool check = firstTime == true
           ? barCounter - 1 == bar * totalBeats
           : barCounter == bar * totalBeats;
+
       if (check == true) {
         bpm = bpm + interval;
+
         barCounter = 0;
         firstTime = false;
         notifyListeners();
@@ -332,6 +336,8 @@ class SpeedProvider extends ChangeNotifier {
   // }
 
   void incrementTempo(int interval) {
+    // print(
+    //     "startTempo is $startTempo sliderInterval is $sliderInterval targetTempo is $targetTempo");
     if (startTempo + sliderInterval <= targetTempo) {
       startTempo += sliderInterval;
     } else {

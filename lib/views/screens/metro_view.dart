@@ -2,14 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
-import 'package:reg_page/reg_page.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
-
-import '../../app_utils/app_strings.dart';
-import '../widgets/custom_selection_bottomsheet.dart';
+import 'package:rhythm_master/views/widgets/custom_selection_bottomsheet.dart';
 
 class MetroView extends StatefulWidget {
   const MetroView({super.key});

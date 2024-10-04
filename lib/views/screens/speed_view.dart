@@ -132,8 +132,9 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       actions: [
                         JHGValueIncDec(
                           initialValue: controller.bar,
-                          onChanged: (int newValue) =>
-                              controller.onChangedBar(newValue),
+                          onChanged: (int newValue) {
+                            controller.onChangedBar(newValue);
+                          },
                           maxValue: 60,
                         ),
                       ],
@@ -178,6 +179,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
             ),
           ),
           kIsWeb ? 20.0.height : 0.0.height,
+          // Text(
+          //     'BPM IS ${controller.bpm} targetTempo is ${controller.targetTempo}'),
           BpmValueWidget(
             bpmValue: controller.bpm > controller.targetTempo
                 ? controller.targetTempo.toStringAsFixed(0)
@@ -186,7 +189,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
           JHGAppBar(
             isResponsive: true,
             isBottom: true,
-            crossAxisAlignment: CrossAxisAlignment.end  ,
+            crossAxisAlignment: CrossAxisAlignment.end,
             leadingWidget: JHGResetBtn(
                 enabled: true,
                 onTap: () {

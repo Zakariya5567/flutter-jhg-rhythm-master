@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
+import 'package:rhythm_master/app_utils/app_%20colors.dart';
+import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/models/sound_model.dart';
+import 'package:rhythm_master/providers/setting_provider.dart';
+import 'package:rhythm_master/providers/speed_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
-
-import '../../../app_utils/app_ colors.dart';
-import '../../../app_utils/app_strings.dart';
-import '../../../models/sound_model.dart';
-import '../../../providers/setting_provider.dart';
-import '../../../providers/speed_provider.dart';
-import '../../widgets/heading.dart';
-import '../../widgets/setting_custom_bottomsheet.dart';
+import 'package:rhythm_master/views/widgets/heading.dart';
+import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
 
 class SpeedTrainerSetting extends StatelessWidget {
   const SpeedTrainerSetting(
@@ -21,7 +20,8 @@ class SpeedTrainerSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Column(
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
       children: [
         // SPEED TRAINER HEADING
         Heading(
@@ -85,14 +85,13 @@ class SpeedTrainerSetting extends StatelessWidget {
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
                     onTap: () async {
-                      if (index == controller.tapSpeedTrainerButtonList.length) {
+                      if (index ==
+                          controller.tapSpeedTrainerButtonList.length) {
                         controller.clearBottomSheetBeats();
                         settingCustomBottomSheet(context, false);
                       } else {
                         controller.setSpeedTrainerBeats(
-                            index,
-                            controller.tapSpeedTrainerButtonList[index]
-                        );
+                            index, controller.tapSpeedTrainerButtonList[index]);
                       }
                     },
                     child: Padding(
@@ -114,8 +113,8 @@ class SpeedTrainerSetting extends StatelessWidget {
                             style: JHGTextStyles.subLabelStyle.copyWith(
                               color: AppColors.whitePrimary,
                               fontSize: index ==
-                                  controller
-                                      .tapSpeedTrainerButtonList.length
+                                      controller
+                                          .tapSpeedTrainerButtonList.length
                                   ? 12
                                   : 18,
                             ),
@@ -130,22 +129,25 @@ class SpeedTrainerSetting extends StatelessWidget {
 
         20.0.height,
         defaultWid(
+          context,
           AppStrings.defaultBars,
           speedController.defaultBar,
           onChanged: (value) {
             speedController.onChangedDefaultBar(value);
           },
         ),
-        20.0.height,
+        10.0.height,
         defaultWid(
+          context,
           AppStrings.defaultInterval,
           speedController.defaultInterval,
           onChanged: (value) {
             speedController.onChangedDefaultInterval(value);
           },
         ),
-        20.0.height,
+        10.0.height,
         defaultWid(
+          context,
           AppStrings.sliderInterval,
           speedController.sliderInterval.toInt(),
           onChanged: (value) {
@@ -171,8 +173,9 @@ class SpeedTrainerSetting extends StatelessWidget {
     );
   }
 
-  Row defaultWid(String title, int initialValue,
+  Row defaultWid(context, String title, int initialValue,
       {required dynamic Function(int) onChanged}) {
+    double width = MediaQuery.of(context).size.width * 0.18;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -183,9 +186,11 @@ class SpeedTrainerSetting extends StatelessWidget {
           fontSize: 14,
           textColor: AppColors.headingColor,
         ),
-
         JHGValueIncDec(
-            initialValue: initialValue, onChanged: onChanged, maxValue: 99),
+            txtContainerWidth: width,
+            initialValue: initialValue,
+            onChanged: onChanged,
+            maxValue: 99),
       ],
     );
   }

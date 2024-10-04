@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
-import 'package:rhythm_master/views/widgets/beats_number_button.dart';
-
 import 'bottom_sheet_widget.dart';
 
 settingCustomBottomSheet(BuildContext context,bool isMetronome){
