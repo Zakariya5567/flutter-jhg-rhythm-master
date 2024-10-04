@@ -182,7 +182,6 @@ class SpeedProvider extends ChangeNotifier {
   // INTERVAL
   void onChangedInterval(int newValue) {
     interval = newValue;
-    print("intervalIs $interval");
     notifyListeners();
     if (isPlaying) {
       setTimer();
@@ -269,8 +268,6 @@ class SpeedProvider extends ChangeNotifier {
     _timer = Timer.periodic(
       Duration(milliseconds: (timeStamp / bpm).round()),
       (Timer timer) async {
-        print(
-            "interval is $interval targetTempo is $targetTempo bpm is $bpm timeStamp is ${(timeStamp / bpm).round()} targetTempo + interval is ${targetTempo + interval}");
         if (targetTempo + interval > bpm) {
           playSound();
         } else {
