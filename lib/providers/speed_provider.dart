@@ -189,11 +189,25 @@ class SpeedProvider extends ChangeNotifier {
     }
   }
 
+  // onChangedBar(int newValue) {
+  //   bar = newValue;
+  //   notifyListeners();
+  //   if (isPlaying) {
+  //     setTimer();
+  //   }
+  // }
   onChangedBar(int newValue) {
     bar = newValue;
+
+    // Reset critical counters and flags
+    totalTick = 0;
+    barCounter = 0;
+    firstTime = true; // Important to reset the first-time flag
+
     notifyListeners();
+
     if (isPlaying) {
-      setTimer();
+      setTimer(); // Re-set the timer to adapt to the new bar setting
     }
   }
 
@@ -213,19 +227,36 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   // START OR STOP AUDIO
+  // void startStop() {
+  //   totalTick = 0;
+  //   bpm = startTempo;
+  //   barCounter = 0;
+  //   if (isPlaying) {
+  //     if (_timer != null) {
+  //       _timer!.cancel();
+  //     }
+  //   } else {
+  //     setTimer();
+  //   }
+  //   isPlaying = !isPlaying;
+  //   // notifyListeners();
+  // }
+
   void startStop() {
     totalTick = 0;
-    bpm = startTempo;
     barCounter = 0;
+    firstTime = true; // Reset so it knows to increase BPM again
+   // bpm = startTempo; // Reset BPM to the starting tempo
+
     if (isPlaying) {
       if (_timer != null) {
-        _timer!.cancel();
+        _timer!.cancel(); // Stop the current timer
       }
     } else {
-      setTimer();
+      setTimer(); // Restart with updated settings
     }
+
     isPlaying = !isPlaying;
-    notifyListeners();
   }
 
   int timeStamp = 60000;
@@ -238,7 +269,8 @@ class SpeedProvider extends ChangeNotifier {
     _timer = Timer.periodic(
       Duration(milliseconds: (timeStamp / bpm).round()),
       (Timer timer) async {
-        print("interval is $interval targetTempo is $targetTempo bpm is $bpm");
+        print(
+            "interval is $interval targetTempo is $targetTempo bpm is $bpm timeStamp is ${(timeStamp / bpm).round()} targetTempo + interval is ${targetTempo + interval}");
         if (targetTempo + interval > bpm) {
           playSound();
         } else {
@@ -259,33 +291,64 @@ class SpeedProvider extends ChangeNotifier {
   bool firstTime = true;
 
   //Play sound based on the metronome ticks
+  // Future playSound() async {
+  //   barCounter = barCounter + 1;
+  //   totalTick = totalTick + 1;
+  //   if (totalTick == 1) {
+  //     bool check = firstTime == true
+  //         ? barCounter - 1 == bar * totalBeats
+  //         : barCounter == bar * totalBeats;
+
+  //     if (check == true) {
+  //       bpm = bpm + interval;
+
+  //       barCounter = 0;
+  //       firstTime = false;
+  //       notifyListeners();
+  //       setTimer();
+  //     }
+  //     if (bpm >= targetTempo + bar * interval) return;
+  //     playBeat1();
+  //     //    playBeat(firstBeat);
+  //   } else {
+  //     if (totalTick < totalBeats) {
+  //       playBeat2();
+  //       // playBeat(secondBeat);
+  //     } else {
+  //       totalTick = 0;
+  //       playBeat2();
+  //       //playBeat(secondBeat);
+  //     }
+  //   }
+  // }
   Future playSound() async {
     barCounter = barCounter + 1;
     totalTick = totalTick + 1;
+
     if (totalTick == 1) {
+      // Adjust this check to handle the barCounter correctly
       bool check = firstTime == true
           ? barCounter - 1 == bar * totalBeats
           : barCounter == bar * totalBeats;
 
       if (check == true) {
         bpm = bpm + interval;
-
         barCounter = 0;
         firstTime = false;
         notifyListeners();
         setTimer();
       }
+
+      // If we've reached the target tempo, stop increasing
       if (bpm >= targetTempo + bar * interval) return;
+
       playBeat1();
-      //    playBeat(firstBeat);
     } else {
       if (totalTick < totalBeats) {
         playBeat2();
-        // playBeat(secondBeat);
       } else {
         totalTick = 0;
         playBeat2();
-        //playBeat(secondBeat);
       }
     }
   }

@@ -139,7 +139,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-
                     JHGHeadAndSubHWidget(
                       AppStrings.interval,
                       margin: EdgeInsets.only(
@@ -171,7 +170,6 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                         // BARS
                         25.0.height,
                     // BPM VALUE SECTION
-
                     // Reset and play pause BUTTON
                   ],
                 ),
