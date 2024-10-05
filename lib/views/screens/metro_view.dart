@@ -341,7 +341,9 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                 onTap: () {
                   controller.clearMetronome();
                 }),
-            centerWidget: JHGPlayPauseBtn(onChanged: (val) {
+            centerWidget: JHGPlayPauseBtn(
+                isPlaying: controller.isPlaying,
+                onChanged: (val) {
               controller.startStop(this);
             }),
           ),

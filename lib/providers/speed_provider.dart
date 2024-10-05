@@ -86,14 +86,9 @@ class SpeedProvider extends ChangeNotifier {
 
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName =
-        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null
-        ? AppStrings.logic1Sound
-        : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null
-        ? AppStrings.logic2Sound
-        : soundList[defSound].beat2)!;
+    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
 
@@ -256,6 +251,7 @@ class SpeedProvider extends ChangeNotifier {
     }
 
     isPlaying = !isPlaying;
+    notifyListeners();
   }
 
   int timeStamp = 60000;
