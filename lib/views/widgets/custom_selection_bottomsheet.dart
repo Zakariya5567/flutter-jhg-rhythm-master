@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
+import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'bottom_sheet_widget.dart';
 
 customSelectionBottomSheet(
@@ -108,6 +109,13 @@ customSelectionBottomSheet(
                       ),
                     ),
                   ),
+                  SizedBox(height: 25),
+                  JHGResetBtn(
+                      enabled: true,
+                      size: 30,
+                      onTap: () {
+                        controller.resetMetronomeCustomBottomSheet();
+                      }).center,
                 ],
               ),
             ),

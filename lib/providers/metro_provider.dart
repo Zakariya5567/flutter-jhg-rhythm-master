@@ -217,6 +217,12 @@ class MetroProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  resetMetronomeCustomBottomSheet(){
+  beatNumerator = 2;
+  beatDenominator = 2;
+  notifyListeners();
+  }
+
   // Set position of the slider
   // Setting position, BPM, and notifying listeners
   setPosition(double value, TickerProviderStateMixin ticker) {

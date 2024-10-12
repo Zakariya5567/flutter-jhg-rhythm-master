@@ -42,6 +42,13 @@ class SettingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  resetSettingCustomBottomSheet(){
+    beatNumerator = 2;
+    beatDenominator = 2;
+    notifyListeners();
+  }
+
+
   incrementBeatNumerator() {
     if (beatNumerator < 96) {
       beatNumerator = beatNumerator + 1;
