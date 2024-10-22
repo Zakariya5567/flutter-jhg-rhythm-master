@@ -4,8 +4,10 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_assets.dart';
+import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
+import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/widgets/custom_selection_bottomsheet.dart';
 
 class MetroView extends StatefulWidget {
@@ -111,44 +113,51 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                       ? AppColors.greySecondary
                                                       : AppColors.greyPrimary,
                                             ),
-                                            child: Center(
-                                              child: Text(
-                                                (index ==
-                                                            controller
-                                                                .tapButtonList
-                                                                .length &&
-                                                        controller
-                                                                .customBeatValue ==
-                                                            null)
-                                                    ? "Custom"
-                                                    : (index ==
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              (index == 4) ?
+                                              MainAxisAlignment.start: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                (index == 4) ?
+                                                JHGIconButton(
+                                                  iconData: Icons.edit,
+                                                    iconColor: JHGColors.white,
+                                                ).paddingOnly(top: 5,right: 5).align(Alignment.topRight):SizedBox(),
+
+                                                  Text(
+                                                    (index == controller.tapButtonList.length &&
+                                                            controller.customBeatValue == null)
+                                                        ? "Custom"
+                                                        : (index ==
+                                                                    controller
+                                                                        .tapButtonList
+                                                                        .length &&
                                                                 controller
-                                                                    .tapButtonList
-                                                                    .length &&
-                                                            controller
-                                                                    .customBeatValue !=
-                                                                null)
-                                                        ? controller
-                                                            .customBeatValue!
-                                                        : controller
-                                                                .tapButtonList[
-                                                            index],
-                                                style: JHGTextStyles
-                                                    .subLabelStyle
-                                                    .copyWith(
-                                                  color: AppColors.whitePrimary,
-                                                  fontSize: (index ==
+                                                                        .customBeatValue !=
+                                                                    null)
+                                                            ? controller
+                                                                .customBeatValue!
+                                                            : controller
+                                                                    .tapButtonList[
+                                                                index],
+                                                    style: JHGTextStyles
+                                                        .subLabelStyle
+                                                        .copyWith(
+                                                      color: AppColors.whitePrimary,
+                                                      fontSize: (index ==
+                                                                  controller
+                                                                      .tapButtonList
+                                                                      .length &&
                                                               controller
-                                                                  .tapButtonList
-                                                                  .length &&
-                                                          controller
-                                                                  .customBeatValue ==
-                                                              null)
-                                                      ? 12
-                                                      : 18,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
+                                                                      .customBeatValue ==
+                                                                  null)
+                                                          ? 12
+                                                          : 18,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                              ],
                                             ),
                                           ),
                                         ),
