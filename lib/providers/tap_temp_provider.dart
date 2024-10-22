@@ -37,7 +37,7 @@ class TapTempoProvider extends ChangeNotifier{
       final interval = currentTime - tapTimestamp!;
 
       // Ignore intervals that are too short or too long
-      if (interval > 200 && interval < 2000) {
+      if (interval > 100 && interval < 3000) {
         tapIntervals.add(interval);
 
         // Limit tapIntervals to the last 5 intervals
@@ -58,45 +58,6 @@ class TapTempoProvider extends ChangeNotifier{
       setAudioName();
     }
   }
-
-
-  ///=======
-  // void handleTap() async {
-  //
-  //   buttonScale = 1.1;
-  //   notifyListeners();
-  //   await Future.delayed(const Duration(milliseconds: 100),(){
-  //     buttonScale = 1;
-  //     notifyListeners();
-  //   });
-  //   // Get current time in milliseconds
-  //   final currentTime = DateTime.now().millisecondsSinceEpoch.toDouble();
-  //
-  //   if (tapTimestamp != null) {
-  //     // Calculate the interval between taps
-  //     final interval = currentTime - tapTimestamp!;
-  //     tapIntervals.add(interval);
-  //
-  //     // Calculate average BPM
-  //     final averageInterval = tapIntervals.reduce((a, b) => a + b) / tapIntervals.length;
-  //     final newBpm = 60000 / averageInterval;
-  //       bpm = newBpm;
-  //       notifyListeners();
-  //   }
-  //   // Update tap timestamp
-  //   tapTimestamp = currentTime;
-  //
-  //   // Set music name based on BPM
-  //   if(bpm != null){
-  //     setAudioName();
-  //   }
-  // }
-
-  int getBpm(bpm) {
-    // printlog("THE BPM IS $bpm and cut speed is ${((60 / bpm) * 1000)}");
-    return int.parse(((60 / bpm) * 1000).toString().split(".")[0]);
-  }
-
 
   // Set audio name based on BPM range
   setAudioName(){

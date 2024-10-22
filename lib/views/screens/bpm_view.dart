@@ -6,9 +6,28 @@ import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/tap_temp_provider.dart';
 import 'package:rhythm_master/views/widgets/bpm_value_widget.dart';
 
-class BpmView extends StatelessWidget {
+class BpmView extends StatefulWidget {
   const BpmView({super.key});
 
+  @override
+  State<BpmView> createState() => _BpmViewState();
+}
+
+
+class _BpmViewState extends State<BpmView> {
+
+  @override
+  void initState() {
+    clearBpm();
+    super.initState();
+  }
+  clearBpm(){
+    Future.delayed(Duration.zero,(){
+      final controller = Provider.of<TapTempoProvider>(context,listen: false);
+      controller.clearBPM();
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
