@@ -121,9 +121,10 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                               children: [
                                                 (index == 4) ?
                                                 JHGIconButton(
+                                                   size: 20,
                                                   iconData: Icons.edit,
                                                     iconColor: JHGColors.white,
-                                                ).paddingOnly(top: 5,right: 5).align(Alignment.topRight):SizedBox(),
+                                                ).paddingOnly(top: 8,right: 8,bottom: 5).align(Alignment.topRight):SizedBox(),
 
                                                   Text(
                                                     (index == controller.tapButtonList.length &&
