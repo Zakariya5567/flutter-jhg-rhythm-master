@@ -24,35 +24,79 @@ class TapTempoProvider extends ChangeNotifier{
   double buttonScale = 1;
   // Handle tap event to calculate BPM
   void handleTap() async {
-
     buttonScale = 1.1;
     notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 100),(){
+    await Future.delayed(const Duration(milliseconds: 100), () {
       buttonScale = 1;
       notifyListeners();
     });
-    // Get current time in milliseconds
+
     final currentTime = DateTime.now().millisecondsSinceEpoch.toDouble();
 
     if (tapTimestamp != null) {
-      // Calculate the interval between taps
       final interval = currentTime - tapTimestamp!;
-      tapIntervals.add(interval);
 
-      // Calculate average BPM
-      final averageInterval = tapIntervals.reduce((a, b) => a + b) / tapIntervals.length;
-      final newBpm = 60000 / averageInterval;
-        bpm = newBpm;
+      // Ignore intervals that are too short or too long
+      if (interval > 200 && interval < 2000) {
+        tapIntervals.add(interval);
+
+        // Limit tapIntervals to the last 5 intervals
+        if (tapIntervals.length > 5) {
+          tapIntervals.removeAt(0);
+        }
+
+        // Calculate average BPM
+        final averageInterval = tapIntervals.reduce((a, b) => a + b) / tapIntervals.length;
+        bpm = 60000 / averageInterval;
         notifyListeners();
+      }
     }
-    // Update tap timestamp
+
     tapTimestamp = currentTime;
 
-    // Set music name based on BPM
-    if(bpm != null){
+    if (bpm != null) {
       setAudioName();
     }
   }
+
+
+  ///=======
+  // void handleTap() async {
+  //
+  //   buttonScale = 1.1;
+  //   notifyListeners();
+  //   await Future.delayed(const Duration(milliseconds: 100),(){
+  //     buttonScale = 1;
+  //     notifyListeners();
+  //   });
+  //   // Get current time in milliseconds
+  //   final currentTime = DateTime.now().millisecondsSinceEpoch.toDouble();
+  //
+  //   if (tapTimestamp != null) {
+  //     // Calculate the interval between taps
+  //     final interval = currentTime - tapTimestamp!;
+  //     tapIntervals.add(interval);
+  //
+  //     // Calculate average BPM
+  //     final averageInterval = tapIntervals.reduce((a, b) => a + b) / tapIntervals.length;
+  //     final newBpm = 60000 / averageInterval;
+  //       bpm = newBpm;
+  //       notifyListeners();
+  //   }
+  //   // Update tap timestamp
+  //   tapTimestamp = currentTime;
+  //
+  //   // Set music name based on BPM
+  //   if(bpm != null){
+  //     setAudioName();
+  //   }
+  // }
+
+  int getBpm(bpm) {
+    // printlog("THE BPM IS $bpm and cut speed is ${((60 / bpm) * 1000)}");
+    return int.parse(((60 / bpm) * 1000).toString().split(".")[0]);
+  }
+
 
   // Set audio name based on BPM range
   setAudioName(){
