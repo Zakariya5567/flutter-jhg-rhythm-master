@@ -59,7 +59,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SPACER
-                    kIsWeb ? 16.0.height : 22.0.height,
+                    kIsWeb ? 12.0.height : 22.0.height,
                     // STARTING TEMPO
                     Heading(
                       title: AppStrings.startingTempo,
@@ -75,7 +75,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
-                    kIsWeb ? 8.0.height : 12.0.height,
+                    kIsWeb ? 6.0.height : 12.0.height,
                     // STARTING SLIDER
                     SliderWidget(
                         height: height,
@@ -86,7 +86,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           controller.setStartTempo(values);
                         }),
                     // SPACER
-                    kIsWeb ? 15.0.height : 18.0.height,
+                    kIsWeb ? 12.0.height : 18.0.height,
                     // TARGET TEMPO
                     Heading(
                       title: AppStrings.targetTempo,
@@ -102,7 +102,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                       },
                     ),
                     // SPACER
-                    kIsWeb ? 16.0.height : 22.0.height,
+                    kIsWeb ? 12.0.height : 22.0.height,
                     // TARGET SLIDER
                     SliderWidget(
                       height: height,
@@ -115,13 +115,12 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     ),
 
                     // SPACER
-                    kIsWeb ? 10.0.height : 12.0.height,
+                    kIsWeb ? 8.0.height : 12.0.height,
                     // BARS
                     JHGHeadAndSubHWidget(
                       AppStrings.bars,
-                      lableStyle:
-                          JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
-                      subLableStyle: JHGTextStyles.bodyStyle,
+                      lableStyle: JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
+                      subLableStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
                       subLabel: AppStrings.howManyBars,
                       margin: EdgeInsets.only(
                         top: JHGHeadAndSubHWidget.top,
@@ -151,7 +150,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
                       lableStyle:
                           JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
-                      subLableStyle: JHGTextStyles.bodyStyle,
+                      subLableStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
                       actions: [
                         JHGValueIncDec(
                           initialValue: controller.interval,
@@ -165,7 +164,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // INTERVAL BUTTONS
                     // SPACER
                     kIsWeb
-                        ? 18.0.height
+                        ? 14.0.height
                         :
                         // BARS
                         25.0.height,
@@ -176,7 +175,7 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
               ),
             ),
           ),
-          kIsWeb ? 20.0.height : 0.0.height,
+          kIsWeb ? 30.0.height : 0.0.height,
           // Text(
           //     'BPM IS ${controller.bpm} targetTempo is ${controller.targetTempo}'),
           BpmValueWidget(
