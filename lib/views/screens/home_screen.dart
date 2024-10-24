@@ -61,24 +61,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   checkToDownloadFile() async {
-    final homeController = Provider.of<HomeProvider>(context, listen: false);
-    if (!kIsWeb) {
-      downloadingStatus = await StringsDownloadService()
-          .isStringsDownloaded(AppStrings.nameOfApp);
-      homeController.setDownloadingStatus(downloadingStatus);
-      LocalDB.getIsFreePlan().then((value) {
-        isFreePlan = value;
-        if (value) {
-          JHGAdsHelper().initializeConsentManager();
-          interstitialAd = JHGInterstitialAd(interstitialAdId);
-          interstitialAd?.loadAd();
-        }
-      });
-    }
-    if (kIsWeb) {
-      homeController.setDownloadingStatus(false);
-      homeController.getUserNameFromRL();
-    }
+    Future.delayed(Duration.zero,() async {
+      final homeController = Provider.of<HomeProvider>(context, listen: false);
+      if (!kIsWeb) {
+        downloadingStatus = await StringsDownloadService()
+            .isStringsDownloaded(AppStrings.nameOfApp);
+        homeController.setDownloadingStatus(downloadingStatus);
+        LocalDB.getIsFreePlan().then((value) {
+          isFreePlan = value;
+          if (value) {
+            JHGAdsHelper().initializeConsentManager();
+            interstitialAd = JHGInterstitialAd(interstitialAdId);
+            interstitialAd?.loadAd();
+          }
+        });
+      }
+      if (kIsWeb) {
+        homeController.setDownloadingStatus(false);
+        homeController.getUserNameFromRL();
+      }
+    });
+
   }
 
   Future<bool> onWillPop() async {

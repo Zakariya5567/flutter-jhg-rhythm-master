@@ -21,7 +21,7 @@ class SpeedTrainerSetting extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return ListView(
-      physics: NeverScrollableScrollPhysics(),
+      physics: AlwaysScrollableScrollPhysics(),
       children: [
         // SPEED TRAINER HEADING
         Heading(
@@ -32,7 +32,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           fontWeight: FontWeight.bold,
           textColor: AppColors.headingColor,
         ),
-        10.0.height,
+        SizedBox(height:height*0.01,),
         Heading(
           padding: 0,
           title: AppStrings.defaultSound,
@@ -41,7 +41,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           textColor: AppColors.headingColor,
         ),
         // SPACER
-        8.0.height,
+        SizedBox(height:height*0.01,),
         Container(
           width: width * 1,
           decoration: BoxDecoration(
@@ -63,7 +63,7 @@ class SpeedTrainerSetting extends StatelessWidget {
                 },
               )),
         ),
-        10.0.height,
+        SizedBox(height:height*0.01,),
         // DEFAULT SOUND
         Heading(
           padding: 0,
@@ -72,7 +72,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           fontSize: 14,
           textColor: AppColors.headingColor,
         ),
-        8.0.height,
+        SizedBox(height:height*0.01,),
         // Button selection 3/3 ....
         SizedBox(
           height: height * 0.085,
@@ -127,7 +127,7 @@ class SpeedTrainerSetting extends StatelessWidget {
               }),
         ),
 
-        20.0.height,
+        SizedBox(height:height*0.02,),
         defaultWid(
           context,
           AppStrings.defaultBars,
@@ -136,7 +136,7 @@ class SpeedTrainerSetting extends StatelessWidget {
             speedController.onChangedDefaultBar(value);
           },
         ),
-        10.0.height,
+        SizedBox(height:height*0.012,),
         defaultWid(
           context,
           AppStrings.defaultInterval,
@@ -145,7 +145,7 @@ class SpeedTrainerSetting extends StatelessWidget {
             speedController.onChangedDefaultInterval(value);
           },
         ),
-        10.0.height,
+        SizedBox(height:height*0.012,),
         defaultWid(
           context,
           AppStrings.sliderInterval,
@@ -155,20 +155,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           },
         ),
 
-        //  Heading(
-        //               title: AppStrings.startingTempo,
-        //               numbers: controller.startTempo.toStringAsFixed(0),
-        //               showButtons: true,
-        //               addButton: () {
-        //                 controller.incrementTempo(
-        //                     settingProvider!.speedDefaultInterval.toInt());
-        //               },
-        //               minusButton: () {
-        //                 controller.decrementTempo(
-        //                     settingProvider!.speedDefaultInterval.toInt());
-        //               },
-        //             ),
-        10.0.height
+        SizedBox(height:height*0.03,),
       ],
     );
   }
