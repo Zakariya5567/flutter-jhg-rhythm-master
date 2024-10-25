@@ -20,7 +20,7 @@ class SpeedProvider extends ChangeNotifier {
   double bpm = 120;
 // Instance of the Player
   final player1 = AudioPlayer();
-  final player2 = AudioPlayer();
+  final player2 = AudioPlayer();  
   // TIMER IS  BPM
   Timer? _timer;
 
@@ -64,14 +64,11 @@ class SpeedProvider extends ChangeNotifier {
     Future.delayed(Duration.zero, () async {
       setSpeedTrainerDefaultValue();
     });
-    // await preloadSounds();
   }
 
   Future<void> preloadSounds() async {
-    var directory1 =
-        !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
-    var directory2 =
-        !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
+    var directory1 = !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
+    var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
     await player1.setFilePath(directory1.path, preload: true);
     await player2.setFilePath(directory2.path, preload: true);
   }
@@ -79,19 +76,14 @@ class SpeedProvider extends ChangeNotifier {
   setSpeedTrainerDefaultValue() async {
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
     String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
-
     double? defSpeedInterval = await SharedPref.getSpeedTrainerDefaultInterval;
-
     gafInterval = defSpeedInterval ?? 1;
-
     defaultBeatValue = defValue ?? "4/4";
-
     soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
     firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
     secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
-
     await preloadSounds();
     notifyListeners();
   }
@@ -183,13 +175,6 @@ class SpeedProvider extends ChangeNotifier {
     }
   }
 
-  // onChangedBar(int newValue) {
-  //   bar = newValue;
-  //   notifyListeners();
-  //   if (isPlaying) {
-  //     setTimer();
-  //   }
-  // }
   onChangedBar(int newValue) {
     bar = newValue;
 
@@ -220,28 +205,10 @@ class SpeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // START OR STOP AUDIO
-  // void startStop() {
-  //   totalTick = 0;
-  //   bpm = startTempo;
-  //   barCounter = 0;
-  //   if (isPlaying) {
-  //     if (_timer != null) {
-  //       _timer!.cancel();
-  //     }
-  //   } else {
-  //     setTimer();
-  //   }
-  //   isPlaying = !isPlaying;
-  //   // notifyListeners();
-  // }
-
   void startStop() {
     totalTick = 0;
     barCounter = 0;
     firstTime = true; // Reset so it knows to increase BPM again
-   // bpm = startTempo; // Reset BPM to the starting tempo
-
     if (isPlaying) {
       if (_timer != null) {
         _timer!.cancel(); // Stop the current timer
@@ -283,37 +250,6 @@ class SpeedProvider extends ChangeNotifier {
   int barCounter = 0;
   bool firstTime = true;
 
-  //Play sound based on the metronome ticks
-  // Future playSound() async {
-  //   barCounter = barCounter + 1;
-  //   totalTick = totalTick + 1;
-  //   if (totalTick == 1) {
-  //     bool check = firstTime == true
-  //         ? barCounter - 1 == bar * totalBeats
-  //         : barCounter == bar * totalBeats;
-
-  //     if (check == true) {
-  //       bpm = bpm + interval;
-
-  //       barCounter = 0;
-  //       firstTime = false;
-  //       notifyListeners();
-  //       setTimer();
-  //     }
-  //     if (bpm >= targetTempo + bar * interval) return;
-  //     playBeat1();
-  //     //    playBeat(firstBeat);
-  //   } else {
-  //     if (totalTick < totalBeats) {
-  //       playBeat2();
-  //       // playBeat(secondBeat);
-  //     } else {
-  //       totalTick = 0;
-  //       playBeat2();
-  //       //playBeat(secondBeat);
-  //     }
-  //   }
-  // }
   Future playSound() async {
     barCounter = barCounter + 1;
     totalTick = totalTick + 1;
@@ -331,11 +267,9 @@ class SpeedProvider extends ChangeNotifier {
         notifyListeners();
         setTimer();
       }
-
       // If we've reached the target tempo, stop increasing
       if (bpm >= targetTempo + bar * interval) return;
-
-      playBeat1();
+        playBeat1();
     } else {
       if (totalTick < totalBeats) {
         playBeat2();
@@ -348,52 +282,17 @@ class SpeedProvider extends ChangeNotifier {
 
   playBeat1() {
     player1.seek(Duration.zero);
+    player1.load();
     player1.play();
   }
 
   playBeat2() {
     player2.seek(Duration.zero);
+    player2.load();
     player2.play();
   }
 
-  playBeat(String beat) {
-    if (player1.playing) {
-      stopLoadAndPlay(beat);
-    } else {
-      loadAndPlay(beat);
-    }
-  }
-
-  stopLoadAndPlay(String beat) {
-    // player.stop();
-    if (!kIsWeb) {
-      player1.seek(Duration.zero);
-    } else {
-      var directory = AppUtils.setWebAsset(beat);
-      player.setFilePath(directory.path, preload: true);
-    }
-
-    //player.setAsset(beat);
-    player1.play();
-  }
-
-  // stopLoadAndPlay(String beat) {
-  //   player.stop();
-  //   if (!kIsWeb) {
-  //     var directory = Utils.getAsset(beat);
-  //     player.setFilePath(directory.path, preload: true);
-  //   } else {
-  //     var directory = AppUtils.setWebAsset(beat);
-  //     player.setFilePath(directory.path, preload: true);
-  //   }
-
-  //   //player.setAsset(beat);
-  //   player.play();
-  // }
-
   void incrementTempo(int interval) {
-    // print(
-    //     "startTempo is $startTempo sliderInterval is $sliderInterval targetTempo is $targetTempo");
     if (startTempo + sliderInterval <= targetTempo) {
       startTempo += sliderInterval;
     } else {
@@ -436,31 +335,4 @@ class SpeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  loadAndPlay(String beat) {
-    // var directory = getAsset(beat);
-    if (!kIsWeb) {
-      player2.seek(Duration.zero);
-      // var directory = Utils.getAsset(beat);
-      // player2.setFilePath(directory.path, preload: true);
-    } else {
-      var directory = AppUtils.setWebAsset(beat);
-      player2.setFilePath(directory.path, preload: true);
-    }
-    //player.setFilePath(directory.path, preload: true);
-    // player.setAsset(beat);
-    player2.play();
-  }
-  // loadAndPlay(String beat) {
-  //   // var directory = getAsset(beat);
-  //   if (!kIsWeb) {
-  //     var directory = Utils.getAsset(beat);
-  //     player.setFilePath(directory.path, preload: true);
-  //   } else {
-  //     var directory = AppUtils.setWebAsset(beat);
-  //     player.setFilePath(directory.path, preload: true);
-  //   }
-  //   //player.setFilePath(directory.path, preload: true);
-  //   // player.setAsset(beat);
-  //   player.play();
-  // }
 }

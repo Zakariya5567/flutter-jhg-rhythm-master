@@ -72,10 +72,9 @@ class MetroProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
-    var directory1 =
-        !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
-    var directory2 =
-        !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
+
+    var directory1 = !kIsWeb ? Utils.getAsset(firstBeat)  : AppUtils.setWebAsset(firstBeat);
+    var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
 
     await player1.setFilePath(directory1.path, preload: true);
     await player2.setFilePath(directory2.path, preload: true);
@@ -175,15 +174,9 @@ class MetroProvider extends ChangeNotifier {
     totalTick = 0;
     isPlaying = false;
 
-    soundName = (defaultSound == null
-        ? AppStrings.logic
-        : soundList[defaultSound!].name)!;
-    firstBeat = (defaultSound == null
-        ? AppStrings.logic1Sound
-        : soundList[defaultSound!].beat1)!;
-    secondBeat = (defaultSound == null
-        ? AppStrings.logic2Sound
-        : soundList[defaultSound!].beat2)!;
+    soundName = (defaultSound == null ? AppStrings.logic : soundList[defaultSound!].name)!;
+    firstBeat = (defaultSound == null ? AppStrings.logic1Sound : soundList[defaultSound!].beat1)!;
+    secondBeat = (defaultSound == null ? AppStrings.logic2Sound : soundList[defaultSound!].beat2)!;
 
     await preloadSounds();
     notifyListeners();
@@ -430,12 +423,10 @@ class MetroProvider extends ChangeNotifier {
   Future playSound() async {
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-      player1.playing ? playBeat(firstBeat, true) : playBeat(firstBeat, false);
+       player1.playing ? playBeat(firstBeat, true) : playBeat(firstBeat, false);
     } else {
       if (totalTick < totalBeat + 1) {
-        player2.playing
-            ? playBeat(secondBeat, true)
-            : playBeat(secondBeat, false);
+        player2.playing ? playBeat(secondBeat, true) : playBeat(secondBeat, false);
         if (totalTick == totalBeat) {
           totalTick = 0;
         }
@@ -443,22 +434,14 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
-  // playBeat(String beat, bool isStop) {
-  //   isStop == true ? player.stop() : null;
-  //   var directory = !kIsWeb ? Utils.getAsset(beat) : AppUtils.setWebAsset(beat);
-  //   player.setFilePath(directory.path, preload: true);
-  //   player.play();
-  // }
-
   playBeat(String beat, bool isStop) {
-    //  isStop == true ? player.stop() : null;
     if (beat == firstBeat) {
       player1.seek(Duration.zero);
-      // player1.load();
+      player1.load();
       player1.play();
     } else {
       player2.seek(Duration.zero);
-      // player2.load();
+      player2.load();
       player2.play();
     }
   }
