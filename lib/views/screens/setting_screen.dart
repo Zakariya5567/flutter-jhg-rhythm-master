@@ -90,7 +90,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ? Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
               child:
-              JHGBannerAd(adID: bannerAdId),
+              JHGBannerAd(adId: bannerAdId),
               // JHGNativeBanner(
               //   adID: nativeBannerAdId,
               // ),
