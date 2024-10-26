@@ -89,9 +89,11 @@ class _SettingScreenState extends State<SettingScreen> {
       trailing: isFreePlan
           ? Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
-              child: JHGNativeBanner(
-                adID: nativeBannerAdId,
-              ),
+              child:
+              JHGBannerAd(adID: bannerAdId),
+              // JHGNativeBanner(
+              //   adID: nativeBannerAdId,
+              // ),
             )
           : const SizedBox(),
       onTapSave: () async {

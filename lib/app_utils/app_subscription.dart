@@ -26,6 +26,14 @@ String get nativeBannerAdId => kIsWeb
     ? 'ca-app-pub-8243857750402094/5169233790'
     : 'ca-app-pub-8243857750402094/5635690548';
 
+
+
+String get bannerAdId => kIsWeb
+    ? ''
+    : Platform.isAndroid
+    ? 'ca-app-pub-8243857750402094/8740263747'
+    : 'ca-app-pub-8243857750402094/4008974952';
+
 String get interstitialAdId => kIsWeb
     ? ''
     : Platform.isAndroid
