@@ -307,6 +307,7 @@ class MetroProvider extends ChangeNotifier {
   setTimer(TickerProviderStateMixin ticker) async {
     //player.setVolume(1.0);
     // dispose the previous timer adn add new one base on BPM
+    // setMetronomeDefaultValue();
     totalTick = 0;
     firstTime = true;
     controller!.reset();
@@ -423,10 +424,10 @@ class MetroProvider extends ChangeNotifier {
   Future playSound() async {
     totalTick = totalTick + 1;
     if (totalTick == 1) {
-       player1.playing ? playBeat(firstBeat, true) : playBeat(firstBeat, false);
+       player1.playing ? playBeat(firstBeat,true) : playBeat(firstBeat, false);
     } else {
       if (totalTick < totalBeat + 1) {
-        player2.playing ? playBeat(secondBeat, true) : playBeat(secondBeat, false);
+        player2.playing ? playBeat(secondBeat,true): playBeat(secondBeat, false);
         if (totalTick == totalBeat) {
           totalTick = 0;
         }
