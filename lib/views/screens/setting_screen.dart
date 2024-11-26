@@ -69,10 +69,10 @@ class _SettingScreenState extends State<SettingScreen> {
           builder: (context, controller, homeProvider, child) {
         return Container(
           height: homeProvider.selectedButton == 0
-              ?  height*0.75
+              ? height * 0.75
               : homeProvider.selectedButton == 1
                   ? height / 2.8
-                  : height*0.75,
+                  : height * 0.75,
           color: AppColors.blackPrimary,
           child: Container(
             // constraints: BoxConstraints(maxWidth: 345),
@@ -89,8 +89,7 @@ class _SettingScreenState extends State<SettingScreen> {
       trailing: isFreePlan
           ? Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
-              child:
-              JHGBannerAd(adId: bannerAdId),
+              child: JHGBannerAd(adId: bannerAdId),
               // JHGNativeBanner(
               //   adID: nativeBannerAdId,
               // ),

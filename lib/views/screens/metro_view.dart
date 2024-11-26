@@ -18,7 +18,6 @@ class MetroView extends StatefulWidget {
 }
 
 class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -114,50 +113,64 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                                       : AppColors.greyPrimary,
                                             ),
                                             child: Column(
-                                              mainAxisAlignment:
-                                              (index == 4) ?
-                                              MainAxisAlignment.start: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: (index == 4)
+                                                  ? MainAxisAlignment.start
+                                                  : MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                (index == 4) ?
-                                                JHGIconButton(
-                                                   size: 20,
-                                                  iconData: Icons.edit,
-                                                    iconColor: JHGColors.white,
-                                                ).paddingOnly(top: 8,right: 8,bottom: 5).align(Alignment.topRight):SizedBox(),
-
-                                                  Text(
-                                                    (index == controller.tapButtonList.length &&
-                                                            controller.customBeatValue == null)
-                                                        ? "Custom"
-                                                        : (index ==
-                                                                    controller
-                                                                        .tapButtonList
-                                                                        .length &&
-                                                                controller
-                                                                        .customBeatValue !=
-                                                                    null)
-                                                            ? controller
-                                                                .customBeatValue!
-                                                            : controller
-                                                                    .tapButtonList[
-                                                                index],
-                                                    style: JHGTextStyles
-                                                        .subLabelStyle
-                                                        .copyWith(
-                                                      color: AppColors.whitePrimary,
-                                                      fontSize: (index ==
+                                                (index == 4)
+                                                    ? JHGIconButton(
+                                                        size: 20,
+                                                        iconData: Icons.edit,
+                                                        iconColor:
+                                                            JHGColors.white,
+                                                      )
+                                                        .paddingOnly(
+                                                            top: 8,
+                                                            right: 8,
+                                                            bottom: 5)
+                                                        .align(
+                                                            Alignment.topRight)
+                                                    : SizedBox(),
+                                                Text(
+                                                  (index ==
+                                                              controller
+                                                                  .tapButtonList
+                                                                  .length &&
+                                                          controller
+                                                                  .customBeatValue ==
+                                                              null)
+                                                      ? "Custom"
+                                                      : (index ==
                                                                   controller
                                                                       .tapButtonList
                                                                       .length &&
                                                               controller
-                                                                      .customBeatValue ==
+                                                                      .customBeatValue !=
                                                                   null)
-                                                          ? 12
-                                                          : 18,
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
+                                                          ? controller
+                                                              .customBeatValue!
+                                                          : controller
+                                                                  .tapButtonList[
+                                                              index],
+                                                  style: JHGTextStyles
+                                                      .subLabelStyle
+                                                      .copyWith(
+                                                    color:
+                                                        AppColors.whitePrimary,
+                                                    fontSize: (index ==
+                                                                controller
+                                                                    .tapButtonList
+                                                                    .length &&
+                                                            controller
+                                                                    .customBeatValue ==
+                                                                null)
+                                                        ? 12
+                                                        : 18,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -202,74 +215,80 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                     height: kIsWeb ? 160 : 180,
                                     //width: 100,
                                     alignment: Alignment.bottomCenter,
+
                                     /// =========== animation null
-                                    child:
-                                    controller.animation == null ? SizedBox():
+                                    child: controller.animation == null
+                                        ? SizedBox()
+                                        : AnimatedBuilder(
+                                            animation: controller.animation!,
+                                            builder: (context, child) {
+                                              //You can customize the translation and rotation values
+                                              double translationValue = 0 *
+                                                  controller.animation!.value;
+                                              double rotationValue = 180 *
+                                                  controller.animation!.value;
+                                              //
 
-                                    AnimatedBuilder(
-                                      animation: controller.animation!,
-                                      builder: (context, child) {
-                                        //You can customize the translation and rotation values
-                                        double translationValue =
-                                            0 * controller.animation!.value;
-                                        double rotationValue =
-                                            180 * controller.animation!.value;
-                                        //
-
-                                        return Transform(
-                                          alignment: Alignment.bottomCenter,
-                                          transform: Matrix4.identity()
-                                            ..translate(translationValue, 0.0)
-                                            ..rotateZ(
-                                                rotationValue * 0.0034533),
-                                          // Convert degrees to radians
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                //color: Colors.green,
-                                                height: metroHeight,
-                                                width: 37,
-                                                alignment: Alignment.center,
-                                                child: Image.asset(
-                                                  AppAssets.stalk,
-                                                  height: metroHeight,
-                                                  width: JHGResponsive.isMobile(
-                                                          context)
-                                                      ? 11
-                                                      : 9,
-                                                  fit: BoxFit.cover,
+                                              return Transform(
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                transform: Matrix4.identity()
+                                                  ..translate(
+                                                      translationValue, 0.0)
+                                                  ..rotateZ(rotationValue *
+                                                      0.0034533),
+                                                // Convert degrees to radians
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
+                                                      //color: Colors.green,
+                                                      height: metroHeight,
+                                                      width: 37,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Image.asset(
+                                                        AppAssets.stalk,
+                                                        height: metroHeight,
+                                                        width: JHGResponsive
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 11
+                                                            : 9,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    //slider
+                                                    Positioned(
+                                                      top: kIsWeb
+                                                          ? bpm <= 250
+                                                              ? (bpm *
+                                                                  (bpm2x - 40) *
+                                                                  0.0010)
+                                                              : (bpm *
+                                                                  (bpm2x -
+                                                                      175) *
+                                                                  0.0008)
+                                                          : bpm <= 250
+                                                              ? (bpm *
+                                                                  (bpm2x - 50) *
+                                                                  0.0010)
+                                                              : (bpm *
+                                                                  (bpm2x -
+                                                                      195) *
+                                                                  0.0010),
+                                                      left: 1,
+                                                      right: 1,
+                                                      child: Image.asset(
+                                                        AppAssets.slider,
+                                                        height: 37,
+                                                        width: 37,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              //slider
-                                              Positioned(
-                                                top: kIsWeb
-                                                    ? bpm <= 250
-                                                        ? (bpm *
-                                                            (bpm2x - 40) *
-                                                            0.0010)
-                                                        : (bpm *
-                                                            (bpm2x - 175) *
-                                                            0.0008)
-                                                    : bpm <= 250
-                                                        ? (bpm *
-                                                            (bpm2x - 50) *
-                                                            0.0010)
-                                                        : (bpm *
-                                                            (bpm2x - 195) *
-                                                            0.0010),
-                                                left: 1,
-                                                right: 1,
-                                                child: Image.asset(
-                                                  AppAssets.slider,
-                                                  height: 37,
-                                                  width: 37,
-                                                ),
-                                              ),
-                                            ],
+                                              );
+                                            },
                                           ),
-                                        );
-                                      },
-                                    ),
                                   ),
                                 ),
 
@@ -354,8 +373,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
             centerWidget: JHGPlayPauseBtn(
                 isPlaying: controller.isPlaying,
                 onChanged: (val) {
-              controller.startStop(this);
-            }),
+                  controller.startStop(this);
+                }),
           ),
         ],
       );

@@ -119,8 +119,10 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                     // BARS
                     JHGHeadAndSubHWidget(
                       AppStrings.bars,
-                      lableStyle: JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
-                      subLableStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
+                      lableStyle:
+                          JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
+                      subLableStyle:
+                          JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
                       subLabel: AppStrings.howManyBars,
                       margin: EdgeInsets.only(
                         top: JHGHeadAndSubHWidget.top,
@@ -150,7 +152,8 @@ class _SpeedViewState extends State<SpeedView> with TickerProviderStateMixin {
                           "${AppStrings.howMuchItShouldIncrease} ${controller.bar} Bars",
                       lableStyle:
                           JHGTextStyles.headLabelStyle.copyWith(fontSize: 18),
-                      subLableStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
+                      subLableStyle:
+                          JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
                       actions: [
                         JHGValueIncDec(
                           initialValue: controller.interval,
