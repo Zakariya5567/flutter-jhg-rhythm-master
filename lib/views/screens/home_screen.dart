@@ -217,13 +217,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           //         buttonsDesc[
                                                           //             index]):
 
-                                                          jHGInfoDialog(
-                                                              context: context,
-                                                              title: buttonList[
-                                                                  index],
-                                                              description:
-                                                                  buttonsDesc[
-                                                                      index]),
+                                                          JHGDialogHelper
+                                                              .showInfoDialog(
+                                                                  context:
+                                                                      context,
+                                                                  title:
+                                                                      buttonList[
+                                                                          index],
+                                                                  description:
+                                                                      buttonsDesc[
+                                                                          index]),
                                                       child: Icon(
                                                         Icons
                                                             .info_outline_rounded,
