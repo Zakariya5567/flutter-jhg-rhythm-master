@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'package:rhythm_master/app_utils/app_%20colors.dart';
 import 'package:rhythm_master/app_utils/app_strings.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
+
 import 'bottom_sheet_widget.dart';
 
 customSelectionBottomSheet(
@@ -50,28 +50,28 @@ customSelectionBottomSheet(
                   ),
                   SizedBox(height: 40),
                   BottomSheetWidget(
-                      title:  "Number of Beats",
-                      subtitle:   "This is the top number and represents how many sounds you will hear between each accented note.",
-                      numbers:  controller.beatNumerator.toString(),
+                      title: "Number of Beats",
+                      subtitle:
+                          "This is the top number and represents how many sounds you will hear between each accented note.",
+                      numbers: controller.beatNumerator.toString(),
                       onAdd: () {
                         controller.incrementBeatNumerator();
                       },
                       onSubtract: () {
                         controller.decrementBeatNumerator();
-                      }
-                   ),
+                      }),
                   SizedBox(height: 30),
                   BottomSheetWidget(
-                      title:   "Note Value",
-                      subtitle:   "This is the bottom number and represents, in combination with the BPM setting how quickly the sounds will play.",
-                      numbers:  controller.beatDenominator.toString(),
+                      title: "Note Value",
+                      subtitle:
+                          "This is the bottom number and represents, in combination with the BPM setting how quickly the sounds will play.",
+                      numbers: controller.beatDenominator.toString(),
                       onAdd: () {
                         controller.incrementBeatDenominator();
                       },
                       onSubtract: () {
                         controller.decrementBeatDenominator();
-                      }
-                  ),
+                      }),
                   SizedBox(height: 30),
                   Center(
                     child: Text(
