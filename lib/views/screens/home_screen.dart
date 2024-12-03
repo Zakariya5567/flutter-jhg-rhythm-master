@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/app_utils/app_%20colors.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_subscription.dart';
+import 'package:rhythm_master/utils/app_colors.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
+import 'package:rhythm_master/utils/app_constants.dart';
 import 'package:rhythm_master/main.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         isFreePlan = value;
         if (value) {
           JHGAdsHelper().initializeConsentManager();
-          interstitialAd = JHGInterstitialAd(interstitialAdId);
+          interstitialAd = JHGInterstitialAd(AppConstants.interstitialAdId);
           interstitialAd?.loadAd();
         }
       });

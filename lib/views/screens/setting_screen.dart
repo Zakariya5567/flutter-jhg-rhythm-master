@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/app_utils/app_%20colors.dart';
-import 'package:rhythm_master/app_utils/app_info.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_subscription.dart';
 import 'package:rhythm_master/main.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
+import 'package:rhythm_master/utils/app_colors.dart';
+import 'package:rhythm_master/utils/app_constants.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
 import 'package:rhythm_master/views/extension/string_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 import 'package:rhythm_master/views/screens/settings_tab/metronome_setting.dart';
@@ -25,17 +24,11 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  String deviceName = 'Unknown';
   SpeedProvider? speedController;
-
-  Future<void> initPackageInfo() async {
-    deviceName = await getDeviceName();
-  }
 
   @override
   void initState() {
     super.initState();
-    initPackageInfo();
     final settingProvider =
         Provider.of<SettingProvider>(context, listen: false);
     speedController = Provider.of<SpeedProvider>(context, listen: false);
@@ -47,8 +40,8 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return JHGSettings(
-      androidAppIdentifier: AppStrings.androidBuildId,
-      iosAppIdentifier: AppStrings.iOSBuildId,
+      androidAppIdentifier: AppConstants.androidBuildId,
+      iosAppIdentifier: AppConstants.iOSBuildId,
       appStoreId: AppStrings.appStoreId,
       appName: AppStrings.appName,
       bodyAppBar: JHGAppBar(
@@ -89,9 +82,10 @@ class _SettingScreenState extends State<SettingScreen> {
       trailing: isFreePlan
           ? Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
-              child: JHGNativeBanner(
-                adID: nativeBannerAdId,
-              ),
+              child: JHGBannerAd(adId: AppConstants.bannerAdId),
+              // JHGNativeBanner(
+              //   adID: nativeBannerAdId,
+              // ),
             )
           : const SizedBox(),
       onTapSave: () async {

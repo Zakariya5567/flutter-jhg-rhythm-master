@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_utils.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
+import 'package:rhythm_master/utils/app_utils.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
+
+import '../utils/app_assets.dart';
 
 //The MetroProvider class is responsible for managing the metronome functionality,
 //controlling BPM, animation, and sound playback.
@@ -61,8 +63,8 @@ class MetroProvider extends ChangeNotifier {
 
   // Set selected sound
   String soundName = AppStrings.logic;
-  String firstBeat = AppStrings.logic1Sound;
-  String secondBeat = AppStrings.logic2Sound;
+  String firstBeat = AppAssets.logic1Sound;
+  String secondBeat = AppAssets.logic2Sound;
   int selectedButton = 0;
 
   clearBottomSheetBeats() {
@@ -179,10 +181,10 @@ class MetroProvider extends ChangeNotifier {
         ? AppStrings.logic
         : soundList[defaultSound!].name)!;
     firstBeat = (defaultSound == null
-        ? AppStrings.logic1Sound
+        ? AppAssets.logic1Sound
         : soundList[defaultSound!].beat1)!;
     secondBeat = (defaultSound == null
-        ? AppStrings.logic2Sound
+        ? AppAssets.logic2Sound
         : soundList[defaultSound!].beat2)!;
 
     await preloadSounds();

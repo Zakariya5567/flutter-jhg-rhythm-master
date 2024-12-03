@@ -3,8 +3,8 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/extension/widget_extension.dart';
 
-import '../../../app_utils/app_ colors.dart';
-import '../../../app_utils/app_strings.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_strings.dart';
 import '../../../providers/setting_provider.dart';
 
 class TapTempoSetting extends StatelessWidget {

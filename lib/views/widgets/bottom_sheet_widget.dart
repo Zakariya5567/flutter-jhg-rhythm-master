@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 
 import 'beats_number_button.dart';
+
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget({super.key,
+  const BottomSheetWidget({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.numbers,
@@ -17,7 +19,6 @@ class BottomSheetWidget extends StatelessWidget {
   final VoidCallback onSubtract;
   final VoidCallback onAdd;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,15 +31,13 @@ class BottomSheetWidget extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-         subtitle,
-         style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
+          subtitle,
+          style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 14),
         ),
         SizedBox(height: 17),
         Center(
           child: BeatsNumberButton(
-              numbers:numbers,
-              onAdd: onAdd,
-              onSubtract:onSubtract),
+              numbers: numbers, onAdd: onAdd, onSubtract: onSubtract),
         ),
       ],
     );

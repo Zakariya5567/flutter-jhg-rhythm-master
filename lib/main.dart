@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_subscription.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
+import 'package:rhythm_master/utils/app_constants.dart';
 import 'package:rhythm_master/providers/home_provider.dart';
 import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
@@ -82,12 +82,12 @@ class _MyAppState extends State<MyApp> {
         home: kIsWeb
             ? const HomeScreen()
             : SplashScreen(
-                yearlySubscriptionId: yearlySubscription(),
-                monthlySubscriptionId: monthlySubscription(),
-                appName: AppStrings.appName,
+                yearlySubscriptionId: AppConstants.yearlySubscription,
+                monthlySubscriptionId: AppConstants.monthlySubscription,
+                featuresList: AppConstants.getFeaturesList,
                 nextPage: () => const HomeScreen(),
+                appName: AppStrings.appName,
                 navKey: navKey,
-                featuresList: getFeaturesList(),
               ),
       ),
     );

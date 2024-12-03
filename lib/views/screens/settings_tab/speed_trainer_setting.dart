@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:rhythm_master/app_utils/app_%20colors.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
+import 'package:rhythm_master/utils/app_colors.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';

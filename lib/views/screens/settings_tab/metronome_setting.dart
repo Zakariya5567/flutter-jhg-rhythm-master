@@ -3,8 +3,8 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythm_master/views/extension/int_extension.dart';
 
-import '../../../app_utils/app_ colors.dart';
-import '../../../app_utils/app_strings.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_strings.dart';
 import '../../../models/sound_model.dart';
 import '../../../providers/metro_provider.dart';
 import '../../../providers/setting_provider.dart';

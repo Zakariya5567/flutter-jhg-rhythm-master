@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../app_utils/dimension.dart';
+import '../../utils/dimension.dart';
 
 
 extension IntExtension on double {

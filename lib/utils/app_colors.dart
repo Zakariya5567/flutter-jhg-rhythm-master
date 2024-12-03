@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 
 class AppColors {
+  AppColors._();
   static Color blackPrimary = const Color.fromRGBO(31, 31, 31, 1);
 
   static Color whitePrimary = JHGColors.whiteText;

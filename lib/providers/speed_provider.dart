@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:rhythm_master/app_utils/app_strings.dart';
-import 'package:rhythm_master/app_utils/app_utils.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
+import 'package:rhythm_master/utils/app_utils.dart';
+
+import '../utils/app_assets.dart';
 
 //The SpeedProvider class manages the functionality of a speed trainer,
 // including BPM, intervals, and audio playback.
@@ -52,8 +53,8 @@ class SpeedProvider extends ChangeNotifier {
   final player = AudioPlayer();
 
   String soundName = AppStrings.logic;
-  String firstBeat = AppStrings.logic1Sound;
-  String secondBeat = AppStrings.logic2Sound;
+  String firstBeat = AppAssets.logic1Sound;
+  String secondBeat = AppAssets.logic2Sound;
 
   String? defaultBeatValue;
 
@@ -86,9 +87,12 @@ class SpeedProvider extends ChangeNotifier {
 
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null ? AppStrings.logic1Sound : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null ? AppStrings.logic2Sound : soundList[defSound].beat2)!;
+    soundName =
+        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat =
+        (defSound == null ? AppAssets.logic1Sound : soundList[defSound].beat1)!;
+    secondBeat =
+        (defSound == null ? AppAssets.logic2Sound : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
 
@@ -240,7 +244,7 @@ class SpeedProvider extends ChangeNotifier {
     totalTick = 0;
     barCounter = 0;
     firstTime = true; // Reset so it knows to increase BPM again
-   // bpm = startTempo; // Reset BPM to the starting tempo
+    // bpm = startTempo; // Reset BPM to the starting tempo
 
     if (isPlaying) {
       if (_timer != null) {
