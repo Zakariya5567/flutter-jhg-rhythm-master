@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rhythm_master/main.dart';
+import 'package:rhythm_master/providers/metro_provider.dart';
 import 'package:rhythm_master/services/local_db.dart';
 import 'package:universal_html/html.dart';
 
@@ -7,8 +10,10 @@ class HomeProvider extends ChangeNotifier {
   var userNameWeb = 'DefaultUserName';
   var isActive = true;
   bool? isAudioDownloading = true;
-  setDownloadingStatus(bool status) {
+  setDownloadingStatus(bool status,TickerProviderStateMixin ticker) {
     isAudioDownloading = status;
+    final MetroProvider metroProvider = Provider.of(navKey.currentContext!,listen: false);
+    metroProvider.initializeAnimationController(ticker);
     notifyListeners();
   }
 

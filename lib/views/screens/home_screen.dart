@@ -63,9 +63,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   checkToDownloadFile() async {
     final homeController = Provider.of<HomeProvider>(context, listen: false);
     if (!kIsWeb) {
-      downloadingStatus = await StringsDownloadService()
-          .isStringsDownloaded(AppStrings.nameOfApp);
-      homeController.setDownloadingStatus(downloadingStatus);
+      downloadingStatus = await StringsDownloadService().isStringsDownloaded(AppStrings.nameOfApp);
+      homeController.setDownloadingStatus(downloadingStatus,this);
       LocalDB.getIsFreePlan().then((value) {
         isFreePlan = value;
         if (value) {
@@ -76,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       });
     }
     if (kIsWeb) {
-      homeController.setDownloadingStatus(false);
+      homeController.setDownloadingStatus(false,this);
       homeController.getUserNameFromRL();
     }
   }

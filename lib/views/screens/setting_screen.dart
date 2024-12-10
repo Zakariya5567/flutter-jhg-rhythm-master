@@ -62,10 +62,10 @@ class _SettingScreenState extends State<SettingScreen> {
           builder: (context, controller, homeProvider, child) {
         return Container(
           height: homeProvider.selectedButton == 0
-              ? height / 1.4
+              ? height * 0.75
               : homeProvider.selectedButton == 1
                   ? height / 2.8
-                  : height / 1.5,
+                  : height * 0.75,
           color: AppColors.blackPrimary,
           child: Container(
             // constraints: BoxConstraints(maxWidth: 345),

@@ -235,7 +235,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: b4365acc15356a42ea0b652e0d3c46cb1c380639
+      resolved-ref: "658f64f18e46a53373d262b42b66e298ab69efb1"
       url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
@@ -549,18 +549,18 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "8c4967f8b7cb46dc914e178daa29813d83ae502e0529d7b0478330616a691ef7"
+      sha256: "4adf4fd5423ec60a29506c76581bc05854c55e3a0b72d35bb28d661c9686edf2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.14"
+    version: "2.2.15"
   path_provider_foundation:
     dependency: transitive
     description:
       name: path_provider_foundation
-      sha256: f234384a3fdd67f989b4d54a5d73ca2a6c422fa55ae694381ae0f4375cd1ea16
+      sha256: "4843174df4d288f5e29185bd6e72a6fbdf5a4a4602717eed565497429f179942"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.1"
   path_provider_linux:
     dependency: transitive
     description:
@@ -678,7 +678,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "4e5edbef71f688b6fd4eca1a656fd7a5709d03d0"
+      resolved-ref: f777b6c9d315091e9ed7644b243808dfa5003028
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
@@ -718,10 +718,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "3b9febd815c9ca29c9e3520d50ec32f49157711e143b7a4ca039eb87e8ade5ab"
+      sha256: "7f172d1b06de5da47b6264c2692ee2ead20bbbc246690427cdb4fc301cd0c549"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.3"
+    version: "2.3.4"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -771,10 +771,10 @@ packages:
     dependency: transitive
     description:
       name: sn_progress_dialog
-      sha256: "6ecd6ce8ac3cffc879fbbbe2259652b526d8769401e4726a67a5a5e2dac3d252"
+      sha256: bbb6bbe71c12afe937474932eefcb5c7d607238b1325f83206f12d3f7a850acf
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.4"
+    version: "1.2.0"
   source_span:
     dependency: transitive
     description:
@@ -891,10 +891,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_ios
-      sha256: e43b677296fadce447e987a2f519dcf5f6d1e527dc35d01ffab4fff5b8a7063e
+      sha256: "16a513b6c12bb419304e72ea0ae2ab4fed569920d1c7cb850263fe3acc824626"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.1"
+    version: "6.3.2"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -907,10 +907,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_macos
-      sha256: "769549c999acdb42b8bcfa7c43d72bf79a382ca7441ab18a808e101149daf672"
+      sha256: "17ba2000b847f334f16626a574c702b196723af2a289e7a93ffcb79acff855c2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.2"
   url_launcher_platform_interface:
     dependency: transitive
     description:
