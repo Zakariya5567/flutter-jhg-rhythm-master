@@ -74,11 +74,11 @@ class MetroProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
-
+    await player1.setVolume(0);
+    await player2.setVolume(0);
     var directory1 = !kIsWeb ? Utils.getAsset(firstBeat)  : AppUtils.setWebAsset(firstBeat);
     var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
-
-    await player1.setFilePath(directory1.path, preload: true);
+    await player1.setFilePath(directory1.path, preload: true,);
     await player2.setFilePath(directory2.path, preload: true);
   }
 
@@ -248,9 +248,6 @@ class MetroProvider extends ChangeNotifier {
       if (timer != null) {
         timer!.cancel();
       }
-      // if (player.playing) {
-      //   await player.stop();
-      // }
     } else {
       setTimer(ticker);
     }
@@ -430,6 +427,10 @@ class MetroProvider extends ChangeNotifier {
 
   // Play sound based on the metronome ticks
   Future playSound() async {
+    if(player1.volume == 0 || player2.volume == 0){
+       player1.setVolume(1.0);
+       player2.setVolume(1.0);
+    }
     totalTick = totalTick + 1;
     if (totalTick == 1) {
        player1.playing ? playBeat(firstBeat,true) : playBeat(firstBeat, false);
@@ -443,7 +444,7 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
-  playBeat(String beat, bool isStop) {
+  playBeat(String beat, bool isStop) async {
     if (beat == firstBeat) {
       player1.seek(Duration.zero);
       player1.load();

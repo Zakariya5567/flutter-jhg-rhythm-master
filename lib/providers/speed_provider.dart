@@ -68,6 +68,9 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
+
+    await player1.setVolume(0);
+    await  player2.setVolume(0);
     var directory1 = !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
     var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
     await player1.setFilePath(directory1.path, preload: true);
@@ -258,6 +261,10 @@ class SpeedProvider extends ChangeNotifier {
   bool firstTime = true;
 
   Future playSound() async {
+    if(player1.volume == 0 || player2.volume == 0){
+      player1.setVolume(1.0);
+      player2.setVolume(1.0);
+    }
     barCounter = barCounter + 1;
     totalTick = totalTick + 1;
 
