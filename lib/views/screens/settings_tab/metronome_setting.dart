@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythm_master/views/extension/int_extension.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_strings.dart';
 import '../../../models/sound_model.dart';
 import '../../../providers/metro_provider.dart';
 import '../../../providers/setting_provider.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_strings.dart';
 import '../../widgets/heading.dart';
 import '../../widgets/setting_custom_bottomsheet.dart';
 
@@ -31,7 +30,9 @@ class MetronomeSetting extends StatelessWidget {
             fontWeight: FontWeight.bold,
             textColor: AppColors.headingColor,
           ),
-          SizedBox(height:height*0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           Heading(
             padding: 0,
             title: AppStrings.soundS,
@@ -39,7 +40,9 @@ class MetronomeSetting extends StatelessWidget {
             fontSize: 14,
             textColor: AppColors.headingColor,
           ),
-          SizedBox(height:height*0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           Consumer<MetroProvider>(builder: (context, controller, child) {
             return MouseRegion(
                 cursor: SystemMouseCursors.click,
@@ -58,7 +61,9 @@ class MetronomeSetting extends StatelessWidget {
                   },
                 ));
           }),
-          SizedBox(height:height*0.005,),
+          SizedBox(
+            height: height * 0.005,
+          ),
           // DEFAULT BPM
           JHGHeadAndSubHWidget(
             AppStrings.defaultBpm,
@@ -81,7 +86,9 @@ class MetronomeSetting extends StatelessWidget {
             fontSize: 14,
             textColor: AppColors.headingColor,
           ),
-          SizedBox(height:height*0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           //Sound button with arrow down
           Container(
             width: width * 1,
@@ -105,7 +112,9 @@ class MetronomeSetting extends StatelessWidget {
                   },
                 )),
           ),
-          SizedBox(height:height*0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           // DEFAULT SOUND
           Heading(
             padding: 0,
@@ -114,7 +123,9 @@ class MetronomeSetting extends StatelessWidget {
             fontSize: 14,
             textColor: AppColors.headingColor,
           ),
-          SizedBox(height:height*0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           // Button selection 3/3 ....
           SizedBox(
               height: height * 0.085,
@@ -130,9 +141,10 @@ class MetronomeSetting extends StatelessWidget {
                             if (index == controller.tapButtonList.length) {
                               controller.clearBottomSheetBeats();
                               settingCustomBottomSheet(context, true);
-                             // controller.setMetronomeBeats(index, controller.tapButtonList[index]);
+                              // controller.setMetronomeBeats(index, controller.tapButtonList[index]);
                             } else {
-                              controller.setMetronomeBeats(index, controller.tapButtonList[index]);
+                              controller.setMetronomeBeats(
+                                  index, controller.tapButtonList[index]);
                             }
                           },
                           child: Padding(
@@ -142,17 +154,20 @@ class MetronomeSetting extends StatelessWidget {
                               width: height * 0.085,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: controller.selectedMetronomeButton == index
-                                    ? AppColors.greySecondary
-                                    : AppColors.greyPrimary,
+                                color:
+                                    controller.selectedMetronomeButton == index
+                                        ? AppColors.greySecondary
+                                        : AppColors.greyPrimary,
                               ),
                               child: Center(
                                 child: Text(
-                                  index == controller.tapButtonList.length ? "Custom" : controller.tapButtonList[index],
+                                  index == controller.tapButtonList.length
+                                      ? "Custom"
+                                      : controller.tapButtonList[index],
                                   style: JHGTextStyles.subLabelStyle.copyWith(
                                       color: AppColors.whitePrimary,
-                                      fontSize:
-                                      index == controller.tapButtonList.length
+                                      fontSize: index ==
+                                              controller.tapButtonList.length
                                           ? 12
                                           : 18),
                                 ),
@@ -161,7 +176,7 @@ class MetronomeSetting extends StatelessWidget {
                           ),
                         ));
                   })),
-          SizedBox(height:height*0.015),
+          SizedBox(height: height * 0.015),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -183,7 +198,9 @@ class MetronomeSetting extends StatelessWidget {
                   maxValue: 99),
             ],
           ),
-          SizedBox(height:height*0.05,),
+          SizedBox(
+            height: height * 0.05,
+          ),
         ],
       ),
     );

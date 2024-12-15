@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:rhythm_master/utils/app_colors.dart';
-import 'package:rhythm_master/utils/app_strings.dart';
 import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/providers/setting_provider.dart';
 import 'package:rhythm_master/providers/speed_provider.dart';
-import 'package:rhythm_master/views/extension/int_extension.dart';
+import 'package:rhythm_master/utils/app_colors.dart';
+import 'package:rhythm_master/utils/app_strings.dart';
 import 'package:rhythm_master/views/widgets/heading.dart';
 import 'package:rhythm_master/views/widgets/setting_custom_bottomsheet.dart';
 
@@ -32,7 +31,9 @@ class SpeedTrainerSetting extends StatelessWidget {
           fontWeight: FontWeight.bold,
           textColor: AppColors.headingColor,
         ),
-        SizedBox(height:height*0.01,),
+        SizedBox(
+          height: height * 0.01,
+        ),
         Heading(
           padding: 0,
           title: AppStrings.defaultSound,
@@ -41,7 +42,9 @@ class SpeedTrainerSetting extends StatelessWidget {
           textColor: AppColors.headingColor,
         ),
         // SPACER
-        SizedBox(height:height*0.01,),
+        SizedBox(
+          height: height * 0.01,
+        ),
         Container(
           width: width * 1,
           decoration: BoxDecoration(
@@ -63,7 +66,9 @@ class SpeedTrainerSetting extends StatelessWidget {
                 },
               )),
         ),
-        SizedBox(height:height*0.01,),
+        SizedBox(
+          height: height * 0.01,
+        ),
         // DEFAULT SOUND
         Heading(
           padding: 0,
@@ -72,7 +77,9 @@ class SpeedTrainerSetting extends StatelessWidget {
           fontSize: 14,
           textColor: AppColors.headingColor,
         ),
-        SizedBox(height:height*0.01,),
+        SizedBox(
+          height: height * 0.01,
+        ),
         // Button selection 3/3 ....
         SizedBox(
           height: height * 0.085,
@@ -127,7 +134,9 @@ class SpeedTrainerSetting extends StatelessWidget {
               }),
         ),
 
-        SizedBox(height:height*0.02,),
+        SizedBox(
+          height: height * 0.02,
+        ),
         defaultWid(
           context,
           AppStrings.defaultBars,
@@ -136,7 +145,9 @@ class SpeedTrainerSetting extends StatelessWidget {
             speedController.onChangedDefaultBar(value);
           },
         ),
-        SizedBox(height:height*0.012,),
+        SizedBox(
+          height: height * 0.012,
+        ),
         defaultWid(
           context,
           AppStrings.defaultInterval,
@@ -145,7 +156,9 @@ class SpeedTrainerSetting extends StatelessWidget {
             speedController.onChangedDefaultInterval(value);
           },
         ),
-        SizedBox(height:height*0.012,),
+        SizedBox(
+          height: height * 0.012,
+        ),
         defaultWid(
           context,
           AppStrings.sliderInterval,
@@ -155,7 +168,9 @@ class SpeedTrainerSetting extends StatelessWidget {
           },
         ),
 
-        SizedBox(height:height*0.03,),
+        SizedBox(
+          height: height * 0.03,
+        ),
       ],
     );
   }
