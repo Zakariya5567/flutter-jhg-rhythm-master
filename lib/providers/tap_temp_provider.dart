@@ -26,7 +26,7 @@ class TapTempoProvider extends ChangeNotifier{
   void handleTap() async {
     buttonScale = 1.1;
     notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       buttonScale = 1;
       notifyListeners();
     });

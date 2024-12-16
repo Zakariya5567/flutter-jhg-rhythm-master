@@ -42,9 +42,7 @@ class SpeedTrainerSetting extends StatelessWidget {
           textColor: AppColors.headingColor,
         ),
         // SPACER
-        SizedBox(
-          height: height * 0.01,
-        ),
+        SizedBox(height: height * 0.01),
         Container(
           width: width * 1,
           decoration: BoxDecoration(
