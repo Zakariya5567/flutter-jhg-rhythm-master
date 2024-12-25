@@ -330,8 +330,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 if (!controller.isActive) {
                   showToast(
                       context: context,
-                      message:
-                          "Sorry but you do not have an active subscription",
+                      message: "Sorry but you do not have an active subscription",
                       isError: true);
                 }
               },

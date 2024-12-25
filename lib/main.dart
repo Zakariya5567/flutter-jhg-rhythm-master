@@ -45,6 +45,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Transparent status bar
       statusBarBrightness: Brightness.dark, // Dark text for status bar
@@ -52,23 +53,17 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TapTempoProvider>(
-            create: (context) => TapTempoProvider()),
-        ChangeNotifierProvider<SpeedProvider>(
-            create: (context) => SpeedProvider()),
-        ChangeNotifierProvider<MetroProvider>(
-            create: (context) => MetroProvider()),
-        ChangeNotifierProvider<SettingProvider>(
-            create: (context) => SettingProvider()),
-        ChangeNotifierProvider<HomeProvider>(
-            create: (context) => HomeProvider()),
+        ChangeNotifierProvider<TapTempoProvider>(create: (context) => TapTempoProvider()),
+        ChangeNotifierProvider<SpeedProvider>(create: (context) => SpeedProvider()),
+        ChangeNotifierProvider<MetroProvider>(create: (context) => MetroProvider()),
+        ChangeNotifierProvider<SettingProvider>(create: (context) => SettingProvider()),
+        ChangeNotifierProvider<HomeProvider>(create: (context) => HomeProvider()),
       ],
       child: MaterialApp(
         navigatorKey: navKey,
         builder: (context, child) {
           return MediaQuery(
-            data: MediaQuery.of(context)
-                .copyWith(textScaler: TextScaler.linear(1.0)),
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
             child: child!,
           );
         },
@@ -79,9 +74,7 @@ class _MyAppState extends State<MyApp> {
             thumbColor: WidgetStateProperty.all(JHGColors.whiteGrey),
           ),
         ),
-        home: kIsWeb
-            ? const HomeScreen()
-            : SplashScreen(
+        home: kIsWeb ? const HomeScreen() : SplashScreen(
                 yearlySubscriptionId: AppConstants.yearlySubscription,
                 monthlySubscriptionId: AppConstants.monthlySubscription,
                 featuresList: AppConstants.getFeaturesList,

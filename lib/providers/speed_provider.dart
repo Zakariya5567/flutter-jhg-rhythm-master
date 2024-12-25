@@ -68,7 +68,6 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
-
     await player1.setVolume(0);
     await  player2.setVolume(0);
     var directory1 = !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
@@ -81,15 +80,13 @@ class SpeedProvider extends ChangeNotifier {
     int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
     String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
     double? defSpeedInterval = await SharedPref.getSpeedTrainerDefaultInterval;
+
     gafInterval = defSpeedInterval ?? 1;
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName =
-        (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat =
-        (defSound == null ? AppAssets.logic1Sound : soundList[defSound].beat1)!;
-    secondBeat =
-        (defSound == null ? AppAssets.logic2Sound : soundList[defSound].beat2)!;
+    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
+    firstBeat = (defSound == null ? AppAssets.logic1Sound : soundList[defSound].beat1)!;
+    secondBeat = (defSound == null ? AppAssets.logic2Sound : soundList[defSound].beat2)!;
 
     getBeatsDuration(defaultBeatValue!);
     await preloadSounds();
@@ -129,7 +126,7 @@ class SpeedProvider extends ChangeNotifier {
 
   // Clear speed trainer settings
   clearSpeedTrainer(bool isNotify) {
-    if (_timer != null) {
+    if(_timer != null) {
       _timer!.cancel();
     }
     isPlaying = false;
@@ -146,16 +143,14 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   // SET START TEMPO RANGE OF SLIDER
-  setStartTempo(
-    double value,
-  ) {
+  setStartTempo(double value) {
     startTempo = value;
     bpm = startTempo;
     barCounter = 0;
     totalTick = 0;
     firstTime = true;
     notifyListeners();
-    if (isPlaying == true) {
+    if(isPlaying == true) {
       setTimer();
     }
   }
@@ -325,18 +320,16 @@ class SpeedProvider extends ChangeNotifier {
       startTempo = 1;
     }
     bpm = startTempo;
-
     notifyListeners();
   }
 
   void incrementTargetTempo(int interval) {
-    if (targetTempo + sliderInterval <= 300) {
+    if(targetTempo + sliderInterval <= 300){
       targetTempo += sliderInterval;
     } else {
       // If incrementing would exceed targetTempo, set startTempo to targetTempo
       targetTempo = 300;
     }
-
     notifyListeners();
   }
 
