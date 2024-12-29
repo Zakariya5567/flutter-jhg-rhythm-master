@@ -47,7 +47,7 @@ class MetronomeSetting extends StatelessWidget {
             return MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: JHGDropDown<SoundModel>(
-                  value: soundList[controller.selectedIndex],
+                  value: soundList[controller.selectedIndex ?? 0],
                   items: soundList,
                   expandedColor: AppColors.liteWhite,
                   onChanged: (values) async {

@@ -44,7 +44,7 @@ class MetroProvider extends ChangeNotifier {
 
   // Instance of the Player
 
-  int selectedIndex = 0;
+  int? selectedIndex;
 
   double timeStamp = 0;
 
@@ -74,41 +74,37 @@ class MetroProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
-    await player1.setVolume(0);
-    await player2.setVolume(0);
+    Future.wait([ player1.setVolume(0),player2.setVolume(0)]);
     var directory1 = !kIsWeb ? Utils.getAsset(firstBeat)  : AppUtils.setWebAsset(firstBeat);
     var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
-    await player1.setFilePath(directory1.path, preload: true,);
-    await player2.setFilePath(directory2.path, preload: true);
+    Future.wait([
+     player1.setFilePath(directory1.path, preload: true),
+     player2.setFilePath(directory2.path, preload: true)
+    ]);
+
   }
 
-  incrementBeatNumerator() {
-    if (beatNumerator < 96) {
-      beatNumerator = beatNumerator + 1;
+  void updateBeatNumerator(int increment) {
+    int newValue = beatNumerator + increment;
+    if (newValue >= 2 && newValue <= 96) {
+      beatNumerator = newValue;
       notifyListeners();
     }
   }
 
-  decrementBeatNumerator() {
-    if (beatNumerator > 2) {
-      beatNumerator = beatNumerator - 1;
+  void updateBeatDenominator(int multiplier) {
+    int newValue = beatDenominator * multiplier;
+    if (newValue >= 2 && newValue <= 64) {
+      beatDenominator = newValue;
       notifyListeners();
     }
   }
 
-  incrementBeatDenominator() {
-    if (beatDenominator < 64) {
-      beatDenominator = beatDenominator + beatDenominator;
-      notifyListeners();
-    }
-  }
-
-  decrementBeatDenominator() {
-    if (beatDenominator > 2) {
-      beatDenominator = beatDenominator - beatDenominator ~/ 2;
-      notifyListeners();
-    }
-  }
+ // Public methods for incrementing/decrementing
+  void incrementBeatNumerator() => updateBeatNumerator(1);
+  void decrementBeatNumerator() => updateBeatNumerator(-1);
+  void incrementBeatDenominator() => updateBeatDenominator(2);
+  void decrementBeatDenominator() => updateBeatDenominator(1 ~/ 2);
 
   String? customBeatValue;
 
@@ -153,63 +149,63 @@ class MetroProvider extends ChangeNotifier {
     });
   }
 
-  setMetronomeDefaultValue() async {
-    double? defBPM = await SharedPref.getDefaultBPM;
-    int? defSound = await SharedPref.getDefaultSound;
-    int? defTiming = await SharedPref.getDefaultTiming;
-    String? defValue = await SharedPref.getMetronomeDefaultValue;
+  Future<void> setMetronomeDefaultValue() async {
+    // Fetch all default values concurrently
+    final results = await Future.wait([
+      SharedPref.getDefaultBPM,
+      SharedPref.getDefaultSound,
+      SharedPref.getDefaultTiming,
+      SharedPref.getMetronomeDefaultValue,
+      SharedPref.getMetronomeDefaultInterval,
+    ]);
 
-    double? defMetroInterval = await SharedPref.getMetronomeDefaultInterval;
+    // Extract results
+    double? defBPM = results[0] as double?;
+    int? defSound = results[1] as int?;
+    int? defTiming = results[2] as int?;
+    String? defValue = results[3] as String?;
+    double? defMetroInterval = results[4] as double?;
 
-    gafInterval = defMetroInterval ?? 1;
-
+    // Assign default values
     defaultBPM = defBPM ?? 120;
     defaultSound = defSound ?? 0;
     defaultTiming = defTiming ?? 0;
     defaultBeatValue = defValue ?? "4/4";
+    gafInterval = defMetroInterval ?? 1;
 
-    selectedIndex = defaultSound ?? 0;
-    selectedButton = defaultTiming ?? 0;
-    getBeatsDuration(defaultBeatValue!, selectedButton);
-    bpm = defaultBPM ?? 120;
+    // Set UI-related properties
+    selectedButton = defaultTiming!;
+    bpm = defaultBPM!;
     position = 0;
     totalTick = 0;
     isPlaying = false;
 
-    soundName = (defaultSound == null
-        ? AppStrings.logic
-        : soundList[defaultSound!].name)!;
-    firstBeat = (defaultSound == null
-        ? AppAssets.logic1Sound
-        : soundList[defaultSound!].beat1)!;
-    secondBeat = (defaultSound == null
-        ? AppAssets.logic2Sound
-        : soundList[defaultSound!].beat2)!;
+    // Configure beat and sound settings
+    getBeatsDuration(defaultBeatValue!, selectedButton);
+    soundName = soundList[ selectedIndex ?? defaultSound!].name!;
+    firstBeat = soundList[ selectedIndex ?? defaultSound!].beat1!;
+    secondBeat = soundList[ selectedIndex ?? defaultSound!].beat2!;
 
+    // Preload sounds
     await preloadSounds();
+
+    // Notify listeners
     notifyListeners();
   }
 
-  // dispose controller if off the page
+
+  // Dispose controller if off the page
   Future<void> disposeController() async {
-    if (timer != null) {
-      timer!.cancel();
-    }
+    timer?.cancel();
+    bpmContinuousTimer?.cancel();
     isPlaying = false;
-    if (controller != null) {
-      controller!.dispose();
-      controller = null;
-    }
-    if (bpmContinuousTimer != null) {
-      bpmContinuousTimer!.cancel();
-    }
+    controller?.dispose();
+    controller = null;
   }
 
-  // clear metronome
-  clearMetronome() {
-    if (timer != null) {
-      timer!.cancel();
-    }
+  // Clear metronome
+  void clearMetronome() {
+    timer?.cancel();
     if (controller != null) {
       animation = Tween<double>(begin: 0, end: 1).animate(controller!);
       controller!.reset();
@@ -218,11 +214,13 @@ class MetroProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  resetMetronomeCustomBottomSheet(){
-  beatNumerator = 2;
-  beatDenominator = 2;
-  notifyListeners();
+  // Reset metronome custom bottom sheet
+  void resetMetronomeCustomBottomSheet() {
+    beatNumerator = 2;
+    beatDenominator = 2;
+    notifyListeners();
   }
+
 
   // Set position of the slider
   // Setting position, BPM, and notifying listeners
@@ -235,6 +233,35 @@ class MetroProvider extends ChangeNotifier {
       setTimer(ticker);
     }
   }
+
+
+  void adjustBpm(TickerProviderStateMixin ticker, int increment) {
+    double newBpm =  bpm + increment;
+    if (newBpm >= bpmMin && newBpm <= bpmMax) {
+      totalTick = 0;
+      bpm = newBpm;
+      notifyListeners();
+      if (isPlaying) {
+        setTimer(ticker);
+      }
+    }
+  }
+
+  void startContinuousBpmAdjustment(TickerProviderStateMixin ticker, int increment) {
+    bpmContinuousTimer?.cancel();
+    bpmContinuousTimer = Timer.periodic(const Duration(milliseconds: 100), (_) {
+      adjustBpm(ticker, increment);
+    });
+  }
+
+// Public methods for increasing/decreasing BPM
+  void increaseBpm(TickerProviderStateMixin ticker) => adjustBpm(ticker, 1);
+  void decreaseBpm(TickerProviderStateMixin ticker) => adjustBpm(ticker, -1);
+
+// Public methods for continuous adjustment
+  void continuousIncreaseBpm(TickerProviderStateMixin ticker) => startContinuousBpmAdjustment(ticker, 1);
+  void continuousDecreaseBpm(TickerProviderStateMixin ticker) => startContinuousBpmAdjustment(ticker, -1);
+
 
   // Start/stop the metronome
   // Toggling between start and stop states and notifying listeners
@@ -253,57 +280,6 @@ class MetroProvider extends ChangeNotifier {
     }
     isPlaying = !isPlaying;
     notifyListeners();
-  }
-
-  // Increase BPM
-  // Increasing BPM, resetting total ticks, and notifying listeners
-  void increaseBpm(TickerProviderStateMixin ticker) {
-    if (bpm < bpmMax) {
-      totalTick = 0;
-      bpm += 1;
-      notifyListeners();
-      if (isPlaying == true) {
-        setTimer(ticker);
-      }
-    }
-  }
-
-  // Continuously increase bpm value until it equal to the bpmMax
-  void continuousIncreaseBpm(TickerProviderStateMixin ticker) {
-    if (bpmContinuousTimer != null) {
-      bpmContinuousTimer!.cancel;
-    }
-    bpmContinuousTimer =
-        Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      increaseBpm(ticker);
-    });
-  }
-
-  // Decrease BPM
-  // Decreasing BPM, resetting total ticks, and notifying listeners
-  void decreaseBpm(TickerProviderStateMixin ticker) {
-    if (bpm > bpmMin) {
-      totalTick = 0;
-      bpm -= 1;
-      if (bpm < 1) {
-        bpm = 1;
-      }
-      notifyListeners();
-      if (isPlaying == true) {
-        setTimer(ticker);
-      }
-    }
-  }
-
-  // Continuously decrease bpm value until it equal to the bpmMin
-  void continuousDecreaseBpm(TickerProviderStateMixin ticker) {
-    if (bpmContinuousTimer != null) {
-      bpmContinuousTimer!.cancel;
-    }
-    bpmContinuousTimer =
-        Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      decreaseBpm(ticker);
-    });
   }
 
 // Define a flag to prevent multiple calls within a very short interval
@@ -368,19 +344,17 @@ class MetroProvider extends ChangeNotifier {
 
     totalBeat = beatN;
 
-    if (beatD == 2) {
-      timeStamp = 120000;
-    } else if (beatD == 4) {
-      timeStamp = 60000;
-    } else if (beatD == 8) {
-      timeStamp = 30000;
-    } else if (beatD == 16) {
-      timeStamp = 15000;
-    } else if (beatD == 32) {
-      timeStamp = 7500;
-    } else if (beatD == 64) {
-      timeStamp = 3750;
-    }
+    Map<int,double> beatDurations = {
+      2: 120000,
+      4: 60000,
+      8: 30000,
+      16: 15000,
+      32: 7500,
+      64: 3750,
+    };
+
+    // Get the timestamp or default to 60000 (for unsupported beat denominators)
+    timeStamp = beatDurations[beatD] ?? 60000;
 
     if (selectedButton == 4) {
       customBeatValue = value;
@@ -416,7 +390,6 @@ class MetroProvider extends ChangeNotifier {
     soundName = name;
     firstBeat = beat1;
     secondBeat = beat2;
-    notifyListeners();
     totalTick = 0;
     notifyListeners();
     if (ticker == null) return;
@@ -425,34 +398,35 @@ class MetroProvider extends ChangeNotifier {
     }
   }
 
-  // Play sound based on the metronome ticks
-  Future playSound() async {
-    if(player1.volume == 0 || player2.volume == 0){
-       player1.setVolume(1.0);
-       player2.setVolume(1.0);
+// Play sound based on the metronome ticks
+  Future<void> playSound() async {
+    // Ensure players have the correct volume
+    if (player1.volume == 0 || player2.volume == 0) {
+      player1.setVolume(1.0);
+      player2.setVolume(1.0);
     }
-    totalTick = totalTick + 1;
+
+    totalTick += 1;
+
+    // Determine which beat to play
     if (totalTick == 1) {
-       player1.playing ? playBeat(firstBeat,true) : playBeat(firstBeat, false);
-    } else {
-      if (totalTick < totalBeat + 1) {
-        player2.playing ? playBeat(secondBeat,true): playBeat(secondBeat, false);
-        if (totalTick == totalBeat) {
-          totalTick = 0;
-        }
+      playBeat(firstBeat, player1);
+    } else if (totalTick <= totalBeat) {
+      playBeat(secondBeat, player2);
+
+      // Reset totalTick if the beat cycle is complete
+      if (totalTick == totalBeat) {
+        totalTick = 0;
       }
     }
   }
 
-  playBeat(String beat, bool isStop) async {
-    if (beat == firstBeat) {
-      player1.seek(Duration.zero);
-      player1.load();
-      player1.play();
-    } else {
-      player2.seek(Duration.zero);
-      player2.load();
-      player2.play();
-    }
+ // Play the specified beat using the given audio player
+  Future<void> playBeat(String beat, AudioPlayer player) async {
+    player.seek(Duration.zero);
+    await player.load();
+    player.play();
   }
+
+
 }

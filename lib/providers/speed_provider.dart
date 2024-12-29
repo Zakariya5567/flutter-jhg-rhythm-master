@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
@@ -7,7 +6,6 @@ import 'package:rhythm_master/models/sound_model.dart';
 import 'package:rhythm_master/services/local_db.dart';
 import 'package:rhythm_master/utils/app_strings.dart';
 import 'package:rhythm_master/utils/app_utils.dart';
-
 import '../utils/app_assets.dart';
 
 //The SpeedProvider class manages the functionality of a speed trainer,
@@ -16,10 +14,9 @@ import '../utils/app_assets.dart';
 class SpeedProvider extends ChangeNotifier {
   // INDICATE SOUND IS PLAYING OR STOP
   bool isPlaying = false;
-
   // BPM IS BEAT PER MINUTE
   double bpm = 120;
-// Instance of the Player
+  // Instance of the Player
   final player1 = AudioPlayer();
   final player2 = AudioPlayer();  
   // TIMER IS  BPM
@@ -55,9 +52,7 @@ class SpeedProvider extends ChangeNotifier {
   String soundName = AppStrings.logic;
   String firstBeat = AppAssets.logic1Sound;
   String secondBeat = AppAssets.logic2Sound;
-
   String? defaultBeatValue;
-
   double gafInterval = 1;
 
   // Initialize  animation controller
@@ -68,30 +63,57 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   Future<void> preloadSounds() async {
-    await player1.setVolume(0);
-    await  player2.setVolume(0);
+    Future.wait([
+     player1.setVolume(0),
+     player2.setVolume(0),
+    ]);
+
     var directory1 = !kIsWeb ? Utils.getAsset(firstBeat) : AppUtils.setWebAsset(firstBeat);
     var directory2 = !kIsWeb ? Utils.getAsset(secondBeat) : AppUtils.setWebAsset(secondBeat);
-    await player1.setFilePath(directory1.path, preload: true);
-    await player2.setFilePath(directory2.path, preload: true);
+
+    Future.wait([
+      player1.setFilePath(directory1.path, preload: true),
+      player2.setFilePath(directory2.path, preload: true)
+    ]);
+
   }
 
-  setSpeedTrainerDefaultValue() async {
-    int? defSound = await SharedPref.getStoreSpeedTrainerDefaultSound;
-    String? defValue = await SharedPref.getSpeedTrainerDefaultValue;
-    double? defSpeedInterval = await SharedPref.getSpeedTrainerDefaultInterval;
+  Future<void> setSpeedTrainerDefaultValue() async {
+    // Fetch default values from SharedPreferences concurrently using Future.wait
+    final results = await Future.wait([
+      SharedPref.getStoreSpeedTrainerDefaultSound,
+      SharedPref.getSpeedTrainerDefaultValue,
+      SharedPref.getSpeedTrainerDefaultInterval,
+    ]);
 
+    final defSound = results[0] as int?;
+    final defValue = results[1] as String?;
+    final defSpeedInterval = results[2] as double?;
+
+    // Set default values
     gafInterval = defSpeedInterval ?? 1;
     defaultBeatValue = defValue ?? "4/4";
 
-    soundName = (defSound == null ? AppStrings.logic : soundList[defSound].name)!;
-    firstBeat = (defSound == null ? AppAssets.logic1Sound : soundList[defSound].beat1)!;
-    secondBeat = (defSound == null ? AppAssets.logic2Sound : soundList[defSound].beat2)!;
+    // Set sound-related values based on the defSound
+    if (defSound == null) {
+      soundName = AppStrings.logic;
+      firstBeat = AppAssets.logic1Sound;
+      secondBeat = AppAssets.logic2Sound;
+    } else {
+      final sound = soundList[defSound];
+      soundName = sound.name!;
+      firstBeat = sound.beat1!;
+      secondBeat = sound.beat2!;
+    }
 
+    // Set beats duration and preload sounds
     getBeatsDuration(defaultBeatValue!);
     await preloadSounds();
+
+    // Notify listeners
     notifyListeners();
   }
+
 
   // TOTAL TICK IS USED TO IDENTIFY BEAT AUDIO
   // TWO TYPE OF AUDIO TICK / TAP
@@ -99,28 +121,20 @@ class SpeedProvider extends ChangeNotifier {
 
   getBeatsDuration(String value) {
     List beatValue = value.split("/");
-
     int beatN = int.parse(beatValue[0]);
     int beatD = int.parse(beatValue[1]);
-
     print("Beat Numerator : $beatN");
-    print("Beat Denomenator : $beatD");
-
+    print("Beat Denominator : $beatD");
     totalBeats = beatN;
-
-    if (beatD == 2) {
-      timeStamp = 120000;
-    } else if (beatD == 4) {
-      timeStamp = 60000;
-    } else if (beatD == 8) {
-      timeStamp = 30000;
-    } else if (beatD == 16) {
-      timeStamp = 15000;
-    } else if (beatD == 32) {
-      timeStamp = 7500;
-    } else if (beatD == 64) {
-      timeStamp = 3750;
-    }
+    Map<int, int> beatDurationMap = {
+      2: 120000,
+      4: 60000,
+      8: 30000,
+      16: 15000,
+      32: 7500,
+      64: 3750,
+    };
+    timeStamp = beatDurationMap[beatD] ?? 60000;
     notifyListeners();
   }
 
@@ -156,38 +170,29 @@ class SpeedProvider extends ChangeNotifier {
   }
 
   // SET TARGET RANGE OF SLIDER
-  setTargetTempo(
-    double value,
-  ) {
+  setTargetTempo(double value) {
     targetTempo = value;
     barCounter = 0;
     totalTick = 0;
     firstTime = true;
     notifyListeners();
-    if (isPlaying) {
-      setTimer();
-    }
+    if (isPlaying) {setTimer();}
   }
 
   // INTERVAL
   void onChangedInterval(int newValue) {
     interval = newValue;
     notifyListeners();
-    if (isPlaying) {
-      setTimer();
-    }
+    if (isPlaying) {setTimer();}
   }
 
   onChangedBar(int newValue) {
     bar = newValue;
-
     // Reset critical counters and flags
     totalTick = 0;
     barCounter = 0;
     firstTime = true; // Important to reset the first-time flag
-
     notifyListeners();
-
     if (isPlaying) {
       setTimer(); // Re-set the timer to adapt to the new bar setting
     }
@@ -301,45 +306,39 @@ class SpeedProvider extends ChangeNotifier {
     player2.play();
   }
 
+
+
   void incrementTempo(int interval) {
-    if (startTempo + sliderInterval <= targetTempo) {
-      startTempo += sliderInterval;
-    } else {
-      // If incrementing would exceed targetTempo, set startTempo to targetTempo
-      startTempo = targetTempo;
-    }
+    startTempo = adjustTempo(startTempo + interval, targetTempo);
     bpm = startTempo;
     notifyListeners();
   }
 
   void decrementTempo(int interval) {
-    if (startTempo - sliderInterval >= 1) {
-      startTempo -= sliderInterval;
-    } else {
-      // If reducing would go below 1, just set startTempo to 1
-      startTempo = 1;
-    }
+    startTempo = adjustTempo(startTempo - interval, 1);
     bpm = startTempo;
     notifyListeners();
   }
 
   void incrementTargetTempo(int interval) {
-    if(targetTempo + sliderInterval <= 300){
-      targetTempo += sliderInterval;
-    } else {
-      // If incrementing would exceed targetTempo, set startTempo to targetTempo
-      targetTempo = 300;
-    }
+    targetTempo = adjustTempo(targetTempo + interval, 300);
     notifyListeners();
   }
 
   void decrementTargetTempo(int interval) {
-    if (targetTempo - sliderInterval >= 1) {
-      targetTempo -= sliderInterval;
-    } else {
-      targetTempo = 1;
-    }
+    targetTempo = adjustTempo(targetTempo - interval, 1);
     notifyListeners();
   }
+
+// Helper function to ensure tempo stays within a valid range
+  double adjustTempo(double newTempo, double limit) {
+    if (newTempo > limit) {
+      return limit;
+    } else if (newTempo < 1) {
+      return 1;
+    }
+    return newTempo;
+  }
+
 
 }

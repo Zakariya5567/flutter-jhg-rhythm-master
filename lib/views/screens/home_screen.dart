@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +14,6 @@ import 'package:rhythm_master/views/extension/int_extension.dart';
 import 'package:rhythm_master/views/screens/bpm_view.dart';
 import 'package:rhythm_master/views/screens/setting_screen.dart';
 import 'package:rhythm_master/views/screens/speed_view.dart';
-
 import 'metro_view.dart';
 
 class HomeScreen extends StatefulWidget {
