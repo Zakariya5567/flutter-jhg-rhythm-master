@@ -84,8 +84,8 @@ class _MetroViewState extends State<MetroView> with TickerProviderStateMixin {
                                       cursor: SystemMouseCursors.click,
                                       child: GestureDetector(
                                         onTap: () async {
-                                          if (index ==
-                                              controller.tapButtonList.length) {
+                                          if (index == controller.tapButtonList.length) {
+                                            controller.setMetronomeDefaultValue();
                                             customSelectionBottomSheet(
                                                 context, this);
                                           } else {

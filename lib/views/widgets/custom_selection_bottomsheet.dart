@@ -115,7 +115,7 @@ customSelectionBottomSheet(
                       enabled: true,
                       size: 30,
                       onTap: () {
-                       // controller.resetMetronomeCustomBottomSheet();
+                        controller.resetMetronomeCustomBottomSheet();
                       }).center,
                 ],
               ),

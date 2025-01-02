@@ -81,30 +81,36 @@ class MetroProvider extends ChangeNotifier {
      player1.setFilePath(directory1.path, preload: true),
      player2.setFilePath(directory2.path, preload: true)
     ]);
-
   }
 
-  void updateBeatNumerator(int increment) {
-    int newValue = beatNumerator + increment;
-    if (newValue >= 2 && newValue <= 96) {
-      beatNumerator = newValue;
+
+  incrementBeatNumerator() {
+    if (beatNumerator < 96) {
+      beatNumerator = beatNumerator + 1;
       notifyListeners();
     }
   }
 
-  void updateBeatDenominator(int multiplier) {
-    int newValue = beatDenominator * multiplier;
-    if (newValue >= 2 && newValue <= 64) {
-      beatDenominator = newValue;
+  decrementBeatNumerator() {
+    if (beatNumerator > 2) {
+      beatNumerator = beatNumerator - 1;
       notifyListeners();
     }
   }
 
- // Public methods for incrementing/decrementing
-  void incrementBeatNumerator() => updateBeatNumerator(1);
-  void decrementBeatNumerator() => updateBeatNumerator(-1);
-  void incrementBeatDenominator() => updateBeatDenominator(2);
-  void decrementBeatDenominator() => updateBeatDenominator(1 ~/ 2);
+  incrementBeatDenominator() {
+    if (beatDenominator < 64) {
+      beatDenominator = beatDenominator + beatDenominator;
+      notifyListeners();
+    }
+  }
+
+  decrementBeatDenominator() {
+    if (beatDenominator > 2) {
+      beatDenominator = beatDenominator - beatDenominator ~/ 2;
+      notifyListeners();
+    }
+  }
 
   String? customBeatValue;
 
